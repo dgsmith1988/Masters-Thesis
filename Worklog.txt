@@ -1,0 +1,421 @@
+*08/03/2022*
+Hmm... I mean so lets see here... I can get a good idea of what to do for the thesis in general... I'm fairly confident in my topic at this point, although I'll give
+Gary some time to take care of the issue which has come up for him... But I mean getting the basics outlined would be good... and getting the various packages to 
+create the bibliographies and everything setup in latex would be good... hmm... so i suppose the first thing to do would be to get latex up and running in terms of
+having a proper bibliography package installed and using it correclty...
+
+okay... so i've got the basics of the title page laid out here... that is a good start and things will start coming together i believe... i can work on getting the
+bibliography and everything together next... or hmm... more laying out the table of contents and everything from a basic layout standpoint... then get the bibliography
+thing working... hmm... so then lets see here... so now we should have a table
+of contents... 
+
+so lets see here... perhaps LyX is a better way to approach this... hmm... and
+this seems to have a very nice organizational structure which would help me save
+a lot of time... but hmm... i mean how to install the missing packages?
+
+*2022/08/09*
+Hmm... so lets se ehere... it would be good to get a bit of work done regarding the thesis... I mean
+undrestanding the latex structure and alyout would be good as well as defining the various sections...
+or understandingt the different sections... i'll have to check out the versions i got... perhaps the
+smaller separate sections is easier for maitenance... 
+
+hmm... so i mean something is going on in the rendering here and i'm not sure exactly what... hmm... i mean i could also figure out another way to be able to break these
+things up and embed them... so far I'm much more liking the ECSE version... so hmm... i'm not entirely sure how this necessarily works here... how am I able to compile
+or render these .pdf's separately? it doesn,t appear to me as that is qhat is necesasrily going on here... hmm... i suppose this is sufficient for now... i mean the
+minor organziaiotnal things are pretty minute... how do i fix thsi rendering thing though? the text seems a bit misaligned... well wehre are the rendering options indicated?
+
+hmm... okay... so i figured that one out... now how do I ge rid of these red rectangles in the table of contents? so hmm... i mean that was nice... but rendering these
+files independently would be much more useful... 
+
+*09/02/2022*
+Hmm... so lets see here... I mean what to do first... well Gary recommended looking up the guy's thesis... so that would be good to do... both the masters and the phd
+to see if there are more details in it... but hmm... so then well there is the other paper he mentioned... so i'll collect some resources first and then once i start
+going through things to try and re-create it, i should be able to have a decent amount of material to refer to... hmm... so it seems the second author made the slide guitar
+part of his masters thesis... it's a minor difference... hmm... but okay... i should have enough material to get started now... oaky... so i mean there are plenty of
+interesting things it seems here... very fascinating... i mean hmmm... okay... so i should just get started to try and implement it... it would be better to focus on
+one idea then jump around too much and not get anything done... well hmm... i mean i would need to read the article more so first... to understand it before i can 
+implement things more fully... but the other one seems like it would be interesting to explore as well... hmm... would it be worth printing these out to make notes...
+i'm not sure but lets keep going here... okay... so then he just talks about
+the inspiration here for the system based on the previous one... hmm... okay...
+there were issues with the original motion capture system... so then we have a
+description of the basics of slide guitar here... i mean i'm familiar enough
+with that already... so then lets see here... now we have the slide guitar sound 
+yes... the most unique characteristic is that you can change the pitch continuously...
+
+hmm... i mean the phsyics of this would be interesting to examine more fully...
+so that is true as well... the slide can excite the length of string "behind"
+it and that is where your muting hand comes into play... interesting... okay...
+so then okay... well i mean this is just be basics of where/how the sound is
+produced by a slide... i mean that makes sense... as that is fundamentally what
+that was titled there... then we get into the contact sounds... this would presumably
+be when the slide strikes the string as well as when it moves up and down the
+string... or more likely the wound strings... as that has a fundamentally different
+texture than the unwound strings... 
+
+so different types of slides produce different noises in terms of their contact
+with the string... or the contact sounds... makes sense... i mean that would be
+interesting to model as well... i wonder how that could be incorporated into
+things here... interseting... and then interesting... i mean the velocity of the
+slide movement also changes how the slide surface interacts with the string's
+surface... and that would change the different type of noise generated... hmm...
+interesting indeed... hmm... okay... so we have spectromgrams here from a steel-string
+guitar... hmm... okay... okay... so lets see here... he just move the slide
+from one point to another point... or one fret to another fret... hmm... okay...
+and he used an acousitc... hmm... so if i was to recreate this i suppose i could...
+although it might be better to make it more controlled... but hmm... okay...
+so he didn't attempt to control the vleoicty at all... and that would control
+and affect the fret-noise... hmm... so i wonder how that would manifest itself...
+well i mean the spectral content would change over time corresponding to how the
+string changes... and that can be determined or informed by the paper examining
+that part... hmm... so then he used brass and glass slides on wound strings...
+the 6th and 5th string... hmm... okay... so then lets see here... i mean hmm... 
+i don't see why those recording parameters/conditions would be incorrect... but
+then lets see here... so he used brass and glass tubes... hmm... so hmm... i mean
+lets see here... so we string was damped on both sides of the tube... i can understand
+behind the slide... but why other other part? or why in front? is this purely
+to try and isolate the contact sounds? i'm beginning to think that is the case
+here... hmm... okay... so then lets see here... 
+
+so evidently the string-slide contact noise is made by the same manner in which
+finger-string contact noises are made... hmm.. interesting... so then lets see
+here... so that paper goes into more detail... and would be worth checking out
+as gary had mentioned... so then lets see here...  so hmm... there is evidentlly
+some sort of commonality between the various different sounds here... hmm...
+interseting... so this is an attempt to capture the noise characteristics...
+okay... fascinating... and the glass slide has a very different  well hmm...
+it seems to generate less intesen noise overall... as he said he didn't attempt
+to control for the slide velocity and that might more have hmm... and impact on
+the path the pitch follows here... hmm... okay... so then lets see here... hmm...
+i mean why would that work like that... and welll i would imagine his velocity
+would change... as it seems to... starts slow, ramps up and then slows down... and
+if velocity is the only part which impacts the noise charactersitics/parameters
+then hmm... i mean that would make sense here... interesting... so then hmm...
+i mean it also seems to be harmonic... although perhaps that is an artifact of
+the string vibrations? i'm not entirely sure but okay... interesting... hmm...
+interesting... the noise seems to be less intense on the a string... in terms
+of it's amplitude... wellthe individual components... interseting... okay... so 
+then lets see here... 
+
+hmm... so he says the overall spectral shape is of a low-pass type... hmm...
+where the slide vleocity controls the cut-off frequecny... ahh.... i sppose i can
+see that... and it clearly has a harmonic structure... so the slide noise is 
+periodic due to the windings around the string... i can see that ... evidently this
+has been studeid by penttien in a chinese string isntrument using wound strings...
+hmm... okay... hmm... so there are static harmonic resonances... hmm... okay... 
+i'm not entirely sure i see those atm... hmm... i think i can see it here now
+actually... okay... so then lets see here... what would cause that? this is
+due to the longitudinal string vibration... hmm... so i would need to learn what
+these different types of string vibration are... longitudinal would presumably
+be down and up the string's length... 
+
+hmm... okay... so i could believe that... and i saw it as well in the data...
+assuming the data was captured correctly.... so the high-frequncy content
+is more pomrnent on the hticker strings as the thinner strings have smaller 
+windings... hmm... sothen the string surgface is smoother... hmm... i wonder
+what that means... or hmm.... so i mean do they actually change the thickness
+of the windings... i'll have to look into that... i mean having a guitar on hand
+would be useful to be able to confirm/disconfirm these various things here... so
+hmm... that would also be interseting to examine more from a mech eng standpoint...
+
+but okay... so i mean i could dig that... understanding the composition of a string
+and how it is constructed would be interesting as well... so then he gets into 
+the differences related to the material of the slide used... so lets see here...
+so a brass tube procudes loduer nosie with more high-frequnecy content then a
+glass tube... i mean we had seen that here... so then the hmm... well the temporal
+variation in harmonic resoanance deepdsn on the material as well... as i had seen
+there.... so the glass tubes tend to produce more frequency moduaitonl or jitter
+than resonances from brass tubes... i definitely observed that... hmm... okay...
+so they think this is due to the differences in mass in the different slides...
+so the brass tube is clearly heavier... 80g as comapred to the 14 g of the glass
+tube... hmm... okay... so i mean then it would ultimately resist motion and
+acceleration more... interesting... i can see that now... and that would amke sense...
+so the slide with less mass would ultimately let more micromvoements of the 
+players hand in... well hmm... i mean i would need to test that out myself...
+
+and then the differences in the surfaces of the different slides would also
+likely have an effect... hmm... i mean the frictional differences... interesting...
+that would be interesting to examine in more detail there... so hmm... then lets
+see here... so the contact noise between a slide tube and a plain or unwound string
+is much quieter... i can see that... so it evidently doesn't have a harmonic
+structure or anything... and more closely resembles white noise... interesting...
+i mean that is quite interesting... and it would make sense in general... i would
+imagine this is something which has been noted by players of the instrument...
+and there is the contact part... when the slide makes contact with the string...
+the click hmm... when it makes inital contact... so this hmm... so has a small
+magnitude but is still audible... hmm... okay...
+
+hmm... so i mean lets see here... utlimatey the slide could vibrarte a bit as well
+depending on how it is necessarily being held... it woudl hmm... i mean i suppose
+ideally you would not want it to vibrate at all... but okay... so then he got the
+IR from each of the different slides... hmm... okay... ahh... but this is just
+on the contact sound... hmm... okay... hmm... i mean i could go through that part
+again afterwards... i suppose i could see how that is useful... or hmm... well
+maybe... not so sure atm i suppose... 
+
+*09/06/2022*
+So then lets see here... I mean what to do with the thesis here... It would be good to keep parsing the document... or the original paper... 
+okay... so hmm... i mean definitely having printed out copies would be nice as that would make things easier to refer to and take notes regarding...
+so he argues here that the slide material and it's surface texture has more of 
+an affect on the sound then the vibrations of the tube itseltf... and that creates
+various different audible differences between the different slides... hmm... i
+mean i can see that i suppose... 
+
+so now we get to slide guitar synthesis here... so the actual synthesis of the 
+sound... hmm... i mean i liked his sound better than what was produced by the
+other one regarding the different string parameters and everything... but hmm...
+okay... so lets see here... so we do the synthesis using a time-varying digital
+waveguide string... hmm... okay... makes sense... i can get that... the handling
+sounds emananting from the sliding contact between the string and slide tube 
+are synthesized using a parametric model... hmm... okay... and then inerseted as
+exication into the waveguide... hmm... okay... so we will need to explore how 
+the different friction noises are modelled here... hmm... okay... so that would
+be interesting to explore... so then lets see here... this is the basics of what
+is going down and is what i would expect... expect for the parametric part however...
+but this is still interesting none the less...
+
+so lets see here... we have a digital waveguide string with time-varying pitch...
+so we use a single-delay loop digitial waveguide... hmm... okay... so with one
+time delay... hmm... okay... so this model which they have developed before... or
+is from another paper is what is being used here... or what forms the basis...
+i should find this paper... okay... so that seems to be similar to what jaffee
+and smith did before... but hmm... okay... so then lets see here... we have the
+basic model here... the classic integer delay, fractional delay to be able to
+increase the tuning stability hmm... and then the loop fitler to change how the
+decay happens... or what frequencies are present... hmm... okay... that is to 
+simulate the vibrational losses in the string... hmm... okay... interesting...
+so the integer and the fractional delay elements are time-varying... that is
+correct... interesting to recall that here... so hmm... okay... so the fractional
+delay filter allows for smoother tuning between pitches... which one would hope
+for here given that is one of the key characteristics defining how a slide sounds
+and is played... but hmm... okay... interesting... so evidently several different
+techniques exist for implementing these filters... hmm... i mean that is something
+which would be interesting to explore... lets get that paper! okay... so that
+is a lenghty one but seems like it will be interesting... but then lets see here...
+
+hmm... so lets see... so they use a 5th-order langrange interpolator... the 
+technical details of which are presumably explained in the paper. hmm... okay...
+interseting... so the interpolation accuracy is highest near the midpoint of
+the filter... so a delay value of 2.5 for a 6-tap filter... so then hmm...
+hmm... i wonder what the impacts are on the frequency response... but hmm...
+okay... so then lets see here... so we then operate this filter in the delay
+range of 2.0-3.0 samples... ahh... intresering... and as this adds a constant
+two-sample delay, then we take off two samples from the integer delay line to 
+make things more controlable/parametrizable... hmm... okay... makes sense...
+so then for the loop-filter here... we have a one-pole low-pass filter... hmm...
+okay... and we parametrize the gain and a value using approximated polynomial
+parameters depending on the length and type of string... hmm... that would also
+be quite interesting to examine... and there is a corresponding paper regarding
+this here... hmm... quite fascinating... hmm... okay... so that paper will be 
+interesting to look into in further detail later... 
+
+hmm... okay... so then now we get into the energy compensation here... so hmm...
+lets see here... so when changing the length of a DWG string... ahh... during
+run-time... then signal energy is variaed... interesting... hmm... okay... well
+this just emphasizes the need to properly understand the physics of the string
+here... but this is quite fascinating... there seem to be several different
+components/facets which i could take here and look at...
+
+so hmm... if the string of a DWG is suddenly shortned to half its original
+length then half the signal samples are discarded... hmm... although hmm...
+i mean how do we transition to this new length? that would be an interesting
+thing to examine... so approximately 50 percent of the signal energy is evidently
+lost in that method... which i suppose i could see... and as i would expect...
+this results in a very poor sounding string... as the decay seems unnaturally
+quick... hmm... okay... so then lets see here... so evidently the true
+energetic behavior of an actual physicl string with time-varying length is
+controversial... hmm... i mean i suppose i could see that... i would need to
+have a better understanding of fundamentally how the energy in a string works
+as well as how the energy works when using a slide... i mean hmm... so in the 
+paper from before some methods are developed which are used here... or only one
+was chosen... the computationallysimpler one... the zero-order energy-preserving
+interpolation, which adds a single time-varying scaling coefficient into the SDL...
+hmm.m.. okay... so what is the SDL? this is the string delay line or something
+I would presume? well this would be extremely efficient it  was just one time-varying
+coefficient... 
+
+okay... so then lets see here... the the hard part when dealing with the energy
+compensation in time-varying strings is that when the length of the DWG changes
+then we would need an estimate for the additional lost or gain of energy...
+hmm... how does that work? i mean with my understanding on physics here... hmm...
+i mean i would think that the energy would be preserved... which would make a lot
+more sense to me... or lost... as i'm not sure how it would be gained... where 
+is the input into the system of the new energy? where is the energy source in 
+this case?
+
+so hmm... lets see here... so in order to estimate the energy loss or change we
+would then need to look at the values in the lost or gained delay line segment...
+hmm... okay... interesting... hmm... so okay... there is a zero-order energy
+preserving interpolation... hmm... what does that mean? zero-order? there is no
+delay element involved? hmm... and energy-preserving presumably means well that
+the total amount of energy doesn't change... hmm... so okay... then lets see
+here... we have this function here expressing the scaling operation... so hmm...
+okay... so we have this p_c  function... which is the square root of 1-the delay
+line variation in samples multipled by the signaloutput from the time-varying
+delay block... hmm... okay... so we effectively have a gain ctronl on the output
+of teh time-varying delay-lin based on the change in the delay line variation 
+for on time-step... hmm... interesting indeed... quite fascinating... i am really
+enjoying this stuff i must say... so this method is only accruate... ahh... i see
+why this is zero-order perhaps... so this method is only accurate when the length
+doesn't change too rapidly as compared to the wavelength... hmm... well i mean there
+will be multiple frequencies occuring or multiple resonant frequencies... is this
+referring to the wave length of each of them? hmm... i will need to take a closer
+look regarding the physics of a vibrating string here... hmm... okay... interesring...
+i mean more fully understanding this condition and statement is going to be required
+i believe...
+
+hmm... so then lets see here... hmm... so we start with this here... we are in
+open G tuning here... and then slide up from the second fret (A) to the 14th fret
+(A again) and hmm... i mean that's an octave slide... a pretty big leap... not
+unheard of... but i'm not sure how common it necessarily is... but okay... then
+lets see here... so we take the delta x... hmm... so we take the period difference
+between the two frequencies... i mean that would be negative... hmm... okay...
+so that's well i'm not exactly sure what is going on here... so hmm... i mean 
+lets see... okay... so then we need to convert that into a number of samples i
+believe... well hmm... i mean that doesn't seem to be the case here so i'm not
+entirely sure this calculation is correct... i can go through it with a more fine
+toothed comb later on... but okay... so i got the same delta x here... so then
+for a particualr frequency f on a string we have this expression for the
+wavewenght... so we take the ratio of the fundamental frequency of the open
+string to the freuqnecy and then multiply it by 2L... i will have to take a much
+closer look into how this works... as understanding that much more fully would
+be necessarily i believe... but hmm... okay... so then lets see here... so hmm... 
+okay... and then once we et this we can get a frequency limit... hmm... so states
+the upper bound for the zero-order energy-preserving interpolation... hmm...
+okay... i mean i'm not sure how this necessarily works or what it is necessarily stating
+here... but okay... hmm... so for this delta x... or the change in string position...
+not necessarily fret position as we are dealing with a slide guitar so we could
+(and often do) move smaller amounts... well then this method works up until 16kHz...
+and based on my knowledge of the range of the guitar... that is something which
+is very easily achievable... interesting... i will have to go through this in 
+much more detail later on... as this seems like it would be quite a fascinating 
+thing to get much more into... so hmm... then lets see here... now we get to the
+contact sound synthesis... 
+
+so then lets see here... to model the contact sound synthesis... so the sound 
+generated by the sliding tube and the string we use a noise pulse train as the
+exictation signal... so hmm... presuambly a bunch of chunks of noise... of what
+duration and spectral characteristics are they? so this is based on the assumption
+that as the tube slides over a single winding... a short expeontially deacying
+noise burst is generated... hmm... okay... recorded pulses could be used in
+synthesis but the contact-sound mechanism so so quick that the exact pulse shape
+is not critical... so long as identical pulses are not used... hmm... interesting...
+i mean i suppose i could see that... so then hmm... i mean we have a diagram
+illustrating it here... so hmm... lets see here... we have L(n) which is presumably
+some sort of a time-varying signal... hmm... i wonder what it represents... 
+so then we delay it and add it with the delayed version of itself... so this would
+okay... so then hmm... well the addition is then smoothed... and then fed into 
+an absolute value function here... and there is an n_w gain... which is presumably
+is that noise width or what is that? hmm... not entirely sure myself... so
+hmm... i mean that goes to some sort of a wave table or what is that? is that
+the noise source for the pulse trains? i'm not entirely sure... but h...okay... 
+so out of that blucj we filter thw siganl with two different filters... one of
+which is followed by a waveshaper... hmm... oaky... so then the output of each
+of the filters has a pair of gains... well one filter and the waveshaper...
+and those gains form a balance control to select between the two signals...
+intresting... so that is then controlled by a gain which is controlled by the
+signal f_c(n)... hmm... oaky... and f_c(n)... well what does that do? well it
+hmm... i mean that comes out of the scaled absoulte value block... okay... hmm...
+so that signal also parametrizes the filter... interesting... hmm... so then lets
+see here... there is also a final gain at the end here... hmm... okay... interesting...
+
+so then the time interval between the noise pulses is controlled by the sliding
+velocity... hmm... interesting... i suppose i could see that as the sliding velcotiy
+controls the rate at which you enounter the different ridges on the string winding...
+hmm... okay... so then a fast slide results in a temporally dense pulse train
+so hmm... i mean i can see that... interesting... and then a slow slide makes it so
+the pulses appear further apart... so perhaps L(n) is this velocity signal...?
+hmm... i'm not entirely sure here... so in a sense... the contact sound synthesizer
+is actually a periodic impact sound synthesis model... so hmm... okay... there 
+are sounds which regularly occur due to the collision of two objects with each
+other... hmm... okay.... interesting... and this is what it more acts as as opposed
+too a more pure friction model... hmm... okay... interesting... so then several
+different impact and friction sound snytehsis models have been investigated before...
+and these are various different referecnes to it here... hmm... okay... so hmm...
+lets then see here... 
+
+hmm... okay... so we have the general structure here... ahh... so L(n) is a signal
+representing the string length... hmm... makes sense... and he says relative
+string length... so preusmably based on the f0... value... hmm... okay... interesting...
+i mean it would be quite fasciating to experiment with the different variations
+of physical parameters and n is the time index... hmm... okay... so i mean this
+has a sampling rate in its own way... interesting... okay... so the contact
+nosie depends on the sliding velocity... so then this means we need to take a
+time difference of the input signal... ahh... as you need a difference oover time
+to calculate a velocity... interesting... makes sense here... so hmm... i mean okay...
+interesting... so if the control rate is different than the sound-synthesis 
+sampling rate then things are a bit different... or you need to have the smoothing
+filter... hmm... okay... not sure i see why but makes sense... so ahh... i mean 
+that would be a differentiator in a way... if we take the time derivative of the
+string length then we would get the sliding velocity... hmm... okay... interesting...
+although hmm... i mean well the total length of the string isn't changing as that
+is fundamentally determined by the size of the guitar... however where we are
+fretting it is what is changing... hmm... interesting... okay... makes sense...
+
+so the smoothing bock changes the samplingrate of L(n) (the control signal for the
+length) to equal the synthesis sampling rate using polynomial interpolation...
+hmm... okay... so then the contact noise is independent of the direction the
+slide travels (up or down) and hence the use of the absolute value here... hmm...
+okay... interesting... so the scaling coefficient is n_w... and this represnts
+the number of windings on the string... interesting... so then the signal f_c
+is the output of the scaling block... and this can be viewed as the
+noise-pulse-firing rate... hmm... okay... interesting indeed here... 
+
+so then lets see here... so the basis for the synthetic contact sound for wound
+strings so hmm... so block a is the noise-pulse-train generator... hmm... oaky...
+so then the type of string (preusmably wound vs. unwound) determines the decay
+time and the duration of the individual pulse... so hmm.... then for enhancing
+the harmonic structure of the contact noise on wound strings, the lowest time-varying
+haromnic is emphasiszed... hmm... as those parts were harmonic IIRC... by filtering
+the nosie pulse train with a second order reosnator where the firiing rate
+controls the resonator's center frequency... hmm... okay... i can get that...
+
+so the higher harmonics are pduced by distorting the resonator's output with a
+suitable non-linear function... hmm... interesting... so this is the waveshaper...
+hmm... okay... so then lets see here... so he uses a scaled hyperbolic tangent
+function... so i shoudl look into how that is going to affect things here... ahh
+so the impact of the harmonics can be controlled by the gain of the waveshaper...
+
+hmm... so okay... the fitler block d is used to simulate the longitudinal vibrational
+modes of the strings... so that is a 4th order IIR... and then that is used to
+change the spectral shape of the contact noise... so the nosie characteristics
+change a lot depneding on the tube material and string type sothen the filter
+will need tochang e depending ont he slide material and string tyoe... and then
+there is the g_bal control here.. hmm... that controls the ratio between the
+time-varying and statc contact sound compomenets... hmm... so interesting...
+part of the sound varies while other parts ofthe sound are static... i wonder
+how that works... hmm... so what are those... i mean the initial attack when the
+slide over comes the friction and then the actual noise while it is moving?
+that would be interesting to experiment with and interesting to see... so then
+the total amplitude of the snythetic contact noise is controled by the slide
+velocity via the scaling coefficient g_TV... dividing it by 100 was found to work
+well...
+
+so then we can also control this overall with the g_user gain value... hmm...
+okay... so then for unwound strings we use a white-noise generator instead with
+the noise-burst generator... so then blocks b c and d aren't used... so the
+filters emphasiing the harmonci aspects as well as the longitudinal modes... 
+or the waveshaper... hmm... okay interesting... i wonder how the different models
+will sound... this will be very interesting to explore... so for unwound strings
+the friction/contact sound is just scaled white-noise... hmm... interesting...
+okay... so then lets see here... we have figure 7... this is a bunch of the 
+fourth-order contact-sound filter magnitude responses... hmm... so the dotted
+lines here... in comparison witht eh contact-sound spectral estimates... hmm...
+okay... so those were done hmm... using LPC or a linear-prediction filter of 
+order 100... hmm... so how can linear prediction be used here to make these
+estimates... that is a good question is is something which would be interesting
+to explore... okay...sothen we can translate these into poles and zeros to form
+the different actual filter realizations... so then lets see here... we have the
+basic slide guitar synthesis model here in figure 8 ahh.... so then we have the 
+energy compensation scaler here... and then the contact sound generator added
+as well... so it is quite similar to the normal SDL DWG model... hmm... interesting...
+makes sense...
+
+hmm... okay... so then what to do here... i mean well it would be good to just
+start developing the model in matlab perhaps... or hmm... or collecting some of
+the papers on the friction/contact synthesis... that would be good as well i
+think...
+
+*09/07/2022*
+So hmm... lets see here... I think the next point I would be at here is developing
+an implementation of things... it would be good to start a Github to back things
+up in case there is some sort of an accident...
