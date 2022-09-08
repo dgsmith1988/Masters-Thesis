@@ -1,0 +1,148 @@
+% Dated footer style
+
+% This style redefines the empty, plain and headers pagestyles to include a
+% date stamp in the footer.
+%
+% The date is the current date, or optionally from the date string from a
+% revision control system (rcs) keyword string.  The user can directly set the
+% date stamp value using the macro \datestamp.  The default form for the date
+% is "1996/08/02".
+%
+% options:
+%   all (default) - The date stamp is placed on all pages.
+%   first - The date stamp is placed only on the first page of the document
+%   off - The date stamp is turned off.  This option suppresses printing of
+%     the date stamp without the need to remove all datestamp commands (such
+%     as \rcs).
+%
+% Files under rcs control:
+%   For a file under rcs control is that the date stamp that appears on the
+%   document is the time of the document modification and not that of the time
+%   of printing.  To use the rcs date, the user invokes the \rcs macro which
+%   takes as an argument an rcs keyword string.  The date is taken from the
+%   rcs keyword string only if the keyword string indicates that the file is
+%   checked in, i.e. not checked out by rcs for modification.
+%
+%   This style defines the macro \rcs.  The user places a revision control
+%   system (rcs) keyword string in the source file at a point after this
+%   package is invoked.
+%     \rcs{#Id: #}	%  Use "$" instead of "#"
+%                       %  (This example uses # instead of $ to avoid having
+%                       %  rcs place the keyword string in the text of the
+%                       %  example.)
+%   The Id keyword string is replaced by rcs with one of the following form.
+%     \rcs{$Id: datestamp.sty,v 1.14 2000/03/26 13:04:05 pkabal Exp $}
+%
+% Date Stamp Format:
+%   This package changes the standard LaTeX pagestyles to include a date
+%   stamp in the footer:
+%   pagestyle "plain"
+%    - left justified date stamp with centered page number in footer
+%   pagestyle "empty"
+%    - left justified date stamp in footer
+%   pagestyle "headers"
+%    - left justified date stamp in footer
+%
+% Macros:
+%   \resetdatestamp
+%     Reset the datestamp counter.  This macro can be used in files that are
+%     included in a larger document.  This way, if the "first" option is
+%     in effect, the first page of the included document also has a date
+%     stamp.
+%   \datestamp[datestamp-string]
+%     Set the date stamp value.  This value can be use to override the current
+%     date or the date derived from the \rcs macro.  If the optional
+%     datestamp-string is omitted, the current date is used.
+%   \rcs{#Id: #}	% Use "$" instead of "#"
+%      Defines the revision date as part of an rcs keyword string.
+%   \datestampbox
+%      This macro can be invoked to place a zero-sized box containing the
+%      datestamp.  This box can be included in the footer of a custom page
+%      layout.  For instance, it can be used with the fancyhdr package,
+%      \fancyfoot[LO,RE]{\datestampbox}
+%   \datestampoffset <dimen>
+%      This macro can be used to control the vertical position of the date
+%      stamp.  For printers that do not allow printing close to the edge of
+%      the paper, or for documents in which the footer comes very close to the
+%      bottom of the physical page, this value may have to be hanged.  The
+%      default value is 5ex.
+
+% $Id: datestamp.sty,v 1.14 2000/03/26 13:04:05 pkabal Exp $
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{datestamp}[2000/03/25]
+
+% date stamp format
+\newdimen\datestampoffset
+\datestampoffset = 5ex
+\def\datestampfont{\reset@font\bfseries\scriptsize}
+
+% date stamp box
+\newcount\datestampcount
+\global\datestampcount=0
+\newcount\datestamplimit
+
+\def\resetdatestamp{\global\datestampcount=0\relax}
+
+\def\datestampbox{%
+  \global\advance \datestampcount by 1
+  \ifnum \datestampcount > \datestamplimit
+  \else
+    \leavevmode\lower \datestampoffset \hbox to 0pt{\datestampfont \@datestamp
+                                         \hskip 0pt minus 1fil\relax}%
+  \fi
+}
+
+% Set up the options
+\DeclareOption{off}{\datestamplimit=0}
+\DeclareOption{first}{\datestamplimit=1}
+\DeclareOption{all}{\datestamplimit=999999}
+
+\ExecuteOptions{all}
+\ProcessOptions
+
+% Set up the page styles include the date in the footer
+\let\SVps@empty=\ps@empty
+\def\ps@empty{\SVps@empty
+  \def\@oddfoot{\datestampbox\hfil}%
+  \let\@evenfoot\@oddfoot
+}
+\let\SVps@plain=\ps@plain
+\def\ps@plain{\SVps@plain
+  \def\@oddfoot{\datestampbox\reset@font\hfil\thepage\hfil}%
+  \let\@evenfoot\@oddfoot
+}
+\let\SVps@headings=\ps@headings
+\def\ps@headings{\SVps@headings
+  \def\@oddfoot{\datestampbox\hfil}%
+  \let\@evenfoot\@oddfoot
+}
+
+% Set the date in the footer immediately
+\let\df@even=\@evenfoot
+\let\df@odd=\@oddfoot
+\def\@evenfoot{\datestampbox\df@even}%
+\def\@oddfoot{\datestampbox\df@odd}%
+
+% Set the date stamp value
+\newcommand \setdatestampvalue
+  [1][\the\year/\two@digits{\the\month}/\two@digits{\the\day}]{%
+  \def\@datestamp{#1}}
+\setdatestampvalue \relax
+\let\datestamp=\setdatestampvalue
+
+% Macro to define \@date using the date from the rcs keyword string
+\def\rcs #1{\df@idparse |#1 $ = = - - $ $ |}
+\def\df@idparse |#1 #2 #3 #4 #5 #6 #7 #8 #9|{%
+  \ifx #4=%
+  \else
+    \ifx #8$%
+      \typeout{File: \df@fname |#2,v|, revision #3 #4}%
+      \setdatestampvalue [#4]%
+    \else
+      \typeout{File: \df@fname |#2,v|, revision #3 #4 locked}%
+      \setdatestampvalue \relax
+    \fi
+  \fi
+}
+\def\df@fname|#1,v#2|{#1}

@@ -1,0 +1,27 @@
+% Style file for LaTeX2e
+%   \usepackage{McGillLogo}
+%
+% This package provides a McGill University crest.  It uses the Encapsulated
+% PostScript file McGillcrest.eps or the PDF file McGillcrest.pdf.
+%
+% macros:
+%    \McGillCrest{h-length}{v-length}
+%      Scale the crest so that the width is the given h-length value and the
+%      height is the given v-length value.  If either dimension is given as !,
+%      the other argument is used to determine the scaling.  This macro calls
+%      \resizebox passing the arguments directly to that macro.
+%
+% Example:
+%   \usepackage{McGillLogo}
+%   \McGillCrest{!}{1in}            % 1 inch high McGill crest
+
+% $Id: McGillLogo.sty,v 1.4 2004/08/31 19:59:14 kabal_res Exp $
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{McGillLogo}[2004/08/31]
+
+\RequirePackage{graphics}
+
+% McGill crest
+\newcommand\McGillCrest[2]{\resizebox{#1}{#2}{%
+        \includegraphics{McGillcrest}}}

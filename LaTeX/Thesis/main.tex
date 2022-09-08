@@ -1,0 +1,113 @@
+ \documentclass [11pt, letterpaper]{report}
+
+%\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{nomencl}
+\usepackage{enumitem}
+\usepackage{amsmath}		% Extra math definitions
+\usepackage{graphicx, subfigure}		% PostScript figures
+\usepackage{setspace}		% 1.5 spacing
+\usepackage{longtable}          % Tables spanning pages
+\usepackage{url}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}       % to simplify the use of \href
+\usepackage{array} % column width in tables
+\usepackage{listings} % for displaying computer code
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{bibliography.bib}
+
+\usepackage{subfiles} %inline documents (allows for usage of packages in subfiles)
+\usepackage{todonotes} %side margin todo notes
+\usepackage{soul} %highlighting
+
+% Custom commands
+\newcommand{\tinytodo}[2][] {\todo[caption={#2}, #1]{\begin{spacing}{0.5} #2 \end{spacing}}}
+
+\newenvironment{tinytest}%
+{\begin{tiny}\it}%
+{\end{tiny}}
+
+% Custom packages
+%\usepackage[first]{datestamp}	% Datestamp on first page of each chapter
+\usepackage[fancyhdr]{McECEThesis}	% Thesis style
+\usepackage{McGillLogo}		% McGill University crest
+
+\makenomenclature
+
+\usepackage{color}
+\def\headrulehook{\color{red}}		% Color the header rule
+
+%===== page layout
+% Define the side margins for a right-side page
+\insidemargin = 1.3in
+\outsidemargin = 0.8in
+
+% Above margin is space above the header
+% Below margin is space below footer
+\abovemargin = 1.1in
+\belowmargin = 0.75in
+
+\begin{document}
+
+%===== Title page
+
+\title{Synthesized Slide Guitar: A digital waveguide approach}
+\author{David G. Smith}
+\date{\Month\ \number\year}
+\organization{%
+  \\[0.2in]
+  \McGillCrest {!}{1in}\\	% McGill University crest
+  \\[0.1in]
+  Department of Music Technology \\ Computational Acoustic Modeling Labratory\\
+  McGill University\\
+  Montr\'eal, Canada}
+\note{%
+  {\color{red} \hrule height 0.4ex}
+  \vskip 3ex
+  An exam submitted to McGill University in partial fulfillment of the
+  requirements for the degree of Master of Arts.
+  \vskip 3ex
+  \copyright\ \the\year\ David Smith
+}
+
+\maketitle
+
+%===== Justification, spacing for the main text
+\raggedbottom
+\onehalfspacing
+\pagenumbering{roman}
+
+%========== Tables of contents, figures, tables
+\tableofcontents
+% \listoffigures
+\listoftables
+
+\newpage{}
+
+\chapter*{List of Acronyms}
+
+\begin{longtable}{ll}
+	DMI & Digital Music Instrument\\
+\end{longtable}
+
+\cleardoublepage
+
+%========== Chapters ==========
+\pagenumbering{arabic}
+\doublespacing
+
+\typeout{}
+\subfile{sections/chapter1}
+
+\typeout{}
+\subfile{sections/chapter2}
+
+%========== Bibliography ==========
+\typeout{}
+\begin{singlespace}
+
+\printbibliography
+
+\end{singlespace}
+
+\end{document}
