@@ -28,12 +28,7 @@ classdef LongitudinalModeFilter
             %TODO:Determine the proper setting for this k value
             [obj.b, obj.a] = zp2tf(obj.complexZeros', obj.complexPoles', db2mag(dB_atten));
             obj.Fs = Fs;
-        end
-        
-        function outputArg = plotFreqResp(obj,inputArg)
-            %PLOTFREQRESP Plot the frequency response
-            outputArg = obj.Property1 + inputArg;
-        end
+        end      
     end
 end
 

@@ -35,5 +35,11 @@ classdef NoisePulse < handle
                 end
             end
         end
+        
+        function consume_f_c(obj, f_c)
+            %TODO: It isn't immediately clear to me how the f_c will be 
+            %used here to control the pulse rate but this function can be 
+            %filled in later
+        end
     end
 end
