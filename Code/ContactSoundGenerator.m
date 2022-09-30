@@ -1,9 +1,9 @@
 classdef ContactSoundGenerator < handle
     properties
-        g_bal
-        g_TV
-        g_user
-        n_w
+        g_bal = .5; %TODO: how to tune this?
+        g_TV = 1;
+        g_user = 1;
+        n_w = 1; %TODO: how to tune this?
         stringModeFilter
         resonator
         noisePulseGen
@@ -13,12 +13,12 @@ classdef ContactSoundGenerator < handle
     end
     
     methods
-        function obj = ContactSoundGenerator(Fs)
+        function obj = ContactSoundGenerator()
             %These values came from nowhere atm...
-            pulsePeriod = .05*Fs;
-            obj.noisePulseGen = NoisePulse(pulsePeriod, -1, -60, pulsePeriod, Fs);
-            obj.resonator(500, Fs);
-            obj.stringModeFilter = LongitudinalModeFilter();
+            pulsePeriod = .05*SystemParams.audioRate;
+            obj.noisePulseGen = NoisePulse(pulsePeriod, -1, -60, pulsePeriod);
+            obj.resonator = ResonatorFilter(500, .99);
+            obj.stringModeFilter = LongitudinalModeFilter(SystemParams.E_string.brass);
         end
         
         function outputSample = tick(obj, L_n)
@@ -29,10 +29,9 @@ classdef ContactSoundGenerator < handle
             f_c_n = obj.n_w*abs(obj.smoothingFilter.tick(L_n - obj.L_n_1));
             
             %update the objects which rely on the cut-off frequency
-            
             obj.resonator.update_f_c(f_c_n);
             obj.noisePulseGen.consume_f_c(f_c_n);
-            obj.g_tv = f_c_n/100; %TODO: Eventually tune this parameter
+            obj.g_TV = f_c_n/100; %TODO: Eventually tune this parameter
             
             %compute the upper branches
             noiseSample = obj.noisePulseGen.tick();        

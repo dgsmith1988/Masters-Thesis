@@ -3,7 +3,7 @@ classdef ExpDecay < handle
     %   Detailed explanation goes here
     
     properties
-        dB_decay
+        dB_decay;
         samples
         tau
         a
@@ -18,7 +18,7 @@ classdef ExpDecay < handle
             obj.samples = samples;
             obj.tau = (-samples/SystemParams.audioRate) / log(db2mag(dB_decay));
             obj.currentValue = 1;
-            obj.a = exp(-1/(obj.tau*SystemParams.audioRate));
+            obj.a = exp(-1/(obj.tau*Sys));
         end
         
         function outputSample = tick(obj)
@@ -34,10 +34,7 @@ classdef ExpDecay < handle
             obj.currentValue = 1;
         end
         
-        function setSamples(newValue)
-            obj.samples = newValue;
-            obj.reset();
-        end
+        function set
     end
 end
 

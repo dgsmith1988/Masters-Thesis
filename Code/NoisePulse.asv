@@ -39,7 +39,7 @@ classdef NoisePulse < handle
         function consume_f_c(obj, f_c)
             newPulsePeriod = round(1/f_c * SystemParams.audioRate);
             obj.pulsePeriod = newPulsePeriod;
-            obj.amplitudeEnvelope.setSamples(newPulsePeriod);
+            obj.amplidtudeEnvelope.setSamples(newPulsePeriod);
         end
     end
 end

@@ -1,26 +1,26 @@
-classdef DelayLineFraction < handle
+classdef DelayLineFraction < FilterObject
     %DELAYLINEFRACTION Class for fractional delay, uses 5th order Langrage
     %interpolation atm... 
     
-    properties
+    properties(GetAccess = public)
         L               %number of taps
         fractionalDelay %fractional delay amount (0 <=x <= 1)
-        b               %FIR filter coefficents
-        z               %filter memory state
     end
     
     methods
         function obj = DelayLineFraction(L, fractionalDelay)
             %DELAYLINEFRACTION Construct an instance of this class
+            
+            b = hlagr2(L, fractionalDelay);
+            a = 1;
+            z_init = zeros(1, length(b)-1);
+            obj@FilterObject(b, a, z_init)
             obj.L = L;
             obj.fractionalDelay = fractionalDelay;
-            obj.b = hlagr2(L, fractionalDelay);
-            obj.z = zeros(1, length(obj.b)-1);
         end
         
-        function outputSample = tick(obj, inputSample)
-            %tick Compute one-sample of output
-            [outputSample, obj.z] = filter(obj.b, 1, inputSample, obj.z);
+        function setFractionalDely(newValue)
+            fprintf("Warning: %s::%s() called and is a pass-thru function atm...\n", class(obj), dbstack.name);
         end
     end
 end

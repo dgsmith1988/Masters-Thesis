@@ -1,0 +1,5 @@
+
+
+slideVelocity = .0001;
+L = 5:-slideVelocity:slideVelocity;
+contactSoundGenerator = ContactSoundGenerator();

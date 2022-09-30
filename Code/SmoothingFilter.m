@@ -7,13 +7,14 @@ classdef SmoothingFilter < FilterObject
     
     methods
         function obj = SmoothingFilter()
-            %SMOOTHINGFILTER 
+            obj@FilterObject(0, 0, 0);
         end
         
         function outputSample = tick(obj, inputSample)
             %TICK Simple pass-thru for now
             outputSample = inputSample;
-            fprintf("Warning: %s::%s() called and is a pass-thru function atm...\n", class(obj), dbstack.name);
+%             st = dbstack;
+%             fprintf("Warning: %s() called and is a pass-thru function atm...\n", st(1).name);
         end
     end
 end
