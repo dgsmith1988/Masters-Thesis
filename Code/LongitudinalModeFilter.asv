@@ -1,0 +1,21 @@
+classdef LongitudinalModeFilter
+    %LONGITUDINALMODEFILTER Wrapper class to keep track of the various data
+    %involved in specifiying and implementing the longitudinal mode filters
+    
+    properties(GetAccess = public)
+        b
+        a
+    end
+    
+    methods
+        function obj = LongitudinalModeFilter(filterSpec)
+            %LONGITUDINALMODEFILTER k should be set so that the maximum
+            %gain of the filter is unity to match the pictures from the CMJ
+            %article. TODO: Examine why this is the case in more detail
+            complexZeros = linearToComplex(filterSpec.zeros.F, filterSpec.zeros.R, SystemParams.audioRate);
+            complexPoles = linearToComplex(filterSpec.poles.F, filterSpec.poles.R, SystemParams.audioRate);
+            [obj.b, obj.a] = zp2tf(complexZeros', complexPoles', db2mag(filterSpec.dB_atten));
+        end      
+    end
+end
+

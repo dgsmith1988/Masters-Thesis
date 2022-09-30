@@ -7,18 +7,15 @@ classdef ResonatorFilter < FilterObject
     end
     
     methods
-        function obj = ResonatorFilter(f_c, r)
+        function obj = ResonatorFilter(f_c, r, Fs)
             %RESONATORFILTER Construct an instance of this class
-
-            %Populate the superclass first
+            %   Detailed explanation goes here
             b = [0, 0, 0];  %b1 should always be 0
             a = [1, 0, 0];  %a1 should always be 1
-            z_init = [0, 0];     %start filter from fresh
-            obj@FilterObject(b, a, z_init);
-            
-            %Populate the subclass properties
+            z = [0, 0];
             obj.f_c = f_c;
             obj.r = r;
+            obj.Fs = Fs;
             obj.updateCoefficients();
         end
         
