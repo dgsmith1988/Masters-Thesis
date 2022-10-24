@@ -34,7 +34,7 @@ classdef ExpDecay < handle
             obj.currentValue = 1;
         end
         
-        function setSamples(newValue)
+        function setSamples(obj, newValue)
             obj.samples = newValue;
             obj.reset();
         end

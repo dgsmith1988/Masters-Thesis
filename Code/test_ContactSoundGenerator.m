@@ -13,3 +13,6 @@ for n = 1:length(L)
     end
     y(n) = contactSoundGenerator.tick(L(n));
 end
+
+plot(y);
+title("CSG Test Output");
