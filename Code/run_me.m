@@ -1,0 +1,2 @@
+addpath(".\tests")
+addpath(".\src")
