@@ -1,52 +1,42 @@
 classdef ContactSoundGenerator < handle
     properties
-        g_bal = .5; %TODO: how to tune this?
+        %Todo: Set these to be passed through the constructor?
+        g_bal = .5;
         g_TV = 1;
-        g_user = 1;
-        n_w = 1; %TODO: how to tune this?
+        g_user = 1;  
+        controlSignalProcessor
+        noisePulse %TODO: this will eventually be changed to noiseSource to support unwound strings
+        metro
+        noiseBurstTrigger
         stringModeFilter
         resonator
-        noiseSource
-        smoothingFilter = SmoothingFilter();
-        L_n_1 = 0;
+        
         %TODO: Add a waveshaper function property? Can Matlab do this?
     end
     
     methods
-        function obj = ContactSoundGenerator()
-            %These values came from nowhere atm...
-            pulsePeriod = .05*SystemParams.audioRate;
-%             obj.noiseSource = NoisePulse(pulsePeriod, -1, -60, pulsePeriod);
-            obj.noiseSource = Noise();
-            obj.resonator = ResonatorFilter(500, .99);
-            obj.stringModeFilter = LongitudinalModeFilter(SystemParams.E_string.brass);
+        function obj = ContactSoundGenerator(stringParams, stringModeFilterSpec)
+            obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w);
+            obj.noisePulse = NoisePulse2(stringParams.pulseLength, stringParams.decayRate);
+            obj.metro = Metro(stringParams.pulseLength, obj.noisePulse);
+            obj.noiseBurstTrigger = NoiseBurstTrigger(obj.metro);
+            obj.stringModeFilter = LongitudinalModeFilter(stringModeFilterSpec);
+            obj.resonator = ResonatorFilter(250, .99); %TODO: Change these to not be magic constants once more things come into place
         end
         
-        function outputSample = tick(obj, L_n)
-            %TICK - L_n is the current value for the string length
-            
-            %calculate the lower branch first to obtain the cut-off
-            %frequency value
-            f_c_n = obj.n_w*abs(obj.smoothingFilter.tick(L_n - obj.L_n_1));
-            
-            %update the objects which rely on the cut-off frequency
-            obj.resonator.update_f_c(f_c_n);
-            obj.noiseSource.consume_f_c(f_c_n);
-            obj.g_TV = f_c_n/100; %TODO: Eventually tune this parameter
-            
-            %compute the upper branches
-            noiseSample = obj.noiseSource.tick();        
+        function outputSample = tick(obj, L)
+            f_c = obj.controlSignalProcessor.tick(L);
+            obj.noiseBurstTrigger.tick(f_c);
+            obj.metro.tick()
+            noiseSample = obj.noisePulse.tick();
+            obj.resonator.update_f_c(f_c);
             v1 = (1-obj.g_bal)*obj.stringModeFilter.tick(noiseSample);
-            %tanh is the waveshaping function here
-            v2 = obj.g_bal*tanh(obj.resonator.tick(noiseSample));           
-            
-            %combine the various branches and scale appropriately
-            outputSample = obj.g_user*obj.g_TV*(v1 + v2);
-%             outputSample = noiseSample;
-            
-            %update any delay elements as need be. only the string length
-            %to be concerned with here...
-            obj.L_n_1 = L_n;
+            v2 = obj.g_bal*(obj.resonator.tick(noiseSample));
+            %convert f_c back to muutos to match the PD patch for now
+            %TODO: Refactor this in your own way to make more sense
+            muutos = f_c * SystemParams.stringLengthMeters / obj.controlSignalProcessor.n_w;
+            obj.g_TV = .5*muutos;
+            outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
         end
         
         function set_g_user(obj, newValue)

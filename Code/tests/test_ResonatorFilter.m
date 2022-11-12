@@ -1,6 +1,6 @@
 clear;
 close all;
-addpath("..\src");
+%addpath("..\src");
 
 N = 8192;
 Fs = 48000;

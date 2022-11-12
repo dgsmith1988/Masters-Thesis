@@ -48,10 +48,12 @@ classdef Metro < handle
         end
         
         function setPeriod(obj, newPeriod_mS)
-            obj.period_mS = newPeriod_mS;
-            obj.tickLimit = Metro.calculateTickLimit(newPeriod_mS);
-            obj.tickCount = 0;
-            obj.enableFlag = true;
+            if newPeriod_mS > 0
+                obj.period_mS = newPeriod_mS;
+                obj.tickLimit = Metro.calculateTickLimit(newPeriod_mS);
+                obj.tickCount = 0;
+                obj.enableFlag = true;
+            end
             %TODO: Determine whether or not trigger the event again after
             %resetting the period here
         end

@@ -2,11 +2,11 @@ close all;
 clear;
 dbstop if error;
 
-addpath("..\src");
-
-slideVelocity = .0001;
-L = 5:-slideVelocity:slideVelocity;
-contactSoundGenerator = ContactSoundGenerator();
+slideVelocity = .001;
+L = .25:slideVelocity:1;
+stringParams = SystemParams.E_string_params;
+stringModeFilterSpec = SystemParams.E_string_modes.brass;
+contactSoundGenerator = ContactSoundGenerator(stringParams, stringModeFilterSpec);
 
 y = zeros(1, length(L));
 for n = 1:length(L)
