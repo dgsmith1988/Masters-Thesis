@@ -57,6 +57,8 @@ classdef SystemParams
         e_string_params = StringParams(0, 0, 0, 1, 329.63);
         
         stringLengthMeters = .065;
+        lowest_f0 = 65.41; %Corresponds to C2 to support open C tuning
+        maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.lowest_f0); %TODO: Fine tune these calculations later
     end
 end
 

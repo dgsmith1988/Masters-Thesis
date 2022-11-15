@@ -21,4 +21,3 @@ classdef FilterObject < handle
         end
     end
 end
-
