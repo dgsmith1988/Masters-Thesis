@@ -2,7 +2,9 @@
 %09/22/2022
 %Test script to ensure fractional delay-line functionality works
 
-addpath("..\src");
+clear
+
+% addpath("..\src");
 
 %Input test signal and output buffer
 x = [1, zeros(1, 9)];
@@ -10,11 +12,11 @@ y = zeros(size(x));
 
 
 %Fractional delay filter settings
-L = 6;                      %number of taps
+L = 6; %for plotting purposes
 fractional_delay = [0, .5, 1]; %fractional delay amount
 
 for k = 1:length(fractional_delay)
-    dl_frac = DelayLineFraction(L, fractional_delay(k));
+    dl_frac = DelayLineFraction(fractional_delay(k));
     
     %Run the test signal through the delay to see what comes out
     for n = 1:length(x)

@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=2cm, top=2cm, bottom=2cm}
+\usepackage{amsmath}
+
+\title{Master’s Thesis Proposal \\\Large{Virtual Slide Guitar: A Digital Wave Guide Approach}}
+\author{David ``Graham'' Smith}
+\date{November 11th, 2022}
+
+\begin{document}
+\maketitle
+
+\section*{Introduction / Motivation}
+\paragraph{}
+One of the more unique and interesting methods of playing guitar is an approach referred to as “slide guitar”. This consists of using a rigid object, most frequently a tube made of metal or glass, to control the length of the string, instead of the traditional fretting approach. The slide acts as another method of string termination and influences the vibration of the string by creating a new load impedance in between the nut and the bridge on the string. This allows unique articulations and pitch inflections to be generated as the player is no-longer constrained to the pitches provided by the fret-locations. Additionally, the interaction of the slide’s surface with that of the string adds a new timbral component related to the slide’s velocity. 
+
+In the case of wound strings, this adds two new components. The first is a time-varying harmonic component due to the interaction of the slide with the spatially periodic pattern of windings on the string’s surface (inherent in a wound string’s construction).  The second component is due to the stimulation of the string’s longitudinal modes as the slide introduces disturbances in this direction when it impacts the ridges of the windings. Given that the slide does not provide sufficient force to change the length of the string from the perspective of the longitudinal modes, the modal frequencies are static, regardless of the motion of the slide. 
+
+For unwound strings, the contact sound generated doesn't include an audible longitudinal component and is more closely modeled by white-noise scaled by the slide velocity. This is explained by the construction of the two objects and how their surfaces interact. Slides and unwound strings are traditionally made of smooth polished materials, chrome/brass/glass and metal respectively. Correspondingly, the coefficient of friction between the two is comparatively much lower than that involved in the wound-string case. Unwound strings also have a uniform surface, lacking in the ridges created by windings which a slide impacts while traveling the length of the string. This darastically reduces the coupling between the slide and the unwound string from a longitudinal standpoint.
+
+Slide-guitar hasn’t been explored nearly as much from a synthesis standpoint as compared the traditional fretted guitar. My motivation comes from the fact the topic is less explored. Additionally, I have long been a guitar player and slide guitar enthusiast, so understanding the physical mechanisms at play in slide articulation (as well as guitar playing in general) are of keen interest to me personally.
+
+\section*{Previous Work}
+\paragraph{}
+Sound synthesis of a vibrating string has long been of interest to researchers as illustrated by the work of Hiller and Ruiz \cite{hiller_synthesizing_1971} \cite{hiller_synthesizing_1971-1}, Karplus-Strong \cite{karplus_digital_1983}, Jaffe-Smith \cite{jaffe_extensions_1983}. More instrument specific extensions were developed by Välimäki et al. \cite{vaelimaeki_physical_1996-1}.  Karjalainen et al made the models much more computationally efficienct with the Single Delay Loop (SDL)\cite{karjalainen_plucked-string_1998}. More recently, guitar specific plucking has been researched by James Woodhouse in a pair of papers \cite{woodhouse_synthesis_2004} \cite{woodhouse_plucked_2004}. However, very little work exists which specifically focuses on the slide guitar. The first published journal article regarding it came out of a group of Finnish researchers in 2008 \cite{pakarinen_virtual_2008}. This material heavily coupled to a master’s thesis by Tapio Puputti published in 2010 \cite{puputti_real-time_2012}. Additionally, this set of papers involves a substantial component related to the gestural control of the synthesizer using a pre-existing Virtual Air Guitar system. Accordingly, the sound synthesis aspect is only half the focus, and the approach taken is a digital waveguide (DWG) model based on other work from the Helsinki University of Technology.
+
+The same group of researchers has conducted prior work which was incorporated into DWG model for slide guitar. A paper of theirs from 2007 focuses on the interaction noises of fingers with wound strings \cite{pakarinen_analysis_2007}. This work heavily informs the model of slide/string surface interaction and translates into a parametric model dependent on the slide and string properties. The same paper influenced a synthesis model of the Chinese guqin \cite{penttinen_model-based_2006}. One of the distinguishing characteristics of the guqin is that it is a fret-less plucked instrument which uses wound strings. Correspondingly, the friction model developed for the Virtual Slide Gutiar (VSG) model is heavily influenced by the guqin’s which was heavily influenced by the work focusing strictly on the finger-string interactions.
+
+Recent work has also attempted to extend the DWG model or use a finite-difference approach. Gianpaolo Evangelista has a history of modeling player/instrument interaction aspects of guitar playing. These have focused just on frets and strings \cite{evangelista_physical_2011} as well as the different touch and collision sounds involved in guitar playing in general \cite{evangelista_playerinstrument_2010}. More recently, he has extended the work performed by the Finnish research group and produced a more physically informed slide model \cite{evangelista_physical_2012}. The most recent approach however is a finite difference model produced by researchers at Queen’s University Belfast which explicitly models the string forces on both the left and right hands and produces quality results \cite{bhanuprakash_finite_2020}.
+
+\section*{Proposed Research / Methodology}
+\paragraph{}
+A synthesis model based on the information in Puputti's thesis will be developed in Matlab which supports sample-by-sample calculations of the resulting sound. The constituent components (i.e. pulse generator, loop-filter, fractional delay...) will be made as modular as possible to allow for an exploration of different approaches to each component and their effect on the sound-synthesis system in general. This includes a Single Delay Line Model (SDL) acting as the waveguide, a 5th order Lagrange interpolator as the fractional delay element, and zero-order energy-preserving interpolation to implement the energy compensation.
+
+Additionally, physical measurements will be made recreating the original approach to capturing the longitudinal modes. Other measurements will be made in order to extend the system and approach to understand their sonic impact. This might include other parameters of the strings, such as the number of windings or linear mass density, but will ultimately be determined as the project develops as the synthesis model dictates which aspects are most impactful. Techniques from some of the other approaches will be investigated to assess their contributions to realism or creative potential (ie. improving the loop filter to incorporate the body effects, adding polarization).
+
+Once a clearer complete synthesis model has been established, the next step would be to determine to determine the effective parameter ranges which produce musical results. After that, an attempt to characterize the best best set of synthesis parameter configurations will be made. This could be done in real-time using a GUI, ultimately dependent on the nature of the control signals involved and the best method to control them.
+
+\section*{Contributions / Summary}
+\paragraph{}
+To summarize, a synthesis model of the slide guitar will be developed. This model will be heavily based on the DWG model proposed by the Finnish researchers to start. Once correctness of the basic algorithm has been established, explorations will be made to see how different parametrizations/implementations of the constituent components affect the sound. Physical measurements will be made to explore aspects such as the winding noise and longitudinal mode characteristics. After a best model implementation and parametrization has been decided upon the parameter space will be explored to see what produces the most usable and musical results.
+
+\clearpage
+\bibliography{references}
+\bibliographystyle{alpha}
+
+\end{document}

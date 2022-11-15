@@ -1,0 +1,29 @@
+classdef LoopFilter < FilterObject
+    %LOOPFILTER     
+    properties
+        phaseDelay = 1/2;
+        g
+        a
+    end
+    
+    methods
+        function obj = LoopFilter(g, a)
+            %TODO: For now this is the LPF as specified in the KS paper to
+            %get things working but will be configured to match the paper
+            %later
+            b_ = [.5, .5];
+            a = 1;
+            z_init = zeros(1, max(length(b), length(a))); 
+            obj@FilterObject(b, a, z_init);
+            obj.g = g;
+            obj.a = a;
+        end
+        
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
+

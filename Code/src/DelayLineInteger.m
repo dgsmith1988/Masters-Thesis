@@ -9,9 +9,22 @@ classdef DelayLineInteger < handle
     
     methods
         function obj = DelayLineInteger(delay)
-            %DELAYLINE Construct an instance of this class
+            %DELAYLINE Construct an instance of this class initialized to
+            %zeros
             obj.pointer = 1;
             obj.buffer = zeros(1, delay);
+        end
+        
+        function fillWithNoise(obj, type)
+            %TODO: Determine the best placement of this and if you can
+            %override constructor
+            if type == "white"
+                obj.buffer = wgn(length(obj.buffer), 1, 0);
+            elseif type == "pink"
+                obj.buffer = pinknoise(size(obj.buffer));
+            else
+               error("Invalid noise type specified");
+            end
         end
         
         function len = getLength(obj)
