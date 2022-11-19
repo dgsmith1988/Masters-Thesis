@@ -15,9 +15,26 @@ relativeStringLengthMin = .25; %corresponds to the 24th fret and 4*f0 of the ope
 fretNumber = 0:12;
 halfStepRatio = 2^(1/12)*ones(size(fretNumber)); %keep things in terms of equal temprement for now
 noteToOpenRatio = halfStepRatio.^fretNumber;
-desiredRelativeLength = 1./noteToOpenRatio
-fretLocations = (1-desiredRelativeLength)*scaleLength_in
+desiredRelativeLength = 1./noteToOpenRatio;
+fretLocations = (1-desiredRelativeLength)*scaleLength_in;
 
 %note frequencies
-f0_Hz = SystemParams.E_string_params.f0
-notes_Hz = f0_Hz ./ desiredRelativeLength
+f0_Hz = SystemParams.E_string_params.f0;
+notes_Hz = f0_Hz ./ desiredRelativeLength;
+
+%figure out how to generate a control signal to create a slide between two
+%frets
+N = 50; %number of samples
+startingStringLength = 1;
+endingStringLength = startingStringLength / halfStepRatio(1);
+sampleRatio = halfStepRatio(1)^(1/(N-1));
+
+L = zeros(1, N);
+L(1) = startingStringLength;
+for n = 2:N
+    L(n) = L(n-1)/sampleRatio;
+end
+
+stem(L);
+endingStringLength
+L(end)
