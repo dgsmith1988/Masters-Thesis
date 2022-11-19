@@ -3,13 +3,13 @@ classdef IntegerDelay < handle
     %output pointers are used here as the length will be adjusted in real
     %time.
     
-    properties(Access = private)
+    properties(GetAccess = public)
         readPointer     %points to the next location which will be read from
         writePointer    %points to the next location which will be read to
         buffer          %contains the contents of the delay line
         delay           %delay amount - not sure how useful this is... could be removed...
     end
-    
+       
     methods
         function obj = IntegerDelay(delay)
             %DELAYLINE Construct an instance of this class initialized to
@@ -38,7 +38,6 @@ classdef IntegerDelay < handle
         function writeSample(obj, inputSample)
             %write incoming sample
             obj.buffer(obj.writePointer) = inputSample;
-            %obj.incrementWritePointer();
         end
         
         function setDelay(obj, newValue)
@@ -49,14 +48,10 @@ classdef IntegerDelay < handle
             if obj.writePointer >= obj.delay
                 obj.readPointer = obj.writePointer - obj.delay;
             else
-                obj.readPointer = length(obj.buffer) + obj_writePointer - obj.delay;
+                obj.readPointer = length(obj.buffer) + obj.writePointer - obj.delay;
             end
         end
-        
-        function len = getLength(obj)
-            len = length(obj.buffer);
-        end
-        
+               
         function initializeBuffer(obj, newData)
             assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions')
             obj.buffer = newData;
@@ -64,17 +59,18 @@ classdef IntegerDelay < handle
     end
     
     methods(Access = private)
-        %TODO: Can these be refactored into one function which operates
-        %by handles/references?
+        %I believe that Matlab arrays/vectors are value objects are this
+        %length so these functions cannot be condensed easily into one
+        %which operates on a handle (aka. Matlab style pointer)
         function incrementReadPointer(obj)
             obj.readPointer = obj.readPointer + 1;
-            if obj.readPointer > obj.readPointer
+            if obj.readPointer > length(obj.buffer)
                 obj.readPointer = 1;
             end
         end
         function incrementWritePointer(obj)
             obj.writePointer = obj.writePointer + 1;
-            if obj.writePointer > obj.writePointer
+            if obj.writePointer > length(obj.buffer)
                 obj.writePointer = 1;
             end
         end

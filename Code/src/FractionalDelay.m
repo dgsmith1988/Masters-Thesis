@@ -3,7 +3,7 @@ classdef FractionalDelay < handle
     %adhere to
     
     properties(GetAccess = public)
-        fractionalDelay %fractional delay amount (0 <=x <= 1)
+        fractionalDelay %fractional delay amount (0 <= x <= 1)
     end
     
     properties(Abstract, Constant)

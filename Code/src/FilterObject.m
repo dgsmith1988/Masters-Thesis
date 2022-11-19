@@ -19,5 +19,9 @@ classdef FilterObject < handle
             %FILTER Filter x to produce y based on current filter state
             [y, obj.z] = filter(obj.b, obj.a, x, obj.z);
         end
+        
+        function plotFrequencyResponse(obj)
+            freqz(obj.b, obj.a, 512, SystemParams.audioRate);
+        end
     end
 end

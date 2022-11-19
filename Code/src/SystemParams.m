@@ -4,7 +4,8 @@ classdef SystemParams
     
     properties(Constant)
         audioRate = 48000;
-        controlRate = 48000;
+        %Keep them both the same for now
+        controlRate = SystemParams.audioRate;
         %Although this code is syntactically atrocious it seems to be the
         %best approach given how Matlab implements constants
         E_string_modes = StringModes(...
@@ -49,12 +50,24 @@ classdef SystemParams
         
         %Numbers taken from the patch in Appendix B of the master's thesis
         %TODO: Revamp and potentially extend these parameters later
-        E_string_params = StringParams(30, 200, 1300, 6, 82.41);
-        A_string_params = StringParams(25, 150, 2000, 5, 110);
-        D_string_params = StringParams(20, 100, 2600, 4, 146.83);
-        G_string_params = StringParams(0, 0, 0, 3, 196);
-        B_string_params = StringParams(0, 0, 0, 2, 246.94);
-        e_string_params = StringParams(0, 0, 0, 1, 329.63);
+        E_string_params = StringParams(30, 200, 1300, 6, 82.41, ...
+            [-0.08135045114297, -0.00085796015850],...  %a_pol
+            [0.97816203269973 , 0.00061375406757]);     %g_pol
+        A_string_params = StringParams(25, 150, 2000, 5, 110, ...
+            [-0.05928143968051, 0.00171045642780],...  
+            [0.98347976839019 , 0.00040239847018]);     
+        D_string_params = StringParams(20, 100, 2600, 4, 146.83, ...
+            [-0.06091679973956, 0.00298025530804],...  
+            [0.98780640700360 , 0.00037712305083]);
+        G_string_params = StringParams(0, 0, 0, 3, 196, ...
+            [-0.03840938807507, 0.00081125415233],...  
+            [0.99012478445221 , 0.00025250158133]);     
+        B_string_params = StringParams(0, 0, 0, 2, 246.94, ...
+            [-0.03042891937178, 0.00113090288951],...  
+            [0.99247813966550 , 0.00012644399078]);     
+        e_string_params = StringParams(0, 0, 0, 1, 329.63, ...
+            [-0.02955827361150, 0.00134421335136],...  
+            [0.99402123928178 , 0.00008928138142]);     
         
         stringLengthMeters = .065;
         lowest_f0 = 65.41; %Corresponds to C2 to support open C tuning
