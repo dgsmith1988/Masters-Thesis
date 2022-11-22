@@ -1,7 +1,7 @@
 clear;
 
-%Testing parameters - Slide at a constant rate from .25 to 1
-n_w = SystemParams.E_string_params.n_w;
+%Testing parameters
+n_w = SystemParams.E_string_params.windsParam;
 relativeLengthStart = .25;
 relativeLengthStop = 1;
 relativeLengthDistance = relativeLengthStop - relativeLengthStart;
@@ -10,7 +10,7 @@ slideVelocity = relativeLengthDistance/numSamples; %relative string length trave
 L = relativeLengthStart:slideVelocity:relativeLengthStop-slideVelocity;
 
 %Processing objects
-controlSignalProcessor = ControlSignalProcessor(n_w, L(1)-slideVelocity);
+controlSignalProcessor = ControlSignalProcessor(n_w);
 
 slide_velocity_up = zeros(1, numSamples);
 f_c_up = zeros(1, numSamples);
@@ -22,10 +22,9 @@ end
 subplot(2, 1, 1)
 plot(f_c_up, 'DisplayName', 'f_c');
 hold on;
-plot(slide_velocity_up, 'DisplayName', 'slide velocity');
+plot(slide_velocityup, 'DisplayName', 'slide_velocity');
 hold off;
 legend();
-title('Upward Motion');
 
 %Now lets slide back down the string
 %Todo: Investigate where the noise in the second parametrization of L comes
@@ -41,9 +40,4 @@ for n = 1:numSamples
 end
 
 subplot(2, 1, 2);
-plot(f_c_down, 'DisplayName', 'f_c');
-hold on;
-plot(slide_velocity_down, 'DisplayName', 'slide velocity');
-hold off;
-legend();
-title('Downward Motion');
+plot(f_c_down);

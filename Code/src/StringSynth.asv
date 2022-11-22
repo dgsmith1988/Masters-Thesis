@@ -2,8 +2,7 @@ classdef StringSynth < handle
     %STRINGSYNTH Synthesizer for one particular string
     
     properties (GetAccess = public)
-        woundFlag               %boolean indicating wound string or not  
-        sampleRateConverter;    %this takes the control signal and makes it at audio rate
+        woundFlag               %boolean indicating wound string or not       
         feedbackLoop            %feedback loop which contains elements to implement string DWG
         %contactSoundGenerator  %unit adding slide/string contact noise
         antiAliasingFilter      %what's in a name, numbnuts?
@@ -16,13 +15,9 @@ classdef StringSynth < handle
             %L_0 = initial relative string length
             %Parse the string parameters
             obj.woundFlag = stringParams.n_w > 0;
-            
-            %Initialize the member variables
             obj.L_n = L_0;
             obj.lastOutputSample = 0;
-            
-            %Instaniate the different processing objects
-            obj.sampleRateConverter = SampleRateConverter();
+            %Calculate the derived object parameters
             obj.feedbackLoop = FeedbackLoop(stringParams, L_0);
 %             obj.constactSoundGenerator = ContactSoundGenerator();
             obj.antiAliasingFilter = AntiAliasingFilter();
@@ -40,20 +35,13 @@ classdef StringSynth < handle
             obj.feedbackLoop.integerDelayLine.initializeBuffer(bufferData);
         end
               
-        function outputSample = tick(obj, L_n_controlRate)
-            
-            %upsample the control signal to the audio rate
-            %TODO: Determine the best approach to this computationally
-            %later, as for now this is just a pass-through and to serve as
-            %a reminder.
-            L_n_audioRate = obj.sampleRateConvertor.tick(L_n_controlRate);
-            
+        function outputSample = tick(obj, L_n)
             %check to if the string length has changed before making any
-            %adjustments to the underlying processing objects
-            if (L_n_audioRate ~= obj.L_n)
-                obj.L_n = L_n_audioRate;
-                obj.feedbackLoop.consumeControlSignal(L_n_audioRate);
-%                 obj.contactSoundGenerator.consumeControlSignal(L_n);                
+            %adjustments to the underlying 
+            if (L_n ~=obj.L_n)
+                obj.L_n = L_n;
+                obj.feedbackLoop.consumeControlSignal(L_n);
+                obj.contactSoundGenerator.consumeControlSignal(L_n);                
             end
             
             %TODO:Add the CSG component

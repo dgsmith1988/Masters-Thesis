@@ -10,7 +10,6 @@ classdef ContactSoundGenerator < handle
         noiseBurstTrigger
         stringModeFilter
         resonator
-        
         %TODO: Add a waveshaper function property? Can Matlab do this?
     end
     
@@ -24,8 +23,8 @@ classdef ContactSoundGenerator < handle
             obj.resonator = ResonatorFilter(250, .99); %TODO: Change these to not be magic constants once more things come into place
         end
         
-        function outputSample = tick(obj, L)
-            f_c = obj.controlSignalProcessor.tick(L);
+        function outputSample = tick(obj, L_n)
+            f_c = obj.controlSignalProcessor.tick(L_n);
             obj.noiseBurstTrigger.tick(f_c);
             obj.metro.tick()
             noiseSample = obj.noisePulse.tick();

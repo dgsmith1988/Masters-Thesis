@@ -1,3 +1,7 @@
+%DEPRECATED - this functionality and tests should be done on the string
+%object directly given the processing loop is inherent to the operation of
+%this object
+
 % clear;
 dbstop if error
 
@@ -6,13 +10,14 @@ durationSec = 2.5;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
 
+%Control signals/buffers
+L = ones(1, numSamples);
+y = zeros(1, numSamples);
+
 %Processing objects
 feedbackLoop = FeedbackLoop(SystemParams.E_string_params, L(1));
 antiAliasingFilter = AntiAliasingFilter();
 
-%Control signals/buffers
-L = ones(1, numSamples);
-y = zeros(1, numSamples);
 %data to use as the exciation
 bufferData = pinknoise(length(feedbackLoop.integerDelayLine.buffer))';
 bufferData = bufferData / max(abs(bufferData)); %Normalize the signal to make it stronger
@@ -37,7 +42,8 @@ pause();
 
 %******Test changing the delay line length******
 startingStringLength = 1;
-endingStringLength = startingStringLength / halfStepRatio(1);
+halfStepRatio = 2^(1/12);
+endingStringLength = startingStringLength / halfStepRatio;
 sampleRatio = halfStepRatio(1)^(1/(numSamples-1));
 
 L = zeros(1, numSamples);
@@ -56,3 +62,4 @@ end
 
 plot(y);
 sound(.5*y, Fs)
+audiowrite("string_out_slide.wav", y, Fs);

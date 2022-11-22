@@ -1,5 +1,5 @@
-classdef NoisePulse2 < handle
-    %NOISEPULSE2 Class modeled after noise pulse as specified in PD code
+classdef NoisePulseGen < handle
+    %NOISEPULSEGEN Class modeled after noise pulse as specified in PD code
     %from the masters thesis
     
     properties
@@ -9,7 +9,7 @@ classdef NoisePulse2 < handle
     end
     
     methods
-        function obj = NoisePulse2(pulseLength_ms, decayRate)
+        function obj = NoisePulseGen(pulseLength_ms, decayRate)
             obj.pulseLength_ms = pulseLength_ms;
             obj.decayRate = decayRate;
             obj.linearRamp = LinearRamp(pulseLength_ms);
@@ -21,6 +21,8 @@ classdef NoisePulse2 < handle
             %Feed this into decaying exponential which scales the noise
             %TODO: Determine why there is an absolute value here
             outputSample = exp(-expArgument/obj.decayRate)*abs(Noise.tick_static());
+            %TODO: Modify this to have a threshold at which we just output
+            %zeros instead
         end
         
         function reset(obj)

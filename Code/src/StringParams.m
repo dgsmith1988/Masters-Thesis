@@ -4,8 +4,8 @@ classdef StringParams
    
     properties (GetAccess = public)
         number          %string number (6 = E, A = 5, ... 1 = e)
-        decayRate       %noise pulse parameter
-        pulseLength     %noise pulse parameter
+        decayRate       %noise pulse parameter used in e^(t/-decayRate)
+        pulseLength     %noise pulse parameter in ms
         n_w             %windings per cm on string %TODO: Fix up units here
         f0              %fundamental frequency for tuning
         a_pol           %table 2 from 1996 - Developmentand Calibration of a Guitar Synthesizer          
