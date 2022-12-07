@@ -3,7 +3,7 @@ classdef AntiAliasingFilter < FilterObject
     
     properties (Constant)
         order = 6
-        cutOffFreq = .5 %normalized specification
+        cutOffFreq = .35 %normalized specification
     end
     
     methods

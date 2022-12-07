@@ -4,6 +4,8 @@
 %location and the correspondings scaling of the open-string's fundamental
 %frequency
 
+clear
+
 %String parameters
 scaleLength_in = 25.5;  %this represents 
 inch2Meter = 127/5000;
@@ -12,7 +14,7 @@ relativeStringLengthMax = 1; %corresponds to an open string and the full length 
 relativeStringLengthMin = .25; %corresponds to the 24th fret and 4*f0 of the open string
 
 %Selected pitch parameters
-fretNumber = 0:12;
+fretNumber = 0:24;
 halfStepRatio = 2^(1/12)*ones(size(fretNumber)); %keep things in terms of equal temprement for now
 noteToOpenRatio = halfStepRatio.^fretNumber;
 desiredRelativeLength = 1./noteToOpenRatio;

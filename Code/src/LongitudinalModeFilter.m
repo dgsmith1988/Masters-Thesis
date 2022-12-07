@@ -1,5 +1,7 @@
 classdef LongitudinalModeFilter < FilterObject
-    %LONGITUDINALMODEFILTER  
+    %LONGITUDINALMODEFILTER - TODO:Rename this to something more
+    %functionality agnostic as technically this doesn't have any code in it
+    %which is aware of the larger processing context that this operates in
     methods
         function obj = LongitudinalModeFilter(filterSpec)
             %LONGITUDINALMODEFILTER 

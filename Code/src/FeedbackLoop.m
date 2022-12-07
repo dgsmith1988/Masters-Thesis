@@ -3,8 +3,11 @@ classdef FeedbackLoop < handle
     %loop to make it eaiser to debug and understand things. It is like the
     %String DWG minus the feedback loop essentially.
     
+    %TOOD: Is there a way to run this at half the sampling rate to save
+    %computations?
+    
     properties
-        f0                      %fundamental frequency in Hz
+        f0                      %open string fundamental frequency in Hz
         integerDelayLine        %delay line implementing integer component
         fractionalDelayLine     %dealy line implementing fractional component
         energyScaler            %calculates compensation coefficient

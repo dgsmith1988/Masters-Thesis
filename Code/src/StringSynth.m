@@ -8,7 +8,7 @@ classdef StringSynth < handle
         %contactSoundGenerator  %unit adding slide/string contact noise
         antiAliasingFilter      %what's in a name, numbnuts?
         L_n                     %current relative string length
-        lastOutputSample         %last output sample to implement feedback
+        lastOutputSample        %last output sample to implement feedback
     end
     
     methods
@@ -33,7 +33,8 @@ classdef StringSynth < handle
             %sound
             %TODO: Examine how different types of noise/exictations could
             %be used here to make the string sound better
-            %             bufferData = 1 - 2*rand(1, length(obj.integerDelayLine.buffer));
+%             bufferData = 1 - 2*rand(1, length(obj.feedbackLoop.integerDelayLine.buffer));
+            %TODO: Examine if bandlimiting this helps with crackle issue
             bufferData = pinknoise(length(obj.feedbackLoop.integerDelayLine.buffer))';
             %Normalize the signal to make it stronger
             bufferData = bufferData / max(abs(bufferData));
@@ -46,7 +47,7 @@ classdef StringSynth < handle
             %TODO: Determine the best approach to this computationally
             %later, as for now this is just a pass-through and to serve as
             %a reminder.
-            L_n_audioRate = obj.sampleRateConvertor.tick(L_n_controlRate);
+            L_n_audioRate = obj.sampleRateConverter.tick(L_n_controlRate);
             
             %check to if the string length has changed before making any
             %adjustments to the underlying processing objects
@@ -56,7 +57,8 @@ classdef StringSynth < handle
 %                 obj.contactSoundGenerator.consumeControlSignal(L_n);                
             end
             
-            %TODO:Add the CSG component
+            %TODO:Add a block to scale the noise and generate plucks at a
+            %specified scale? Well in a more controlled manner...
             loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
 %             CSGoutput = obj.contactSoundGenerator.tick();
             CSGOutput = 0;
@@ -67,6 +69,7 @@ classdef StringSynth < handle
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
             outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
+%             outputSample = obj.lastOutputSample;
         end
     end
 end

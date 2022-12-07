@@ -20,7 +20,7 @@ stringStart = .25;
 stringEnd = stringStart + slideVelocity*(numSamples-1);
 L = stringStart:slideVelocity:stringEnd;
 
-noMotionDuration = NoisePulseTrain.calculateTicks(2*(NoisePulseTrain.disableDelay_ms));
+noMotionDuration = calculateTicks(2*(NoisePulseTrain.disableDelay_ms));
 L = [L, L(end)*ones(1, noMotionDuration)];
 numSamples = length(L);
 

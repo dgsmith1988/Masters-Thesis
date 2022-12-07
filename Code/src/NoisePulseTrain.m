@@ -28,7 +28,7 @@ classdef NoisePulseTrain < handle
             %behavior and functionality is more well defined
             %calculate all the various parameters
             obj.triggerPeriod_ms = triggerPeriod_ms;
-            obj.tickLimit = NoisePulseTrain.calculateTicks(obj.triggerPeriod_ms);
+            obj.tickLimit = calculateTicks(obj.triggerPeriod_ms);
             obj.noisePulseGen = NoisePulseGen(pulseLength_ms, decayRate);
             obj.enableFlag = false; %derive when the start the train from the control signal as opposed to defaulting it
         end
@@ -37,24 +37,21 @@ classdef NoisePulseTrain < handle
         %velocity?
         %TODO: Determine whether or not to make the initial value something
         %you can pass in
-        function outputSample = tick(obj, f_c_n)
-            if(abs(f_c_n - obj.f_c_n_1) > obj.threshold)
-                if f_c_n == 0
+        function outputSample = tick(obj, newTriggerPeriod_ms)
+            if(abs(newTriggerPeriod_ms - obj.triggerPeriod_ms) > obj.threshold)
+                if newTriggerPeriod_ms == 0
                     %diasble the noisePulseGen after 500 ms as per how the
                     %PD patch descibres the functionality
-                    
-                    obj.disableCount = NoisePulseTrain.calculateTicks(obj.disableDelay_ms);
+                    obj.disableCount = calculateTicks(obj.disableDelay_ms);
                     obj.disableFlag = true;
-                elseif f_c_n > 0
-                    %update the period at which the pulses are generated
-                    newTriggerPeriod_ms = round(100/f_c_n);
+                elseif newTriggerPeriod_ms > 0
                     assert(newTriggerPeriod_ms > 1/SystemParams.audioRate);
                     obj.triggerPeriod_ms = newTriggerPeriod_ms;
-                    obj.tickLimit = NoisePulseTrain.calculateTicks(newTriggerPeriod_ms);
+                    obj.tickLimit = calculateTicks(newTriggerPeriod_ms);
                     obj.enableFlag = true;
                 end
                 %update the value for the next iteration
-                obj.f_c_n_1 = f_c_n;
+                obj.triggerPeriod_ms = newTriggerPeriod_ms;
             end
             
             if obj.disableFlag
@@ -77,14 +74,6 @@ classdef NoisePulseTrain < handle
             end
             
             outputSample = obj.noisePulseGen.tick();
-        end
-    end
-    
-    methods (Static)
-        %TODO: Extract this function as the same functionality is used by
-        %other parts?
-        function ticks = calculateTicks(duration_ms)
-            ticks = round((duration_ms*10^-3)*SystemParams.audioRate);
         end
     end
 end
