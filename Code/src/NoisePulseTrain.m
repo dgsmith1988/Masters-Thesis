@@ -64,7 +64,7 @@ classdef NoisePulseTrain < handle
             
             if obj.enableFlag
                 %TODO: Come back and verify there isn't an off-by-one bug
-                %here
+                %here. Also, look into what if there is overshoot?
                 obj.tickCount = obj.tickCount + 1;
                 %>= handles the case where the period shortens
                 if obj.tickCount >= obj.tickLimit

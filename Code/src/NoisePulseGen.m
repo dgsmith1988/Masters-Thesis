@@ -2,6 +2,12 @@ classdef NoisePulseGen < handle
     %NOISEPULSEGEN Class modeled after noise pulse as specified in PD code
     %from the masters thesis
     
+    %TODO: Determine the best approach here as Gary's suggestion of using
+    %and IIR to generate the amplitude envelope is more physically informed
+    %however it would need to be hard clipped potentially... also the
+    %fundamental API and behavior would change from a programming
+    %standpoint
+    
     properties
         linearRamp
         pulseLength_ms

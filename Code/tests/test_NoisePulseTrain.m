@@ -4,6 +4,7 @@ clear;
 
 %System parameters
 stringParams = SystemParams.E_string_params;
+f0 = stringParams.f0;
 pulseLength_ms = stringParams.pulseLength;
 decayRate = stringParams.decayRate;
 n_w = stringParams.n_w;
@@ -27,18 +28,18 @@ numSamples = length(L);
 %buffers to be filled during processing loop
 f_c = zeros(1, numSamples);
 slideVelocitySignal = zeros(1, numSamples);
+triggerPeriod = zeros(1, numSamples);
 y = zeros(1, numSamples);
 
 %Processing objects
-controlSignalProcessor = ControlSignalProcessor(n_w, L(1)-slideVelocity);
+controlSignalProcessor = ControlSignalProcessor(n_w, f0, L(1)-slideVelocity);
 noisePulseTrain = NoisePulseTrain(triggerPeriod_ms, pulseLength_ms, decayRate);
 
 %Processing loop
 for n = 1:numSamples
-    [slideVelocitySignal(n), f_c(n)] = controlSignalProcessor.tick(L(n));
-    y(n) = noisePulseTrain.tick(f_c(n));
+    [slideVelocitySignal(n), f_c(n), triggerPeriod(n)] = controlSignalProcessor.tick(L(n));
+    y(n) = noisePulseTrain.tick(triggerPeriod(n));
 end
-
 
 subplot(2, 1, 1);
 plot(y);

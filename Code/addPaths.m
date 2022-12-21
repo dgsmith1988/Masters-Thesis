@@ -4,3 +4,4 @@ addpath(".\tests")
 addpath(".\src")
 %Add code which came from other sources
 addpath(genpath(".\external"))
+addpath(genpath(".\scratch"))

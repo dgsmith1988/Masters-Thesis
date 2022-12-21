@@ -9,12 +9,8 @@ classdef Noise
             %Wrapper function to make swapping classes easier
             outputSample = Noise.tick_static();
         end
-        
-        function consume_f_c(obj, f_c_n)
-            %Pass through
-        end
     end
-    methods(Static)       
+    methods(Static)
         function outputSample = tick_static()
             %TICK generate one sample of noise on -1.0 to 1.0 range
             %TODO: Determine if this method/approach is even still valid

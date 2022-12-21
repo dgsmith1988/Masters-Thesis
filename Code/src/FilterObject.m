@@ -21,7 +21,7 @@ classdef FilterObject < handle
         end
         
         function plotFrequencyResponse(obj)
-            freqz(obj.b, obj.a, 512, SystemParams.audioRate);
+            freqz(obj.b, obj.a, 4096, SystemParams.audioRate);
         end
     end
 end
