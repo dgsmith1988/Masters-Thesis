@@ -69,7 +69,6 @@ classdef StringSynth < handle
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
             outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
-%             outputSample = obj.lastOutputSample;
         end
     end
 end

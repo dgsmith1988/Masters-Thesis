@@ -1,11 +1,9 @@
-%Tests for the revamped CSP based on the different derivations for the f_c
-%and period parameters
+%Test the ControlSignalProcessor with a time-varying slide velocity
 
 close all;
 clear;
 
 %Generaly system parameters
-% stringParams = SystemParams.E_string_params;
 n_w = SystemParams.E_string_params.n_w;
 Fs = SystemParams.audioRate;
 stringLength = SystemParams.stringLengthMeters;

@@ -1,7 +1,8 @@
-%Test for the time-varying length signal
+%Test the wound CSG with a constant slide speed
 
 % close all;
 % clear;
+
 dbstop if error;
 
 %System parameters
@@ -9,18 +10,12 @@ Fs = SystemParams.audioRate;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.E_string_params;
 stringModeFilterSpec = SystemParams.E_string_modes.brass;
-f0 = stringParams.f0;
-pulseLength_ms = stringParams.pulseLength;
-decayRate = stringParams.decayRate;
 n_w = stringParams.n_w;
-duration_sec = .6;
+duration_sec = 2;
 numSamples = round(Fs*duration_sec);
 
 %Keep the f_c constant for now to simplify the tests
-a = 1/.09;
-increment = duration_sec/numSamples;
-x = 0:increment:duration_sec-increment;
-f_c = 1000*(-a*(x -.3).^2 + 1);
+f_c = 250*ones(1, numSamples);
 
 %generate the control signal based on the derivations in your notebook
 L = zeros(1, numSamples);

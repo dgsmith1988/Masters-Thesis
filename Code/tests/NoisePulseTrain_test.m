@@ -2,16 +2,22 @@
 %amplitude envelope
 
 clear;
-close;
+close all;
 
 %System parameters
 Fs = SystemParams.audioRate;
+Ts = 1/Fs;
 duration_sec = 3;
 numSamples = round(duration_sec*Fs);
 
 %Noise pulse characteristics
 period_samp = 1*Fs/4;
-alpha = 127/128;
+decayRate = SystemParams.E_string_params.decayRate;
+
+%10000 is a tuning parameter here as the decay rate from the thesis did not
+%sound good
+alpha = exp(-10000/(decayRate*Fs));
+% alpha = 127/128;
 % alpha = 4095/4096;
 f_c = Fs/period_samp;
 
@@ -20,16 +26,16 @@ y1 = zeros(1, numSamples);
 y2 = zeros(1, numSamples);
 
 %Processing objects
-noisePulseTrain2 = NoisePulseTrain2(period_samp, alpha);
+noisePulseTrain = NoisePulseTrain(period_samp, alpha);
 
 %Processing loop
 for n = 1:numSamples
-    y1(n) = noisePulseTrain2.tick(f_c);
+    y1(n) = noisePulseTrain.tick(f_c);
 end
 
 figure;
 plot(y1);
-title("Noise Pulse Train Test");
+title("Noise Pulse Train Test - Constant Rate");
 
 %Rate changing test
 a = 1/.09;
@@ -39,7 +45,7 @@ f_c = 1000*(-a*(x -.3).^2 + 1);
 
 %Processing loop
 for n = 1:numSamples
-    y2(n) = noisePulseTrain2.tick(f_c(n));
+    y2(n) = noisePulseTrain.tick(f_c(n));
 end
 
 figure;

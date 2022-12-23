@@ -7,7 +7,7 @@ close all;
 addpath("..\src");
 
 N = 4096;
-Fs = 44100;
+Fs = SystemParams.audioRate;
 num_samples = 5*Fs;
 y = zeros(1, num_samples);
 

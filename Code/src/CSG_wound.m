@@ -1,4 +1,4 @@
-classdef ContactSoundGenerator < handle
+classdef CSG_wound < handle
     properties
         %Todo: Set these to be passed through the constructor?
         g_bal = .5;
@@ -13,36 +13,20 @@ classdef ContactSoundGenerator < handle
     end
     
     methods
-        function obj = ContactSoundGenerator(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_n_1)
+        function obj = CSG_wound(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_n_1)
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
-            %TODO: Replace this with the decay rate from the strings once
-            %you get a formula to achieve that
-            obj.noisePulseTrain = NoisePulseTrain2(7, 127/128);
+            %TODO:10,000 was established from tuning it would be good to
+            %redo the decay rates in general
+            obj.noisePulseTrain = NoisePulseTrain(0, exp(-10000/(stringParams.decayRate*SystemParams.audioRate)));
             obj.stringModeFilter = LongitudinalModeFilter(stringModeFilterSpec);
             obj.resonator = ResonatorFilter(250, .99); %TODO: Change these to not be magic constants once more things come into place
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
         end
         
-%         function outputSample = tick(obj, L_n)
-%             [absoluteSlideVelocity, resonatorFrequency_Hz, triggerPeriod_ms] = obj.controlSignalProcessor.tick(L_n);
-%             noiseSample = obj.noisePulseTrain.tick(triggerPeriod_ms);
-%             obj.resonator.update_f_c(resonatorFrequency_Hz);
-%             %compute the upper branch from the longitudinal modes first
-%             v1 = (1-obj.g_bal)*obj.stringModeFilter.tick(noiseSample);
-%             %compute the lower branch due to the time-varying harmonic
-%             %component
-%             v2 = obj.resonator.tick(noiseSample);
-%             %this value of 40 comes from the PD patch
-%             v2 = obj.waveshaperFunctionHandle(40*v2);
-%             v2 = obj.g_bal*v2;           
-%             obj.g_TV = .5*abs(absoluteSlideVelocity);
-%             outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
-%         end
-
         function outputSample = tick(obj, L_n)
             %calculate the control parameters and update the corresponding
             %objects
-            [f_c_n, absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
+            [f_c_n, ~] = obj.controlSignalProcessor.tick(L_n);
             noiseSample = obj.noisePulseTrain.tick(f_c_n);
             obj.resonator.update_f_c(f_c_n);
             
@@ -53,11 +37,11 @@ classdef ContactSoundGenerator < handle
             %compute the lower branch due to the time-varying harmonic
             %component
             v2 = obj.resonator.tick(noiseSample);
-            %this value of 40 comes from the PD patch
             v2 = obj.waveshaperFunctionHandle(obj.preScalingGain*v2);
             v2 = obj.g_bal*v2;
-            %disable the velocity scaling for now
-            obj.g_TV = .5*abs(absoluteSlideSpeed);
+            
+            %Scale the signal by the slide speed and output it
+            obj.g_TV = 100/f_c_n;
             outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
         end
         
