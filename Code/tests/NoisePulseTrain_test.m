@@ -1,24 +1,21 @@
-%Script to test the new noise pulse class using the IIR to generate the
-%amplitude envelope
+%Script to test the NoisePulseTrain class and ensure correct operation
 
 clear;
 close all;
 
 %System parameters
 Fs = SystemParams.audioRate;
-Ts = 1/Fs;
 duration_sec = 3;
 numSamples = round(duration_sec*Fs);
 
 %Noise pulse characteristics
-period_samp = 1*Fs/4;
-decayRate = SystemParams.E_string_params.decayRate;
+%set it to generate 4 pulses per second
+period_samp = Fs/4; 
+%/8 here sounds best however this is ulitmately determined by the string
+%characteristics
+T60_samp = period_samp/8; 
 
-%10000 is a tuning parameter here as the decay rate from the thesis did not
-%sound good
-alpha = exp(-10000/(decayRate*Fs));
-% alpha = 127/128;
-% alpha = 4095/4096;
+%Constant Rate Test
 f_c = Fs/period_samp;
 
 %buffers to be filled during processing loop
@@ -26,7 +23,7 @@ y1 = zeros(1, numSamples);
 y2 = zeros(1, numSamples);
 
 %Processing objects
-noisePulseTrain = NoisePulseTrain(period_samp, alpha);
+noisePulseTrain = NoisePulseTrain(period_samp, T60_samp);
 
 %Processing loop
 for n = 1:numSamples

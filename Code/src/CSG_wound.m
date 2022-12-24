@@ -1,6 +1,5 @@
 classdef CSG_wound < handle
     properties
-        %Todo: Set these to be passed through the constructor?
         g_bal = .5;
         g_TV = 1;
         g_user = 1;  
@@ -8,16 +7,14 @@ classdef CSG_wound < handle
         noisePulseTrain
         stringModeFilter
         resonator
-        preScalingGain = 10
+        preScalingGain = 3
         waveshaperFunctionHandle
     end
     
     methods
         function obj = CSG_wound(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_n_1)
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
-            %TODO:10,000 was established from tuning it would be good to
-            %redo the decay rates in general
-            obj.noisePulseTrain = NoisePulseTrain(0, exp(-10000/(stringParams.decayRate*SystemParams.audioRate)));
+            obj.noisePulseTrain = NoisePulseTrain(0, stringParams.T60);
             obj.stringModeFilter = LongitudinalModeFilter(stringModeFilterSpec);
             obj.resonator = ResonatorFilter(250, .99); %TODO: Change these to not be magic constants once more things come into place
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
@@ -28,6 +25,7 @@ classdef CSG_wound < handle
             %objects
             [f_c_n, ~] = obj.controlSignalProcessor.tick(L_n);
             noiseSample = obj.noisePulseTrain.tick(f_c_n);
+%             outputSample = noiseSample;
             obj.resonator.update_f_c(f_c_n);
             
             %compute the upper branch from the longitudinal modes first

@@ -44,13 +44,13 @@ xlim([0 250]);
 legend();
 
 %filtered decaying noise bursts
-T60 = 5*10^-3;
-tau = ExponentialDecay.calculateTimeConsant(T60);
-alpha = exp(-1/(tau*Fs));
-% alpha = 31/32;
-% alpha = 127/128;
+obj.T60 = T60;
+            .tau = ExponentialDecay.calculateTimeConsant(T60);
+            alpha = exp(-1/(obj.tau*SystemParams.audioRate));
+% alpha = -31/32;
+alpha = -127/128;
 b = [1];
-a = [1 -alpha];
+a = [1 alpha];
 
 samplesPerPeriod = Fs/f0;
 cyclesPerDuration = (duration_sec*Fs) / samplesPerPeriod;
