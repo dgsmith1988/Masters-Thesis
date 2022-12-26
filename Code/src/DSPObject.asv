@@ -1,0 +1,20 @@
+classdef DSPObject
+    %Basic interfact any processing object needs to adhere to. This was
+    %implemented later in the game and will gradually be added to the
+    %inheritance tree of each object.
+    properties
+        Property1
+    end
+    
+    methods(Abstract)
+        outputSample = tick(obj)
+    end
+    
+    methods
+        function outputSample = tick_passThru(obj, inputSample)
+            %This method exists to make it easier to debug 
+            outputSample = inputSample;
+        end
+    end
+end
+

@@ -13,10 +13,12 @@ classdef FeedbackLoop < handle
         energyScaler            %calculates compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
         DWGLength               %current DWG length in samples
+        L_n_1                   %previous L_n signal
     end
     
     methods
         function obj = FeedbackLoop(stringParams, L_0)
+            obj.L_n_1 = L_0;
             obj.f0 = stringParams.f0;
             obj.DWGLength = obj.calculateTotalDWGLength(L_0);
             
@@ -32,7 +34,11 @@ classdef FeedbackLoop < handle
             obj.energyScaler = EnergyScaler(obj.DWGLength);
         end
         
-        function outputSample = tick(obj, feedbackSample)
+        function outputSample = tick(obj, feedbackSample, L_n)
+            if L_n ~= obj.L_n_1
+                consumeControlSignal(obj, L_n);
+            end
+            
             %Run through all the various processing objects to generate the
             %next sample
             integerDelayOut = obj.integerDelayLine.tick(feedbackSample);
@@ -41,6 +47,8 @@ classdef FeedbackLoop < handle
             outputSample = obj.loopFilter.tick(g_c*fractionalDelayOut);
         end
         
+        %Save this for now as you might be able to move this outside to the
+        %calling object
         function consumeControlSignal(obj, L_n)
             obj.DWGLength = obj.calculateTotalDWGLength(L_n);
             

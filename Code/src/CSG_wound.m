@@ -2,12 +2,12 @@ classdef CSG_wound < handle
     properties
         g_bal = .5;
         g_TV = 1;
-        g_user = 1;  
+        g_user = 1;
         controlSignalProcessor
         noisePulseTrain
         stringModeFilter
         resonator
-        preScalingGain = 3
+        waveshaperPreScalingGain = 7
         waveshaperFunctionHandle
     end
     
@@ -23,9 +23,8 @@ classdef CSG_wound < handle
         function outputSample = tick(obj, L_n)
             %calculate the control parameters and update the corresponding
             %objects
-            [f_c_n, ~] = obj.controlSignalProcessor.tick(L_n);
+            [f_c_n, absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
             noiseSample = obj.noisePulseTrain.tick(f_c_n);
-%             outputSample = noiseSample;
             obj.resonator.update_f_c(f_c_n);
             
             %compute the upper branch from the longitudinal modes first
@@ -35,16 +34,13 @@ classdef CSG_wound < handle
             %compute the lower branch due to the time-varying harmonic
             %component
             v2 = obj.resonator.tick(noiseSample);
-            v2 = obj.waveshaperFunctionHandle(obj.preScalingGain*v2);
+            v2 = obj.waveshaperFunctionHandle(obj.waveshaperPreScalingGain*v2);
             v2 = obj.g_bal*v2;
             
             %Scale the signal by the slide speed and output it
-            obj.g_TV = 100/f_c_n;
+            obj.g_TV =.5*absoluteSlideSpeed;
+%             obj.g_TV = f_c_n/100;
             outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
-        end
-        
-        function set_g_user(obj, newValue)
-            obj.g_user = newValue;
         end
     end
 end

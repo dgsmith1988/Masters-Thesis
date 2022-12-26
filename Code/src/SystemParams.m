@@ -5,8 +5,9 @@ classdef SystemParams
     properties(Constant)
         audioRate = 48000;
 %         audioRate = 8000;
-        %Keep them both the same for now
-        controlRate = SystemParams.audioRate;
+        controlRate = 1000;
+%         controlRate = SystemParams.audioRate;
+
         %Although this code is syntactically atrocious it seems to be the
         %best approach given how Matlab implements constants
         E_string_modes = StringModes(...

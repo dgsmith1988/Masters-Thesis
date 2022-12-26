@@ -2,29 +2,34 @@ classdef StringSynth < handle
     %STRINGSYNTH Synthesizer for one particular string
     
     properties (GetAccess = public)
-        woundFlag               %boolean indicating wound string or not  
         sampleRateConverter;    %this takes the control signal and makes it at audio rate
         feedbackLoop            %feedback loop which contains elements to implement string DWG
-        %contactSoundGenerator  %unit adding slide/string contact noise
-        antiAliasingFilter      %what's in a name, numbnuts?
-        L_n                     %current relative string length
+        contactSoundGenerator   %unit adding slide/string contact noise
+        antiAliasingFilter      %what's in a name?
         lastOutputSample        %last output sample to implement feedback
     end
     
     methods
-        function obj = StringSynth(stringParams, L_0)
-            %L_0 = initial relative string length
-            %Parse the string parameters
-            obj.woundFlag = stringParams.n_w > 0;
-            
+        function obj = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0)           
             %Initialize the member variables
-            obj.L_n = L_0;
             obj.lastOutputSample = 0;
             
             %Instaniate the different processing objects
             obj.sampleRateConverter = SampleRateConverter();
             obj.feedbackLoop = FeedbackLoop(stringParams, L_0);
-%             obj.constactSoundGenerator = ContactSoundGenerator();
+            
+            %Determine which contact sound generator to use whether we have
+            %a wound string or not. Dummy one is used to test the string
+            %model without friction sounds.
+            if(stringParams.n_w > 0)
+                obj.contactSoundGenerator = CSG_wound(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0);
+                
+            elseif(stringParams.n_w == 0)
+                obj.contactSoundGenerator = CSG_unwound(stringParams, L_0);
+            else
+                obj.contactSoundGenerator = CSG_dummy();
+            end
+            
             obj.antiAliasingFilter = AntiAliasingFilter();
         end
         
@@ -33,35 +38,19 @@ classdef StringSynth < handle
             %sound
             %TODO: Examine how different types of noise/exictations could
             %be used here to make the string sound better
-%             bufferData = 1 - 2*rand(1, length(obj.feedbackLoop.integerDelayLine.buffer));
+            %             bufferData = 1 - 2*rand(1, length(obj.feedbackLoop.integerDelayLine.buffer));
             %TODO: Examine if bandlimiting this helps with crackle issue
             bufferData = pinknoise(length(obj.feedbackLoop.integerDelayLine.buffer))';
             %Normalize the signal to make it stronger
             bufferData = bufferData / max(abs(bufferData));
             obj.feedbackLoop.integerDelayLine.initializeBuffer(bufferData);
         end
-              
-        function outputSample = tick(obj, L_n_controlRate)
-            
-            %upsample the control signal to the audio rate
-            %TODO: Determine the best approach to this computationally
-            %later, as for now this is just a pass-through and to serve as
-            %a reminder.
-            L_n_audioRate = obj.sampleRateConverter.tick(L_n_controlRate);
-            
-            %check to if the string length has changed before making any
-            %adjustments to the underlying processing objects
-            if (L_n_audioRate ~= obj.L_n)
-                obj.L_n = L_n_audioRate;
-                obj.feedbackLoop.consumeControlSignal(L_n_audioRate);
-%                 obj.contactSoundGenerator.consumeControlSignal(L_n);                
-            end
-            
+        
+        function outputSample = tick(obj, L_n)
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
-            loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
-%             CSGoutput = obj.contactSoundGenerator.tick();
-            CSGOutput = 0;
+            loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample, L_n);
+            CSGOutput = obj.contactSoundGenerator.tick(L_n);
             
             %Store this to implement the feedback on the next computation
             obj.lastOutputSample = loopOutput + CSGOutput;
