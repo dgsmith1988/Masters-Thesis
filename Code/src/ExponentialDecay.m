@@ -22,8 +22,12 @@ classdef ExponentialDecay
             obj.onePoleIIR = FilterObject(b, a, z_init);
         end
         
-        function outputSample = tick(obj, f_c_n)
-            outputSample = obj.onePoleIIR.tick(obj.impulseTrain.tick(f_c_n));
+        function outputSample = tick(obj)
+            outputSample = obj.onePoleIIR.tick(obj.impulseTrain.tick());
+        end
+        
+        function consumeControlSignal(obj, f_c_n)
+            obj.impulseTrain.consumeControlSignal(f_c_n);
         end
     end
     

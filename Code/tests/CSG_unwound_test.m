@@ -2,7 +2,7 @@
 %following the parabolic trajctory associated with stopping and starting
 
 close all;
-% clear;
+clear;
 
 dbstop if error;
 
@@ -44,7 +44,8 @@ for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y1(n) = csg_unwound.tick(L(n));
+    csg_unwound.consumeControlSignal(L(n));
+    y1(n) = csg_unwound.tick();
 end
 
 figure;
@@ -52,7 +53,7 @@ plot(y1);
 title("Unwound CSG Test Output - Constant Slide Velocity");
 
 figure;
-spectrogram(y1, window, overlap, N, Fs, "yaxis");  
+spectrogram(y1, window, overlap, N, Fs, "yaxis");
 title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram')
 
 %*********Time Varying Slide Velocity Test********
@@ -81,7 +82,8 @@ for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y2(n) = csg_unwound.tick(L(n));
+    csg_unwound.consumeControlSignal(L(n));
+    y2(n) = csg_unwound.tick();
 end
 
 figure;
@@ -89,5 +91,5 @@ plot(y2);
 title("Unwound CSG Test Output - Time-Varying Slide Velocity");
 
 figure;
-spectrogram(y2, window, overlap, N, Fs, "yaxis");  
+spectrogram(y2, window, overlap, N, Fs, "yaxis");
 title('Unwound CSG Test Output - Time-Varying Slide Velocity Spectrogram');

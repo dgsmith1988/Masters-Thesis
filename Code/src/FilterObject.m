@@ -1,10 +1,11 @@
-classdef FilterObject < handle
+classdef FilterObject < handle & AudioProcessor
     %LOOPFILTER Wrapper class to make it easier to manage the coefficients
     %and state of a filter across multiple calculations
     properties(GetAccess = public)
-        a   %IIR coefficients
-        b   %FIR coefficients
-        z   %Filter state
+        a           %IIR coefficients
+        b           %FIR coefficients
+        z           %Filter state
+        N = 4096;   %Number of FFT points
     end
     
     methods
@@ -21,7 +22,7 @@ classdef FilterObject < handle
         end
         
         function plotFrequencyResponse(obj)
-            freqz(obj.b, obj.a, 4096, SystemParams.audioRate);
+            freqz(obj.b, obj.a, obj.N, SystemParams.audioRate);
         end
     end
 end

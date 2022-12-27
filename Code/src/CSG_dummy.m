@@ -1,6 +1,6 @@
-classdef CSG_dummy < handle  
+classdef CSG_dummy < handle 
     methods
-        function outputSample = tick(obj, L_n)
+        function outputSample = tick(obj)
            outputSample = 0;
         end
     end

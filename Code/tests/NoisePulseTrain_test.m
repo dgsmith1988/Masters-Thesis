@@ -13,7 +13,8 @@ numSamples = round(duration_sec*Fs);
 period_samp = Fs/4; 
 %/8 here sounds best however this is ulitmately determined by the string
 %characteristics
-T60_samp = period_samp/8; 
+T60_samp = period_samp/8;
+T60 = T60_samp/Fs;
 
 %Constant Rate Test
 f_c = Fs/period_samp;
@@ -23,11 +24,12 @@ y1 = zeros(1, numSamples);
 y2 = zeros(1, numSamples);
 
 %Processing objects
-noisePulseTrain = NoisePulseTrain(period_samp, T60_samp);
+noisePulseTrain = NoisePulseTrain(period_samp, T60);
 
 %Processing loop
 for n = 1:numSamples
-    y1(n) = noisePulseTrain.tick(f_c);
+    noisePulseTrain.consumeControlSignal(f_c);
+    y1(n) = noisePulseTrain.tick();
 end
 
 figure;
@@ -42,7 +44,8 @@ f_c = 1000*(-a*(x -.3).^2 + 1);
 
 %Processing loop
 for n = 1:numSamples
-    y2(n) = noisePulseTrain.tick(f_c(n));
+    noisePulseTrain.consumeControlSignal(f_c(n));
+    y2(n) = noisePulseTrain.tick();
 end
 
 figure;

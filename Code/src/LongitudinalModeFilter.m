@@ -11,7 +11,6 @@ classdef LongitudinalModeFilter < FilterObject
             %start the filter to start from scratch
             z_init = zeros(1, max(length(filterSpec.zeros.F), length(filterSpec.poles.F))); 
             obj@FilterObject(b, a, z_init);
-%             [obj.b, obj.a] = zp2tf(complexZeros', complexPoles', db2mag(0));
         end      
     end
 end

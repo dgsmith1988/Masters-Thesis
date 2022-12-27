@@ -1,4 +1,4 @@
-classdef SampleRateConverter < handle
+classdef SampleRateConverter < handle & AudioProcessor
     %SAMPLERATECONVERTOR - TODO: Fill this class in later once you get a
     %better sense for how the various components are going to relate and
     %process the different control signals... 

@@ -1,6 +1,4 @@
 classdef EnergyScaler < handle
-    %TODO: I believe this could easily be integerated into the DWG model
-    %itself
     properties
         prevLengthSamples
     end

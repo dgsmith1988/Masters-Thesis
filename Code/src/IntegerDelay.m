@@ -1,4 +1,4 @@
-classdef IntegerDelay < handle
+classdef IntegerDelay < handle & AudioProcessor
     %DELAYLINE Simple delay line to simplify implementations. Input and
     %output pointers are used here as the length will be adjusted in real
     %time.

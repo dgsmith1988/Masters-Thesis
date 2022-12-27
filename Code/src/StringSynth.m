@@ -47,6 +47,12 @@ classdef StringSynth < handle
         end
         
         function outputSample = tick(obj, L_n)
+            if(L_n ~= obj.L_n_1)
+                %Update the various system parameters
+                obj.feedbackLoop.consumeControlSignal(L_n);
+                obj.contactSoundGenerator.consumeControlSignal(L_n);
+            end
+            
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
             loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample, L_n);

@@ -29,7 +29,8 @@ exponentialDecay = ExponentialDecay(period_samp, T60);
 
 %Processing loop
 for n = 1:numSamples
-    y2(n) = exponentialDecay.tick(f_c);
+    exponentialDecay.consumeControlSignal(f_c);
+    y2(n) = exponentialDecay.tick();
 end
 
 stem(0:numSamples-1, y2);

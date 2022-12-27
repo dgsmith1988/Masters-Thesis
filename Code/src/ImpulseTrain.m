@@ -16,8 +16,18 @@ classdef ImpulseTrain < handle
             end
         end
         
-        function outputSample = tick(obj, f_c_n)
-            %process the new parameter first
+        function outputSample = tick(obj)
+            outputSample = 0;
+            if obj.enableFlag
+                if obj.tickCount >= obj.tickLimit
+                    outputSample = 1;
+                    obj.tickCount = 0;
+                end
+                obj.tickCount = obj.tickCount + 1;               
+            end
+        end
+        
+        function consumeControlSignal(obj, f_c_n)
             if f_c_n == 0
                 obj.enableFlag = false;
             elseif f_c_n ~= obj.f_c_n_1
@@ -31,15 +41,6 @@ classdef ImpulseTrain < handle
                 end
                 
                 obj.enableFlag = true;
-            end
-            
-            outputSample = 0;
-            if obj.enableFlag
-                if obj.tickCount >= obj.tickLimit
-                    outputSample = 1;
-                    obj.tickCount = 0;
-                end
-                obj.tickCount = obj.tickCount + 1;               
             end
         end
     end

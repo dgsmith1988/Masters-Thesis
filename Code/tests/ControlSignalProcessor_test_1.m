@@ -32,7 +32,6 @@ f_c_calc = zeros(1, numSamples);
 for n = 1:numSamples
     f_c_calc(n) = controlSignalProcessor.tick(L(n));
 end
-period_ms = f_c2period_ms(f_c_calc);
 err = f_c_calc - f_c;
 
 subplot(2, 1, 1);
@@ -45,11 +44,6 @@ legend();
 title('f_c comparison');
 
 subplot(2, 1, 2);
-yyaxis left;
 plot(L, 'DisplayName', 'L[n]');
-hold on;
-yyaxis right
-plot(period_ms, 'DisplayName', 'period ms');
-hold off;
-legend();
-title('L and period');
+% legend();
+title('L[n]');

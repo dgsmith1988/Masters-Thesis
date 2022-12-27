@@ -30,7 +30,8 @@ for k = 1:length(T60_samples)
     
     %Processing loop
     for n = 1:numSamples
-        y1(k, n) = exponentialDecay.tick(f_c);
+        exponentialDecay.consumeControlSignal(f_c);
+        y1(k, n) = exponentialDecay.tick();
     end
     
     stem(0:numSamples-1, y1(k, :));

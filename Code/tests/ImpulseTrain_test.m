@@ -1,6 +1,6 @@
 %Test the ImpulseTrain class
 
-clear all;
+clear;
 close all;
 
 %********Basic test for a constant rate********
@@ -14,7 +14,8 @@ f_c = Fs/tickLimit;
 y = zeros(1, numSamples);
 
 for n = 1:numSamples
-    y(n) = impulseTrain.tick(f_c);
+    impulseTrain.consumeControlSignal(f_c);
+    y(n) = impulseTrain.tick();
 end
 
 figure;
@@ -31,7 +32,8 @@ f_c = [f_c1*ones(1, 15), f_c2*ones(1, 15)];
 
 impulseTrain = ImpulseTrain(tickLimits(1));
 for n = 1:numSamples
-    y(n) = impulseTrain.tick(f_c(n));
+    impulseTrain.consumeControlSignal(f_c(n));
+    y(n) = impulseTrain.tick();
 end
 
 subplot(5, 1, 2);
@@ -47,7 +49,8 @@ f_c = [f_c1*ones(1, 15), f_c2*ones(1, 15)];
 
 impulseTrain = ImpulseTrain(tickLimits(1));
 for n = 1:numSamples
-    y(n) = impulseTrain.tick(f_c(n));
+    impulseTrain.consumeControlSignal(f_c(n));
+    y(n) = impulseTrain.tick();
 end
 
 subplot(5, 1, 3);
@@ -60,7 +63,8 @@ f_c = [Fs/tickLimit*ones(1, 15), zeros(1, 15)];
 
 impulseTrain = ImpulseTrain(tickLimit);
 for n = 1:numSamples
-    y(n) = impulseTrain.tick(f_c(n));
+    impulseTrain.consumeControlSignal(f_c(n));
+    y(n) = impulseTrain.tick();
 end
 
 subplot(5, 1, 4);
@@ -73,7 +77,8 @@ f_c = [zeros(1, 15), Fs/tickLimit*ones(1, 15)];
 
 impulseTrain = ImpulseTrain(0);
 for n = 1:numSamples
-    y(n) = impulseTrain.tick(f_c(n));
+    impulseTrain.consumeControlSignal(f_c(n));
+    y(n) = impulseTrain.tick();
 end
 
 subplot(5, 1, 5);

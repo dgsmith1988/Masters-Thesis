@@ -48,7 +48,8 @@ for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y1(n) = csg_wound.tick(L(n));
+    csg_wound.consumeControlSignal(L(n));
+    y1(n) = csg_wound.tick();
 end
 
 figure;
@@ -71,7 +72,8 @@ for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y2(n) = csg_wound.tick(L(n));
+    csg_wound.consumeControlSignal(L(n));
+    y2(n) = csg_wound.tick();
 end
 
 figure;
@@ -92,7 +94,8 @@ for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y3(n) = csg_wound.tick(L(n));
+    csg_wound.consumeControlSignal(L(n));
+    y3(n) = csg_wound.tick();
 end
 
 figure;

@@ -1,7 +1,8 @@
 classdef CSG_unwound < handle
     properties
         g_TV = 1;
-        g_user = 1;  
+        g_user = 1; 
+        absoluteSlideSpeed
         controlSignalProcessor
         lowPassFilter
     end
@@ -19,17 +20,19 @@ classdef CSG_unwound < handle
             obj.lowPassFilter = FilterObject(b, a, z_init);
         end
         
-        function outputSample = tick(obj, L_n)
-            %calculate the control parameters and update the corresponding
-            %objects
-            [~, absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
-
+        function outputSample = tick(obj)
             noiseSample = Noise.tick();
             lowPassed = obj.lowPassFilter.tick(noiseSample);
 
             %Scale the signal by the slide speed and output it
-            obj.g_TV = .5*absoluteSlideSpeed;
+            obj.g_TV = .5*obj.absoluteSlideSpeed;
             outputSample = obj.g_user*(obj.g_TV*lowPassed);
+        end
+        
+        function consumeControlSignal(obj, L_n)
+            %calculate the control parameters and update the corresponding
+            %objects
+            [~, obj.absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
         end
     end
 end

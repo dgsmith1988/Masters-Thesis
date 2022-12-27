@@ -9,6 +9,8 @@ classdef CSG_wound < handle
         resonator
         waveshaperPreScalingGain = 7
         waveshaperFunctionHandle
+        f_c_n
+        absoluteSlideSpeed
     end
     
     methods
@@ -20,13 +22,8 @@ classdef CSG_wound < handle
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
         end
         
-        function outputSample = tick(obj, L_n)
-            %calculate the control parameters and update the corresponding
-            %objects
-            [f_c_n, absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
-            noiseSample = obj.noisePulseTrain.tick(f_c_n);
-            obj.resonator.update_f_c(f_c_n);
-            
+        function outputSample = tick(obj)
+            noiseSample = obj.noisePulseTrain.tick();
             %compute the upper branch from the longitudinal modes first
             %TODO: Use a different type of noise source here? The noise
             %pulse train might not be the best as it is harmonic signal...
@@ -38,9 +35,17 @@ classdef CSG_wound < handle
             v2 = obj.g_bal*v2;
             
             %Scale the signal by the slide speed and output it
-            obj.g_TV =.5*absoluteSlideSpeed;
+            obj.g_TV =.5*obj.absoluteSlideSpeed;
 %             obj.g_TV = f_c_n/100;
             outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
+        end
+        
+        function consumeControlSignal(obj, L_n)
+            %calculate the control parameters and update the corresponding
+            %objects
+            [obj.f_c_n, obj.absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);    
+            obj.noisePulseTrain.consumeControlSignal(obj.f_c_n);
+            obj.resonator.update_f_c(obj.f_c_n);
         end
     end
 end
