@@ -1,15 +1,17 @@
 classdef FeedbackLoop < handle
     %Class to encapsulate the various processing elements in the feedback
     %loop to make it eaiser to debug and understand things. It is like the
-    %String DWG minus the feedback loop essentially.
+    %String DWG minus the feedback connection which causes the reflection
+    %essentially.
     
     %TOOD: Is there a way to run this at half the sampling rate to save
     %computations?
     
     properties
-        f0                      %open string fundamental frequency in Hz
+        openString_f0           %open string fundamental frequency in Hz
+        pitch_f0                %selected pitch based on relative string length
         integerDelayLine        %delay line implementing integer component
-        fractionalDelayLine     %dealy line implementing fractional component
+        fractionalDelayLine     %delay line implementing fractional component
         energyScaler            %calculates compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
         DWGLength               %current DWG length in samples
@@ -17,14 +19,15 @@ classdef FeedbackLoop < handle
     
     methods
         function obj = FeedbackLoop(stringParams, L_0)
-            obj.f0 = stringParams.f0;
-            obj.DWGLength = obj.calculateTotalDWGLength(L_0, obj.f0);
+            obj.openString_f0 = stringParams.f0;
+            obj.pitch_f0 = obj.calculatePitchF0(L_0, obj.openString_f0);
+            obj.DWGLength = obj.calculateTotalDWGLength(obj.pitch_f0);
             
             %These objects are created before the delay line lengths are
             %calculated to facilitate how Matlab handles OOP
             obj.loopFilter = OnePole(stringParams.a_pol, stringParams.g_pol, L_0);
             obj.fractionalDelayLine = LagrangeDelay(.5); %any value can be used here, as we update it later
-            [p_int, p_frac_delta] = obj.calculateDelayLineLengths();
+            [p_int, p_frac_delta] = obj.calculateDelayLineLengths(obj.DWGLength, obj.loopFilter.phaseDelay, obj.fractionalDelayLine.integerDelay);
             
             %Construct/update the processing objects based on the parameters
             obj.integerDelayLine = IntegerDelay(p_int);
@@ -44,7 +47,8 @@ classdef FeedbackLoop < handle
         %Save this for now as you might be able to move this outside to the
         %calling object
         function consumeControlSignal(obj, L_n)
-            obj.DWGLength = obj.calculateTotalDWGLength(L_n, obj.f0);
+            obj.pitch_f0 = obj.calculatePitchF0(L_n, obj.openString_f0);
+            obj.DWGLength = obj.calculateTotalDWGLength(obj.pitch_f0);
             
             [p_int, p_frac_delta] = obj.calculateDelayLineLengths(obj.DWGLength, obj.loopFilter.phaseDelay, obj.fractionalDelayLine.integerDelay);
             if p_int ~= obj.integerDelayLine.delay
@@ -56,23 +60,7 @@ classdef FeedbackLoop < handle
             
             obj.loopFilter.updateFilter(L_n);
         end
-        
-%         function [p_int, p_frac_delta] = calculateDelayLineLengths(obj)
-%             %Calculate the parameters for the delay lines based on the
-%             %current filter objects in the DWG and system parameters
-%             
-%             %integer delay line length
-%             p_int = floor(obj.DWGLength - obj.loopFilter.phaseDelay - obj.fractionalDelayLine.integerDelay);
-%             %fractional component of fractional delay
-%             p_frac_delta = obj.DWGLength - p_int - obj.loopFilter.phaseDelay - obj.fractionalDelayLine.integerDelay;
-%         end
-        
-%         function DWGLength = calculateTotalDWGLength(obj, L_n)
-%             %Calculate the overall delay line length based on the string
-%             %length, open string f0 and audioRate
-%             DWGLength = SystemParams.audioRate * (L_n / obj.f0);
-%         end
-        
+               
         function pluck(obj)
             %This function prepares the string model to start generating
             %sound
@@ -91,10 +79,19 @@ classdef FeedbackLoop < handle
         %functionality is correct without instantiating an object. After
         %this has been verified then the objects will call the functions
         %using their own internal state and update the parameters
-        %accordingly.
+        %accordingly. However I now dislike this...
         
-        function DWGLength = calculateTotalDWGLength(L_n, f0)
-            DWGLength = SystemParams.audioRate * (L_n / f0);
+        function DWGLength = calculateTotalDWGLength(pitch_f0)
+            %Calculate the total DWG length in samples based on the
+            %specified fundamental frequency of the desired pitch
+            DWGLength = SystemParams.audioRate ./ pitch_f0;
+        end
+        
+        function pitch_f0 = calculatePitchF0(L_n, openString_f0)
+            %Calculate the fundamental frequency of the produced pitch
+            %based on the open-string fundamental and relative string
+            %length
+            pitch_f0 = openString_f0 ./ L_n;
         end
         
         function [p_int, p_frac_delta] = calculateDelayLineLengths(DWGLength, loopFilterDelay, fractionalDelayInteger)

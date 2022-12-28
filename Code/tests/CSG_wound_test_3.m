@@ -1,8 +1,8 @@
-%Test the wound CSG object in using the combined output from both branches
-%and a time-varying slide velocity
+%Test the wound CSG object in the scenario where the slide doesn't move to
+%ensure it outputs zeros
 
-close all;
-clear;
+% close all;
+% clear;
 
 dbstop if error;
 
@@ -15,17 +15,14 @@ n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);
 
-%Generate the parabolic f_c/velocity trajectory
-a = 1/.09;
-increment = .6/numSamples;
-x = 0:increment:.6-increment;
-f_c = 1000*(-a*(x -.3).^2 + 1);
+%A slide velocity of zero corresponds to an f_c of 0
+f_c = 0;
 
 %generate the control signal based on the derivations in your notebook
 L = zeros(1, numSamples);
 L(1) = 1;
 for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
+    L(n) = L(n-1) - f_c/(n_w*stringLength*Fs);
 end
 
 %Set the initial one to be slightly greater than 1 in order to remove the
@@ -42,24 +39,22 @@ y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
 %create/initialize the processing objects
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
-csg_wound.g_bal = .5;
-y4 = zeros(1, length(L));
+csg_wound.g_bal = .25;
+y5 = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    y4(n) = csg_wound.tick(L(n));
+    csg_wound.consumeControlSignal(L(n));
+    y4(n) = csg_wound.tick();
 end
 
 figure;
-plot(y4);
-title("Wound CSG Time-Varying Slide Velocity Output");
+plot(y5);
+title("Wound CSG No Slide Motion Output");
 
 figure;
-spectrogram(y4, window, overlap, N, Fs, "yaxis");  
+spectrogram(y5, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Time-Varying Slide Velocity Spectrogram')
-% hold on;
-% yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
-% hold off;
-
+title('Wound CSG No Slide Motion Spectrogram')
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');

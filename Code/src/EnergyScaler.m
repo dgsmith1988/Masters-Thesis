@@ -1,4 +1,6 @@
 classdef EnergyScaler < handle
+    %Class to implement the zero-order energy-preserving interpolation
+    %associated with time-varying fractional delay-lines
     properties
         prevLengthSamples
     end
@@ -8,8 +10,7 @@ classdef EnergyScaler < handle
              obj.prevLengthSamples = initialLengthSamples;
         end
         
-        function g_c = tick(obj, currentLengthSamples)
-            %TODO: Fine tune these and debug them later
+        function g_c = tick(obj, currentLengthSamples)            
             delta_x = currentLengthSamples - obj.prevLengthSamples;
             g_c = sqrt(abs(1-delta_x));
             obj.prevLengthSamples = currentLengthSamples;

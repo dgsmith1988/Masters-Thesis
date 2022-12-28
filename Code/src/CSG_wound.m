@@ -1,6 +1,6 @@
 classdef CSG_wound < handle
     properties
-        g_bal = .5;
+        g_bal = .25; %favor the modal resonators as they can get burried
         g_TV = 1;
         g_user = 1;
         controlSignalProcessor
@@ -22,7 +22,9 @@ classdef CSG_wound < handle
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
         end
         
-        function outputSample = tick(obj)
+        function [outputSample, noiseSample] = tick(obj)
+            %The noise pulse train is made avaialable for debugging
+            %purposes
             noiseSample = obj.noisePulseTrain.tick();
             %compute the upper branch from the longitudinal modes first
             %TODO: Use a different type of noise source here? The noise

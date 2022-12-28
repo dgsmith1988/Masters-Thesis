@@ -1,8 +1,8 @@
 %Test the wound CSG object in using the combined output from both branches
 %and a time-varying slide velocity
 
-close all;
-clear;
+% close all;
+% clear;
 
 dbstop if error;
 
@@ -42,7 +42,7 @@ y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
 %create/initialize the processing objects
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
-csg_wound.g_bal = .5;
+csg_wound.g_bal = .25;
 y4 = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)
@@ -61,6 +61,6 @@ spectrogram(y4, window, overlap, N, Fs, "yaxis");
 ylim([0 y_upperLim]);
 title('Wound CSG Time-Varying Slide Velocity Spectrogram')
 % hold on;
-% yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
 % hold off;
 

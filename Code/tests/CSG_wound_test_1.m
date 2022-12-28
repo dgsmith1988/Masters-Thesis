@@ -44,12 +44,13 @@ y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
 csg_wound.g_bal = 0;  %shift the balance to only select the longitudinal modes
 y1 = zeros(1, length(L));
+noiseTrainPulse = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
     csg_wound.consumeControlSignal(L(n));
-    y1(n) = csg_wound.tick();
+    [y1(n), noiseTrainPulse(n)] = csg_wound.tick();
 end
 
 figure;
@@ -88,7 +89,7 @@ yline(f_c(1)/1000, 'r');
 
 %*****Longitudinal + Resonator Branch Test*****
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
-csg_wound.g_bal = .5;  %balance both branches equally
+csg_wound.g_bal = .25;  %favor the modes to bring them out more
 y3 = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)

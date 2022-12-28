@@ -14,6 +14,10 @@ classdef IntegerDelay < handle & AudioProcessor
         function obj = IntegerDelay(delay)
             %DELAYLINE Construct an instance of this class initialized to
             %zeros
+            %Allocate the buffer to be the maximum value possible to
+            %support the worst case scenario. TODO: This could be made more
+            %memory efficient by doing it on a per-string basis using the
+            %min and max L values as well.
             obj.buffer = zeros(1, SystemParams.maxDelayLineLength);
             obj.readPointer = 1;
             obj.writePointer = delay + 1; %Add one as Matlab starts indexing at 1

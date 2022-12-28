@@ -72,8 +72,14 @@ classdef SystemParams
             [0.99402123928178 , 0.00008928138142]);     
         
         stringLengthMeters = .65;
-        lowest_f0 = 65.41; %Corresponds to C2 to support open C tuning
-        maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.lowest_f0); %TODO: Fine tune these calculations later
+        minRelativeStringLength = .25;  %Limit things to two octaves per string (or the 24th fret)
+        maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
+        minString_f0 = 65.41;  %Corresponds to C2 to support open C tuning
+        maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altred tunings
+        
+        %TODO: Figure out if these are necessary here?
+        maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minString_f0); 
+%         minDelayLineLength = ceil(SystemParams.audioRate/SystemParams.maxString_f0);
     end
 end
 
