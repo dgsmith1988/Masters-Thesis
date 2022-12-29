@@ -27,8 +27,8 @@ openString_f0 = 110;
 
 decrement = (min_L - max_L) / (numSamples-1);
 L = max_L:decrement:min_L;
-pitch_f0 = FeedbackLoop.calculatePitchF0(L, openString_f0);
-DWGLength = FeedbackLoop.calculateTotalDWGLength(pitch_f0);
+pitch_f0 = calculatePitchF0(L, openString_f0);
+DWGLength = calculateTotalDWGLength(pitch_f0);
 
 figure;
 subplot(2, 1, 1);
@@ -52,7 +52,7 @@ grid minor;
 %frequency pitches
 increment = (max_pitchf0 - min_pitchf0) / (numSamples-1);
 pitch_f0 = min_pitchf0:increment:max_pitchf0;
-DWGLength = FeedbackLoop.calculateTotalDWGLength(pitch_f0);
+DWGLength = calculateTotalDWGLength(pitch_f0);
 figure;
 plot(pitch_f0, DWGLength);
 grid on;
@@ -77,7 +77,7 @@ DWGLength = lowerLim:increment:upperLim;
 loopFilterDelay = OnePole.phaseDelay;
 fractionalDelayInteger = LagrangeDelay.integerDelay;
 
-[p_int, p_frac_delta] = FeedbackLoop.calculateDelayLineLengths(DWGLength, loopFilterDelay, fractionalDelayInteger);
+[p_int, p_frac_delta] = calculateDelayLineLengths(DWGLength, loopFilterDelay, fractionalDelayInteger);
 
 figure;
 yyaxis left;

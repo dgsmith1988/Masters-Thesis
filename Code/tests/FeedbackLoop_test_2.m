@@ -26,13 +26,13 @@ decrement = (min_L - max_L) / (numSamples-1);
 L = max_L:decrement:min_L;
 
 %Geneate the theoretical values
-pitch_f0_target = FeedbackLoop.calculatePitchF0(L, openString_f0);
-DWGLength_target = FeedbackLoop.calculateTotalDWGLength(pitch_f0_target);
+pitch_f0_target = calculatePitchF0(L, openString_f0);
+DWGLength_target = calculateTotalDWGLength(pitch_f0_target);
 
 loopFilterDelay = feedbackLoop.loopFilter.phaseDelay;
 fractionalDelayInteger = feedbackLoop.fractionalDelayLine.integerDelay;
 
-[integerDelay_target, fractionalDelay_target] = FeedbackLoop.calculateDelayLineLengths(DWGLength_target, loopFilterDelay, fractionalDelayInteger);
+[integerDelay_target, fractionalDelay_target] = calculateDelayLineLengths(DWGLength_target, loopFilterDelay, fractionalDelayInteger);
 
 %Simulate the processing of the L[n] signal which the object does inside
 %the string synth
@@ -74,5 +74,3 @@ title("Pitch f0 Error");
 subplot(4,1,4);
 plot(L, DWGLength_err);
 title("DWG Length Error");
-
-
