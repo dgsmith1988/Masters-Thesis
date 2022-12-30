@@ -6,4 +6,3 @@ function complexValues = linearToComplex(f, R, Fs)
 theta = (2*pi)*f/Fs;
 complexValues = R.*exp(1i*theta);
 end
-

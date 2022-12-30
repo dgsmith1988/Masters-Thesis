@@ -31,7 +31,7 @@ classdef ImpulseTrain < handle
             if f_c_n == 0
                 obj.enableFlag = false;
             elseif f_c_n ~= obj.f_c_n_1
-                obj.tickLimit = f_c_to_ticks(f_c_n);
+                obj.tickLimit = f_cToTicks(f_c_n, SystemParams.audioRate);
                 obj.f_c_n_1 = f_c_n;
                 
                 if obj.enableFlag == false

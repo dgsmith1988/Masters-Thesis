@@ -1,8 +1,12 @@
 %Test the wound CSG object in using the combined output from both branches
 %and a time-varying slide velocity
 
-% close all;
-% clear;
+%TODO: Extend this to separating the different branches like before to see
+%how they respond to the sweep and contribute to the combined spectrum at
+%the end
+
+close all;
+clear;
 
 dbstop if error;
 
@@ -40,27 +44,70 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
+%*****Isolate Longitudinal Mode Branch Test*****
 %create/initialize the processing objects
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
-csg_wound.g_bal = .25;
+csg_wound.g_bal = 0;
+pulseTrain_TV = zeros(1, length(L));
 y4 = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
     csg_wound.consumeControlSignal(L(n));
-    y4(n) = csg_wound.tick();
+    [y4(n), pulseTrain_TV(n)] = csg_wound.tick();
 end
 
 figure;
 plot(y4);
-title("Wound CSG Time-Varying Slide Velocity Output");
+title("Wound CSG Time-Varying Slide Velocity - Longitudinal Branch Output");
 
 figure;
 spectrogram(y4, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Time-Varying Slide Velocity Spectrogram')
-% hold on;
+title('Wound CSG Time-Varying Slide Velocity - Longitudinal Branch Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
-% hold off;
 
+%*****Isolate Resonator Branch Test*****
+%create/initialize the processing objects
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound.g_bal = 1;
+y5 = zeros(1, length(L));
+for n = 1:length(L)
+    if(mod(n, 100) == 0)
+        fprintf("n = %i/%i\n", n, length(L));
+    end
+    csg_wound.consumeControlSignal(L(n));
+    y5(n) = csg_wound.tick();
+end
+
+figure;
+plot(y5);
+title("Wound CSG Time-Varying Slide Velocity - Resonator Branch Output");
+
+figure;
+spectrogram(y5, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+title('Wound CSG Time-Varying Slide Velocity - Resonator Branch Spectrogram')
+
+%*****Combined Branches Test*****
+%create/initialize the processing objects
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound.g_bal = .25; %Favor the modes to bring them out more
+y6 = zeros(1, length(L));
+for n = 1:length(L)
+    if(mod(n, 100) == 0)
+        fprintf("n = %i/%i\n", n, length(L));
+    end
+    csg_wound.consumeControlSignal(L(n));
+    y6(n) = csg_wound.tick();
+end
+
+figure;
+plot(y6);
+title("Wound CSG Time-Varying Slide Velocity - Combined Branches Output");
+
+figure;
+spectrogram(y6, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+title('Wound CSG Time-Varying Slide Velocity - Combined Branches Spectrogram')

@@ -1,13 +1,20 @@
 classdef OnePole < LoopFilter & FilterObject
-    %Class matching the parametrization of the loop filter original
-    %specified in the CMJ paper
-    %TODO: Determine the best way to verify correct implementation here
+    %Class matching the parametrization of the loop filter specified in the
+    %CMJ paper. One-pole low-pass parametrized by gain (g) and cut-off (a)
+    %           g*(1 + a)
+    %   H(z) = -----------
+    %           1 + a*z^-1
     
-    properties
+    properties(GetAccess = public)
+        %Polynomial coefficients for interpolation based on string length
+        %to generate the a and g values
         a_pol
         g_pol
-%         g_loop  %a and g parameters in the filter
-%         a_loop
+        
+        %Corresponding a and g values from filter's H(z). Renamed due to
+        %name clash with "a" in parent class FilterObject
+        g_param
+        a_param
     end
     
     properties(Constant)
@@ -30,15 +37,11 @@ classdef OnePole < LoopFilter & FilterObject
             %for electric guitar synthesizer
             m_fret = relativeLengthToFretNum(L_n);
             %g = g_0 + m_fret*g_1
-            g_loop = obj.g_pol(1) + m_fret*obj.g_pol(2);
+            obj.g_param = obj.g_pol(1) + m_fret*obj.g_pol(2);
             %a = a_0 + m_fret*a_1
-            a_loop = obj.a_pol(1) + m_fret*obj.a_pol(2);
-            obj.b = g_loop*(1 + a_loop);
-            obj.a = [1 a_loop];
-            %TODO: Come back and revamp the tick function to more closely
-            %match the PD patch calculations
-            %TODO: Verify these calculations more in depth, i.e. plot the
-            %different Fig 18/19 from the 1998 paper
+            obj.a_param = obj.a_pol(1) + m_fret*obj.a_pol(2);
+            obj.b = obj.g_param*(1 + obj.a_param);
+            obj.a = [1 obj.a_param];
         end
     end
 end

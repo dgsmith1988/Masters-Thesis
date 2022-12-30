@@ -5,6 +5,9 @@ classdef FilterObject < handle & AudioProcessor
         a           %IIR coefficients
         b           %FIR coefficients
         z           %Filter state
+    end
+    
+    properties (Constant)
         N = 4096;   %Number of FFT points
     end
     
@@ -23,6 +26,10 @@ classdef FilterObject < handle & AudioProcessor
         
         function plotFrequencyResponse(obj)
             freqz(obj.b, obj.a, obj.N, SystemParams.audioRate);
+        end
+        
+        function [h, f] = computeFrequencyResponse(obj)
+            [h, f] = freqz(obj.b, obj.a, obj.N, SystemParams.audioRate);
         end
     end
 end

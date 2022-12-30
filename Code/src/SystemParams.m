@@ -77,7 +77,6 @@ classdef SystemParams
         minString_f0 = 65.41;  %Corresponds to C2 to support open C tuning
         maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altred tunings
         
-        %TODO: Figure out if these are necessary here?
         maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minString_f0); 
 %         minDelayLineLength = ceil(SystemParams.audioRate/SystemParams.maxString_f0);
     end

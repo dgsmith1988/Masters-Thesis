@@ -23,8 +23,8 @@ classdef CSG_wound < handle
         end
         
         function [outputSample, noiseSample] = tick(obj)
-            %The noise pulse train is made avaialable for debugging
-            %purposes
+            %The noise pulse train is made available for debugging
+            %and comparison purposes
             noiseSample = obj.noisePulseTrain.tick();
             %compute the upper branch from the longitudinal modes first
             %TODO: Use a different type of noise source here? The noise
