@@ -8,7 +8,7 @@ classdef AudioProcessor < handle
         outputSample = tick(obj)
     end
     
-    methods
+    methods(Static)
         function outputSample = passThru(inputSample)
             %This method exists to make it easier to debug the signal
             %processing chain with minimal code changes. Use it if you want

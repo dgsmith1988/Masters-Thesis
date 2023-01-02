@@ -6,6 +6,7 @@ classdef SystemParams
         audioRate = 48000;
 %         audioRate = 8000;
         controlRate = 1000;
+%         controlRate = 8000;
 %         controlRate = SystemParams.audioRate;
 
         %Although this code is syntactically atrocious it seems to be the

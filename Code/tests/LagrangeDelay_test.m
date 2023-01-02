@@ -13,11 +13,13 @@ y = zeros(size(x));
 
 %Fractional delay filter settings
 fractionalDelays = [0, .5, 1]; %fractional delay amount
+% fractionalDelays = [0, .5, .99]
+L = 6;
 
 %******Test the basic constructor first******
 figure;
 for k = 1:length(fractionalDelays)
-    langangeDelay = LagrangeDelay(fractionalDelays(k));
+    langangeDelay = LagrangeDelay(L, fractionalDelays(k));
     
     %Run the test signal through the delay to see what comes out
     for n = 1:length(x)
@@ -36,7 +38,7 @@ for k = 1:length(fractionalDelays)
     grid on;
     grid minor;
     legend();
-    title(sprintf("Lagrange Delay Test - L = %i, fd = %1.2f", langangeDelay.order, fractionalDelays(k)));
+    title(sprintf("Lagrange Delay Test - L = %i, fd = %1.2f", langangeDelay.filterLength, fractionalDelays(k)));
 end
 
 %******Test the parameter update feature******

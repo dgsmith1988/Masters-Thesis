@@ -35,7 +35,7 @@ classdef OnePole < LoopFilter & FilterObject
         function updateFilter(obj, L_n)
             %Calculations taken from 1998 paper on developing calibration
             %for electric guitar synthesizer
-            m_fret = relativeLengthToFretNum(L_n);
+            m_fret = relativeLengthToFretNumber(L_n);
             %g = g_0 + m_fret*g_1
             obj.g_param = obj.g_pol(1) + m_fret*obj.g_pol(2);
             %a = a_0 + m_fret*a_1

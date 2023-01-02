@@ -7,11 +7,13 @@ classdef StringSynth < handle
         contactSoundGenerator   %unit adding slide/string contact noise
         antiAliasingFilter      %what's in a name?
         lastOutputSample        %last output sample to implement feedback
+        L_n_1
     end
     
     methods
-        function obj = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0)           
+        function obj = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0)
             %Initialize the member variables
+            obj.L_n_1 = L_0;
             obj.lastOutputSample = 0;
             
             %Instaniate the different processing objects
@@ -41,29 +43,36 @@ classdef StringSynth < handle
             %             bufferData = 1 - 2*rand(1, length(obj.feedbackLoop.integerDelayLine.buffer));
             %TODO: Examine if bandlimiting this helps with crackle issue
             bufferData = pinknoise(length(obj.feedbackLoop.integerDelayLine.buffer))';
+%             bufferLength = length(obj.feedbackLoop.integerDelayLine.buffer);
+%             n = 0:bufferLength-1;
+%             bufferData = sin(2*pi/bufferLength * n);
+%             bufferData = [1 zeros(1, bufferLength-1)];
             %Normalize the signal to make it stronger
             bufferData = bufferData / max(abs(bufferData));
             obj.feedbackLoop.integerDelayLine.initializeBuffer(bufferData);
         end
         
-        function outputSample = tick(obj, L_n)
+        function consumeControlSignal(obj, L_n)
             if(L_n ~= obj.L_n_1)
                 %Update the various system parameters
                 obj.feedbackLoop.consumeControlSignal(L_n);
                 obj.contactSoundGenerator.consumeControlSignal(L_n);
+                obj.L_n_1 = L_n;
             end
-            
+        end
+        
+        function outputSample = tick(obj)         
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
-            loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample, L_n);
-            CSGOutput = obj.contactSoundGenerator.tick(L_n);
+            loopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
+            CSGOutput = obj.contactSoundGenerator.tick();
             
             %Store this to implement the feedback on the next computation
             obj.lastOutputSample = loopOutput + CSGOutput;
             
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
-            outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
+            outputSample = obj.antiAliasingFilter.passThru(obj.lastOutputSample);
         end
     end
 end

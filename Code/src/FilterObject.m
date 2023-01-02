@@ -8,7 +8,7 @@ classdef FilterObject < handle & AudioProcessor
     end
     
     properties (Constant)
-        N = 4096;   %Number of FFT points
+        N = 4096;   %Number of FFT points for platting/anaylsis
     end
     
     methods
