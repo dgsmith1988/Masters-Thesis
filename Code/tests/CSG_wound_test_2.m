@@ -1,10 +1,6 @@
 %Test the wound CSG object in using the combined output from both branches
 %and a time-varying slide velocity
 
-%TODO: Extend this to separating the different branches like before to see
-%how they respond to the sweep and contribute to the combined spectrum at
-%the end
-
 close all;
 clear;
 

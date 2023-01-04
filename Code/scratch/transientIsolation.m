@@ -9,6 +9,7 @@ Fs = SystemParams.audioRate;
 duration_sec = 2;
 numSamples = duration_sec*Fs;
 nRange = 0:numSamples-1;
+L = 2;
 
 %Delay values control signal
 % transitionSample = 120;
@@ -25,7 +26,7 @@ x = sin(2*pi*f0/Fs*nRange);
 % x = repmat([1, zeros(1, 11)], 1, numSamples/12);
 
 %Processing object initialization
-lagrangeDelay = LagrangeDelay(D(1));
+lagrangeDelay = LagrangeDelay(L, D(1));
 y_lagrange = zeros(1, numSamples);
 
 %Processing loop
@@ -46,13 +47,14 @@ plot(nRange, x, nRange, y_lagrange);
 % stem(transitionSample-1, y_lagrange(transitionSample));
 % hold off;
 legend('x', 'y lagrange');
-xlim([0 200]);
+% xlim([0 200]);
+xlim([11975 12050]);
 grid on;
 grid minor;
 
-frameLength = 200;
-for i = 1:numSamples/frameLength
-    xlim([(i-1)*frameLength+1, i*frameLength]);
-    disp("Hit enter for next frame...");
-    pause;
-end
+% frameLength = 200;
+% for i = 1:numSamples/frameLength
+%     xlim([(i-1)*frameLength+1, i*frameLength]);
+%     disp("Hit enter for next frame...");
+%     pause;
+% end

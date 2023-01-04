@@ -3,7 +3,7 @@
 %before.
 
 clear;
-close all;
+% close all;
 
 %System parameters
 Fs_audio = SystemParams.audioRate;
@@ -19,12 +19,12 @@ L = 6;
 %Delay values control signal
 numPeriods = 10;     %the discontinuity should be introduced 10-1 = 9 times
 controlPeriod = numSamples_control/numPeriods;
-start = 0;
-stop = 1;
+start = .75;
+stop = .25;
 increment = (stop - start)/(controlPeriod-1);
 D = start:increment:stop;
+D = filter(1/8*[]);
 D = repmat(D, 1, numPeriods);
-% D = filter(1/8*[1 1 1 1 1 1 1 1], 1, D);
 % D = D + 2.5;
 
 %Input signal is a sine wave to make things clearer. Put it in the filter's
@@ -58,8 +58,6 @@ for n_control = nRange_control+1
         n_audio = n_audio + 1;
     end
 end
-
-D_interp = filter(1/8*[1 1 1 1 1 1 1 1], 1, D_interp);
 D_farrow = D_interp + 2;
 y_theoretical = sin(2*pi*f0/Fs_audio*(nRange_audio - D_farrow));
 % y_theoretical = sin(2*pi*f0/Fs_audio*(nRange_audio - 2 - D_interp));
@@ -121,16 +119,16 @@ xlim([lower upper]);
 grid on;
 grid minor;
 
-% frameLength = 300;
-% overlap = .5;
-% hopSize = frameLength*(1-overlap);
-% for i = 1:numSamples_audio/(hopSize)
-%     start = (i-1)*hopSize+1;
-%     stop = start + frameLength;
-%     xlim([start, stop]);
-%     disp("Hit enter for next frame...");
-%     pause;
-% end
+frameLength = 300;
+overlap = .5;
+hopSize = frameLength*(1-overlap);
+for i = 1:numSamples_audio/(hopSize)
+    start = (i-1)*hopSize+1;
+    stop = start + frameLength;
+    xlim([start, stop]);
+    disp("Hit enter for next frame...");
+    pause;
+end
 
 % figure; plot(nRange_audio, y_lagrange-y_farrow); xlabel("Time (sec)");
 err_farrow = y_theoretical - y_farrow;

@@ -5,6 +5,7 @@ classdef SystemParams
     properties(Constant)
         audioRate = 48000;
 %         audioRate = 8000;
+%         controlRate = 500;
         controlRate = 1000;
 %         controlRate = 8000;
 %         controlRate = SystemParams.audioRate;
