@@ -896,7 +896,7 @@
 											"top": 806,
 											"width": 123.90625,
 											"height": 13,
-											"text": "+order",
+											"text": "+filterLength",
 											"horizontalAlignment": 0
 										}
 									],
@@ -1904,8 +1904,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGFb+QaS8HrsYw="
 							},
-							"name": "order",
-							"type": ""
+							"name": "filterLength"
 						}
 					],
 					"operations": [

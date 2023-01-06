@@ -42,14 +42,20 @@ classdef StringSynth < handle
             %be used here to make the string sound better
             %             bufferData = 1 - 2*rand(1, length(obj.feedbackLoop.integerDelayLine.buffer));
             %TODO: Examine if bandlimiting this helps with crackle issue
-            bufferData = pinknoise(length(obj.feedbackLoop.integerDelayLine.buffer))';
+%             bufferData = pinknoise(length(obj.feedbackLoop.integerDelayLine.buffer))';
 %             bufferLength = length(obj.feedbackLoop.integerDelayLine.buffer);
 %             n = 0:bufferLength-1;
 %             bufferData = sin(2*pi/bufferLength * n);
 %             bufferData = [1 zeros(1, bufferLength-1)];
             %Normalize the signal to make it stronger
+%             bufferData = bufferData / max(abs(bufferData));
+%             obj.feedbackLoop.integerDelayLine.initializeBuffer(bufferData);
+            D = SystemParams.maxDelayLineLength;
+            L = 6;
+            bufferData = pinknoise(D+floor(L/2));
             bufferData = bufferData / max(abs(bufferData));
-            obj.feedbackLoop.integerDelayLine.initializeBuffer(bufferData);
+            obj.feedbackLoop.farrowDelay =  dsp.VariableFractionalDelay('InterpolationMethod', 'Farrow',...
+                'FilterLength', L, 'MaximumDelay', D, 'InitialConditions', bufferData);
         end
         
         function consumeControlSignal(obj, L_n)
@@ -72,7 +78,7 @@ classdef StringSynth < handle
             
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
-            outputSample = obj.antiAliasingFilter.passThru(obj.lastOutputSample);
+            outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
         end
     end
 end
