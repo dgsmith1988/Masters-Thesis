@@ -33,9 +33,7 @@ x = sin(2*pi*f0/Fs_audio*nRange_audio);
 farrowDelay = dsp.VariableFractionalDelay('InterpolationMethod', 'Farrow', 'FilterLength', L);
 %only the inteprolation order matters at instantaition as we change the
 %other componenets during the processing loop
-M_init = delay(1)-D_min;
-d_init = delay(1) - floor(delay(1));
-interpDelayLagrange = InterpDelayLagrange(M_init, N_lagrange, d_init);
+interpDelayLagrange = InterpDelayLagrange(N_lagrange, delay(1));
 y_farrow = zeros(1, numSamples_audio);
 y_lagrangeInterp = zeros(1, numSamples_audio);
 

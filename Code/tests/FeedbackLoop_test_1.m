@@ -1,3 +1,5 @@
+%DEPRECATED - FeedbackLoop internals have changed since this was created...
+
 %This tests the internal processing and functions of the FeedbackLoop to
 %make sure the values are objects are updated correctly. The parameter
 %functions were tested in the HelperFunctions_test_1.m script. The test goes

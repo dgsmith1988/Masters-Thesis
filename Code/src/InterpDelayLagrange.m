@@ -11,15 +11,15 @@ classdef InterpDelayLagrange < handle
     end
     
     methods
-        function obj = InterpDelayLagrange(M, N, d)
+        function obj = InterpDelayLagrange(N, delay)
             assert(mod(N, 2) ~= 0, "Lagrange interp order must be odd");
             
             %Calculate the various derived values
-            obj.M = M;
             obj.N = N;
             obj.D_min = (N-1)/2;
-            obj.D = (N-1)/2 + d; %TODO: This might not be named correctly
-            obj.d = d;
+            obj.M = floor(delay - obj.D_min);
+            obj.d = delay - floor(delay);
+            obj.D = obj.D_min + obj.d;
             obj.L = N + 1;
             obj.h = hlagr2(obj.L, obj.d);
             
@@ -81,6 +81,14 @@ classdef InterpDelayLagrange < handle
             %Increment the delay line by one sample
             obj.circularBuffer.decrementDelay();
             obj.M = obj.M - 1;
+        end
+        
+        function bufferLength = getBufferLength(obj)
+            bufferLength = obj.circularBuffer.getBufferLength();
+        end
+        
+        function initializeDelayLine(obj, data)
+            obj.circularBuffer.initializeBuffer(data);
         end
     end
 end

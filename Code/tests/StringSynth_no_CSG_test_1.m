@@ -7,7 +7,7 @@ writeAudioFlag = false;
 testName = "StringSynth Test 1 - No CSG - No Slide Motion";
 
 %System processing parameters
-stringParams = SystemParams.E_string_params;
+stringParams = SystemParams.e_string_params;
 stringParams.n_w = -1; %indicate that we don't use a CSG
 stringModeFilterSpec = SystemParams.E_string_modes.chrome;
 waveshaperFunctionHandle = @tanh;

@@ -16,11 +16,13 @@ y = zeros(size(x));
 M = [3, 6, 9]; 
 N = 5; %Lagrange order
 d = 0; %No fractional component at the moment
+D = (N-1)/2 + d;
+delay = M + D;
 
 %******Test the basic constructor first******
 figure;
 for k = 1:length(M)
-    interpolatedDelayLine = InterpDelayLagrange(M(k), N, d);
+    interpolatedDelayLine = InterpDelayLagrange(N, delay(k));
     
     %Run the test signal through the delay to see what comes out
     for n = 1:length(x)
@@ -39,7 +41,6 @@ for k = 1:length(M)
     grid on;
     grid minor;
     legend();
-    D = interpolatedDelayLine.D;
     title(sprintf("Interp Lagrange Delay Test - M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
 end
 
@@ -48,7 +49,8 @@ end
 x = repmat(x, [1, 3]);
 y = zeros(size(x));
 M = 8;
-interpolatedDelayLine = InterpDelayLagrange(M, N, d);
+delay = M + D;
+interpolatedDelayLine = InterpDelayLagrange(N, delay);
 n = 1;
 for k = 1:3
     if k == 2
@@ -85,7 +87,7 @@ M = [8, 9, 8];
 d = [.25, .5, .75];
 D = d + (N-1)/2;
 delay = M + D;
-interpolatedDelayLine = InterpDelayLagrange(M(1), N, 0);
+interpolatedDelayLine = InterpDelayLagrange(N, delay(1));
 n = 1;
 for k = 1:3
     interpolatedDelayLine.setDelay(delay(k))

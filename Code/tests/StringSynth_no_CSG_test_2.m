@@ -16,8 +16,8 @@ stringModeFilterSpec = SystemParams.D_string_modes.chrome;
 waveshaperFunctionHandle = @tanh;
 
 %Generate the appropriate control signal
-startingStringLength = fretNumberToRelativeLength(1);
-endingStringLength = fretNumberToRelativeLength(0);
+startingStringLength = fretNumberToRelativeLength(0);
+endingStringLength = fretNumberToRelativeLength(1);
 frequencyRatio = startingStringLength/endingStringLength;
 sampleRatio = frequencyRatio^(1/numSamples);
 

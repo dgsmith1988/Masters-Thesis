@@ -81,6 +81,8 @@ classdef SystemParams
         
         maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minString_f0); 
         minDelayLineLength = floor(SystemParams.audioRate/SystemParams.maxString_f0);
+        
+        lagrangeOrder = 5;
     end
 end
 

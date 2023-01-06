@@ -83,6 +83,10 @@ classdef CircularBuffer < handle
             %TODO: Should this also reset the read/write pointers?
             obj.buffer = newData;
         end
+        
+        function bufferLength = getBufferLength(obj)
+            bufferLength = length(obj.buffer);
+        end
     end
     
     methods(Access = private)
