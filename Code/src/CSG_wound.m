@@ -15,6 +15,9 @@ classdef CSG_wound < handle
     
     methods
         function obj = CSG_wound(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_n_1)
+            %TODO: Determine the best way to initialize these later
+            obj.f_c_n = 0;
+            obj.absoluteSlideSpeed = 0;
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             obj.noisePulseTrain = NoisePulseTrain(0, stringParams.T60);
             obj.stringModeFilter = LongitudinalModeFilter(stringModeFilterSpec);
