@@ -19,13 +19,28 @@
   <defs
      id="defs2">
     <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1026"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="TriangleOutL">
+      <path
+         transform="scale(0.8)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#ff2200;fill-opacity:1"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         id="path1024" />
+    </marker>
+    <marker
        inkscape:stockid="TriangleOutL"
        orient="auto"
        refY="0.0"
        refX="0.0"
        id="marker3910"
        style="overflow:visible"
-       inkscape:isstock="true">
+       inkscape:isstock="true"
+       inkscape:collect="always">
       <path
          id="path3908"
          d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
@@ -382,7 +397,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="531.2248"
+     inkscape:cx="465.7248"
      inkscape:cy="469.571"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -768,6 +783,22 @@
          y="260.46356"
          style="stroke-width:0.26458332"
          id="tspan4809">antialiasing filter consumes it in a way.</tspan></text>
+    <path
+       style="fill:#ff2200;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#marker1026);fill-opacity:1"
+       d="M 66.939582,136.92708 261.40833,110.46875"
+       id="path1016"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.616669"
+       y="124.75625"
+       id="text1150"><tspan
+         sodipodi:role="line"
+         id="tspan1148"
+         x="65.616669"
+         y="124.75625"
+         style="stroke-width:0.26458332">Move this outside the feedback loop</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

@@ -3,17 +3,22 @@
 close all;
 clear;
 dbstop if error
-writeAudioFlag = false;
-testName = "StringSynth Test 1 - No CSG - No Slide Motion";
 
 %System processing parameters
-stringParams = SystemParams.e_string_params;
+stringParams = SystemParams.A_string_params;
 stringParams.n_w = -1; %indicate that we don't use a CSG
-stringModeFilterSpec = SystemParams.E_string_modes.chrome;
+stringModeFilterSpec = SystemParams.A_string_modes.chrome;
 waveshaperFunctionHandle = @tanh;
-durationSec = 2;
+durationSec = 3;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
+
+%Spectrogram analysis parameters
+windowLength = 12*10^-3*Fs; %12 ms window
+window = hamming(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim = 15; %corresponds to 15kHz on the frequency axis
 
 %Generate the constant control signal
 L = ones(1, numSamples);
@@ -33,22 +38,9 @@ for n = 1:numSamples
 end
 
 plot(y1);
-title(testName);
-% soundsc(y1, Fs)
-if writeAudioFlag
-    audiowrite(testName + ".wav", y1, Fs);
-end
+title("Single Plucked Note Test");
 
-% figure;
-% subplot(2, 1, 1);
-% stem(0:5, stringSynth.feedbackLoop.fractionalDelayLine.b);
-% frameLength = 143;
-% subplot(2, 1, 2);
-% stem(0:numSamples-1, y1);
-% grid on;
-% grid minor;
-% for i = 1:numSamples/frameLength
-%     xlim([(i-1)*frameLength+1, i*frameLength]);
-%     disp("Hit enter for next frame...");
-%     pause;
-% end
+figure;
+spectrogram(y1, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+title('Single Plucked Note Spectrogram')

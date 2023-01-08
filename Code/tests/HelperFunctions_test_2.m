@@ -4,7 +4,6 @@
 % 1. relativeLengthToFretNumber()
 % 2. fretNumberToRelativeLength()
 % 3. f_c_To_Ticks()
-%
 %linearToComplex() is not tested here as that is tested when the filter
 %specficiations are translated into coefficients and it doesn't
 %generate/process any audio/control signals.
@@ -97,6 +96,7 @@ grid minor;
 %sampling rates. This should generate a staircase function where the width
 %of each "step" corresponds to f_c. It should start at 2 ticks and go to
 %192.
+
 f_c = 250;
 Fs_min = 2*f_c;
 Fs_max = 48000;

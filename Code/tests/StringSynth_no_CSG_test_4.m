@@ -1,4 +1,4 @@
-%Test the string synth patch for various sliding up 3 fret over one
+%Test the string synth patch for various sliding up 5 fret over half a
 %second and reverse
 
 clear;
@@ -6,9 +6,11 @@ close all;
 dbstop if error
 
 %System processing parameters
-duration_sec = .5;
+soundDuration_sec = 3;
+slideDuration_sec = .5;
+staticDuration_sec = soundDuration_sec - slideDuration_sec;
 Fs = SystemParams.audioRate;
-numSamples = duration_sec * Fs;
+numSamples = soundDuration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
 n_w = stringParams.n_w; %extract the parameter before we overwrite it
@@ -30,7 +32,8 @@ y_upperLim = 15; %corresponds to 15kHz on the frequency axis
 %Generate the appropriate control signal
 startingFret = 0;
 endingFret = 5;
-L = generateL(startingFret, endingFret, duration_sec, Fs);
+L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
+L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
 stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
@@ -40,7 +43,7 @@ y6 = zeros(1, numSamples);
 stringSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
     stringSynth.consumeControlSignal(L(n))
     y6(n) = stringSynth.tick();
@@ -63,7 +66,8 @@ title('Fast Upward Bend Spectrogram')
 %Generate the appropriate control signal
 startingFret = 5;
 endingFret = 0;
-L = generateL(startingFret, endingFret, duration_sec, Fs);
+L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
+L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
 stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
@@ -73,7 +77,7 @@ y7 = zeros(1, numSamples);
 stringSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
     stringSynth.consumeControlSignal(L(n))
     y7(n) = stringSynth.tick();

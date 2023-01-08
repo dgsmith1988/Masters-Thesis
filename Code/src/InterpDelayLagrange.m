@@ -15,11 +15,12 @@ classdef InterpDelayLagrange < handle
             assert(mod(N, 2) ~= 0, "Lagrange interp order must be odd");
             
             %Calculate the various derived values
+%             obj.D_min = (N-1)/2;
+%             obj.M = floor(delay - obj.D_min);
+%             obj.d = delay - floor(delay);
+%             obj.D = obj.D_min + obj.d;
+            [obj.M, obj.D_min, obj.D, obj.d] = calculateInterpDelayLineComponents(N, delay);
             obj.N = N;
-            obj.D_min = (N-1)/2;
-            obj.M = floor(delay - obj.D_min);
-            obj.d = delay - floor(delay);
-            obj.D = obj.D_min + obj.d;
             obj.L = N + 1;
             obj.h = hlagr2(obj.L, obj.d);
             
@@ -47,9 +48,10 @@ classdef InterpDelayLagrange < handle
         
         function setDelay(obj, newValue)
             %Check to make sure the integer component doesn't change more
-            %than 1 sample at a time            
-            M_new = floor(newValue - obj.D_min);
-            d_new = newValue - floor(newValue);
+            %than 1 sample at a time
+            [M_new, ~, ~, d_new] = calculateInterpDelayLineComponents(obj.N, newValue);
+%             M_new = floor(newValue - obj.D_min);
+%             d_new = newValue - floor(newValue);
             
             diff_M = M_new - obj.M;
             assert(abs(diff_M) <= 1, "Integer part of delay line can't be adjusted more than one sample")

@@ -53,7 +53,6 @@ classdef StringSynth < handle
         function outputSample = tick(obj)         
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
-%             feedbackLoopOutput = 0;
             feedbackLoopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
             CSGOutput = obj.contactSoundGenerator.tick();
             
@@ -63,8 +62,6 @@ classdef StringSynth < handle
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
             outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
-%             obj.lastOutputSample = obj.antiAliasingFilter.tick(feedbackLoopOutput);
-%             outputSample = CSGOutput + feedbackLoopOutput;
         end
     end
 end

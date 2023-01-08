@@ -28,18 +28,19 @@ decrement = (min_L - max_L) / (numSamples-1);
 L = max_L:decrement:min_L;
 
 %Geneate the theoretical values
-pitch_f0_target = calculatePitchF0(L, openString_f0);
-DWGLength_target = calculateTotalDWGLength(pitch_f0_target);
-
 loopFilterDelay = feedbackLoop.loopFilter.phaseDelay;
-fractionalDelayInteger = feedbackLoop.fractionalDelayLine.integerDelay;
+lagrangeOrder = feedbackLoop.interpolatedDelayLine.N;
 
-[integerDelay_target, fractionalDelay_target] = calculateDelayLineLengths(DWGLength_target, loopFilterDelay, fractionalDelayInteger);
+pitch_f0_target = calculatePitchF0(L, openString_f0);
+DWGLength_target = calculateTotalDWGLength(pitch_f0_target, Fs);
+interpDelay_target = calculateInterpDelayLineLength(DWGLength_target, loopFilterDelay);
+[M_target, D_min, D_target, d_target] = calculateInterpDelayLineComponents(lagrangeOrder, interpDelay_target);
 
 %Simulate the processing of the L[n] signal which the object does inside
 %the string synth
-integerDelay_measured = zeros(1, numSamples);
-fractionalDelay_measured = zeros(1, numSamples);
+M_measured = zeros(1, numSamples);
+D_measured = zeros(1, numSamples);
+d_measured = zeros(1, numSamples);
 pitch_f0_measured = zeros(1, numSamples);
 DWGLength_measured = zeros(1, numSamples);
 
@@ -52,27 +53,38 @@ for n = 1:numSamples
     feedbackLoop.consumeControlSignal(L(n));
     feedbackLoop.tick(0);
     %Extract the parameters from the object state
-    integerDelay_measured(n) = feedbackLoop.integerDelayLine.delay;
-    fractionalDelay_measured(n) = feedbackLoop.fractionalDelayLine.fractionalDelay;
+    M_measured(n) = feedbackLoop.interpolatedDelayLine.M;
+    D_measured(n) = feedbackLoop.interpolatedDelayLine.D;
+    d_measured(n) = feedbackLoop.interpolatedDelayLine.d;
     pitch_f0_measured(n) = feedbackLoop.pitch_f0;
     DWGLength_measured(n) = feedbackLoop.DWGLength;
 end
 
-integerDelay_err = integerDelay_target - integerDelay_measured;
-fractionalDelay_err = fractionalDelay_target - fractionalDelay_measured;
+M_err = M_target - M_measured;
+D_err = D_target - D_measured;
+d_err = d_target - d_measured;
 pitch_f0_err = pitch_f0_target - pitch_f0_measured;
 DWGLength_err = DWGLength_target - DWGLength_measured;
 
 figure;
-subplot(4,1,1);
-plot(L, integerDelay_err);
-title("Integer Delay Error");
-subplot(4,1,2);
-plot(L, fractionalDelay_err);
-title("Fractional Delay Error");
-subplot(4,1,3);
+subplot(5, 1, 1);
+plot(L, M_err);
+title("M Error");
+subplot(5, 1, 2);
+plot(L, D_err);
+title("D Error");
+subplot(5, 1, 3);
+plot(L, d_err);
+title("d Error");
+subplot(5, 1, 4);
 plot(L, pitch_f0_err);
 title("Pitch f0 Error");
-subplot(4,1,4);
+subplot(5, 1, 5);
 plot(L, DWGLength_err);
 title("DWG Length Error");
+
+assert(sum(M_err) == 0);
+assert(sum(D_err) == 0);
+assert(sum(d_err) == 0);
+assert(sum(pitch_f0_err) == 0);
+assert(sum(DWGLength_err) == 0);

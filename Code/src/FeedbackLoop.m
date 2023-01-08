@@ -41,11 +41,11 @@ classdef FeedbackLoop < handle
             %Calculate the various derived parameters first
             obj.pitch_f0 = calculatePitchF0(L_n, obj.openString_f0);
             obj.DWGLength = calculateTotalDWGLength(obj.pitch_f0, SystemParams.audioRate);
-            
+            delayLineLength = calculateInterpDelayLineLength(obj.DWGLength, obj.loopFilter.phaseDelay);
             %Update the different processing objects based on the new
             %derived parameters
             obj.g_c_n = obj.energyScaler.tick(obj.DWGLength);
-            obj.interpolatedDelayLine.setDelay(obj.DWGLength);           
+            obj.interpolatedDelayLine.setDelay(delayLineLength);           
             obj.loopFilter.updateFilter(L_n);
         end
         

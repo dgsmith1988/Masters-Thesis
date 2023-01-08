@@ -5,7 +5,8 @@
 %to work correctly. These functions are:
 % - calculatePitchF0()
 % - calculateTotalDWGLength()
-% - calculateDelayLineLengths()
+% - calculateInterpDelayLineLength()
+% - calcualteInterpDelayLineComponents()
 
 clear;
 close all;
@@ -22,6 +23,7 @@ min_L = SystemParams.minRelativeStringLength;
 min_pitchf0 = minString_f0 / max_L;
 max_pitchf0 = maxString_f0 / min_L;
 openString_f0 = 110;
+N = SystemParams.lagrangeOrder;
 
 %********Test 1********
 %Test the basic parametrization functions first to ensure they calculate
@@ -65,8 +67,8 @@ xlabel("Pitch f0 (Hz)");
 title("DWG Length range based on min/max pitch f0 values");
 
 %********Test 3********
-%Calculate the various delay line values associated with the integer and
-%fractional delays for each frequency over the range of values.
+%Calculate the interpolated delay line length based on the phase delay of
+%the loop filter.
 
 %Recalculate this to be a linear sweep across the range of values. Use the
 %ceil/cloor functions to start and end on an integer to make the graphs
@@ -78,22 +80,51 @@ DWGLength = lowerLim:increment:upperLim;
 
 %Constants based on filter types used in the signal processing chain
 loopFilterDelay = OnePole.phaseDelay;
-fractionalDelayInteger = LagrangeDelay.integerDelay;
 
-[p_int, p_frac_delta] = calculateDelayLineLengths(DWGLength, loopFilterDelay, fractionalDelayInteger);
+delay = calculateInterpDelayLineLength(DWGLength, loopFilterDelay);
 
 figure;
-yyaxis left;
-stem(DWGLength, p_int, 'DisplayName', "Integer Delay Line Length")
+subplot(2, 1, 1);
+plot(DWGLength, delay, 'DisplayName', "Interp Delay Line Length");
 xlabel("DWG Length (samples)");
-ylabel("Integer Delay Line Length (samples)");
-ylim([47 51]);
-yyaxis right;
-stem(DWGLength, p_frac_delta, 'DisplayName', "Fractional Delay Amount");
-xlabel("DWG Length (samples)");
-ylabel("Fractional Delay Line Component (samples)");
-ylim([-.1 1.1])
-grid on;
-grid minor;
-xlim([50.5 53.5]);
+ylabel("Interpolated Delay Line Length (samples)");
 title("FeedbackLoop Parameter Calculation Test");
+grid on; grid minor;
+subplot(2, 1, 2);
+plot(DWGLength - delay, 'DisplayName', "Difference");
+ylabel("Difference (samples)");
+title("Difference Between DWG Length and Interp Delay Line");
+grid on; grid minor;
+
+%********Test 4********
+%Calculate the interpolated delay line length sub-components based on the
+%delay value passed to it as well as the lagrange interpolation order
+
+[M, D_min, D, d] = calculateInterpDelayLineComponents(N, delay);
+
+figure;
+subplot(2, 1, 1);
+yyaxis left;
+stem(delay, M, 'DisplayName', "M");
+xlabel("Delay (samples)");
+ylabel("M (samples)");
+ylim([97, 106]);
+yyaxis right;
+stem(delay, D, 'DisplayName', 'D');
+ylabel('D (samples)')
+ylim([1.9, 3.1])
+title("Integer and Langrange Delay Components");
+xlim([100, 104])
+grid on; grid minor;
+
+subplot(2, 1, 2);
+yyaxis left;
+stem(delay, D, 'DisplayName', "D");
+xlabel("Delay (samples)");
+ylabel("D (samples)");
+yyaxis right;
+stem(delay, d, 'DisplayName', 'd');
+ylabel("d (samples)");
+title("Langrange Delay Breakdown");
+xlim([100, 104])
+grid on; grid minor;

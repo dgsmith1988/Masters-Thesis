@@ -76,11 +76,18 @@ classdef SystemParams
         stringLengthMeters = .65;
         minRelativeStringLength = .25;  %Limit things to two octaves per string (or the 24th fret)
         maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
-        minString_f0 = 65.41;  %Corresponds to C2 to support open C tuning
-        maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altred tunings
         
-        maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minString_f0); 
-        minDelayLineLength = floor(SystemParams.audioRate/SystemParams.maxString_f0);
+        minFretNumber = relativeLengthToFretNumber(SystemParams.maxRelativeStringLength);
+        maxFretNumber = relativeLengthToFretNumber(SystemParams.minRelativeStringLength);
+        
+        minString_f0 = 65.41;  %Corresponds to C2 to support open C tuning
+        maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altered tunings
+        
+        minPitch_f0 = SystemParams.minString_f0/SystemParams.maxRelativeStringLength;   %Corresponds to lowest note possible
+        maxPitch_f0 = SystemParams.maxString_f0/SystemParams.minRelativeStringLength   %Corresponds to higest note possible
+        
+        maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minPitch_f0);  %Delay line length associated with lowest pitch
+        minDelayLineLength = floor(SystemParams.audioRate/SystemParams.maxPitch_f0); %Delay line length associated with highest pitch
         
         lagrangeOrder = 5;
     end
