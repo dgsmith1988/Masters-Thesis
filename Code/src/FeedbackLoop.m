@@ -1,20 +1,17 @@
-classdef FeedbackLoop < handle
+classdef FeedbackLoop < handle & AudioGenerator
     %Class to encapsulate the various processing elements in the feedback
     %loop to make it eaiser to debug and understand things. It is like the
     %String DWG minus the feedback connection which causes the reflection
     %essentially.
-    
-    %TOOD: Is there a way to run this at half the sampling rate to save
-    %computations?
-    
+      
     properties
         openString_f0           %open string fundamental frequency in Hz
-        pitch_f0                %selected pitch based on relative string length
+        pitch_f0                %selected pitch based on relative string length        
+        g_c_n                   %compensation coefficient
+        DWGLength               %current DWG length in samples
         interpolatedDelayLine   %delay line which allows for fractional delay components
         energyScaler            %calculates compensation coefficient
-        g_c_n                   %compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
-        DWGLength               %current DWG length in samples
     end
     
     methods

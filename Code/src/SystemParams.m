@@ -54,6 +54,7 @@ classdef SystemParams
         
         %Numbers taken from the patch in Appendix B of the master's thesis
         %TODO: Revamp and potentially extend these parameters later
+        %TODO: Change these to match the new constructor
         E_string_params = StringParams(15*10^-3, 2000, 6, 82.41, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol

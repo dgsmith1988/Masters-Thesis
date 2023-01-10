@@ -1,10 +1,10 @@
-classdef InterpDelayLagrange < handle
+classdef InterpDelayLagrange < handle & AudioProcessor
     properties
+        circularBuffer  %Circular buffer to store the data
         M               %Interger delay length
-        h               %Lagrange filter coefficients
         N               %Lagrange interpolation order
         L               %Length of filter for Lagrange interp
-        circularBuffer  %Circular buffer to store the data
+        h               %Lagrange filter coefficients
         D               %Delay implemented by Lagrange component, D = floor(D) + d
         D_min           %Minimum D based on N
         d               %Fractional delay component
@@ -15,10 +15,6 @@ classdef InterpDelayLagrange < handle
             assert(mod(N, 2) ~= 0, "Lagrange interp order must be odd");
             
             %Calculate the various derived values
-%             obj.D_min = (N-1)/2;
-%             obj.M = floor(delay - obj.D_min);
-%             obj.d = delay - floor(delay);
-%             obj.D = obj.D_min + obj.d;
             [obj.M, obj.D_min, obj.D, obj.d] = calculateInterpDelayLineComponents(N, delay);
             obj.N = N;
             obj.L = N + 1;
@@ -47,13 +43,11 @@ classdef InterpDelayLagrange < handle
         end
         
         function setDelay(obj, newValue)
-            %Check to make sure the integer component doesn't change more
-            %than 1 sample at a time
             [M_new, ~, ~, d_new] = calculateInterpDelayLineComponents(obj.N, newValue);
-%             M_new = floor(newValue - obj.D_min);
-%             d_new = newValue - floor(newValue);
             
             diff_M = M_new - obj.M;
+            %Make sure we don't move more than 1 sample at a time as I
+            %haven't tested the interpolation for that.
             assert(abs(diff_M) <= 1, "Integer part of delay line can't be adjusted more than one sample")
             
             if diff_M == 1

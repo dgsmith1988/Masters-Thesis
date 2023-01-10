@@ -1,10 +1,10 @@
-classdef CircularBuffer < handle
+classdef CircularBuffer < handle & AudioProcessor
     %Circular buffer to help facilitate the interpolated delay line class.
     
     properties(Constant)
-        %TODO: Eventually calculate these values based on the Lagrange
-        %order as well as note ranges.
-        maxDelay = SystemParams.maxDelayLineLength;
+        %TODO: Eventually figure out the best places to put these things
+        %based on proper program structure
+        maxDelay = SystemParams.maxDelayLineLength + SystemParams.lagrangeOrder;
         minDelay = SystemParams.minDelayLineLength;
     end
     properties(GetAccess = public)
@@ -14,7 +14,7 @@ classdef CircularBuffer < handle
         delay           %delay amount - not sure how useful this is... could be removed...
     end
     
-    methods
+    methods       
         function obj = CircularBuffer(delay)
             %Construct an instance of this class initialized to zeros
             
@@ -38,13 +38,13 @@ classdef CircularBuffer < handle
             obj.incrementWritePointer();
         end
         
-        function currentSample = getNextSample(obj)
+        function currentSample = getCurrentSample(obj)
             %return the sample where the pointer is looking
             currentSample = obj.buffer(obj.readPointer);
         end
         
         function writeSample(obj, inputSample)
-            %write sample to the current write pointer
+            %write sample to the current write pointer location
             obj.buffer(obj.writePointer) = inputSample;
         end
         
@@ -66,7 +66,7 @@ classdef CircularBuffer < handle
         end
         
         function incrementDelay(obj)
-            assert(obj.delay ~= obj.maxDelay)
+            assert(obj.delay ~= obj.maxDelay, "We have reached the maximum delay line length.")
             obj.delay = obj.delay + 1;
             obj.decrementReadPointer()
         end

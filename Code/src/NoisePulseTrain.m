@@ -1,4 +1,5 @@
-classdef NoisePulseTrain < handle    
+classdef NoisePulseTrain < handle & AudioGenerator
+    
     properties
         exponentialDecay
     end

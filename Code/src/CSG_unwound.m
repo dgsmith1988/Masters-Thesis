@@ -1,4 +1,4 @@
-classdef CSG_unwound < handle
+classdef CSG_unwound < handle & AudioGenerator
     properties
         g_TV = 1;
         g_user = 1; 

@@ -1,8 +1,8 @@
 classdef ControlSignalProcessor < handle
-    %PROCESSCONTROLSIGNAL This class abstracts the context specific aspects
-    %of the relative length control signal away and generates the
-    %parameters for the CSG's constiuent processing objects as more
-    %agnostic standard parameters (i.e. cut-off frequencies, durations)
+    %This class abstracts the context specific aspects of the relative 
+    %length control signal away and generates the parameters for the CSG's
+    %constiuent processing objects as more agnostic standard parameters 
+    %(i.e. cut-off frequencies, durations)
     
     properties (GetAccess = public)
         L_n_1           %Previous relative length signal

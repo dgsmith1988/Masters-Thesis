@@ -13,8 +13,8 @@ classdef OnePole < LoopFilter & FilterObject
         
         %Corresponding a and g values from filter's H(z). Renamed due to
         %name clash with "a" in parent class FilterObject
-        g_param
         a_param
+        g_param
     end
     
     properties(Constant)

@@ -1,4 +1,4 @@
-classdef CSG_wound < handle
+classdef CSG_wound < handle & AudioGenerator
     properties
         g_bal = .25; %favor the modal resonators as they can get burried
         g_TV = 1;

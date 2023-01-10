@@ -1,4 +1,4 @@
-classdef ExponentialDecay
+classdef ExponentialDecay < AudioGenerator
     %Exponential decay implemented by feeding impulse signals into an IIR
     %tuned to have a specific decay rate
     
