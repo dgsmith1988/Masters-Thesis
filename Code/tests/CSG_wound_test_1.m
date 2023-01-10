@@ -1,4 +1,5 @@
-%Test the wound CSG object in three different ways
+%Test the wound CSG object in three different ways using a constant slide
+%velocity
 %   1. Longitudinal mode branch
 %   2. Resonator branch
 %   3. Combined output

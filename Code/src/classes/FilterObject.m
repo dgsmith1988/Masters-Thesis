@@ -1,6 +1,6 @@
-classdef FilterObject < handle & AudioProcessor
-    %LOOPFILTER Wrapper class to make it easier to manage the coefficients
-    %and state of a filter across multiple calculations
+classdef FilterObject < AudioProcessor
+    %Wrapper class to make it easier to manage the coefficients and state 
+    %of a filter across multiple calculations
     properties(GetAccess = public)
         a           %IIR coefficients
         b           %FIR coefficients

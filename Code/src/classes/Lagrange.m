@@ -1,5 +1,5 @@
-classdef InterpDelayLagrange < handle & AudioProcessor
-    properties
+classdef Lagrange < InterpolatedDelayLine
+    properties(GetAccess = public)
         circularBuffer  %Circular buffer to store the data
         M               %Interger delay length
         N               %Lagrange interpolation order
@@ -11,8 +11,9 @@ classdef InterpDelayLagrange < handle & AudioProcessor
     end
     
     methods
-        function obj = InterpDelayLagrange(N, delay)
+        function obj = Lagrange(N, delay)
             assert(mod(N, 2) ~= 0, "Lagrange interp order must be odd");
+            obj.delay = delay;
             
             %Calculate the various derived values
             [obj.M, obj.D_min, obj.D, obj.d] = calculateInterpDelayLineComponents(N, delay);

@@ -1,4 +1,4 @@
-classdef StringSynth < handle
+classdef StringSynth < Controllable & AudioGenerator
     %STRINGSYNTH Synthesizer for one particular string
     
     properties (GetAccess = public)
@@ -29,7 +29,7 @@ classdef StringSynth < handle
                 obj.contactSoundGenerator = CSG_dummy();
             end
             
-            obj.antiAliasingFilter = AntiAliasingFilter();
+            obj.antiAliasingFilter = AntiAliasing();
         end
         
         function pluck(obj)

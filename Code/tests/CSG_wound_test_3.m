@@ -40,7 +40,7 @@ y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 %create/initialize the processing objects
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
 csg_wound.g_bal = .25;
-y5 = zeros(1, length(L));
+y7 = zeros(1, length(L));
 for n = 1:length(L)
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
@@ -50,11 +50,11 @@ for n = 1:length(L)
 end
 
 figure;
-plot(y5);
+plot(y7);
 title("Wound CSG No Slide Motion Output");
 
 figure;
-spectrogram(y5, window, overlap, N, Fs, "yaxis");  
+spectrogram(y7, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 title('Wound CSG No Slide Motion Spectrogram')
-yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
+% yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');

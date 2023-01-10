@@ -1,12 +1,12 @@
-classdef NoisePulseTrain < handle & AudioGenerator
+classdef NoisePulseTrain < Controllable & AudioGenerator
     
     properties
         exponentialDecay
     end
     
     methods
-        function obj = NoisePulseTrain(period_samp, T60)
-            obj.exponentialDecay = ExponentialDecay(period_samp, T60);
+        function obj = NoisePulseTrain(period_samples, T60)
+            obj.exponentialDecay = ExponentialDecay(period_samples, T60);
         end
         
         function outputSample = tick(obj)

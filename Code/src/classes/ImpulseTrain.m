@@ -1,4 +1,4 @@
-classdef ImpulseTrain < handle
+classdef ImpulseTrain < AudioGenerator & Controllable
     
     properties
         tickCount           %counter used to trigger start of a noise pulse

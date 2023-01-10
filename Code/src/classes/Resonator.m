@@ -1,9 +1,5 @@
-classdef ResonatorFilter < FilterObject & AudioProcessor
-    %RESONATORFILTER Second order resonator filter with normalized gain
-    %TODO: Reparametrize this to match the specifications from the second
-    %order resonator in PD. This would include adding a Q factor as well as
-    %some sort of interpolation to handle changing between center
-    %frequencies more cleanly.
+classdef Resonator < FilterObject
+    %RESONATOR Second order resonator filter with normalized gain
     
     properties
         f_c
@@ -11,9 +7,9 @@ classdef ResonatorFilter < FilterObject & AudioProcessor
     end
     
     methods
-        function obj = ResonatorFilter(f_c, r)
-            %RESONATORFILTER Construct an instance of this class
-
+        function obj = Resonator(f_c, r)
+            %RESONATOR Construct an instance of this class
+            
             %Populate the superclass first
             b = [0, 0, 0];  %b1 should always be 0
             a = [1, 0, 0];  %a1 should always be 1
@@ -29,15 +25,15 @@ classdef ResonatorFilter < FilterObject & AudioProcessor
         function outputSample = tick(obj, inputSample)
             [outputSample, obj.z] = filter(obj.b, obj.a, inputSample, obj.z);
         end
-               
-        function update_f_c(obj, new_f_c)
-            obj.f_c = new_f_c;
+        
+        function update_f_c(obj, newValue)
+            obj.f_c = newValue;
             obj.update_a2Coefficient()
         end
         
-        function update_r(obj, r)
+        function update_r(obj, newValue)
             %Calculate filter coefficients based on value passed in
-            obj.r = r;
+            obj.r = newValue;
             obj.updateCoefficients();
         end
         

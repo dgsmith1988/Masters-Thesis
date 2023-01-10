@@ -6,7 +6,6 @@
 clear;
 close all;
 
-% Fs = SystemParams.audioRate;
 stringParams = SystemParams.e_string_params;
 openString_f0 = stringParams.f0;
 L_min = SystemParams.minRelativeStringLength;
@@ -14,21 +13,18 @@ L_max = SystemParams.maxRelativeStringLength;
 numSamples = 2000;
 decrement = (L_min - L_max) / (numSamples - 1);
 L = L_max:decrement:L_min;
-% nRange = 0:numSamples-1;
 
 pitch_f0 = calculatePitchF0(L, openString_f0);
 
 %Initialize/instantiate the processing object
 %Initial value doesn't really matter here as much
-loopFilter = OnePole(stringParams.a_pol, stringParams.g_pol, L(1));
-
-
+loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L(1));
 
 a = zeros(1, numSamples);
 g = zeros(1, numSamples);
 
 for n = 1:numSamples
-    loopFilter.updateFilter(L(n));
+    loopFilter.consumeControlSignal(L(n));
     a(n) = loopFilter.a_param;
     g(n) = loopFilter.g_param;
 end

@@ -1,4 +1,4 @@
-classdef FeedbackLoop < handle & AudioGenerator
+classdef FeedbackLoop < Controllable & AudioGenerator
     %Class to encapsulate the various processing elements in the feedback
     %loop to make it eaiser to debug and understand things. It is like the
     %String DWG minus the feedback connection which causes the reflection
@@ -22,8 +22,8 @@ classdef FeedbackLoop < handle & AudioGenerator
             obj.DWGLength = calculateTotalDWGLength(obj.pitch_f0, SystemParams.audioRate);
             
             %Construct/update the processing objects based on the parameters
-            obj.loopFilter = OnePole(stringParams.a_pol, stringParams.g_pol, L_0);
-            obj.interpolatedDelayLine = InterpDelayLagrange(SystemParams.lagrangeOrder, obj.DWGLength);
+            obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_0);
+            obj.interpolatedDelayLine = Lagrange(SystemParams.lagrangeOrder, obj.DWGLength);
             obj.energyScaler = EnergyScaler(obj.DWGLength);
         end
         
@@ -39,11 +39,12 @@ classdef FeedbackLoop < handle & AudioGenerator
             obj.pitch_f0 = calculatePitchF0(L_n, obj.openString_f0);
             obj.DWGLength = calculateTotalDWGLength(obj.pitch_f0, SystemParams.audioRate);
             delayLineLength = calculateInterpDelayLineLength(obj.DWGLength, obj.loopFilter.phaseDelay);
+            
             %Update the different processing objects based on the new
             %derived parameters
             obj.g_c_n = obj.energyScaler.tick(obj.DWGLength);
             obj.interpolatedDelayLine.setDelay(delayLineLength);           
-            obj.loopFilter.updateFilter(L_n);
+            obj.loopFilter.consumeControlSignal(L_n);
         end
         
         function initializeDelayLine(obj)

@@ -23,7 +23,7 @@ subplot(5, 1, 1);
 stem(0:numSamples-1, y);
 title('Constant rate');
 
-%********Test for a changing rate - rate increases********
+%********Test for a changing rate - rate decreases********
 tickLimits = [5, 6];
 f_c1 = Fs/tickLimits(1);
 f_c2 = Fs/tickLimits(2);
@@ -38,9 +38,9 @@ end
 
 subplot(5, 1, 2);
 stem(0:numSamples-1, y);
-title('Rate increases at sample 15');
+title('Rate decreases at sample 15');
 
-%********Test for a changing rate - rate decreases********
+%********Test for a changing rate - rate increases********
 tickLimits = [6, 5];
 f_c1 = Fs/tickLimits(1);
 f_c2 = Fs/tickLimits(2);
@@ -55,7 +55,7 @@ end
 
 subplot(5, 1, 3);
 stem(0:numSamples-1, y);
-title('Rate decreases at sample 15');
+title('Rate increases at sample 15');
 
 %********Test for a transition to stop********
 tickLimit = 5;

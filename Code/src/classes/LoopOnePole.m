@@ -1,4 +1,4 @@
-classdef OnePole < LoopFilter & FilterObject
+classdef LoopOnePole < LoopFilter & FilterObject
     %Class matching the parametrization of the loop filter specified in the
     %CMJ paper. One-pole low-pass parametrized by gain (g) and cut-off (a)
     %           g*(1 + a)
@@ -22,17 +22,17 @@ classdef OnePole < LoopFilter & FilterObject
     end
        
     methods
-        function obj = OnePole(a_pol, g_pol, L_n)
+        function obj = LoopOnePole(a_pol, g_pol, L_n)
             %L = relative string length
             %as we only have one pole there is only one delay element to
             %contend with
             obj@FilterObject(0, 0, 1);
             obj.a_pol = a_pol;
             obj.g_pol = g_pol;
-            obj.updateFilter(L_n);
+            obj.consumeControlSignal(L_n);
         end
         
-        function updateFilter(obj, L_n)
+        function consumeControlSignal(obj, L_n)
             %Calculations taken from 1998 paper on developing calibration
             %for electric guitar synthesizer
             m_fret = relativeLengthToFretNumber(L_n);

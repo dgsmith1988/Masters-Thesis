@@ -1,4 +1,4 @@
-classdef CSG_wound < handle & AudioGenerator
+classdef CSG_wound < ContactSoundGenerator
     properties
         g_bal = .25; %favor the modal resonators as they can get burried
         g_TV = 1;
@@ -20,8 +20,8 @@ classdef CSG_wound < handle & AudioGenerator
             obj.absoluteSlideSpeed = 0;
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             obj.noisePulseTrain = NoisePulseTrain(0, stringParams.T60);
-            obj.stringModeFilter = LongitudinalModeFilter(stringModeFilterSpec);
-            obj.resonator = ResonatorFilter(250, .99); %TODO: Change these to not be magic constants once more things come into place
+            obj.stringModeFilter = LongitudinalMode(stringModeFilterSpec);
+            obj.resonator = Resonator(obj.f_c_n, .99); %TODO: Change these to not be magic constants once more things come into place
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
         end
         

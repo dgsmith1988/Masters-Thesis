@@ -4,7 +4,6 @@
 
 clear;
 close all;
-addpath("..\src");
 
 N = 4096;
 Fs = SystemParams.audioRate;

@@ -26,7 +26,7 @@ stringParams = [SystemParams.e_string_params, SystemParams.B_string_params,...
 for string = stringParams
     %Initialize/instantiate the processing object
     %Initial value doesn't really matter here as much
-    loopFilter = OnePole(string.a_pol, string.g_pol, L(1));
+    loopFilter = LoopOnePole(string.a_pol, string.g_pol, L(1));
     
     %Output buffers to store values
     f = zeros(1, FilterObject.N);
@@ -34,7 +34,7 @@ for string = stringParams
     
     figure;
     for n = 1:numSamples
-        loopFilter.updateFilter(L(n));
+        loopFilter.consumeControlSignal(L(n));
         [h(n,:), f] = loopFilter.computeFrequencyResponse();
         subplot(2, 1, 1);
         hold on;

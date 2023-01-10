@@ -1,7 +1,9 @@
 classdef FilterSpec
+    %Class for organizing the longitudinal mode filter specifications based
+    %on how they are provided in the CMJ article
     properties
-        poles
         zeros
+        poles
         dB_atten
     end
     

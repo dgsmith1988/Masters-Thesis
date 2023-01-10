@@ -1,20 +1,20 @@
-classdef ExponentialDecay < AudioGenerator
+classdef ExponentialDecay < AudioGenerator & Controllable
     %Exponential decay implemented by feeding impulse signals into an IIR
     %tuned to have a specific decay rate
     
     properties
         impulseTrain
-        onePoleIIR      %one-pole filter tuned to generate coeff
+        onePoleIIR      %one-pole filter tuned to amplitude envelope
         T60
         tau
         alpha
     end
     
     methods
-        function obj = ExponentialDecay(period_samp, T60)
-            obj.impulseTrain = ImpulseTrain(period_samp);
+        function obj = ExponentialDecay(period_samples, T60)
+            obj.impulseTrain = ImpulseTrain(period_samples);
             obj.T60 = T60;
-            obj.tau = ExponentialDecay.calculateTimeConsant(T60);
+            obj.tau = obj.calculateTimeConsant(T60);
             obj.alpha = exp(-1/(obj.tau*SystemParams.audioRate));
             b = 1;
             a = [1 -obj.alpha];

@@ -1,4 +1,4 @@
-classdef CSG_dummy < handle & AudioGenerator
+classdef CSG_dummy < ContactSoundGenerator
     methods
         function outputSample = tick(obj)
            outputSample = 0;
