@@ -18,7 +18,7 @@ windowLength = 12*10^-3*Fs; %12 ms window
 window = hamming(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 15; %corresponds to 15kHz on the frequency axis
+y_upperLim_kHz = 24;
 
 %Generate the constant control signal
 L = ones(1, numSamples);
@@ -42,5 +42,5 @@ title("Single Plucked Note Test");
 
 figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title('Single Plucked Note Spectrogram')

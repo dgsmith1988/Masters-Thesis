@@ -4,5 +4,6 @@ function complexValues = linearToComplex(f, R, Fs)
 
 %First convert the linear frequency into an angular frequency/position
 theta = (2*pi)*f/Fs;
+%Then plug it into our good friend the complex exponential
 complexValues = R.*exp(1i*theta);
 end

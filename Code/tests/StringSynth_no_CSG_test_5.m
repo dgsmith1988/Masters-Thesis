@@ -26,7 +26,7 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 15; %corresponds to 15kHz on the frequency axis
+y_upperLim_kHz = 24;
 
 
 %********Test extreme slide up********
@@ -64,7 +64,7 @@ title("g_c[n]");
 
 figure;
 spectrogram(y8, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title('Extreme Upward Bend Spectrogram')
 
 %********Run the test in reverse********
@@ -103,5 +103,5 @@ title("g_c[n]");
 
 figure;
 spectrogram(y9, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title('Extreme Downward Slide Spectrogram')

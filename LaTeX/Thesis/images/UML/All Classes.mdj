@@ -1,7 +1,7 @@
 {
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
-	"name": "Untitled",
+	"name": "Virtual Slide Guitar",
 	"ownedElements": [
 		{
 			"_type": "UMLModel",
@@ -2470,7 +2470,7 @@
 											"font": "Arial;13;3",
 											"left": 1029,
 											"top": 223,
-											"width": 214.96337890625,
+											"width": 253.9951171875,
 											"height": 13,
 											"text": "Controllable"
 										},
@@ -2505,7 +2505,7 @@
 									"font": "Arial;13;0",
 									"left": 1024,
 									"top": 216,
-									"width": 224.96337890625,
+									"width": 263.9951171875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGFnAmhWK10mOc="
@@ -2532,7 +2532,7 @@
 									"font": "Arial;13;0",
 									"left": 1024,
 									"top": 241,
-									"width": 224.96337890625,
+									"width": 263.9951171875,
 									"height": 10
 								},
 								{
@@ -2557,16 +2557,16 @@
 											"font": "Arial;13;2",
 											"left": 1029,
 											"top": 256,
-											"width": 214.96337890625,
+											"width": 253.9951171875,
 											"height": 13,
-											"text": "+consumeControlSignal(: float)",
+											"text": "+consumeControlSignal(controlSignal: float)",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1024,
 									"top": 251,
-									"width": 224.96337890625,
+									"width": 263.9951171875,
 									"height": 23
 								},
 								{
@@ -2606,7 +2606,7 @@
 							"containerChangeable": true,
 							"left": 1024,
 							"top": 216,
-							"width": 224.96337890625,
+							"width": 263.9951171875,
 							"height": 71,
 							"nameCompartment": {
 								"$ref": "AAAAAAGFnAmhWK1z2zM="
@@ -2739,8 +2739,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1122,
-									"top": 341,
+									"left": 1132,
+									"top": 339,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2760,8 +2760,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 1107,
-									"top": 341,
+									"left": 1117,
+									"top": 338,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2781,8 +2781,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1151,
-									"top": 340,
+									"left": 1161,
+									"top": 342,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2800,7 +2800,7 @@
 								"$ref": "AAAAAAGFmVEK0aeh/8w="
 							},
 							"lineStyle": 1,
-							"points": "1139:407;1136:287",
+							"points": "1142:407;1152:287",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGFnC1F4q4xCoU="
@@ -7445,7 +7445,7 @@
 											"font": "Arial;13;3",
 											"left": 733,
 											"top": 55,
-											"width": 67.54541015625,
+											"width": 67.60888671875,
 											"height": 13,
 											"text": "Tickable"
 										},
@@ -7480,7 +7480,7 @@
 									"font": "Arial;13;0",
 									"left": 728,
 									"top": 48,
-									"width": 77.54541015625,
+									"width": 77.60888671875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGFnDjB4a5Nqsw="
@@ -7507,7 +7507,7 @@
 									"font": "Arial;13;0",
 									"left": 728,
 									"top": 73,
-									"width": 77.54541015625,
+									"width": 77.60888671875,
 									"height": 10
 								},
 								{
@@ -7532,7 +7532,7 @@
 											"font": "Arial;13;2",
 											"left": 733,
 											"top": 88,
-											"width": 67.54541015625,
+											"width": 67.60888671875,
 											"height": 13,
 											"text": "+tick(): float",
 											"horizontalAlignment": 0
@@ -7541,7 +7541,7 @@
 									"font": "Arial;13;0",
 									"left": 728,
 									"top": 83,
-									"width": 77.54541015625,
+									"width": 77.60888671875,
 									"height": 23
 								},
 								{
@@ -7581,7 +7581,7 @@
 							"containerChangeable": true,
 							"left": 728,
 							"top": 48,
-							"width": 77.54541015625,
+							"width": 77.60888671875,
 							"height": 58,
 							"nameCompartment": {
 								"$ref": "AAAAAAGFnDjB4a5MVlE="
@@ -11856,7 +11856,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGFmVUuI6hRnNY="
 									},
-									"name": "period_samples"
+									"name": "period_samples",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -11864,7 +11865,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGFmVUuI6hRnNY="
 									},
-									"name": "T60"
+									"name": "T60",
+									"type": ""
 								}
 							]
 						},
@@ -13618,7 +13620,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGFmVln/6pOeQc="
 							},
-							"name": "a_param"
+							"name": "a_param",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -13626,7 +13629,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGFmVln/6pOeQc="
 							},
-							"name": "g_param"
+							"name": "g_param",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -14273,6 +14277,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGFnA0lDa2+SHw="
 									},
+									"name": "controlSignal",
 									"type": "float"
 								}
 							],
@@ -14663,7 +14668,7 @@
 											"top": 333,
 											"width": 295.18505859375,
 											"height": 13,
-											"text": "+onePoleIIR: OnePole",
+											"text": "+onePoleIIR: FilterObject",
 											"horizontalAlignment": 0
 										},
 										{
@@ -16585,5 +16590,7 @@
 				}
 			]
 		}
-	]
+	],
+	"author": "David Graham Smith",
+	"company": "K&K Industrial Smoothing"
 }

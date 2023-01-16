@@ -1,7 +1,7 @@
 %Script to test the NoisePulseTrain class and ensure correct operation
 
-clear;
-close all;
+% clear;
+% close all;
 
 %System parameters
 Fs = SystemParams.audioRate;

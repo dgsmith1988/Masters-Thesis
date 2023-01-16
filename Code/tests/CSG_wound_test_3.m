@@ -46,7 +46,7 @@ for n = 1:length(L)
         fprintf("n = %i/%i\n", n, length(L));
     end
     csg_wound.consumeControlSignal(L(n));
-    y4(n) = csg_wound.tick();
+    y7(n) = csg_wound.tick();
 end
 
 figure;

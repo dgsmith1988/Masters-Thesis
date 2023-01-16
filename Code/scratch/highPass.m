@@ -1,0 +1,15 @@
+N = 4096;
+Fs = 48000; 
+% f_c = Fs/8;
+% f_c = 15;
+% r = .96; 
+% p = linearToComplex(f_c, r, Fs);
+p = .99;
+b = p*[1 -1];
+a = [1, -p];
+figure;
+zplane(b, a);
+figure;
+freqz(b, a, N, Fs);
+% yline(0);
+grid on; grid minor;

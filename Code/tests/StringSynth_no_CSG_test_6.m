@@ -24,7 +24,7 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 15; %corresponds to 15kHz on the frequency axis
+y_upperLim_kHz = 24;
 
 
 %********Test a wide vibrato********
@@ -57,10 +57,11 @@ plot(y10);
 title("Slow Wide Vibrato");
 subplot(2, 1, 2);
 plot(L);
+title("L[n]");
 
 figure;
 spectrogram(y10, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title("Slow Wide Vibrato")
 
 %********Test a narrow fast vibrato********
@@ -96,5 +97,5 @@ plot(L);
 
 figure;
 spectrogram(y11, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title("Narrow Fast Vibrato");

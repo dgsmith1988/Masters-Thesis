@@ -4,7 +4,7 @@
 % 1. generateLcurve()
 
 clear;
-close all;
+% close all;
 dbstop if error
 
 %System parameters

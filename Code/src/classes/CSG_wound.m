@@ -11,6 +11,8 @@ classdef CSG_wound < ContactSoundGenerator
         waveshaperFunctionHandle
         f_c_n
         absoluteSlideSpeed
+        
+        highPassFilter
     end
     
     methods
@@ -23,6 +25,7 @@ classdef CSG_wound < ContactSoundGenerator
             obj.stringModeFilter = LongitudinalMode(stringModeFilterSpec);
             obj.resonator = Resonator(obj.f_c_n, .99); %TODO: Change these to not be magic constants once more things come into place
             obj.waveshaperFunctionHandle = waveshaperFunctionHandle;
+            obj.highPassFilter = HighPassOnePole(.99);
         end
         
         function [outputSample, noiseSample] = tick(obj)
@@ -38,6 +41,10 @@ classdef CSG_wound < ContactSoundGenerator
             v2 = obj.resonator.tick(noiseSample);
             v2 = obj.waveshaperFunctionHandle(obj.waveshaperPreScalingGain*v2);
             v2 = obj.g_bal*v2;
+            
+            %highpass it to see if we can eliminate the issue of build up
+            %in the DWG
+%             v2 = obj.highPassFilter.tick(v2);
             
             %Scale the signal by the slide speed and output it
             obj.g_TV =.5*obj.absoluteSlideSpeed;

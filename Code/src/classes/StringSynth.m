@@ -47,7 +47,7 @@ classdef StringSynth < Controllable & AudioGenerator
             end
         end
         
-        function outputSample = tick(obj)         
+        function [outputSample, feedbackLoopOutput, CSGOutput] = tick(obj)         
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
             feedbackLoopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
@@ -55,10 +55,12 @@ classdef StringSynth < Controllable & AudioGenerator
             
             %Store this to implement the feedback on the next computation
             obj.lastOutputSample = feedbackLoopOutput + CSGOutput;
+%             obj.lastOutputSample = feedbackLoopOutput;
             
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
             outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
+%             outputSample = obj.antiAliasingFilter.tick(CSGOutput + feedbackLoopOutput);
         end
     end
 end

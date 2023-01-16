@@ -4,4 +4,7 @@ addpath(".\tests")
 addpath(genpath(".\src"))
 %Add code which came from other sources
 addpath(genpath(".\external"))
+%Add code where i figure things out it isolation
 addpath(genpath(".\scratch"))
+%Add sound examples from elsewhere
+addpath(".\sounds")

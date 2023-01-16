@@ -240,14 +240,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="493.94361"
-     inkscape:cy="560.36715"
+     inkscape:cx="164.50962"
+     inkscape:cy="641.17935"
      inkscape:document-units="mm"
-     inkscape:current-layer="g964-6-0-4"
+     inkscape:current-layer="g824"
      showgrid="false"
-     inkscape:window-width="2400"
-     inkscape:window-height="1271"
-     inkscape:window-x="2391"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1" />
   <metadata
@@ -540,15 +540,20 @@
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#181818;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <text
          id="text819"
-         y="34.181816"
-         x="14.767816"
-         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         y="32.431019"
+         x="32.517635"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:0.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"
-           y="34.181816"
-           x="14.767816"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:0.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
+           y="32.431019"
+           x="32.517635"
            id="tspan817"
-           sodipodi:role="line">Noise Pulse Train</tspan></text>
+           sodipodi:role="line">Noise Pulse/Burst</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:0.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
+           y="35.932613"
+           x="32.517635"
+           sodipodi:role="line"
+           id="tspan991">Source</tspan></text>
     </g>
     <g
        style=""
