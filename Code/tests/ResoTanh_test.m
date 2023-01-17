@@ -19,6 +19,7 @@ numSamples = round(duration_sec*Fs);
 period_samp = 0;
 T60 = SystemParams.D_string_params.T60;
 r = .99;
+preTanhGain = 7;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -40,7 +41,7 @@ y1 = zeros(1, numSamples);
 
 %Processing objects
 noisePulseTrain = NoisePulseTrain(period_samp, T60);
-resoTanh = ResoTanh(f_c(1), r);
+resoTanh = ResoTanh(f_c(1), r, preTanhGain);
 
 %Processing loop
 for n = 1:numSamples
@@ -57,11 +58,11 @@ figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
-plot((0:n-1)/Fs, f_c/1000, 'r');
-plot((0:n-1)/Fs, 2*f_c/1000, 'r');
-plot((0:n-1)/Fs, 3*f_c/1000, 'r');
-plot((0:n-1)/Fs, 4*f_c/1000, 'r');
-plot((0:n-1)/Fs, 5*f_c/1000, 'r');
-plot((0:n-1)/Fs, 6*f_c/1000, 'r');
+plot((0:n-1)/Fs, f_c/1000, ':r');
+plot((0:n-1)/Fs, 2*f_c/1000, ':r');
+plot((0:n-1)/Fs, 3*f_c/1000, ':r');
+plot((0:n-1)/Fs, 4*f_c/1000, ':r');
+plot((0:n-1)/Fs, 5*f_c/1000, ':r');
+plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
 title("ResoTanh Test");

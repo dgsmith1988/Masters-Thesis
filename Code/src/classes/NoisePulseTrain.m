@@ -1,5 +1,4 @@
 classdef NoisePulseTrain < Controllable & AudioGenerator
-    
     properties
         exponentialDecay
     end

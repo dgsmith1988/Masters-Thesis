@@ -3,17 +3,19 @@ classdef ResoTanh < HarmonicAccentuator
     %series with a tanh function
     
     properties
-        preTanhGain = 7;
+        preTanhGain
         resonator
     end
     
     methods
-        function obj = ResoTanh(f_c, r)
+        function obj = ResoTanh(f_c, r, preTanhGain)
             obj.resonator = Resonator(f_c, r);
+            obj.preTanhGain = preTanhGain;
         end
         
-        function outputSample = tick(obj, inputSample)
-            outputSample = tanh(obj.preTanhGain*obj.resonator.tick(inputSample));
+        function [outputSample, resonatorOutput] = tick(obj, inputSample)
+            resonatorOutput = obj.resonator.tick(inputSample);
+            outputSample = tanh(obj.preTanhGain*resonatorOutput);
         end
         
         function consumeControlSignal(obj, f_c_n)
