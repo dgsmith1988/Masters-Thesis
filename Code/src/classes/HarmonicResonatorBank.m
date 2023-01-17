@@ -12,11 +12,10 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
         resonator_4
         resonator_5
         resonator_6
-        lowPass
+
         %TODO: Determine the best values to tune these to through
         %measurement for each string/slide type
-        h = db2mag([0 -2.5 -5 -7.5 -10 -12.5 -15]); %this holds the different relative strengths of each harmonic
-%         h = db2mag(zeros(1, HarmonicResonatorBank.numResonators)); %this holds the different relative strengths of each harmonic
+        h = db2mag([0 -2.5 -5 -7.5 -10 -12.5]); %this holds the different relative strengths of each harmonic
     end
     
     properties(Constant)
@@ -36,7 +35,7 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
         
         function outputSample = tick(obj, inputSample)
             %Buffer to store the outputs
-            y = zeros(1, obj.numResonators+1);
+            y = zeros(1, obj.numResonators);
             
             y(1) = obj.resonator_1.tick(inputSample);
             y(2) = obj.resonator_2.tick(inputSample);
@@ -44,7 +43,6 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
             y(4) = obj.resonator_4.tick(inputSample);
             y(5) = obj.resonator_5.tick(inputSample);
             y(6) = obj.resonator_6.tick(inputSample);
-%             y(7) = obj.lowPass.passThru(0);
             
             %Apply the relative amplitdues and sum the filter outputs to
             %generate the total output
@@ -58,7 +56,6 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
             obj.resonator_4.update_f_c(4*f_c_n);
             obj.resonator_5.update_f_c(5*f_c_n);
             obj.resonator_6.update_f_c(6*f_c_n);
-%             obj.lowPass.update_f_c(6.5*f_c_n);
         end
     end
 end
