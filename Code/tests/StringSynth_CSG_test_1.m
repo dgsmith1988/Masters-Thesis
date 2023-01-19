@@ -17,7 +17,8 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 5; %corresponds to 5kHz on the frequency axis
+% y_upperLim = 5; %corresponds to 5kHz on the frequency axis
+y_upperLim = Fs/2000; %corresponds to 5kHz on the frequency axis
 
 %Generate the appropriate control signal
 startingFret = 0;
@@ -25,7 +26,7 @@ endingFret = 5;
 L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
+stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
 y1 = zeros(1, numSamples);
 feedbackLoopOutput = zeros(1, numSamples);
 CSGOutput = zeros(1, numSamples);

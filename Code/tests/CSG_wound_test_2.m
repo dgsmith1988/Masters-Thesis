@@ -15,6 +15,20 @@ n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);
 
+%Configure the noise source and harmonic accentuator
+% noiseSource = "Burst";
+noiseSource = "PulseTrain";
+% harmonicAccentuator = "HarmonicResonatorBank";
+harmonicAccentuator = "ResoTanh";
+
+%Spectrogram analysis parameters
+windowLength = 12*10^-3*Fs; %12 ms window
+window = hamming(windowLength);
+% window = rectwin(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim = 7; %corresponds to 5kHz on the frequency axis
+
 %Generate the parabolic f_c/velocity trajectory
 a = 1/.09;
 increment = .6/numSamples;
@@ -32,17 +46,9 @@ end
 %discontinuity at the beginning
 L_n_1 = L(1);
 
-%Spectrogram analysis parameters
-windowLength = 12*10^-3*Fs; %12 ms window
-window = hamming(windowLength);
-% window = rectwin(windowLength);
-overlap = .75*windowLength;
-N = 4096;
-y_upperLim = 5; %corresponds to 5kHz on the frequency axis
-
 %*****Isolate Longitudinal Mode Branch Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = 0;
 pulseTrain_TV = zeros(1, length(L));
 y4 = zeros(1, length(L));
@@ -62,11 +68,11 @@ figure;
 spectrogram(y4, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 title('Wound CSG Time-Varying Slide Velocity - Longitudinal Branch Spectrogram')
-yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
 
 %*****Isolate Resonator Branch Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = 1;
 y5 = zeros(1, length(L));
 for n = 1:length(L)
@@ -79,16 +85,24 @@ end
 
 figure;
 plot(y5);
-title("Wound CSG Time-Varying Slide Velocity - Resonator Branch Output");
+title("Wound CSG Time-Varying Slide Velocity - Harmonics Branch Output");
 
 figure;
 spectrogram(y5, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Time-Varying Slide Velocity - Resonator Branch Spectrogram')
+title('Wound CSG Time-Varying Slide Velocity - Harmonics Branch Spectrogram');
+hold on; 
+plot((0:n-1)/Fs, f_c/1000, ':r');
+plot((0:n-1)/Fs, 2*f_c/1000, ':r');
+plot((0:n-1)/Fs, 3*f_c/1000, ':r');
+plot((0:n-1)/Fs, 4*f_c/1000, ':r');
+plot((0:n-1)/Fs, 5*f_c/1000, ':r');
+plot((0:n-1)/Fs, 6*f_c/1000, ':r');
+hold off;
 
 %*****Combined Branches Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = .25; %Favor the modes to bring them out more
 y6 = zeros(1, length(L));
 for n = 1:length(L)
@@ -107,3 +121,12 @@ figure;
 spectrogram(y6, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 title('Wound CSG Time-Varying Slide Velocity - Combined Branches Spectrogram')
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
+hold on; 
+plot((0:n-1)/Fs, f_c/1000, ':r');
+plot((0:n-1)/Fs, 2*f_c/1000, ':r');
+plot((0:n-1)/Fs, 3*f_c/1000, ':r');
+plot((0:n-1)/Fs, 4*f_c/1000, ':r');
+plot((0:n-1)/Fs, 5*f_c/1000, ':r');
+plot((0:n-1)/Fs, 6*f_c/1000, ':r');
+hold off;

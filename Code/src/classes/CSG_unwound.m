@@ -11,12 +11,10 @@ classdef CSG_unwound < ContactSoundGenerator
         function obj = CSG_unwound(stringParams, L_n_1)
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             
+            %Generate the LPF coefficients and initalize the object to
+            %noise as we are going to be filtering noise.
             [b, a] = butter(1, .5);
-            %TODO: There is a larger question of is time-alignment
-            %necessary between all the different synthesizer components?
-            %We can initialize this to noise as we are filtering noise
-            z_init = Noise.tick();
-            
+            z_init = Noise.tick();           
             obj.lowPassFilter = FilterObject(b, a, z_init);
         end
         

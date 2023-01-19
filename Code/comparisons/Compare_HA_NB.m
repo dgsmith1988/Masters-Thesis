@@ -1,8 +1,8 @@
-%Compare the different harmonic accentuator methods using the noise pulse
-%train as a sound source.
+%Compare the different harmonic accentuator methods using the noise burst
+%as a sound source.
 
-close all;
-clear all;
+% close all;
+% clear all;
 
 dbstop if error;
 
@@ -23,8 +23,8 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 7; %corresponds to 5kHz on the frequency axis
-% y_upperLim = Fs/2000;
+% y_upperLim = 7; %corresponds to 5kHz on the frequency axis
+y_upperLim = Fs/2000;
 
 %Generate f_c control signal
 a = 1/.09;
@@ -33,32 +33,32 @@ x = 0:increment:.6-increment;
 f_c = 1000*(-a*(x -.3).^2 + 1);
 
 %buffers to be filled during processing loop
-npt = zeros(1, numSamples);         %noise pulse train signal
-ro_npt = zeros(1, numSamples);      %resonator output to understand processing chain
-y_npt_hrb = zeros(1, numSamples);   %resonator bank output
-y_npt_rt = zeros(1, numSamples);    %resonator->tanh output
+nb = zeros(1, numSamples);  %noise burst signal
+ro_nb = zeros(1, numSamples);  %resonator output to understand processing chain
+y_nb_hrb = zeros(1, numSamples);
+y_nb_rt = zeros(1, numSamples);
 
 %Processing/generation objects
-noisePulseTrain = NoisePulseTrain(period_samp, T60);
+noiseBurst = NoiseBurst(period_samp, T60);
 harmonicResonatorBank = HarmonicResonatorBank(f_c(1), r);
 resoTanh = ResoTanh(f_c(1), r, preTanhGain);
 
-%Processing loop
+%Processing loop for hard clipped noise pulse train
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     %generate the various stimuli first
-    noisePulseTrain.consumeControlSignal(f_c(n));
+    noiseBurst.consumeControlSignal(f_c(n));
     harmonicResonatorBank.consumeControlSignal(f_c(n));
     resoTanh.consumeControlSignal(f_c(n));
-    npt(n) = noisePulseTrain.tick();
-    y_npt_hrb(n) = harmonicResonatorBank.tick(npt(n));
-    [y_npt_rt(n), ro_npt(n)] = resoTanh.tick(npt(n));
+    nb(n) = noiseBurst.tick();
+    y_nb_hrb(n) = harmonicResonatorBank.tick(nb(n));
+    [y_nb_rt(n), ro_nb(n)] = resoTanh.tick(nb(n));
 end
 
 figure;
-spectrogram(npt, window, overlap, N, Fs, "yaxis");  
+spectrogram(nb, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
 plot((0:n-1)/Fs, f_c/1000, ':r');
@@ -68,10 +68,10 @@ plot((0:n-1)/Fs, 4*f_c/1000, ':r');
 plot((0:n-1)/Fs, 5*f_c/1000, ':r');
 plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("NPT Source");
+title("NB Source");
 
 figure;
-spectrogram(ro_npt, window, overlap, N, Fs, "yaxis");  
+spectrogram(ro_nb, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
 plot((0:n-1)/Fs, f_c/1000, ':r');
@@ -81,10 +81,10 @@ plot((0:n-1)/Fs, 4*f_c/1000, ':r');
 plot((0:n-1)/Fs, 5*f_c/1000, ':r');
 plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("RO Intermediate-NPT Test");
+title("RO Intermediate-NB Test");
 
 figure;
-spectrogram(y_npt_hrb, window, overlap, N, Fs, "yaxis");  
+spectrogram(y_nb_hrb, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
 plot((0:n-1)/Fs, f_c/1000, ':r');
@@ -94,10 +94,10 @@ plot((0:n-1)/Fs, 4*f_c/1000, ':r');
 plot((0:n-1)/Fs, 5*f_c/1000, ':r');
 plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("HR-NPT Test");
+title("HR-NB Test");
 
 figure;
-spectrogram(y_npt_rt, window, overlap, N, Fs, "yaxis");  
+spectrogram(y_nb_rt, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
 plot((0:n-1)/Fs, f_c/1000, ':r');
@@ -107,4 +107,12 @@ plot((0:n-1)/Fs, 4*f_c/1000, ':r');
 plot((0:n-1)/Fs, 5*f_c/1000, ':r');
 plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("RT-NPT Test");
+title("RT-NB Test");
+
+figure;
+subplot(2, 1, 1);
+plot(0:numSamples-1, y_nb_hrb);
+title("Noise Burst Through Harmonic Resonator Bank");
+subplot(2, 1, 2);
+plot(0:numSamples-1, y_nb_rt);
+title("Noise Burst Through ResoTanh");

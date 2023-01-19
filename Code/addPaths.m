@@ -8,3 +8,5 @@ addpath(genpath(".\external"))
 addpath(genpath(".\scratch"))
 %Add sound examples from elsewhere
 addpath(".\sounds")
+%Add directory where comparisons are generated
+addpath(".\comparisons")

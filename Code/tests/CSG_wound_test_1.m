@@ -17,6 +17,10 @@ stringModeFilterSpec = SystemParams.D_string_modes.chrome;
 n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);
+% noiseSource = "Burst";
+noiseSource = "PulseTrain";
+harmonicAccentuator = "HarmonicResonatorBank";
+% harmonicAccentuator = "ResoTanh";
 
 %Keep the f_c constant for now to simplify the tests
 f_c = 250*ones(1, numSamples);
@@ -42,7 +46,7 @@ y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
 %*****Isolate Longitudinal Mode Branch Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = 0;  %shift the balance to only select the longitudinal modes
 y1 = zeros(1, length(L));
 noiseTrainPulse = zeros(1, length(L));
@@ -62,12 +66,10 @@ figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 title('Wound CSG Longitudinal Branch Output Spectrogram')
-hold on;
-yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
-hold off;
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
 
 %*****Resonator Branch Test*****
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = 1;  %shift the balance to only select the resonator branch
 y2 = zeros(1, length(L));
 for n = 1:length(L)
@@ -85,11 +87,11 @@ title("Wound CSG Resonator Branch Test Output");
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Resonator Branch Output Spectrogram')
-yline(f_c(1)/1000, 'r');
+title('Wound CSG Harmonics Branch Output Spectrogram')
+yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
 
-%*****Longitudinal + Resonator Branch Test*****
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
+%*****Longitudinal + Harmonics Branch Test*****
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
 csg_wound.g_bal = .25;  %favor the modes to bring them out more
 y3 = zeros(1, length(L));
 for n = 1:length(L)
@@ -108,4 +110,8 @@ figure;
 spectrogram(y3, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 title('Wound CSG Combined Branches Output Spectrogram')
-yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, 'r');
+yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
+yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
+
+
+yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--r');

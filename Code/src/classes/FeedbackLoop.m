@@ -15,14 +15,17 @@ classdef FeedbackLoop < Controllable & AudioGenerator
     end
     
     methods
-        function obj = FeedbackLoop(stringParams, L_0)
+        function obj = FeedbackLoop(stringParams, L_init)
+            %L_init is the string length the system starts at as at each
+            %time sample (including n = 0) a value for L[n] will be passed
+            %into the larger synthesis context
             obj.g_c_n = 1;
             obj.openString_f0 = stringParams.f0;
-            obj.pitch_f0 = calculatePitchF0(L_0, obj.openString_f0);
+            obj.pitch_f0 = calculatePitchF0(L_init, obj.openString_f0);
             obj.DWGLength = calculateTotalDWGLength(obj.pitch_f0, SystemParams.audioRate);
             
             %Construct/update the processing objects based on the parameters
-            obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_0);
+            obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_init);
             obj.interpolatedDelayLine = Lagrange(SystemParams.lagrangeOrder, obj.DWGLength);
             obj.energyScaler = EnergyScaler(obj.DWGLength);
         end

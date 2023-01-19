@@ -30,7 +30,6 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
             obj.resonator_4 = Resonator(f_c, r);
             obj.resonator_5 = Resonator(f_c, r);
             obj.resonator_6 = Resonator(f_c, r);
-            obj.lowPass = LowPass(f_c);
         end
         
         function outputSample = tick(obj, inputSample)

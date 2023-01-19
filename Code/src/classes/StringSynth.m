@@ -10,7 +10,7 @@ classdef StringSynth < Controllable & AudioGenerator
     end
     
     methods
-        function obj = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0)
+        function obj = StringSynth(stringParams, stringModeFilterSpec, L_0)
             %Initialize the member variables
             obj.L_n_1 = L_0;
             obj.lastOutputSample = 0;
@@ -22,7 +22,7 @@ classdef StringSynth < Controllable & AudioGenerator
             %a wound string or not. Dummy one is used to test the string
             %model without friction sounds.
             if(stringParams.n_w > 0)
-                obj.contactSoundGenerator = CSG_wound(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L_0);                
+                obj.contactSoundGenerator = CSG_wound(stringParams, stringModeFilterSpec, "PulseTrain", "ResoTanh", L_0);                
             elseif(stringParams.n_w == 0)
                 obj.contactSoundGenerator = CSG_unwound(stringParams, L_0);
             else
