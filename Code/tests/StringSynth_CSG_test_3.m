@@ -1,4 +1,4 @@
-%Test the string synth patch for various sliding up 3 fret over one
+%Test the slide synth patch for various sliding up 3 fret over one
 %second and reverse
 
 clear;
@@ -13,7 +13,6 @@ Fs = SystemParams.audioRate;
 numSamples = soundDuration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
-stringParams.n_w = -1; %indicate that we don't use a CSG
 stringModeFilterSpec = SystemParams.D_string_modes.chrome;
 
 %Spectrogram analysis parameters

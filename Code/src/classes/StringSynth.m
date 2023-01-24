@@ -5,7 +5,7 @@ classdef StringSynth < Controllable & AudioGenerator
         feedbackLoop            %feedback loop which contains elements to implement string DWG
         contactSoundGenerator   %unit adding slide/string contact noise
         antiAliasingFilter      %what's in a name?
-        lastOutputSample        %last output sample to implement feedback
+        lastFeedbackSample      %last output sample to implement feedback
         L_n_1                   %previous L_n value
     end
     
@@ -13,7 +13,7 @@ classdef StringSynth < Controllable & AudioGenerator
         function obj = StringSynth(stringParams, stringModeFilterSpec, L_0)
             %Initialize the member variables
             obj.L_n_1 = L_0;
-            obj.lastOutputSample = 0;
+            obj.lastFeedbackSample = 0;
             
             %Instaniate the different processing objects
             obj.feedbackLoop = FeedbackLoop(stringParams, L_0);
@@ -39,28 +39,26 @@ classdef StringSynth < Controllable & AudioGenerator
         end
         
         function consumeControlSignal(obj, L_n)
-            if(L_n ~= obj.L_n_1)
+%             if(L_n ~= obj.L_n_1)
                 %Update the various system parameters
                 obj.feedbackLoop.consumeControlSignal(L_n);
                 obj.contactSoundGenerator.consumeControlSignal(L_n);
                 obj.L_n_1 = L_n;
-            end
+%             end
         end
         
         function [outputSample, feedbackLoopOutput, CSGOutput] = tick(obj)         
             %TODO:Add a block to scale the noise and generate plucks at a
             %specified scale? Well in a more controlled manner...
-            feedbackLoopOutput = obj.feedbackLoop.tick(obj.lastOutputSample);
+            feedbackLoopOutput = obj.feedbackLoop.tick(obj.lastFeedbackSample);
             CSGOutput = obj.contactSoundGenerator.tick();
             
             %Store this to implement the feedback on the next computation
-            obj.lastOutputSample = feedbackLoopOutput + CSGOutput;
-%             obj.lastOutputSample = feedbackLoopOutput;
+            obj.lastFeedbackSample = feedbackLoopOutput;
             
             %Filter the output before sending it out incase aliasing
             %occured when the delay-line length changed
-            outputSample = obj.antiAliasingFilter.tick(obj.lastOutputSample);
-%             outputSample = obj.antiAliasingFilter.tick(CSGOutput + feedbackLoopOutput);
+            outputSample = obj.antiAliasingFilter.tick(feedbackLoopOutput + CSGOutput);
         end
     end
 end

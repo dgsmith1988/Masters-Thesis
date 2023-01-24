@@ -82,9 +82,10 @@ classdef SystemParams
         maxFretNumber = relativeLengthToFretNumber(SystemParams.minRelativeStringLength);
         
         minString_f0 = 65.41;  %Corresponds to C2 to support open C tuning
+%         minString_f0 = 82.41;  %Corresponds to E2 which is lowest note in standard tuning
         maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altered tunings
         
-        minPitch_f0 = SystemParams.minString_f0/SystemParams.maxRelativeStringLength;   %Corresponds to lowest note possible
+        minPitch_f0 = SystemParams.minString_f0/SystemParams.maxRelativeStringLength;  %Corresponds to lowest note possible
         maxPitch_f0 = SystemParams.maxString_f0/SystemParams.minRelativeStringLength   %Corresponds to higest note possible
         
         maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minPitch_f0);  %Delay line length associated with lowest pitch

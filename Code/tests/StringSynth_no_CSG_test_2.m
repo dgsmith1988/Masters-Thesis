@@ -11,10 +11,8 @@ Fs = SystemParams.audioRate;
 numSamples = duration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
-n_w = stringParams.n_w; %extract the parameter before we overwrite it
 stringParams.n_w = -1; %indicate that we don't use a CSG
 stringModeFilterSpec = SystemParams.D_string_modes.chrome;
-waveshaperFunctionHandle = @tanh;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -22,8 +20,7 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 15; %corresponds to 15kHz on the frequency axis
-
+y_upperLim = Fs/2000; %corresponds to 15kHz on the frequency axis
 
 %********Test down 1 fret over three seconds********
 
@@ -33,7 +30,7 @@ endingFret = 1;
 L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
+stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
 y2 = zeros(1, numSamples);
 
 %Processing loop
@@ -66,7 +63,7 @@ endingFret = 0;
 L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
+stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
 y3 = zeros(1, numSamples);
 
 %Processing loop

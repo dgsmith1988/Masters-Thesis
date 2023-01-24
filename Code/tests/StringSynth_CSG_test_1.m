@@ -9,7 +9,6 @@ numSamples = duration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
 stringModeFilterSpec = SystemParams.D_string_modes.chrome;
-waveshaperFunctionHandle = @tanh;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -62,4 +61,4 @@ title("absoluteSlideSpeed[n]");
 
 figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");
-% ylim([0 y_upperLim]);
+ylim([0 y_upperLim]);

@@ -1,9 +1,4 @@
-classdef FeedbackLoop < Controllable & AudioGenerator
-    %Class to encapsulate the various processing elements in the feedback
-    %loop to make it eaiser to debug and understand things. It is like the
-    %String DWG minus the feedback connection which causes the reflection
-    %essentially.
-      
+classdef StringDWG < Controllable & AudioGenerator     
     properties
         openString_f0           %open string fundamental frequency in Hz
         pitch_f0                %selected pitch based on relative string length        
@@ -12,11 +7,11 @@ classdef FeedbackLoop < Controllable & AudioGenerator
         interpolatedDelayLine   %delay line which allows for fractional delay components
         energyScaler            %calculates compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
-        dcBlocker               %make sure no unwanted energy gets into the DWG
+        y_n_1 = 0               %last output sample to implement feedback
     end
     
     methods
-        function obj = FeedbackLoop(stringParams, L_init)
+        function obj = StringDWG(stringParams, L_init)
             %L_init is the string length the system starts at as at each
             %time sample (including n = 0) a value for L[n] will be passed
             %into the larger synthesis context
@@ -29,15 +24,21 @@ classdef FeedbackLoop < Controllable & AudioGenerator
             obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_init);
             obj.interpolatedDelayLine = Lagrange(SystemParams.lagrangeOrder, obj.DWGLength);
             obj.energyScaler = EnergyScaler(obj.DWGLength);
-            obj.dcBlocker = DCBlocker(.995);
         end
         
-        function outputSample = tick(obj, feedbackSample)
+        function y_n = tick(obj, x_n)
+            %See signal flow diagram for signal names.
+            
+            %Implement the feedback
+            v_n = obj.y_n_1 + x_n;
+            
             %Run through all the various processing objects to generate the
-            %next sample
-            dcBlockerOut = obj.dcBlocker.passThru(feedbackSample);
-            interpDelayOut = obj.interpolatedDelayLine.tick(dcBlockerOut);
-            outputSample = obj.loopFilter.tick(obj.g_c_n*interpDelayOut);
+            %next sample.
+            interpDelayOut = obj.interpolatedDelayLine.tick(v_n);
+            y_n = obj.loopFilter.tick(obj.g_c_n*interpDelayOut);
+            
+            %Store the output for the next iteration
+            obj.y_n_1 = y_n;
         end
         
         function consumeControlSignal(obj, L_n)
@@ -53,7 +54,7 @@ classdef FeedbackLoop < Controllable & AudioGenerator
             obj.loopFilter.consumeControlSignal(L_n);
         end
         
-        function initializeDelayLine(obj)
+        function pluck(obj)
             %TODO: Examine how different types of noise/exictations could
             %be used here to make the string sound better
             

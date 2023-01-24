@@ -13,7 +13,6 @@ Fs = SystemParams.audioRate;
 numSamples = soundDuration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.A_string_params;
-stringParams.n_w = -1;                      %indicate that we don't use a CSG
 stringParams.f0 = SystemParams.minPitch_f0; %change the fundamental to the lowest one possible
 %Deteremine the L to achieve the highest pitch for this string
 L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, stringParams.f0);

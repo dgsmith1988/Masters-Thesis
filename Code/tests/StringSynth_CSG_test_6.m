@@ -11,8 +11,7 @@ staticDuration_sec = soundDuration_sec - slideDuration_sec;
 Fs = SystemParams.audioRate;
 numSamples = soundDuration_sec * Fs;
 stringLength = SystemParams.stringLengthMeters;
-stringParams = SystemParams.e_string_params;
-stringParams.n_w = -1;                      %indicate that we don't use a CSG
+stringParams = SystemParams.A_string_params;
 %Deteremine the L to achieve the highest pitch for this string
 L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, stringParams.f0);
 stringModeFilterSpec = SystemParams.A_string_modes.chrome;
