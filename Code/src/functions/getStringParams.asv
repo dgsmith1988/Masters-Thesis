@@ -1,0 +1,14 @@
+function stringParams = getStringParams(stringName)
+    switch stringName
+        case "E"
+        case "A"
+        case "D"
+        case "G"
+        case "B"
+        case "e"
+        
+        otherwise
+            error("Invalid stringName ");
+    end
+end
+

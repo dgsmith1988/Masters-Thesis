@@ -1,4 +1,4 @@
-%Test the string synth patch for various sliding up 3 fret over one
+%Test the string synth patch for various sliding up 5 fret over half a
 %second and reverse
 
 clear;
@@ -7,7 +7,7 @@ dbstop if error
 
 %System processing parameters
 soundDuration_sec = 3;
-slideDuration_sec = 1;
+slideDuration_sec = .5;
 staticDuration_sec = soundDuration_sec - slideDuration_sec;
 Fs = SystemParams.audioRate;
 numSamples = soundDuration_sec * Fs;
@@ -29,66 +29,66 @@ y_upperLim = Fs/2000; %corresponds to 15kHz on the frequency axis
 
 %Generate the appropriate control signal
 startingFret = 0;
-endingFret = 3;
+endingFret = 5;
 L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
-y4 = zeros(1, numSamples);
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
+y6 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    y4(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y6(n) = slideSynth.tick();
 end
 
 figure;
 subplot(2, 1, 1)
-plot(y4);
+plot(y6);
 title("Upwards bend");
 subplot(2, 1, 2);
 plot(L);
 
 figure;
-spectrogram(y4, window, overlap, N, Fs, "yaxis");  
+spectrogram(y6, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Medium Upward Bend Spectrogram')
+title('Fast Upward Bend Spectrogram')
 
 %********Test Down 1 Fret over three seconds********
 
 %Generate the appropriate control signal
-startingFret = 3;
+startingFret = 5;
 endingFret = 0;
 L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
-y5 = zeros(1, numSamples);
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
+y7 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    y5(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y7(n) = slideSynth.tick();
 end
 
 figure;
 subplot(2, 1, 1)
-plot(y5);
+plot(y7);
 title("Downwards Slide");
 subplot(2, 1, 2);
 plot(L);
 
 figure;
-spectrogram(y5, window, overlap, N, Fs, "yaxis");  
+spectrogram(y7, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Medium Downward Slide Spectrogram')
+title('Fast Downward Slide Spectrogram')

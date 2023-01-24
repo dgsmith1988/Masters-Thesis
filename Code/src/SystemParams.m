@@ -4,11 +4,7 @@ classdef SystemParams
     
     properties(Constant)
         audioRate = 48000;
-%         audioRate = 8000;
-%         controlRate = 500;
-        controlRate = 1000;
-%         controlRate = 8000;
-%         controlRate = SystemParams.audioRate;
+        controlRate = 1000; %Not used in actual system, only in explorations
 
         %Although this code is syntactically atrocious it seems to be the
         %best approach given how Matlab implements constants
@@ -53,8 +49,6 @@ classdef SystemParams
                 -28.9746725110396));                                                    %dB attenuation        
         
         %Numbers taken from the patch in Appendix B of the master's thesis
-        %TODO: Revamp and potentially extend these parameters later
-        %TODO: Change these to match the new constructor
         E_string_params = StringParams(6, 82.41, 2000, 15*10^-3, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol

@@ -54,19 +54,14 @@ classdef StringDWG < Controllable & AudioGenerator
             obj.loopFilter.consumeControlSignal(L_n);
         end
         
-        function pluck(obj)
-            %TODO: Examine how different types of noise/exictations could
-            %be used here to make the string sound better
-            
-            bufferLength = obj.interpolatedDelayLine.getBufferLength;
+        function pluck(obj)           
+%             bufferLength = obj.interpolatedDelayLine.getBufferLength;
 %             bufferData = 1 - 2*rand(1, bufferLength);
-            bufferData = pinknoise(1, bufferLength);
-            
-            %normalize the data and remove the DC bias
-            bufferData = bufferData / max(abs(bufferData));
-%             bufferData = highpass(bufferData, 200, SystemParams.audioRate, Steepness=.99, StopBandAttenuation=80);
-%             bufferData = bufferData - mean(bufferData);
-%             bufferData = obj.dcBlocker.tick(bufferData);
+%             bufferData = pinknoise(1, bufferLength);
+            %normalize the data
+%             bufferData = bufferData / max(abs(bufferData));
+            bufferData = audioread("sounds\pinkNoise.wav");
+%             bufferData = audioread("sounds\whiteNoise.wav");
             obj.interpolatedDelayLine.initializeDelayLine(bufferData);
         end
     end

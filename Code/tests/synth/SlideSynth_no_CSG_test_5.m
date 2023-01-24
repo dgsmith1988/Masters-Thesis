@@ -36,19 +36,19 @@ L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
 y8 = zeros(1, numSamples);
 g_c_8 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    g_c_8(n) = stringSynth.feedbackLoop.g_c_n;
-    y8(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    g_c_8(n) = slideSynth.stringDWG.g_c_n;
+    y8(n) = slideSynth.tick();
 end
 
 figure;
@@ -74,19 +74,19 @@ L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
 y9 = zeros(1, numSamples);
 g_c_9 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    g_c_9(n) = stringSynth.feedbackLoop.g_c_n;
-    y9(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    g_c_9(n) = slideSynth.stringDWG.g_c_n;
+    y9(n) = slideSynth.tick();
 end
 
 figure;

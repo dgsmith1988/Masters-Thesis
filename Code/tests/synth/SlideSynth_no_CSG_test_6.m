@@ -25,7 +25,6 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim_kHz = Fs/2000;
 
-
 %********Test a wide vibrato********
 %All the vibrato terms are in frets which are then mapped to the relative
 %string length
@@ -37,17 +36,17 @@ fretTrajectory = vibratoWidth*sin(2*pi*vibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
 y10 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    y10(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y10(n) = slideSynth.tick();
 end
 
 figure;
@@ -74,17 +73,17 @@ fretTrajectory = vibratoWidth*sin(2*pi*vibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(stringParams, stringModeFilterSpec, L(1));
 y11 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    stringSynth.consumeControlSignal(L(n))
-    y11(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y11(n) = slideSynth.tick();
 end
 
 figure;
