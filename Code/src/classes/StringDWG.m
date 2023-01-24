@@ -1,17 +1,19 @@
-classdef StringDWG < Controllable & AudioGenerator     
+classdef StringDWG < Controllable & AudioGenerator
     properties
         openString_f0           %open string fundamental frequency in Hz
-        pitch_f0                %selected pitch based on relative string length        
+        pitch_f0                %selected pitch based on relative string length
         g_c_n                   %compensation coefficient
         DWGLength               %current DWG length in samples
         interpolatedDelayLine   %delay line which allows for fractional delay components
         energyScaler            %calculates compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
         y_n_1 = 0               %last output sample to implement feedback
+        noiseType               %what type of noise to put in the initial buffer
+        useNoiseFile            %flag indicating whether to generate the data or load it from a file
     end
     
     methods
-        function obj = StringDWG(stringParams, L_init)
+        function obj = StringDWG(stringParams, L_init, noiseType, useNoiseFile)
             %L_init is the string length the system starts at as at each
             %time sample (including n = 0) a value for L[n] will be passed
             %into the larger synthesis context
@@ -24,6 +26,10 @@ classdef StringDWG < Controllable & AudioGenerator
             obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_init);
             obj.interpolatedDelayLine = Lagrange(SystemParams.lagrangeOrder, obj.DWGLength);
             obj.energyScaler = EnergyScaler(obj.DWGLength);
+            
+            %Save the flags which configure the generated sound
+            obj.noiseType = noiseType;
+            obj.useNoiseFile = useNoiseFile;
         end
         
         function y_n = tick(obj, x_n)
@@ -50,18 +56,35 @@ classdef StringDWG < Controllable & AudioGenerator
             %Update the different processing objects based on the new
             %derived parameters
             obj.g_c_n = obj.energyScaler.tick(obj.DWGLength);
-            obj.interpolatedDelayLine.setDelay(delayLineLength);           
+            obj.interpolatedDelayLine.setDelay(delayLineLength);
             obj.loopFilter.consumeControlSignal(L_n);
         end
         
-        function pluck(obj)           
-%             bufferLength = obj.interpolatedDelayLine.getBufferLength;
-%             bufferData = 1 - 2*rand(1, bufferLength);
-%             bufferData = pinknoise(1, bufferLength);
-            %normalize the data
-%             bufferData = bufferData / max(abs(bufferData));
-            bufferData = audioread("sounds\pinkNoise.wav");
-%             bufferData = audioread("sounds\whiteNoise.wav");
+        function pluck(obj)
+            bufferData = [];
+            bufferLength = obj.interpolatedDelayLine.getBufferLength;
+            
+            switch obj.noiseType
+                case "Pink"
+                    if obj.useNoiseFile
+                        bufferData = audioread("sounds\whiteNoise.wav");
+                    else
+                        bufferData = 1 - 2*rand(1, bufferLength);
+                    end
+                case "White"
+                    if obj.useNoiseFile
+                        bufferData = audioread("sounds\pinkNoise.wav");
+                    else
+                        bufferData = pinknoise(1, bufferLength);
+                    end
+            end
+            
+            %normalize the generated data to make the synthesized signal stronger
+            if ~obj.useNoiseFile
+                bufferData = bufferData / max(abs(bufferData));
+            end
+            
+            %put that baby in the delay line!           
             obj.interpolatedDelayLine.initializeDelayLine(bufferData);
         end
     end

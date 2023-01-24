@@ -1,105 +1,101 @@
-%Test the string synth patch for the extreme values defined in the system
-%parameters file
+%Test the slide synth patch for extreme string length settings
 
-clear all;
+clear;
 close all;
 dbstop if error
 
-%System processing parameters
+%Synthsizer and sound parameters
+slideSynthParams = SlideSynthParams();
+slideSynthParams.enableCSG = false;
+slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
+slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
+slideSynthParams.stringNoiseSource = "Pink";
+slideSynthParams.useNoiseFile = true;
+slideSynthParams.slideType = "Brass";
+%This test requires a special string, otherwise delay line values get
+%messed up
+slideSynthParams.stringName = "C"; 
+
+%Slide motion parameters
 soundDuration_sec = 3;
-slideDuration_sec = 3;
-staticDuration_sec = soundDuration_sec - slideDuration_sec;
-Fs = SystemParams.audioRate;
-numSamples = soundDuration_sec * Fs;
-stringLength = SystemParams.stringLengthMeters;
-stringParams = SystemParams.A_string_params;
-stringParams.f0 = SystemParams.minPitch_f0; %change the fundamental to the lowest one possible
-%Deteremine the L to achieve the highest pitch for this string
-L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, stringParams.f0);
-stringModeFilterSpec = SystemParams.A_string_modes.chrome;
+slideDuration_sec = soundDuration_sec;
+lowerFret = SystemParams.minFretNumber;
+% L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, SystemParams.E_string_params.f0); 
+L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, SystemParams.minString_f0); 
+higherFret = relativeLengthToFretNumber(L_max_pitch);
 
 %Spectrogram analysis parameters
+Fs = SystemParams.audioRate;
 windowLength = 12*10^-3*Fs; %12 ms window
 window = hamming(windowLength);
-% window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
 y_upperLim_kHz = Fs/2000;
 
-
-%********Test extreme slide up********
-%Generate the appropriate control signal
-startingFret = 0;
-endingFret = relativeLengthToFretNumber(L_max_pitch);
-L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
+%********Test 3 frets up over three seconds********
+%Generate derived parameters/control signal
+numSamples = soundDuration_sec * Fs;
+staticDuration_sec = soundDuration_sec - slideDuration_sec;
+L = generateLCurve(lowerFret, higherFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
+M = 8;
+L = filter(1/M *ones(1, M), 1, L, L(1)*ones(1, M-1));
+L(L > 1) = 1;
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(slideSynthParams, L(1));
 y8 = zeros(1, numSamples);
-g_c_8 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, numSamples);
+        fprintf("n = %i/%i\n", n, length(L));
     end
-    stringSynth.consumeControlSignal(L(n))
-    g_c_8(n) = stringSynth.feedbackLoop.g_c_n;
-    y8(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y8(n) = slideSynth.tick();
 end
 
 figure;
-subplot(3, 1, 1)
+subplot(2, 1, 1)
 plot(y8);
-title("Extreme Upwards bend");
-subplot(3, 1, 2);
+title("Upwards bend");
+subplot(2, 1, 2);
 plot(L);
-subplot(3, 1, 3);
-plot(g_c_8);
-title("g_c[n]");
 
 figure;
 spectrogram(y8, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
-title('Extreme Upward Bend Spectrogram')
+title('Medium Upward Bend Spectrogram')
 
-%********Run the test in reverse********
+%********Test up 3 frets over three seconds********
+
 %Generate the appropriate control signal
-startingFret = relativeLengthToFretNumber(L_max_pitch);
-endingFret = 0;
-L = generateLCurve(startingFret, endingFret, slideDuration_sec, Fs);
+L = generateLCurve(higherFret, lowerFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(slideSynthParams, L(1));
 y9 = zeros(1, numSamples);
-g_c_9 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, numSamples);
+        fprintf("n = %i/%i\n", n, length(L));
     end
-    stringSynth.consumeControlSignal(L(n))
-    g_c_9(n) = stringSynth.feedbackLoop.g_c_n;
-    y9(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y9(n) = slideSynth.tick();
 end
 
 figure;
-subplot(3, 1, 1)
+subplot(2, 1, 1)
 plot(y9);
-title("Extreme Downwards Slide");
-subplot(3, 1, 2);
+title("Downwards Slide");
+subplot(2, 1, 2);
 plot(L);
-title("L[n]");
-subplot(3, 1, 3);
-plot(g_c_9);
-title("g_c[n]");
 
 figure;
 spectrogram(y9, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
-title('Extreme Downward Slide Spectrogram')
+title('Medium Downward Slide Spectrogram')

@@ -6,16 +6,18 @@ function filterSpec = getModeFilterSpec(stringName, slideType)
             stringModes = SystemParams.A_string_modes;
         case "D"
             stringModes = SystemParams.D_string_modes;
+        case "C"
+            stringModes = SystemParams.E_string_modes;
         otherwise
             error("Invalid stringName passed. Only pass wound strings.");
     end
     
     switch slideType
-        case "brass"
+        case "Brass"
             filterSpec = stringModes.brass;
-        case "chrome"
+        case "Chrome"
             filterSpec = stringModes.chrome;
-        case "glass"
+        case "Glass"
             filterSpec = stringModes.glass;
         otherwise
             error("Invalid slide type passed. Use chrome, glass or brass.");

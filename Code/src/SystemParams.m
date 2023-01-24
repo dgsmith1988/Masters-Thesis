@@ -49,6 +49,9 @@ classdef SystemParams
                 -28.9746725110396));                                                    %dB attenuation        
         
         %Numbers taken from the patch in Appendix B of the master's thesis
+        C_string_params = StringParams(7, 65.41, 1400, 17*10^-3, ...
+            [-0.08135045114297, -0.00085796015850],...  %a_pol
+            [0.97816203269973 , 0.00061375406757]);     %g_pol
         E_string_params = StringParams(6, 82.41, 2000, 15*10^-3, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol
@@ -80,7 +83,7 @@ classdef SystemParams
         maxString_f0 = 329.63; %Corresponds to E4 as the highest string is never raised in altered tunings
         
         minPitch_f0 = SystemParams.minString_f0/SystemParams.maxRelativeStringLength;  %Corresponds to lowest note possible
-        maxPitch_f0 = SystemParams.maxString_f0/SystemParams.minRelativeStringLength   %Corresponds to higest note possible
+        maxPitch_f0 = SystemParams.maxString_f0/SystemParams.minRelativeStringLength;  %Corresponds to higest note possible
         
         maxDelayLineLength = ceil(SystemParams.audioRate/SystemParams.minPitch_f0);  %Delay line length associated with lowest pitch
         minDelayLineLength = floor(SystemParams.audioRate/SystemParams.maxPitch_f0); %Delay line length associated with highest pitch

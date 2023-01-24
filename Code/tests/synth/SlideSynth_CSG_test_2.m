@@ -5,42 +5,46 @@ clear;
 close all;
 dbstop if error
 
-%System processing parameters
+%Synthsizer and sound parameters
+slideSynthParams = SlideSynthParams();
+slideSynthParams.enableCSG = true;
+slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
+slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
+slideSynthParams.stringNoiseSource = "Pink";
+slideSynthParams.useNoiseFile = true;
+slideSynthParams.slideType = "Brass";
+slideSynthParams.stringName = "D";
 duration_sec = 3;
-Fs = SystemParams.audioRate;
-numSamples = duration_sec * Fs;
-stringLength = SystemParams.stringLengthMeters;
-stringParams = SystemParams.D_string_params;
-stringModeFilterSpec = SystemParams.D_string_modes.chrome;
 
-%Spectrogram analysis parameters
-windowLength = 12*10^-3*Fs; %12 ms window
-window = hamming(windowLength);
-% window = rectwin(windowLength);
-overlap = .75*windowLength;
-N = 4096;
-y_upperLim = Fs/2000; %corresponds to 15kHz on the frequency axis
-
-
-%********Test down 1 fret over three seconds********
-
-%Generate the appropriate control signal
+%Slide motion parameters
 startingFret = 0;
 endingFret = 1;
+
+%Spectrogram analysis parameters
+Fs = SystemParams.audioRate;
+windowLength = 12*10^-3*Fs; %12 ms window
+window = hamming(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim_kHz = Fs/2000;
+
+%********Test down 1 fret over three seconds********
+%Derived parameters/control signal
+numSamples = duration_sec * Fs;
 L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+slideSynth = SlideSynth(slideSynthParams, L(1));
 y2 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    stringSynth.consumeControlSignal(L(n))
-    y2(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y2(n) = slideSynth.tick();
 end
 
 figure;
@@ -52,28 +56,30 @@ plot(L);
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title('Slow Upward Bend Spectrogram')
 
 %********Test Down 1 Fret over three seconds********
-
-%Generate the appropriate control signal
-startingFret = 1;
-endingFret = 0;
+%Swap the start/end points and start again
+temp = startingFret;
+startingFret = endingFret;
+endingFret = temp;
 L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 
-%Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, L(1));
+%Processing object initialization
+slideSynth = SlideSynth(slideSynthParams, L(1));
+
+%Output buffers
 y3 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate sound...
+slideSynth.pluck(); %Set up the string to generate sound...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    stringSynth.consumeControlSignal(L(n))
-    y3(n) = stringSynth.tick();
+    slideSynth.consumeControlSignal(L(n))
+    y3(n) = slideSynth.tick();
 end
 
 figure;
@@ -85,5 +91,5 @@ plot(L);
 
 figure;
 spectrogram(y3, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim]);
+ylim([0 y_upperLim_kHz]);
 title('Slow Downward Slide Spectrogram')

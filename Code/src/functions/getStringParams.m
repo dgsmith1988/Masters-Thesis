@@ -12,6 +12,8 @@ function stringParams = getStringParams(stringName)
             stringParams = SystemParams.B_string_params;
         case "e"
             stringParams = SystemParams.e_string_params;
+        case "C"
+            stringParams = SystemParams.C_string_params;
         otherwise
             error("Invalid stringName passed");
     end
