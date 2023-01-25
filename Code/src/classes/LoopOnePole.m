@@ -23,10 +23,10 @@ classdef LoopOnePole < LoopFilter & FilterObject
        
     methods
         function obj = LoopOnePole(a_pol, g_pol, L_n)
-            %L = relative string length
-            %as we only have one pole there is only one delay element to
-            %contend with
-            obj@FilterObject(0, 0, 1);
+            %initialize everything in the parent to zero to keep matlab
+            %happy. in the call to consumeControlSignal() the coefficients
+            %will be generated.
+            obj@FilterObject(0, 0, 0);
             obj.a_pol = a_pol;
             obj.g_pol = g_pol;
             obj.consumeControlSignal(L_n);
