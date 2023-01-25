@@ -32,8 +32,9 @@ classdef StringDWG < Controllable & AudioGenerator
             obj.useNoiseFile = useNoiseFile;
         end
         
-        function [y_n, interpDelayOut] = tick(obj, x_n)
+        function [y_n, interpDelayOut, loopFilterOut] = tick(obj, x_n)
             %See signal flow diagram for signal names.
+            %https://github.com/dgsmith1988/Masters-Thesis/blob/main/LaTeX/Thesis/images/diagrams/StringDWG.svg
             
             %Implement the feedback loop
             interpDelayOut = obj.interpolatedDelayLine.tick(obj.y_n_1);

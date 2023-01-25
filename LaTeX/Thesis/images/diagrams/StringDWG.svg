@@ -426,9 +426,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="624.18454"
-     inkscape:cy="478.78532"
+     inkscape:zoom="1"
+     inkscape:cx="679.23096"
+     inkscape:cy="570.19929"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -716,33 +716,6 @@
          y="255.17191"
          style="stroke-width:0.26458332"
          id="tspan4809">Note: L[n] not depicted as everything consumes it in a way.</tspan></text>
-    <g
-       transform="rotate(90,56.934123,123.50802)"
-       id="g1010-2">
-      <text
-         id="text1001-7"
-         y="52.481255"
-         x="163.65834"
-         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           style="font-size:7.76111126px;stroke-width:0.26458332"
-           y="52.481255"
-           x="163.65834"
-           id="tspan999-6"
-           sodipodi:role="line">+</tspan></text>
-      <circle
-         r="3.4745038"
-         cy="50.048328"
-         cx="166.90982"
-         id="path1003-9"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke" />
-    </g>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1593-1-6-4)"
-       d="m 133.96994,233.48371 h 24.17993"
-       id="path1583-2-1-5"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <rect
        style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:0.26499999, 0.52999997;stroke-dashoffset:0;stroke-opacity:1"
        id="rect1987"
