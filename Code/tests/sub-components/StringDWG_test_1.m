@@ -5,7 +5,7 @@ clear all;
 dbstop if error
 
 %System processing parameters
-stringParams = SystemParams.A_string_params;
+stringParams = SystemParams.e_string_params;
 durationSec = 3;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
@@ -22,7 +22,7 @@ N = 4096;
 y_upperLim_kHz = Fs/2000;
 
 %Generate the constant control signal
-L = ones(1, numSamples);
+L = SystemParams.minRelativeStringLength*ones(1, numSamples);
 
 %Processing objects
 stringDWG = StringDWG(stringParams, L(1), noiseType, useNoiseFile);
@@ -45,3 +45,5 @@ figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
 title('Single Plucked Note Spectrogram')
+pitch_f0 = calculatePitchF0(L(1), stringParams.f0);
+yline(pitch_f0/1000, "--r");
