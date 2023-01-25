@@ -294,6 +294,22 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="scale(0.8)" />
     </marker>
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker1291-7-8-5-1-7"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1289-6-5-3-6-2"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -303,8 +319,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="203.78482"
-     inkscape:cy="634.56206"
+     inkscape:cx="373.00562"
+     inkscape:cy="583.22489"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -567,19 +583,55 @@
     <path
        inkscape:connector-curvature="0"
        id="path1341-3-7-1-8"
-       d="m 96.86145,51.151523 h 17.74598"
+       d="m 128.21457,51.151523 h 17.74598"
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1291-7-8-5-1)"
        sodipodi:nodetypes="cc" />
     <text
        id="text2670-5-9"
-       y="48.634518"
-       x="99.783455"
+       y="48.766811"
+       x="131.66573"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:4.93888903px;stroke-width:0.26458332"
-         y="48.634518"
-         x="99.783455"
+         y="48.766811"
+         x="131.66573"
          id="tspan2668-6-5"
          sodipodi:role="line">y[n]</tspan></text>
+    <g
+       id="g824-1-8-1-7"
+       transform="translate(87.749702,19.606236)">
+      <g
+         id="g3615-0">
+        <rect
+           y="23.301399"
+           x="22.378845"
+           height="16.487776"
+           width="18.132465"
+           id="rect815-3-1-0-5"
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <text
+           id="text819-7-0-9-4"
+           y="31.128775"
+           x="31.239407"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;line-height:0.5;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           xml:space="preserve"><tspan
+             id="tspan1422-0"
+             style="font-size:4.23333311px"
+             y="31.128775"
+             x="31.239407"
+             sodipodi:role="line">DC</tspan><tspan
+             style="font-size:4.23333311px"
+             y="35.043781"
+             x="31.239407"
+             sodipodi:role="line"
+             id="tspan931">Blocker</tspan></text>
+      </g>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path1341-3-7-1-8-4"
+       d="m 96.598241,51.151523 10.602229,0"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1291-7-8-5-1-7)"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>

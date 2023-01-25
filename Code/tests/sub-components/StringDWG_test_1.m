@@ -1,14 +1,14 @@
 %Test the StringDWG with a basic pluck
 
-close all;
+% close all;
 clear all;
 dbstop if error
 
 %String DWG Parameters
 % stringParams = SystemParams.A_string_params;
 stringParams = SystemParams.e_string_params;
-% noiseType = "White";
-noiseType = "Pink";
+noiseType = "White";
+% noiseType = "Pink";
 useNoiseFile = false;
 % useNoiseFile = true;
 L = SystemParams.minRelativeStringLength;
@@ -45,6 +45,7 @@ for n = 1:numSamples
     y1(n) = stringDWG.tick(0);
 end
 
+figure;
 plot(y1);
 title("Single Plucked Note Test");
 

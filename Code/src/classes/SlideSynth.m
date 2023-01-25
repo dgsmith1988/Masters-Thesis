@@ -29,7 +29,7 @@ classdef SlideSynth < Controllable & AudioGenerator
             end
             
             %TODO: Coupling filter is currently a place holder
-            obj.couplingFilter = FilterObject(1, 1, 0);
+            obj.couplingFilter = CouplingFilter("None");
             obj.stringDWG = StringDWG(stringParams, L_0, params.stringNoiseSource, params.useNoiseFile);
             obj.antiAliasingFilter = AntiAliasing();
         end

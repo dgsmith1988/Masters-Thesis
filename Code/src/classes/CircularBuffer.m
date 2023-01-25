@@ -7,6 +7,7 @@ classdef CircularBuffer < handle & AudioProcessor
         maxDelay = SystemParams.maxDelayLineLength + SystemParams.lagrangeOrder;
         minDelay = SystemParams.minDelayLineLength;
     end
+    
     properties(GetAccess = public)
         readPointer     %points to the next location which will be read from
         writePointer    %points to the next location which will be read to
@@ -20,6 +21,7 @@ classdef CircularBuffer < handle & AudioProcessor
             
             %TODO: This could be made more memory efficient by doing it on
             %a per-string basis using the min and max L values as well.
+            
             %Allocate the buffer to be the maximum value possible to
             %support the worst case scenario.
             obj.buffer = zeros(1, obj.maxDelay);
@@ -79,9 +81,14 @@ classdef CircularBuffer < handle & AudioProcessor
         end
         
         function initializeBuffer(obj, newData)
-            assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions')
+            assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions');
             %TODO: Should this also reset the read/write pointers?
             obj.buffer = newData;
+        end
+        
+        function initializeDelayLine(obj, newData)
+            assert(length(newData) == obj.delay, 'New data must match current delay setting');
+            obj.buffer(1:obj.delay) = newData;
         end
         
         function bufferLength = getBufferLength(obj)

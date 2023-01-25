@@ -26,7 +26,7 @@ classdef Lagrange < InterpolatedDelayLine
         end
         
         function outputSample = tick(obj, inputSample)
-            %hold x[n-M] to x[n-M-N] to perform the interpolation
+            %this holds x[n-M] to x[n-M-N] to perform the interpolation
             x = zeros(1, obj.L);
             
             %extract x[n-M]...x[n-M-N] from the circular buffer
@@ -84,8 +84,19 @@ classdef Lagrange < InterpolatedDelayLine
             bufferLength = obj.circularBuffer.getBufferLength();
         end
         
-        function initializeDelayLine(obj, data)
+        function bufferDelay = getBufferDelay(obj)
+            bufferDelay = obj.circularBuffer.delay;
+        end
+        
+        function initializeBuffer(obj, data)
+            %Initialize the entire buffer associated with the delay line
             obj.circularBuffer.initializeBuffer(data);
+        end
+        
+        function initializeDelayLine(obj, data)
+            %The start the buffer associated with the current delay length.
+            %Everything else will be zeros.
+            obj.circularBuffer.initializeDelayLine(data);
         end
     end
 end

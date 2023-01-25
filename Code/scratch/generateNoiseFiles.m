@@ -1,8 +1,8 @@
 %Generate the noise files to make it easier to compare between
 %configurations while developing/testing
 
-% close all;
-% clear all;
+close all;
+clear all;
 dbstop if error
 
 %System processing parameters
@@ -10,6 +10,7 @@ stringParams = SystemParams.A_string_params;
 durationSec = 3;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
+noiseType = "Pink";
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -22,12 +23,11 @@ y_upperLim_kHz = Fs/2000;
 L = ones(1, numSamples);
 
 %Processing objects
-stringDWG = StringDWG(stringParams, L(1));
+stringDWG = StringDWG(stringParams, L(1), noiseType, false);
 y1 = zeros(1, numSamples);
 
 %Processing loop
-stringDWG.pluck(); %Set up the string to generate noise...
-noiseData = stringDWG.interpolatedDelayLine.circularBuffer.buffer;
+noiseData = stringDWG.pluck(); %Set up the string to generate noise...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));

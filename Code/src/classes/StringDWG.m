@@ -62,35 +62,35 @@ classdef StringDWG < Controllable & AudioGenerator
             obj.loopFilter.consumeControlSignal(L_n);
         end
         
-        function pluck(obj)
+        function bufferData = pluck(obj)
             bufferData = [];
-            bufferLength = obj.interpolatedDelayLine.getBufferLength;
+            bufferLength = obj.interpolatedDelayLine.getBufferLength();
             
             switch obj.noiseType
                 case "White"
                     if obj.useNoiseFile
                         bufferData = audioread("sounds\whiteNoise.wav");
                     else
-                        bufferData = 1 - 2*rand(1, bufferLength);
+                        bufferData = 1 - 2*rand(1, bufferLength+1);
                     end
                 case "Pink"
                     if obj.useNoiseFile
                         bufferData = audioread("sounds\pinkNoise.wav");
                     else
-                        bufferData = pinknoise(1, bufferLength);
+                        bufferData = pinknoise(1, bufferLength+1);
                     end
             end
             
-            %normalize the generated data to make the synthesized signal stronger
             if ~obj.useNoiseFile
+                %Remove the DC component and normalize the data. This has
+                %has already been done on the saved waveforms.
+                bufferData = bufferData - mean(bufferData);           
                 bufferData = bufferData / max(abs(bufferData));
             end
             
-            %remove DC component
-            bufferData = bufferData - mean(bufferData);
-            
-            %put that baby in the delay line!           
-            obj.interpolatedDelayLine.initializeDelayLine(bufferData);
+            %put that baby in the delay line!
+            obj.loopFilter.z = bufferData(1);
+            obj.interpolatedDelayLine.initializeBuffer(bufferData(2:end));
         end
     end
 end

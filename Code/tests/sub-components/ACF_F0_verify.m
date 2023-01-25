@@ -41,6 +41,7 @@ figure;
 % subplot(2, 1, 1);
 k = 0:p0_samples+1:6*(p0_samples+1);
 plot(0:numSamples-1, y1, k, y1(k+1), "ro");
+% plot(0:numSamples-1, y1, lags(locs), y1(lags(locs)), "ro");
 title("Signal");
 ylabel("Amplitude");
 xlabel("n");
