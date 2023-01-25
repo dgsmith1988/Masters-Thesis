@@ -83,6 +83,9 @@ classdef StringDWG < Controllable & AudioGenerator
                 bufferData = bufferData / max(abs(bufferData));
             end
             
+            %remove DC component
+            bufferData = bufferData - mean(bufferData);
+            
             %put that baby in the delay line!           
             obj.interpolatedDelayLine.initializeDelayLine(bufferData);
         end

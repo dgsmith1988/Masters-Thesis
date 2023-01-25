@@ -5,14 +5,15 @@ clear all;
 dbstop if error
 
 %System processing parameters
+% stringParams = SystemParams.A_string_params;
 stringParams = SystemParams.e_string_params;
 durationSec = 3;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
 % noiseType = "White";
 noiseType = "Pink";
-% useNoiseFile = false;
-useNoiseFile = true;
+useNoiseFile = false;
+% useNoiseFile = true;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -35,6 +36,7 @@ for n = 1:numSamples
         fprintf("n = %i/%i\n", n, length(L));
     end
     stringDWG.consumeControlSignal(L(n));
+    %zero is passed here as the is no input to the DWG
     y1(n) = stringDWG.tick(0);
 end
 
