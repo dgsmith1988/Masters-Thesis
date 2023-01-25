@@ -855,22 +855,6 @@
          inkscape:connector-curvature="0" />
     </marker>
     <marker
-       inkscape:isstock="true"
-       style="overflow:visible"
-       id="marker1179-79-33-0"
-       refX="0"
-       refY="0"
-       orient="auto"
-       inkscape:stockid="TriangleOutL"
-       inkscape:collect="always">
-      <path
-         transform="scale(0.8)"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path1177-6-4-1"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
        inkscape:stockid="DotS"
        orient="auto"
        refY="0"
@@ -884,22 +868,6 @@
          d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutL-5-2-5-1"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         id="path1029-6-2-2-8"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
     </marker>
     <marker
        inkscape:stockid="DotS"
@@ -921,22 +889,6 @@
        orient="auto"
        refY="0"
        refX="0"
-       id="TriangleOutL-3-7-5-6"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         id="path1029-60-8-3-5"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
        id="marker4547-6-6-7"
        style="overflow:visible"
        inkscape:isstock="true">
@@ -947,38 +899,6 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="scale(0.8)" />
     </marker>
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutL-3-5-9-8-4"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         id="path1029-60-2-5-0-6"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="TriangleOutL-3-5-9-7-8-0"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         id="path1029-60-2-5-9-5-0"
-         d="M 5.77,0 -2.88,5 V -5 Z"
-         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
-         transform="scale(0.8)"
-         inkscape:connector-curvature="0" />
-    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -988,8 +908,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="682.95694"
-     inkscape:cy="1760.9307"
+     inkscape:cx="430.0998"
+     inkscape:cy="1703.7878"
      inkscape:document-units="mm"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -1991,171 +1911,5 @@
          d="m 203.19463,-284.03911 v -22.92227"
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL-3-5-9-7-8)" />
     </g>
-    <g
-       transform="translate(-3.7797619,117.16857)"
-       id="g1015-8-9">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path1169-7-34-6"
-         d="m 132.5357,-280.45692 h 9.35443"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1179-79-33-0)" />
-      <path
-         sodipodi:nodetypes="ccc"
-         inkscape:connector-curvature="0"
-         id="path885-9-7-62-8"
-         d="m 66.466902,-313.49123 v 33.03431 h 36.054408"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2734-8-7);marker-end:url(#TriangleOutL-5-2-5-1)" />
-      <path
-         sodipodi:nodetypes="ccc"
-         inkscape:connector-curvature="0"
-         id="path885-0-8-63-4"
-         d="m 56.39387,-298.38611 v 32.74052 h 24.130229"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#DotS-3-7);marker-end:url(#TriangleOutL-3-7-5-6)" />
-      <g
-         id="g964-6-7-92-2-9"
-         transform="translate(14.44578,-315.13188)">
-        <path
-           inkscape:transform-center-x="-2.3835158"
-           d="m 144.77244,34.674957 -7.15055,4.128373 -7.15055,4.128375 0,-8.256748 0,-8.256747 7.15055,4.128374 z"
-           inkscape:randomized="0"
-           inkscape:rounded="0"
-           inkscape:flatsided="false"
-           sodipodi:arg2="1.0471976"
-           sodipodi:arg1="0"
-           sodipodi:r2="4.7670345"
-           sodipodi:r1="9.534071"
-           sodipodi:cy="34.674957"
-           sodipodi:cx="135.23837"
-           sodipodi:sides="3"
-           id="path940-3-05-4-7-5"
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           sodipodi:type="star" />
-        <text
-           id="text944-8-7-9-6-1"
-           y="35.466026"
-           x="132.19707"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           xml:space="preserve"><tspan
-             y="35.466026"
-             x="132.19707"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan946-4-0-31-4-9"
-             sodipodi:role="line">h<tspan
-   id="tspan3112-2-83-7"
-   style="font-size:64.99999762%;baseline-shift:sub">6.5</tspan></tspan></text>
-      </g>
-      <g
-         id="g964-6-1-9-5-6"
-         transform="translate(-47.04694,-300.1201)">
-        <path
-           inkscape:transform-center-x="-2.3835158"
-           d="m 144.77244,34.674957 -7.15055,4.128373 -7.15055,4.128375 0,-8.256748 0,-8.256747 7.15055,4.128374 z"
-           inkscape:randomized="0"
-           inkscape:rounded="0"
-           inkscape:flatsided="false"
-           sodipodi:arg2="1.0471976"
-           sodipodi:arg1="0"
-           sodipodi:r2="4.7670345"
-           sodipodi:r1="9.534071"
-           sodipodi:cy="34.674957"
-           sodipodi:cx="135.23837"
-           sodipodi:sides="3"
-           id="path940-3-4-6-7-5"
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           sodipodi:type="star" />
-        <text
-           id="text944-8-02-5-3-6"
-           y="35.866932"
-           x="131.86836"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           xml:space="preserve"><tspan
-             y="35.866932"
-             x="131.86836"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-             id="tspan946-4-02-9-57-6"
-             sodipodi:role="line">6.5</tspan></text>
-      </g>
-      <path
-         sodipodi:nodetypes="ccc"
-         inkscape:connector-curvature="0"
-         id="path1169-90-8-32-8"
-         d="m 97.725508,-265.4485 c 5.106802,0 10.213592,0 15.320392,0 l 12.30312,-28.46973"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4547-6-6-7)" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path885-0-1-6-4-0"
-         d="m 159.48725,-280.45692 h 37.18564"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL-3-5-9-8-4)" />
-      <g
-         id="g824-1-1-59-4-5"
-         transform="translate(86.742898,-313.06054)">
-        <g
-           id="g909-2-9-2-9">
-          <rect
-             y="24.372965"
-             x="18.876173"
-             height="16.461308"
-             width="27.507204"
-             id="rect815-3-3-8-3-6"
-             style="opacity:1;fill:#fbfbfb;fill-opacity:1;stroke:#000000;stroke-width:0.21505873;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-          <text
-             id="text819-7-2-2-1-5"
-             y="31.439865"
-             x="32.526421"
-             style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:0.5;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-             xml:space="preserve"><tspan
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:0.5;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
-               y="31.439865"
-               x="32.526421"
-               id="tspan817-4-25-5-2-8"
-               sodipodi:role="line">Low-Pass</tspan><tspan
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:0.5;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
-               y="36.793545"
-               x="32.526421"
-               sodipodi:role="line"
-               id="tspan888-2-2-8-4">Filter</tspan></text>
-        </g>
-      </g>
-      <g
-         id="g1010-0-4-14-8"
-         transform="translate(36.284806,-330.50525)">
-        <text
-           id="text1001-2-4-9-4"
-           y="52.481255"
-           x="163.65834"
-           style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           xml:space="preserve"><tspan
-             style="font-size:7.76111126px;stroke-width:0.26458332"
-             y="52.481255"
-             x="163.65834"
-             id="tspan999-1-6-3-2"
-             sodipodi:role="line">+</tspan></text>
-        <circle
-           r="3.4745038"
-           cy="50.048328"
-           cx="166.90982"
-           id="path1003-6-2-59-2"
-           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke" />
-      </g>
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path885-0-1-6-9-7-3"
-         d="m 203.19463,-284.03911 v -22.92227"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL-3-5-9-7-8-0)" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="38.175594"
-       y="-128.2887"
-       id="text1698"><tspan
-         sodipodi:role="line"
-         id="tspan1696"
-         x="38.175594"
-         y="-128.2887"
-         style="stroke-width:0.26458332;fill:#ff0000">REMOVE THE LOW PASS FILTER PART</tspan></text>
   </g>
 </svg>

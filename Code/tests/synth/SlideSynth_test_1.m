@@ -4,7 +4,7 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = true;
+slideSynthParams.enableCSG = f;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";

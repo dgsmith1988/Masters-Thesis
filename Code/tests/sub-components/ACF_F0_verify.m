@@ -2,33 +2,36 @@
 close all;
 clear;
 
-%System processing parameters
-p0_samples = 100; %make the period of f0 an integer muliple of samples at this sampling frequency
-Fs = SystemParams.audioRate;
+%String DWG parameters
+noiseType = "Pink";
+useNoiseFile = false;
 stringParams = SystemParams.A_string_params;
-stringParams.n_w = -1; %indicate that we don't use a CSG
-stringParams.f0 = Fs/p0_samples; %set this to a frequency which has an integer length period in samples at this Fs
-stringModeFilterSpec = SystemParams.A_string_modes.chrome;
-waveshaperFunctionHandle = @tanh;
-durationSec = 1;
 
+%Modify the parameters to generate an integer sample period for easier
+%verification with this method
+p0_samples = 100;
+Fs = SystemParams.audioRate;
+stringParams.f0 = Fs/p0_samples;
+
+%Sound length in seconds and samples
+durationSec = 1;
 numSamples = durationSec * Fs;
 
 %Generate the constant control signal
 L = ones(1, numSamples);
 
 %Processing objects
-stringSynth = StringSynth(stringParams, stringModeFilterSpec, waveshaperFunctionHandle, L(1));
+stringDWG = StringDWG(stringParams, L(1), noiseType, useNoiseFile);
 y1 = zeros(1, numSamples);
 
 %Processing loop
-stringSynth.pluck(); %Set up the string to generate noise...
+stringDWG.pluck(); %Set up the string to generate noise...
 for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    stringSynth.consumeControlSignal(L(n));
-    y1(n) = stringSynth.tick();
+    stringDWG.consumeControlSignal(L(n));
+    y1(n) = stringDWG.tick(0.0);
 end
 
 [r, lags] = xcorr(y1);

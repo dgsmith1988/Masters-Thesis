@@ -1,7 +1,7 @@
 %Test the StringDWG with a basic pluck
 
 close all;
-% clear;
+clear all;
 dbstop if error
 
 %System processing parameters
@@ -9,6 +9,10 @@ stringParams = SystemParams.A_string_params;
 durationSec = 3;
 Fs = SystemParams.audioRate;
 numSamples = durationSec * Fs;
+% noiseType = "White";
+noiseType = "Pink";
+% useNoiseFile = false;
+useNoiseFile = true;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -21,7 +25,7 @@ y_upperLim_kHz = Fs/2000;
 L = ones(1, numSamples);
 
 %Processing objects
-stringDWG = StringDWG(stringParams, L(1));
+stringDWG = StringDWG(stringParams, L(1), noiseType, useNoiseFile);
 y1 = zeros(1, numSamples);
 
 %Processing loop

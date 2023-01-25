@@ -1,4 +1,4 @@
-classdef StringDWG < Controllable & AudioGenerator
+classdef StringDWG < Controllable & AudioGenerator  
     properties
         openString_f0           %open string fundamental frequency in Hz
         pitch_f0                %selected pitch based on relative string length
@@ -32,16 +32,15 @@ classdef StringDWG < Controllable & AudioGenerator
             obj.useNoiseFile = useNoiseFile;
         end
         
-        function y_n = tick(obj, x_n)
+        function [y_n, interpDelayOut] = tick(obj, x_n)
             %See signal flow diagram for signal names.
             
-            %Implement the feedback
-            v_n = obj.y_n_1 + x_n;
+            %Implement the feedback loop
+            interpDelayOut = obj.interpolatedDelayLine.tick(obj.y_n_1);
+            loopFilterOut = obj.loopFilter.tick(obj.g_c_n*interpDelayOut);
             
-            %Run through all the various processing objects to generate the
-            %next sample.
-            interpDelayOut = obj.interpolatedDelayLine.tick(v_n);
-            y_n = obj.loopFilter.tick(obj.g_c_n*interpDelayOut);
+            %Generate the current output sample
+            y_n = x_n + loopFilterOut;
             
             %Store the output for the next iteration
             obj.y_n_1 = y_n;
@@ -65,13 +64,13 @@ classdef StringDWG < Controllable & AudioGenerator
             bufferLength = obj.interpolatedDelayLine.getBufferLength;
             
             switch obj.noiseType
-                case "Pink"
+                case "White"
                     if obj.useNoiseFile
                         bufferData = audioread("sounds\whiteNoise.wav");
                     else
                         bufferData = 1 - 2*rand(1, bufferLength);
                     end
-                case "White"
+                case "Pink"
                     if obj.useNoiseFile
                         bufferData = audioread("sounds\pinkNoise.wav");
                     else

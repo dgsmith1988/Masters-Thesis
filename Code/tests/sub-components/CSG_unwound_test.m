@@ -22,7 +22,7 @@ windowLength = 12*10^-3*Fs;
 window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 5;
+y_upperLim = Fs/2000;
 
 %*********No Slide Velocity Test********
 %Keep the f_c constant for now to simplify the tests
@@ -90,7 +90,7 @@ title("Unwound CSG Test Output - Constant Slide Velocity");
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");
-title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram')
+title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram');
 
 %*********Time Varying Slide Velocity Test********
 %Generate the parabolic trajectory from before

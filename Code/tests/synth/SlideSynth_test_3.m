@@ -1,5 +1,4 @@
-%Test the slide synth patch for various sliding up 3 fret over one
-%second and reverse
+%Test the slide synth patch sliding up 3 frets over one second and reverse
 
 clear;
 close all;
@@ -7,7 +6,7 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = true;
+slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
