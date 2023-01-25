@@ -4,16 +4,19 @@ close all;
 clear all;
 dbstop if error
 
-%System processing parameters
+%String DWG Parameters
 % stringParams = SystemParams.A_string_params;
 stringParams = SystemParams.e_string_params;
-durationSec = 3;
-Fs = SystemParams.audioRate;
-numSamples = durationSec * Fs;
 % noiseType = "White";
 noiseType = "Pink";
 useNoiseFile = false;
 % useNoiseFile = true;
+L = SystemParams.minRelativeStringLength;
+
+%System Processing Parameters
+durationSec = 3;
+Fs = SystemParams.audioRate;
+numSamples = durationSec * Fs;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -22,8 +25,10 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim_kHz = Fs/2000;
 
+%*******************************Test Begins********************************
+
 %Generate the constant control signal
-L = SystemParams.minRelativeStringLength*ones(1, numSamples);
+L = L*ones(1, numSamples);
 
 %Processing objects
 stringDWG = StringDWG(stringParams, L(1), noiseType, useNoiseFile);
