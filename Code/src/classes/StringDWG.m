@@ -26,7 +26,7 @@ classdef StringDWG < Controllable & AudioGenerator
             
             %Construct/update the processing objects based on the parameters
             obj.loopFilter = LoopOnePole(stringParams.a_pol, stringParams.g_pol, L_init);
-            obj.interpolatedDelayLine = Lagrange_v2(SystemParams.lagrangeOrder, obj.DWGLength);
+            obj.interpolatedDelayLine = Lagrange(SystemParams.lagrangeOrder, obj.DWGLength);
             obj.energyScaler = EnergyScaler(obj.DWGLength);
             
             %Save the flags which configure the generated sound

@@ -10,9 +10,9 @@ slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
-slideSynthParams.useNoiseFile = true;
+slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "D";
+slideSynthParams.stringName = "e";
 
 %Slide motion parameters
 soundDuration_sec = 3;

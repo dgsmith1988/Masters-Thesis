@@ -7,11 +7,11 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = true;
+slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
-slideSynthParams.useNoiseFile = true;
+slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
 slideSynthParams.stringName = "B";
 

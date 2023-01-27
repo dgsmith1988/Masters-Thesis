@@ -4,11 +4,11 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = f;
+slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
-slideSynthParams.useNoiseFile = true;
+slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
 slideSynthParams.stringName = "E";
 duration_sec = 3;
@@ -47,8 +47,8 @@ for n = 1:numSamples
         fprintf("n = %i/%i\n", n, length(L));
     end
     slideSynth.consumeControlSignal(L(n))
-    f_c(n) = slideSynth.contactSoundGenerator.f_c_n;
-    absoluteSlideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
+%     f_c(n) = slideSynth.contactSoundGenerator.f_c_n;
+%     absoluteSlideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     [y1(n), feedbackLoopOutput(n), CSGOutput(n)] = slideSynth.tick();
 end
 

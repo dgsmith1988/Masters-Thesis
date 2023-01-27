@@ -111,6 +111,10 @@ classdef CircularBuffer < handle & AudioProcessor
             end
         end
         
+        function bufferLength = getBufferLength(obj)
+            bufferLength = length(obj.buffer);
+        end
+        
         function initializeBuffer(obj, newData)
             %This initializes all the locations allocated to the buffer.
             assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions');
@@ -123,10 +127,6 @@ classdef CircularBuffer < handle & AudioProcessor
             %current delay setting.
             assert(length(newData) == obj.bufferDelay, 'New data must match current delay setting');
             obj.buffer(1:obj.bufferDelay) = newData;
-        end
-        
-        function bufferLength = getBufferLength(obj)
-            bufferLength = length(obj.buffer);
         end
     end
 end
