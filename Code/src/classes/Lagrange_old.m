@@ -8,6 +8,7 @@ classdef Lagrange < InterpolatedDelayLine
         D               %Delay implemented by Lagrange component, D = floor(D) + d
         D_min           %Minimum D based on N
         d               %Fractional delay component
+        x               %Internal buffer for computations, this holds x[n-M] to x[n-M-N] to perform the interpolation
     end
     
     methods
@@ -23,24 +24,40 @@ classdef Lagrange < InterpolatedDelayLine
             
             %Setup the buffer to hold the data
             obj.circularBuffer = CircularBuffer(obj.M + obj.N);
+            
+            %Initialize the buffer for the interpolation computations
+            obj.x = zeros(1, obj.L);
         end
         
         function outputSample = tick(obj, inputSample)
-            %this holds x[n-M] to x[n-M-N] to perform the interpolation
-            x = zeros(1, obj.L);
+%             %this holds x[n-M] to x[n-M-N] to perform the interpolation
+%             x = zeros(1, obj.L);
+%             
+%             %extract x[n-M]...x[n-M-N] from the circular buffer
+%             n = 1;
+%             for k = obj.M:obj.M+obj.N
+%                 x(n) = obj.circularBuffer.getSampleAtDelay(k);
+%                 n = n + 1;
+%             end
+%             
+%             %perform the convolution sum with the Lagrange filter kernel
+%             outputSample = sum((obj.h .* x));
+            outputSample = obj.getCurrentSample();
             
+            %update the buffer
+            obj.circularBuffer.tick(inputSample);
+        end
+        
+        function outputSample = getCurrentSample(obj)
             %extract x[n-M]...x[n-M-N] from the circular buffer
             n = 1;
             for k = obj.M:obj.M+obj.N
-                x(n) = obj.circularBuffer.getSampleAtDelay(k);
+                obj.x(n) = obj.circularBuffer.getSampleAtDelay(k);
                 n = n + 1;
             end
             
             %perform the convolution sum with the Lagrange filter kernel
-            outputSample = sum((obj.h .* x));
-            
-            %update the buffer
-            obj.circularBuffer.tick(inputSample);
+            outputSample = sum((obj.h .* obj.x));
         end
         
         function setDelay(obj, newValue)

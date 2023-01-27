@@ -1,11 +1,9 @@
 %David "Graham" Smith
-%11/15/2022
+%01/27/2023
 %Test script to ensure integer delay-line functionality works
 
 clear;
 close all;
-
-% addpath("..\src");
 
 %Input test signal and output buffer
 impulseLength = 10;
@@ -74,7 +72,31 @@ grid on;
 grid minor;
 legend();
 
-%******Test the getSampleAtDelay() function******
+%******Test the getSampleAtOffset() function******
+%Initialize the buffer with a sequence and then read it out to make sure it
+%is correct
+
+delay = 10;
+circularBuffer = CircularBuffer(delay);
+%reverse the sequence at the input here based on how the read/writer
+%pointers are laid out.
+sequence = delay-1:-1:0;
+circularBuffer.initializeDelayLine(sequence);
+y = zeros(1, delay);
+
+for n = 1:delay
+    y(n) = circularBuffer.getSampleAtOffset(n);
+end
+
+figure;
+nPlot = 0:delay-1;
+stem(nPlot, y);
+title("Circular Buffer Indexing Test - y[n]");
+xlabel("Time-index (n)");
+ylabel("Sample Value");
+grid on; grid minor;
+
+% %******Test the index  wrap around functionality******
 %Write enough samples to cross over the end of the buffer boundary and then
 %extract all the elements from the buffer using the getSampleAtDelay()
 %value to make sure the seqeuence is the same.
@@ -82,7 +104,6 @@ legend();
 delay = 10;
 circularBuffer = CircularBuffer(delay);
 numSamples = CircularBuffer.maxDelay - delay/2;
-
 
 %Buffers to track variables/output over time
 writePointer = zeros(1, numSamples+1);
@@ -103,7 +124,7 @@ readPointer(end) = circularBuffer.readPointer;
 
 %Extract the last "delay" values
 for n = 1:delay
-    y(n) = circularBuffer.getSampleAtDelay(n);
+    y(n) = circularBuffer.getSampleAtOffset(n);
 end
 
 start = numSamples - 1;

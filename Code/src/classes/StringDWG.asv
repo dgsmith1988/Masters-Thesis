@@ -67,11 +67,6 @@ classdef StringDWG < Controllable & AudioGenerator
         
         function bufferData = pluck(obj)
             bufferData = [];
-            
-            %We only want to initialize the integer component of the delay
-            %line as not having the interpolation part start from zero
-            %produces undesirable results. A DC component is introduced
-            %with pink noise for one... 
             bufferLength = obj.interpolatedDelayLine.M;
             
             switch obj.noiseType
@@ -90,13 +85,16 @@ classdef StringDWG < Controllable & AudioGenerator
             end
             
             if ~obj.useNoiseFile
-                %Remove the DC component and normalize the data.
+                %Remove the DC component and normalize the data. This has
+                %has already been done on the saved waveforms.
                 bufferData = bufferData - mean(bufferData);
                 bufferData = bufferData / max(abs(bufferData));
             end
             
             %put that baby in the delay line!
-            obj.interpolatedDelayLine.initializeNonInterpolatingPart(bufferData);
+            %             obj.loopFilter.z = bufferData(1);
+            %             obj.interpolatedDelayLine.initializeBuffer(bufferData(2:end));
+            obj.interpolatedDelayLine.initializeDelayLine(bufferData);
         end
     end
 end

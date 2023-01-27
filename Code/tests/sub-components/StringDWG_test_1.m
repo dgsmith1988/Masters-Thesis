@@ -6,12 +6,13 @@ dbstop if error
 
 %String DWG Parameters
 % stringParams = SystemParams.A_string_params;
-stringParams = SystemParams.e_string_params;
-noiseType = "White";
-% noiseType = "Pink";
+stringParams = SystemParams.B_string_params;
+% stringParams = SystemParams.e_string_params;
+% noiseType = "White";
+noiseType = "Pink";
 useNoiseFile = false;
 % useNoiseFile = true;
-L = SystemParams.minRelativeStringLength;
+L = 2*SystemParams.minRelativeStringLength;
 
 %System Processing Parameters
 durationSec = 3;

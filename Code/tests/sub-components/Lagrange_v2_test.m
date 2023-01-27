@@ -1,8 +1,8 @@
 %David "Graham" Smith
-%01/09/2022
-%Test script to ensure Interpolated Lagrange delay-line functionality works
+%01/27/2022
+%Test script to ensure the new Lagrange interpolating delay-line functionality works
 
-clear;
+clear all;
 close all;
 
 %Input test signal and output buffer
@@ -20,7 +20,7 @@ delay = M + D;
 %******Test the basic constructor first******
 figure;
 for k = 1:length(M)
-    interpolatedDelayLine = Lagrange(N, delay(k));
+    interpolatedDelayLine = Lagrange_v2(N, delay(k));
     
     %Run the test signal through the delay to see what comes out
     for n = 1:length(x)
@@ -48,7 +48,7 @@ x = repmat(x, [1, 3]);
 y = zeros(size(x));
 M = 8;
 delay = M + D;
-interpolatedDelayLine = Lagrange(N, delay);
+interpolatedDelayLine = Lagrange_v2(N, delay);
 n = 1;
 for k = 1:3
     if k == 2
@@ -85,7 +85,7 @@ M = [8, 9, 8];
 d = [.25, .5, .75];
 D = d + (N-1)/2;
 delay = M + D;
-interpolatedDelayLine = Lagrange(N, delay(1));
+interpolatedDelayLine = Lagrange_v2(N, delay(1));
 n = 1;
 for k = 1:3
     interpolatedDelayLine.setDelay(delay(k))

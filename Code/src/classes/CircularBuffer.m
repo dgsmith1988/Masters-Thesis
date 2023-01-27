@@ -12,10 +12,10 @@ classdef CircularBuffer < handle & AudioProcessor
         readPointer     %points to the next location which will be read from
         writePointer    %points to the next location which will be read to
         buffer          %contains the contents of the delay line
-        delay           %delay amount - not sure how useful this is... could be removed...
+        bufferDelay     %delay amount
     end
     
-    methods       
+    methods
         function obj = CircularBuffer(delay)
             %Construct an instance of this class initialized to zeros
             
@@ -26,8 +26,11 @@ classdef CircularBuffer < handle & AudioProcessor
             %support the worst case scenario.
             obj.buffer = zeros(1, obj.maxDelay);
             obj.readPointer = 1;
-            obj.writePointer = delay + 1; %Add one as Matlab starts indexing at 1
-            obj.delay = delay;
+            %Add one as Matlab starts indexing at 1
+            %Add another one so it points to the next location to be
+            %written to (and one sample behind is x[n])
+            obj.writePointer = obj.readPointer + delay; 
+            obj.bufferDelay = delay;
         end
         
         function outputSample = tick(obj, newSample)
@@ -36,12 +39,11 @@ classdef CircularBuffer < handle & AudioProcessor
             obj.buffer(obj.writePointer) = newSample;
             
             %increment pointers
-            obj.incrementReadPointer();
-            obj.incrementWritePointer();
+            obj.incrementPointers();
         end
         
         function currentSample = getCurrentSample(obj)
-            %return the sample where the pointer is looking
+            %return the sample where the read pointer is looking
             currentSample = obj.buffer(obj.readPointer);
         end
         
@@ -50,13 +52,16 @@ classdef CircularBuffer < handle & AudioProcessor
             obj.buffer(obj.writePointer) = inputSample;
         end
         
-        function sample = getSampleAtDelay(obj, delay)
-            %Indexing starts at 0 here instead of one to make it easier to
-            %mesh with DSP notation. This assumes that the write pointer is
-            %currently pointing to the next buffer location to be written
-            %to so the previous buffer location would contain x[n-1].
+        function sample = getSampleAtOffset(obj, offset)
+            %Indexing here is done relative to the current location of the
+            %write pointer. This allows for more flexability but more
+            %caution is required. Assuming that you are starting at the
+            %beginning of a time-step n, this would put the writePointer at
+            %the next location to be written to. One location behind it
+            %corresponds to x[n-1], and after writing to the location it
+            %will point to x[n] and need to be updated.
             
-            indexPointer = obj.writePointer - delay;
+            indexPointer = obj.writePointer - offset;
             
             %If we go beyond the start of the buffer we need to wrap things
             %around to the other end.
@@ -68,38 +73,30 @@ classdef CircularBuffer < handle & AudioProcessor
         end
         
         function incrementDelay(obj)
-            assert(obj.delay ~= obj.maxDelay, "We have reached the maximum delay line length.")
-            obj.delay = obj.delay + 1;
+            assert(obj.bufferDelay ~= obj.maxDelay, "We have reached the maximum delay line length.")
+            obj.bufferDelay = obj.bufferDelay + 1;
             obj.decrementReadPointer()
         end
         
         function decrementDelay(obj)
-            assert(obj.delay ~= obj.minDelay)
-            obj.delay = obj.delay - 1;
+            assert(obj.bufferDelay ~= obj.minDelay)
+            obj.bufferDelay = obj.bufferDelay - 1;
             obj.incrementReadPointer()
             
         end
         
-        function initializeBuffer(obj, newData)
-            assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions');
-            %TODO: Should this also reset the read/write pointers?
-            obj.buffer = newData;
+        function incrementPointers(obj)
+            obj.incrementWritePointer();
+            obj.incrementReadPointer();
         end
         
-        function initializeDelayLine(obj, newData)
-            assert(length(newData) == obj.delay, 'New data must match current delay setting');
-            obj.buffer(1:obj.delay) = newData;
+        function incrementWritePointer(obj)
+            obj.writePointer = obj.writePointer + 1;
+            if obj.writePointer > length(obj.buffer)
+                obj.writePointer = 1;
+            end
         end
         
-        function bufferLength = getBufferLength(obj)
-            bufferLength = length(obj.buffer);
-        end
-    end
-    
-    methods(Access = private)
-        %I believe that Matlab arrays/vectors are value objects so these
-        %functions cannot be condensed easily into one which operates on a
-        %handle (aka. Matlab style pointer)
         function incrementReadPointer(obj)
             obj.readPointer = obj.readPointer + 1;
             if obj.readPointer > length(obj.buffer)
@@ -114,11 +111,22 @@ classdef CircularBuffer < handle & AudioProcessor
             end
         end
         
-        function incrementWritePointer(obj)
-            obj.writePointer = obj.writePointer + 1;
-            if obj.writePointer > length(obj.buffer)
-                obj.writePointer = 1;
-            end
+        function initializeBuffer(obj, newData)
+            %This initializes all the locations allocated to the buffer.
+            assert(length(newData) == length(obj.buffer), 'New data must match existing buffer dimensions');
+            %TODO: Should this also reset the read/write pointers?
+            obj.buffer = newData;
+        end
+        
+        function initializeDelayLine(obj, newData)
+            %This only initializes the locations assocaited with the
+            %current delay setting.
+            assert(length(newData) == obj.bufferDelay, 'New data must match current delay setting');
+            obj.buffer(1:obj.bufferDelay) = newData;
+        end
+        
+        function bufferLength = getBufferLength(obj)
+            bufferLength = length(obj.buffer);
         end
     end
 end

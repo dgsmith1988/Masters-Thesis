@@ -28,7 +28,7 @@ y_upperLim_kHz = Fs/2000;
 %*****************************Test code starts*****************************
 
 %Create the processing object
-stringDWG = StringDWG(stringParams, max_L, "Pink", true);
+stringDWG = StringDWG(stringParams, max_L, "Pink", false);
 
 %Generate the control signal
 decrement = (min_L - max_L) / (numSamples-1);
