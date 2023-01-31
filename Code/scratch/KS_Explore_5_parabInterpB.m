@@ -1,4 +1,4 @@
-%Basic script to examine the KS implementation for comparison purposes...
+%Basic script to experiment with parabolic interpolation of KS algorithm
 
 clear all;
 close all;
@@ -16,20 +16,22 @@ y_upperLim_kHz = Fs/2000;
 %Sound parameters
 % delay = 150;
 % delay = 100;
-delay = 75.3;
+% delay = 75.3;
 % delay = 75;
-% delay = 25;
+% delay = 25.6;
 duration_sec = 3;
 
 %Processing varibles/objects
 loopFilter = LoopOnePole(SystemParams.e_string_params.a_pol, SystemParams.e_string_params.g_pol, 1);
+% loopFilter = FilterObject([.5 .5], 1, 0);
 % delayLine = CircularBuffer(delay);
 delayLine = Lagrange(5, delay);
 x_delay = 0;
 
 %Derived parameters
-p = delay + loopFilter.phaseDelay;
-pitch_f0 = Fs/p;
+% p = delay + loopFilter.phaseDelay;
+period_samples = delay + 1/2;
+pitch_f0 = Fs/period_samples;
 numSamples = duration_sec*Fs;
 
 %Removing the DC component and normalize it
@@ -54,15 +56,44 @@ for n = 1:numSamples
 end
 
 figure;
-stem(0:numSamples-1, y);
+plot(y);
 title("KS Scratch Output");
-xlim([-1 3*delay + 1]);
-ylim([0 1.1]);
-grid on;
-grid minor;
+
+%Perform the spectral parabolic interpolation to estimate the f0 of the
+%signal
+start = numSamples/2;
+stop = start + N - 1;
+Y = fft(y(start:stop).*(hamming(N)'), N);
+% Y = fft(y, N);
+Y_dB = mag2db(abs(Y));
+
+[M, I] = max(Y_dB(1:N/2));
+alpha = Y_dB(I-1);
+beta = Y_dB(I);
+gamma = Y_dB(I+1);
+
+p = 1/2 * (alpha-gamma) / (alpha - 2*beta + gamma)
+assert(abs(p) <= .5);
+bin_estimate = I - 1 + p
+y_estimate = beta - 1/4 * (alpha - gamma)*bin_estimate;
+% pitch_f0 * N/Fs = Fs/period_samples * N/Fs = N/period_samples;
+f0_bin = N / period_samples
+bin_err = f0_bin - bin_estimate
+err_hz = bin_err * Fs / N
+
+figure;
+plot(0:N-1, Y_dB, "DisplayName", "Y dB");
+title("Y dB");
+xlabel("BIN");
+xline(f0_bin, "r", "DisplayName", "True Value");
+xline(bin_estimate, "g", "DisplayName", "Estimated Value");
+legend();
+grid on; grid minor;
+xlim([0 N/2-1]);
 
 figure;
 spectrogram(y, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
 title('KS Scratch Spectrogram');
 yline(pitch_f0/1000, "--r");
+yline(bin_estimate*Fs/N/1000, "--k");

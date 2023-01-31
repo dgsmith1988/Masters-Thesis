@@ -1,4 +1,4 @@
-%This tests the functionality associated with the FeedbackLoop's
+%This tests the functionality associated with the StringDWG's
 %consumption of the control signal. The actual sound generation will be
 %tested in the StringSynth tests using a dummy CSG as the FeedbackLoop
 %needs to operate in the computational context provided by the StringSynth

@@ -9,7 +9,6 @@ classdef StringDWG < Controllable & AudioGenerator
         energyScaler            %calculates compensation coefficient
         loopFilter              %loop filter implementing string decay/body effects
         
-        y_n_1 = 0               %last output sample to implement feedback
         noiseType               %what type of noise to put in the initial buffer
         useNoiseFile            %flag indicating whether to generate the data or load it from a file
     end

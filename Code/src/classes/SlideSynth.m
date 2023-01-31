@@ -40,6 +40,10 @@ classdef SlideSynth < Controllable & AudioGenerator
         end
         
         function consumeControlSignal(obj, L_n)
+            %TODO: Add a check on the value of L_n to make sure it has
+            %changed enough to warrant running the update routines to save
+            %on computations
+            
             %Update the various system parameters
             obj.stringDWG.consumeControlSignal(L_n);
             obj.contactSoundGenerator.consumeControlSignal(L_n);

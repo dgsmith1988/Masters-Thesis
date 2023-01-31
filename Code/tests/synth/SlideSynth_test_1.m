@@ -1,3 +1,5 @@
+%Simple plucking of the string
+
 clear;
 close all;
 dbstop if error
@@ -10,12 +12,12 @@ slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "E";
+slideSynthParams.stringName = "B";
 duration_sec = 3;
 
 %Slide motion parameters
-startingFret = 0;
-endingFret = 5;
+startingFret = 12;
+endingFret = 12;
 
 %Spectrogram analysis parameters
 Fs = SystemParams.audioRate;

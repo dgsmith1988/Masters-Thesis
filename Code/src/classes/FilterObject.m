@@ -31,5 +31,19 @@ classdef FilterObject < AudioProcessor
         function [h, f] = computeFrequencyResponse(obj)
             [h, f] = freqz(obj.b, obj.a, obj.N, SystemParams.audioRate);
         end
+        
+        function plotPhaseDelay(obj)
+%             phasedelay(obj.b, obj.a, obj.N, SystemParams.audioRate);
+            phasedelay(obj.b, obj.a, obj.N);
+            grid on;
+            grid minor;
+        end
+        
+        function plotGroupDelay(obj)
+            grpdelay(obj.b, obj.a, obj.N, SystemParams.audioRate);
+%             grpdelay(obj.b, obj.a, obj.N);
+            grid on;
+            grid minor;
+        end
     end
 end
