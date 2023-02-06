@@ -163,11 +163,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="403.99335"
-     inkscape:cy="686.99019"
+     inkscape:zoom="1.979899"
+     inkscape:cx="350.64931"
+     inkscape:cy="596.21309"
      inkscape:document-units="mm"
-     inkscape:current-layer="g964-6-0-4"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="2400"
      inkscape:window-height="1271"
@@ -182,7 +182,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -229,9 +229,10 @@
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2156)"
-       d="m 148.86843,114.58855 h 9.02104"
+       d="m 148.86843,114.58855 18.91001,0"
        id="path2020"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2092)"
        d="m 125.17747,114.58855 h 6.37645"
@@ -265,6 +266,17 @@
        id="path1486-9-8"
        d="m 134.89901,130.06398 12.30312,-28.44272"
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1496-67-7)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="152.33617"
+       y="112.47659"
+       id="text887-56"><tspan
+         sodipodi:role="line"
+         id="tspan885-0"
+         x="152.33617"
+         y="112.47659"
+         style="font-size:4.93888903px;stroke-width:0.26458332">y[n]</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -323,16 +335,16 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         x="132.05267"
+         x="131.52351"
          y="35.466026"
          id="text944-8-1"><tspan
            sodipodi:role="line"
            id="tspan946-4-3"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-           x="132.05267"
+           x="131.52351"
            y="35.466026">g<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan950-8-8">TV</tspan></tspan></text>
+   id="tspan950-8-8">slide</tspan></tspan></text>
     </g>
     <g
        style=""

@@ -15,12 +15,13 @@ classdef LoopOnePole < LoopFilter & FilterObject
         %name clash with "a" in parent class FilterObject
         a_param
         g_param
+        
+        %TODO: Determine best way to handle this in terms of initialization
+        %value
+        %updated on each change of L[n]
+        phaseDelay = .25;
     end
-    
-    properties(Constant)
-        phaseDelay = 1/2;
-    end
-       
+           
     methods
         function obj = LoopOnePole(a_pol, g_pol, L_n)
             %initialize everything in the parent to zero to keep matlab
@@ -42,6 +43,9 @@ classdef LoopOnePole < LoopFilter & FilterObject
             obj.a_param = obj.a_pol(1) + m_fret*obj.a_pol(2);
             obj.b = obj.g_param*(1 + obj.a_param);
             obj.a = [1 obj.a_param];
+            
+            %update the phase delay to be the average across the spectrum
+%             [~, ~, obj.phaseDelay] = obj.computePhaseDelay();
         end
     end
 end

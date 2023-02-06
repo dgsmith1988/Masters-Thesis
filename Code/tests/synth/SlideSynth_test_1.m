@@ -16,8 +16,8 @@ slideSynthParams.stringName = "B";
 duration_sec = 3;
 
 %Slide motion parameters
-startingFret = 12;
-endingFret = 12;
+startingFret = 0;
+endingFret = 0;
 
 %Spectrogram analysis parameters
 Fs = SystemParams.audioRate;

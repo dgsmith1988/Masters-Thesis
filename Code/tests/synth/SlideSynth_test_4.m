@@ -7,7 +7,7 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = false;
+slideSynthParams.enableCSG = true;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
@@ -36,12 +36,13 @@ y_upperLim_kHz = Fs/2000;
 numSamples = soundDuration_sec * Fs;
 L = generateLCurve(lowerFret, higherFret, slideDuration_sec, Fs);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs)];
-M = 8;
+M = 48;
 L = filter(1/M *ones(1, M), 1, L, L(1)*ones(1, M-1));
 L(L > 1) = 1;
 
 %Processing objects
 slideSynth = SlideSynth(slideSynthParams, L(1));
+slideSpeed = zeros(1, numSamples);
 y6 = zeros(1, numSamples);
 
 %Processing loop
@@ -50,16 +51,23 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y6(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y6);
+grid on; grid minor;
 title("Upwards bend");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+grid on; grid minor;
+subplot(3, 1, 3);
+plot(slideSpeed);
+grid on; grid minor;
+title("Slide Speed");
 
 figure;
 spectrogram(y6, window, overlap, N, Fs, "yaxis");  
@@ -82,16 +90,23 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y7(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y7);
+grid on; grid minor;
 title("Downwards Slide");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+grid on; grid minor;
+subplot(3, 1, 3);
+plot(slideSpeed);
+grid on; grid minor;
+title("Slide Speed");
 
 figure;
 spectrogram(y7, window, overlap, N, Fs, "yaxis");  

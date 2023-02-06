@@ -6,13 +6,13 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = false;
+slideSynthParams.enableCSG = true;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
-slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
+slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "e";
+slideSynthParams.stringName = "D";
 
 %Slide motion parameters
 soundDuration_sec = 3;
@@ -42,6 +42,7 @@ L(L > 1) = 1;
 %Processing objects
 slideSynth = SlideSynth(slideSynthParams, L(1));
 y4 = zeros(1, numSamples);
+slideSpeed = zeros(1, numSamples);
 
 %Processing loop
 slideSynth.pluck(); %Set up the string to generate sound...
@@ -50,15 +51,20 @@ for n = 1:numSamples
         fprintf("n = %i/%i\n", n, length(L));
     end
     slideSynth.consumeControlSignal(L(n))
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y4(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y4);
 title("Upwards bend");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+title("L[n]");
+subplot(3, 1, 3);
+plot(slideSpeed);
+title("Slide Speed");
 
 figure;
 spectrogram(y4, window, overlap, N, Fs, "yaxis");  
@@ -82,15 +88,20 @@ for n = 1:numSamples
         fprintf("n = %i/%i\n", n, length(L));
     end
     slideSynth.consumeControlSignal(L(n))
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y5(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y5);
 title("Downwards Slide");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+title("L[n]");
+subplot(3, 1, 3);
+plot(slideSpeed);
+title("Slide Speed");
 
 figure;
 spectrogram(y5, window, overlap, N, Fs, "yaxis");  

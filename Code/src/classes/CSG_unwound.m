@@ -1,7 +1,7 @@
 classdef CSG_unwound < ContactSoundGenerator
     properties
         g_TV = 1;
-        g_user = 1; 
+        g_user = .10; 
         absoluteSlideSpeed
         controlSignalProcessor
         lowPassFilter

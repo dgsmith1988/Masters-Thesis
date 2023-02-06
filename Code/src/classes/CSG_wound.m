@@ -7,14 +7,14 @@ classdef CSG_wound < ContactSoundGenerator
         harmonicAccentuator
         
         %Parameters which change during run-time
-        g_TV = 1;
+        g_slide
         f_c_n
-        absoluteSlideSpeed
+        slideSpeed
         
         %User specified tuning parameters which shouldn't change during
         %operation, but made non-constant to facilitate testing
-        g_bal = .25; %favor the modal resonators as they can get buried
-        g_user = 1;
+        g_bal = .75; %favor the string winding noise as compared to modal resonators
+        g_user = .5;
     end
     
     properties (Constant)
@@ -28,7 +28,7 @@ classdef CSG_wound < ContactSoundGenerator
             %Initializing these to zero is no issue as they are given
             %values at each call to the consumeControlSignal() function
             obj.f_c_n = 0;
-            obj.absoluteSlideSpeed = 0;
+            obj.slideSpeed = 0;
             
             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             
@@ -53,7 +53,7 @@ classdef CSG_wound < ContactSoundGenerator
             end
         end
         
-        function [outputSample, noiseSample] = tick(obj)
+        function [y_n, noiseSample] = tick(obj)
             %The noise source is made available for debugging
             %and comparison purposes
             noiseSample = obj.noiseSource.tick();
@@ -67,14 +67,14 @@ classdef CSG_wound < ContactSoundGenerator
             v2 = obj.g_bal*v2;
             
             %Scale the signal by the slide speed and output it
-            obj.g_TV =.5*obj.absoluteSlideSpeed;
-            outputSample = obj.g_user*(obj.g_TV*(v1 + v2));
+            obj.g_slide =.5*obj.slideSpeed;
+            y_n = obj.g_user*(obj.g_slide*(v1 + v2));
         end
         
         function consumeControlSignal(obj, L_n)
             %calculate the control parameters and update the corresponding
             %objects
-            [obj.f_c_n, obj.absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
+            [obj.f_c_n, obj.slideSpeed] = obj.controlSignalProcessor.tick(L_n);
             obj.noiseSource.consumeControlSignal(obj.f_c_n);
             obj.harmonicAccentuator.consumeControlSignal(obj.f_c_n);
         end

@@ -48,13 +48,15 @@ classdef SystemParams
                 ZeroPoleSpec([859 -859 2000 -2000], [.9929, .9929, .9922, .9922]),...   %poles
                 -28.9746725110396));                                                    %dB attenuation        
         
-        %Numbers taken from the patch in Appendix B of the master's thesis
+        %The C string was created for testing purposes and its loop filter
+        %polynomials match that of the E string. The number of windings
+        %were measured on a guitar. The decay time was tuned by ear.
         C_string_params = StringParams(7, 65.41, 1400, 17*10^-3, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol
         E_string_params = StringParams(6, 82.41, 2000, 15*10^-3, ...
-            [-0.08135045114297, -0.00085796015850],...  %a_pol
-            [0.97816203269973 , 0.00061375406757]);     %g_pol
+            [-0.08135045114297, -0.00085796015850],...
+            [0.97816203269973 , 0.00061375406757]);
         A_string_params = StringParams(5, 110, 2600, 13*10^-3, ...
             [-0.05928143968051, 0.00171045642780],...  
             [0.98347976839019 , 0.00040239847018]);     
@@ -72,7 +74,9 @@ classdef SystemParams
             [0.99402123928178 , 0.00008928138142]);     
         
         stringLengthMeters = .65;
-        minRelativeStringLength = .25;  %Limit things to two octaves per string (or the 24th fret)
+%         minRelativeStringLength = fretNumberToRelativeLength(24);  %Limit things to two octaves per string (or the 24th fret)
+%         minRelativeStringLength = fretNumberToRelativeLength(21);
+        minRelativeStringLength = fretNumberToRelativeLength(15);
         maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
         
         minFretNumber = relativeLengthToFretNumber(SystemParams.maxRelativeStringLength);

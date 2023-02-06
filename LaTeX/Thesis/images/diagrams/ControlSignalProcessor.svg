@@ -325,8 +325,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="569.54011"
-     inkscape:cy="706.41433"
+     inkscape:cx="420.06029"
+     inkscape:cy="606.89305"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -457,17 +457,17 @@
          style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <text
          id="text1178"
-         y="149.64903"
-         x="51.583942"
+         y="149.01895"
+         x="52.366375"
          style="font-style:normal;font-weight:normal;font-size:7.76111126px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          xml:space="preserve"><tspan
            style="font-size:4.93888903px;stroke-width:0.26458332"
-           y="149.64903"
-           x="51.583942"
+           y="149.01895"
+           x="52.366375"
            id="tspan1176"
            sodipodi:role="line">z<tspan
-   id="tspan1184"
-   style="font-size:4.93888903px;baseline-shift:super">-1</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:super"
+   id="tspan999">-1</tspan></tspan></text>
     </g>
     <path
        sodipodi:nodetypes="cc"
@@ -598,7 +598,8 @@
        transform="translate(55.879456,77.928613)"
        id="g964-6-0-4-4-1">
       <g
-         id="g1220-9">
+         id="g1220-9"
+         style="">
         <path
            inkscape:transform-center-x="-2.3835158"
            d="m 144.77244,34.674957 -7.15055,4.128373 -7.15055,4.128375 0,-8.256748 0,-8.256747 7.15055,4.128374 z"
@@ -617,18 +618,20 @@
            sodipodi:type="star" />
         <text
            id="text944-8-1-6-7-5"
-           y="32.820194"
-           x="128.48079"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           y="33.613941"
+           x="130.86203"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:0.64999998;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
            xml:space="preserve"><tspan
              sodipodi:role="line"
              id="tspan1332"
-             x="128.48079"
-             y="32.820194">String</tspan><tspan
+             x="130.86203"
+             y="33.613941"
+             style="font-size:2.82222223px;line-height:0.64999998">String</tspan><tspan
              sodipodi:role="line"
              id="tspan1334"
-             x="128.48079"
-             y="38.993805">Length</tspan></text>
+             x="130.86203"
+             y="36.824219"
+             style="font-size:2.82222223px;line-height:0.64999998">Length</tspan></text>
       </g>
     </g>
     <path
@@ -672,14 +675,14 @@
     <text
        id="text944-8-1-6-7-5-0"
        y="113.70382"
-       x="160.50633"
+       x="158.91885"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          y="113.70382"
-         x="160.50633"
+         x="158.91885"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
          id="tspan946-4-3-2-4-5-4"
-         sodipodi:role="line">F<tspan
+         sodipodi:role="line">1/T<tspan
    id="tspan1180-2-9"
    style="font-size:64.99999762%;baseline-shift:sub">s</tspan></tspan></text>
     <flowRoot
@@ -705,20 +708,16 @@
            height="30"
            x="484.5"
            y="270.70081" /></flowRegion><flowPara
-         id="flowPara1330"></flowPara></flowRoot>    <flowRoot
+         id="flowPara1330" /></flowRoot>    <text
        xml:space="preserve"
-       id="flowRoot1361"
-       style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;"
-       transform="matrix(0.26458333,0,0,0.26458333,-25.532291,91.894792)"><flowRegion
-         id="flowRegion1363"
-         style="fill:#ff0000;"><rect
-           id="rect1365"
-           width="133.5"
-           height="88"
-           x="642"
-           y="172.20081"
-           style="fill:#ff0000;" /></flowRegion><flowPara
-         id="flowPara1367">Think of better </flowPara><flowPara
-         id="flowPara1369">string length</flowPara><flowPara
-         id="flowPara1371">indicator</flowPara></flowRoot>  </g>
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="31.805073"
+       y="16.554098"
+       id="text987"><tspan
+         sodipodi:role="line"
+         id="tspan985"
+         x="31.805073"
+         y="25.917868"
+         style="stroke-width:0.26458332"></tspan></text>
+  </g>
 </svg>

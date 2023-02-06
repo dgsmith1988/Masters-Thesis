@@ -12,7 +12,7 @@ slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "E";
+slideSynthParams.stringName = "G";
 
 %Slide motion parameters
 soundDuration_sec = 3;
@@ -36,13 +36,13 @@ numSamples = soundDuration_sec * Fs;
 %********Test a wide vibrato********
 %All the vibrato terms are in frets which are then mapped to the relative
 %string length
-
 t = (0:numSamples-1)/Fs;
 fretTrajectory = wideVibratoWidth*sin(2*pi*wideVibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
 %Processing objects
 slideSynth = SlideSynth(slideSynthParams, L(1));
+slideSpeed = zeros(1, numSamples);
 y10 = zeros(1, numSamples);
 
 %Processing loop
@@ -51,17 +51,20 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y10(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1)
 plot(y10);
 title("Slow Wide Vibrato");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
-title("L[n]");
+subplot(3, 1, 3);
+plot(slideSpeed);
+title("Slide Speed");
 
 figure;
 spectrogram(y10, window, overlap, N, Fs, "yaxis");  
@@ -85,16 +88,20 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y11(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1)
 plot(y11);
 title("Narrow Fast Vibrato");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+subplot(3, 1, 3);
+plot(slideSpeed);
+title("Slide Speed");
 
 figure;
 spectrogram(y11, window, overlap, N, Fs, "yaxis");  

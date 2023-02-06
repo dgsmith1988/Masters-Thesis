@@ -3,10 +3,10 @@ clear all;
 close all;
 
 %String DWG Parameters
-stringParams = SystemParams.A_string_params;
+% stringParams = SystemParams.A_string_params;
 % stringParams = SystemParams.G_string_params;
 % stringParams = SystemParams.B_string_params;
-% stringParams = SystemParams.e_string_params;
+stringParams = SystemParams.e_string_params;
 noiseType = "Pink";
 useNoiseFile = false;
 Fs = SystemParams.audioRate;
@@ -19,7 +19,7 @@ N = 4096;
 y_upperLim_kHz = Fs/2000;
 
 %Sound parameters
-f0_bin = 30;
+f0_bin = 32;
 duration_sec = 3;
 
 %Derived parameters

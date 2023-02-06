@@ -7,13 +7,13 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = false;
+slideSynthParams.enableCSG = true;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
-slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
+slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "e";
+slideSynthParams.stringName = "D";
 duration_sec = 3;
 
 %Slide motion parameters
@@ -36,6 +36,7 @@ L = generateLCurve(startingFret, endingFret, duration_sec, Fs);
 %Processing objects
 slideSynth = SlideSynth(slideSynthParams, L(1));
 y2 = zeros(1, numSamples);
+slideSpeed2 = zeros(1, numSamples);
 
 %Processing loop
 slideSynth.pluck(); %Set up the string to generate sound...
@@ -43,16 +44,21 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed2(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y2(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y2);
 title("Upwards bend");
-subplot(2, 1, 2);
+subplot(3, 1, 2);
 plot(L);
+title("L[n]");
+subplot(3, 1, 3);
+plot(slideSpeed2);
+title("Slide Speed");
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
@@ -71,6 +77,7 @@ slideSynth = SlideSynth(slideSynthParams, L(1));
 
 %Output buffers
 y3 = zeros(1, numSamples);
+slideSpeed3 = zeros(1, numSamples);
 
 %Processing loop
 slideSynth.pluck(); %Set up the string to generate sound...
@@ -78,16 +85,21 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, length(L));
     end
-    slideSynth.consumeControlSignal(L(n))
+    slideSynth.consumeControlSignal(L(n));
+    slideSpeed3(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
     y3(n) = slideSynth.tick();
 end
 
 figure;
-subplot(2, 1, 1)
+subplot(3, 1, 1);
 plot(y3);
-title("Downwards Slide");
-subplot(2, 1, 2);
+title("Downwards bend");
+subplot(3, 1, 2);
 plot(L);
+title("L[n]");
+subplot(3, 1, 3);
+plot(slideSpeed3);
+title("Slide Speed");
 
 figure;
 spectrogram(y3, window, overlap, N, Fs, "yaxis");  

@@ -36,28 +36,29 @@ for string = stringParams
     for n = 1:numSamples
         loopFilter.consumeControlSignal(L(n));
         [h(n,:), f] = loopFilter.computeFrequencyResponse();
-        subplot(2, 1, 1);
+%         subplot(2, 1, 1);
         hold on;
         plot(f, mag2db(abs(h(n, :))), 'DisplayName', sprintf("L = %.2f", L(n)));
         hold off;
-        text(f(end-350), mag2db(abs(h(n, end)))-.015, sprintf("L = %.2f", L(n)));
-        subplot(2, 1, 2);
-        hold on;
-        plot(f, angle(h(n, :)), 'DisplayName', sprintf("L = %.2f", L(n)));
-        hold off;
+%         text(f(end-350), mag2db(abs(h(n, end-350))), sprintf("L = %.2f", L(n)));
+        text(f(end), mag2db(abs(h(n, end))), sprintf("L = %.2f", L(n)));
+%         subplot(2, 1, 2);
+%         hold on;
+%         plot(f, angle(h(n, :)), 'DisplayName', sprintf("L = %.2f", L(n)));
+%         hold off;
     end
-    subplot(2, 1, 1);
+%     subplot(2, 1, 1);
     xlabel("Frequency (Hz)");
     ylabel("Magnitude (dB)");
     title(sprintf("String #%i - Magnitude Response for Various L Values", string.number));
     grid on;
     grid minor;
-    subplot(2, 1, 2);
-    xlabel("Frequency (Hz)");
-    ylabel("Phase (rad)");
-    title(sprintf("String #%i - Phase Response for Various L Values", string.number));
-    grid on;
-    grid minor;
-    legend('Location', 'southeast');
+%     subplot(2, 1, 2);
+%     xlabel("Frequency (Hz)");
+%     ylabel("Phase (rad)");
+%     title(sprintf("String #%i - Phase Response for Various L Values", string.number));
+%     grid on;
+%     grid minor;
+%     legend('Location', 'southeast');
     % legend();
 end

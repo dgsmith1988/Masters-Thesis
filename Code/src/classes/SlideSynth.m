@@ -25,7 +25,7 @@ classdef SlideSynth < Controllable & AudioGenerator
                     error("Invalid n_w passed");
                 end                
             else
-                obj.contactSoundGenerator = CSG_dummy();
+                obj.contactSoundGenerator = CSG_dummy(stringParams.n_w, L_0);
             end
             
             %TODO: Coupling filter is currently a place holder
