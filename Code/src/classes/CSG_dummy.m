@@ -1,20 +1,21 @@
 classdef CSG_dummy < ContactSoundGenerator
     properties
-        controlSignalProcessor
-        absoluteSlideSpeed = 0;
+        f_c_n
+        slideSpeed_n
     end
     
     methods
-        function obj = CSG_dummy(n_w, L_n_1)
-            obj.controlSignalProcessor = ControlSignalProcessor(n_w, L_n_1);
+        function obj = CSG_dummy()
+            
         end
         
         function outputSample = tick(obj)
-           outputSample = 0;
+            outputSample = 0;
         end
         
-        function consumeControlSignal(obj, L_n)
-            [~, obj.absoluteSlideSpeed] = obj.controlSignalProcessor.tick(L_n);
+        function consumeControlSignal(obj, f_c_n, slideSpeed_n)
+            obj.f_c_n = f_c_n;
+            obj.slideSpeed = slideSpeed_n;
         end
     end
 end

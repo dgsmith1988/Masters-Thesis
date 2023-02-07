@@ -1,0 +1,34 @@
+classdef Interpolator < Controllable & Tickable
+   
+    properties
+        L_n
+        L_n_1
+        R
+        increment
+        k
+    end
+    
+    methods
+        function obj = untitled(inputArg1,inputArg2)
+            %UNTITLED Construct an instance of this class
+            %   Detailed explanation goes here
+            obj.Property1 = inputArg1 + inputArg2;
+        end
+        
+        function L_interp = tick(obj)
+            %Calculate the next sample to get from L[n-1] to L[n]
+            obj.tickCount = obj.tick + 1;
+            if obj.tickCount > R
+                error("New L_n value should have been given by now... Check calling context...");
+            end
+        end
+        
+        function consumeControlSignal(obj, L_n)
+            obj.L_n_1 = obj.L_n;
+            obj.L_n = L_n;
+            increment = (obj.L_n - obj.L_n_1)/obj.R;
+            tickCount = 0;
+        end
+    end
+end
+

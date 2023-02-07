@@ -54,11 +54,9 @@ for m = 1:numSamples_ctrl
         if(mod(n, 100) == 0)
             fprintf("n = %i/%i\n", n, numSamples_audio);
         end
-        [y1(n), stringDWGOutput(n), CSGOutput(n)] = slideSynth.tick();
-        %Extract the parameters here as they don't get updated until the
-        %call to slideSynth.tick() due to interpolation
         f_c(n) = slideSynth.contactSoundGenerator.f_c_n;
-        slideSpeed(n) = slideSynth.contactSoundGenerator.slideSpeed_n;
+        slideSpeed(n) = slideSynth.contactSoundGenerator.slideSpeed;
+        [y1(n), stringDWGOutput(n), CSGOutput(n)] = slideSynth.tick();
         n = n + 1;
     end
 end

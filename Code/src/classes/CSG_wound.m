@@ -1,7 +1,7 @@
 classdef CSG_wound < ContactSoundGenerator
     properties
         %Processing/generation objects
-        controlSignalProcessor
+%         controlSignalProcessor
         noiseSource
         stringModeFilter
         harmonicAccentuator
@@ -24,13 +24,13 @@ classdef CSG_wound < ContactSoundGenerator
     end
     
     methods
-        function obj = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1)
+        function obj = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator)
             %Initializing these to zero is no issue as they are given
             %values at each call to the consumeControlSignal() function
             obj.f_c_n = 0;
             obj.slideSpeed = 0;
             
-            obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
+%             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             
             if noiseSource == "Burst"
                 obj.noiseSource = NoiseBurst(0, stringParams.T60);

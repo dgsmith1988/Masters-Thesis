@@ -3,13 +3,13 @@ classdef CSG_unwound < ContactSoundGenerator
         g_TV = 1;
         g_user = .10; 
         absoluteSlideSpeed
-        controlSignalProcessor
+%         controlSignalProcessor
         lowPassFilter
     end
     
     methods
-        function obj = CSG_unwound(stringParams, L_n_1)
-            obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
+        function obj = CSG_unwound()
+%             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
             
             %Generate the LPF coefficients and initalize the object to
             %noise as we are going to be filtering noise.

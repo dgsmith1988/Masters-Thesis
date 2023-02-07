@@ -2,7 +2,8 @@ classdef SlideSynth < Controllable & AudioGenerator
     %STRINGSYNTH Synthesizer for one particular string
     
     properties (GetAccess = public)
-        stringDWG
+        controlSignalProcessor  %this handles pre-processing the incoming control signal
+        stringDWG               %object which generates the string sound
         contactSoundGenerator   %unit adding slide/string contact noise
         couplingFilter          %TODO: Determine this later
         antiAliasingFilter      %what's in a name?
@@ -18,20 +19,21 @@ classdef SlideSynth < Controllable & AudioGenerator
             if params.enableCSG
                 if(stringParams.n_w > 0)
                     stringModeFilterSpec = getModeFilterSpec(params.stringName, params.slideType);
-                    obj.contactSoundGenerator = CSG_wound(stringParams, stringModeFilterSpec, "PulseTrain", "ResoTanh", L_0);
+                    obj.contactSoundGenerator = CSG_wound(stringParams, stringModeFilterSpec, "PulseTrain", "ResoTanh");
                 elseif(stringParams.n_w == 0)
-                    obj.contactSoundGenerator = CSG_unwound(stringParams, L_0);
+                    obj.contactSoundGenerator = CSG_unwound();
                 else
                     error("Invalid n_w passed");
                 end                
             else
-                obj.contactSoundGenerator = CSG_dummy(stringParams.n_w, L_0);
+                obj.contactSoundGenerator = CSG_dummy();
             end
             
             %TODO: Coupling filter is currently a place holder
             obj.couplingFilter = CouplingFilter("None");
             obj.stringDWG = StringDWG(stringParams, L_0, params.stringNoiseSource, params.useNoiseFile);
             obj.antiAliasingFilter = AntiAliasing();
+            obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_0);
         end
         
         function pluck(obj)
@@ -39,17 +41,25 @@ classdef SlideSynth < Controllable & AudioGenerator
             obj.stringDWG.pluck();
         end
         
-        function consumeControlSignal(obj, L_n)
-            %TODO: Add a check on the value of L_n to make sure it has
+        function consumeControlSignal(obj, L_m)
+            %TODO: Add a check on the value of L_m to make sure it has
             %changed enough to warrant running the update routines to save
             %on computations
             
             %Update the various system parameters
-            obj.stringDWG.consumeControlSignal(L_n);
-            obj.contactSoundGenerator.consumeControlSignal(L_n);
+            obj.controlSignalProcessor.consumeControlSignal(L_m);
         end
         
         function [y_n, stringDWGOutput, CSGOutput] = tick(obj)
+            %Generate the various control signals at audio rate
+            [L_n, f_c_n, slideSpeed_n] = obj.controlSignalProcessor.tick();
+            
+            %Update the different processing objects accordingly
+            %TODO: Simplify this so the n_w calucation is done in the contact
+            %sound generator?
+            obj.stringDWG.consumeControlSignal(L_n);
+            obj.contactSoundGenerator.consumeControlSignal(f_c_n, slideSpeed_n);
+            
             %Run through the various processing objects
             CSGOutput = obj.contactSoundGenerator.tick();
             
