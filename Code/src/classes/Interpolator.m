@@ -1,4 +1,4 @@
-classdef Interpolator < Controllable & Tickable
+classdef Interpolator < Controllable & AudioProcessor
    
     properties
         x_m

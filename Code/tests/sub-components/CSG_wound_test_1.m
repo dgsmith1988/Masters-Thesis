@@ -5,7 +5,7 @@
 %   3. Combined output
 
 close all;
-clear;
+clear all;
 
 dbstop if error;
 
@@ -24,17 +24,7 @@ harmonicAccentuator = "HarmonicResonatorBank";
 
 %Keep the f_c constant for now to simplify the tests
 f_c = 250*ones(1, numSamples);
-
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to produce a
-%constant velocity
-L_n_1 = L(1) + L(1)-L(2);
+slideSpeed = f_c/n_w;
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -45,16 +35,19 @@ N = 4096;
 y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
 %*****Isolate Longitudinal Mode Branch Test*****
-%create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
-csg_wound.g_bal = 0;  %shift the balance to only select the longitudinal modes
-y1 = zeros(1, length(L));
-noiseTrainPulse = zeros(1, length(L));
-for n = 1:length(L)
+%Xreate/initialize the processing objects
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
+noiseTrainPulse = zeros(1, numSamples);
+y1 = zeros(1, numSamples);
+csg_wound.g_bal = 0;    %shift the balance to only select the longitudinal modes
+csg_wound.g_user = 1;   %maximize the signal
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     [y1(n), noiseTrainPulse(n)] = csg_wound.tick();
 end
 
@@ -69,14 +62,17 @@ title('Wound CSG Longitudinal Branch Output Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
 
 %*****Resonator Branch Test*****
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
 csg_wound.g_bal = 1;  %shift the balance to only select the resonator branch
-y2 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound.g_user = 1;   %maximize the signal
+y2 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     y2(n) = csg_wound.tick();
 end
 
@@ -91,14 +87,17 @@ title('Wound CSG Harmonics Branch Output Spectrogram')
 yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
 
 %*****Longitudinal + Harmonics Branch Test*****
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
 csg_wound.g_bal = .25;  %favor the modes to bring them out more
-y3 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound.g_user = 1;   %maximize the signal
+y3 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     y3(n) = csg_wound.tick();
 end
 
@@ -112,6 +111,4 @@ ylim([0 y_upperLim]);
 title('Wound CSG Combined Branches Output Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
 yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
-
-
 yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--r');

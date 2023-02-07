@@ -52,6 +52,6 @@ L = [L, L(end)*ones(1, staticDuration_sec*Fs_ctrl)];
 y9 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
 
 figure;
-spectrogram(y9, window, overlap, N, Fs_audio, "yaxis");  
+spectrogram(y9, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
 title('Extreme Downward Slide Spectrogram')

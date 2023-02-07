@@ -4,15 +4,12 @@
 %   3. A time-varying slide velocity
 
 close all;
-clear;
-
+clear all;
 dbstop if error;
 
 %System parameters
 Fs = SystemParams.audioRate;
-stringLength = SystemParams.stringLengthMeters;
-stringParams = SystemParams.D_string_params;
-n_w = stringParams.n_w;
+stringParams = SystemParams.B_string_params;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);
 
@@ -24,29 +21,19 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim = Fs/2000;
 
-%*********No Slide Velocity Test********
-%Keep the f_c constant for now to simplify the tests
-f_c = zeros(1, numSamples);
-
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to produce a
-%constant velocity
-L_n_1 = L(1) + L(1)-L(2);
+%*********No Slide Speed Test********
+slideSpeed = zeros(1, numSamples);
 
 %create/initialize the processing objects
-csg_unwound = CSG_unwound(stringParams, L_n_1);
-y1 = zeros(1, length(L));
-for n = 1:length(L)
+csg_unwound = CSG_unwound();
+y1 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(L(n));
+    csg_unwound.consumeControlSignal(0, slideSpeed(n));
     y1(n) = csg_unwound.tick();
 end
 
@@ -56,31 +43,21 @@ title("Unwound CSG Test Output - No Slide Velocity");
 
 figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");
-title('Unwound CSG Test Output - No Slide Velocity Spectrogram')
+title('Unwound CSG Test Output - No Slide Velocity Spectrogram');
 
-%*********Constant Slide Velocity Test********
-%Keep the f_c constant for now to simplify the tests
-f_c = 250*ones(1, numSamples);
-
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to produce a
-%constant velocity
-L_n_1 = L(1) + L(1)-L(2);
+%*********Constant Slide Spped Test********
+slideSpeed = 250*ones(1, numSamples);
 
 %create/initialize the processing objects
-csg_unwound = CSG_unwound(stringParams, L_n_1);
-y2 = zeros(1, length(L));
-for n = 1:length(L)
+csg_unwound = CSG_unwound();
+y2 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(L(n));
+    csg_unwound.consumeControlSignal(0, slideSpeed(n));
     y2(n) = csg_unwound.tick();
 end
 
@@ -94,31 +71,21 @@ title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram');
 
 %*********Time Varying Slide Velocity Test********
 %Generate the parabolic trajectory from before
-%TODO: Put this into a function as many tests use it?
 a = 1/.09;
 increment = .6/numSamples;
 x = 0:increment:.6-increment;
-f_c = 1000*(-a*(x -.3).^2 + 1);
-
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to produce a
-%constant velocity
-L_n_1 = L(1) + L(1)-L(2);
+slideSpeed = 1000*(-a*(x -.3).^2 + 1);
 
 %create/initialize the processing objects
-csg_unwound = CSG_unwound(stringParams, L_n_1);
-y3 = zeros(1, length(L));
-for n = 1:length(L)
+csg_unwound = CSG_unwound();
+y3 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(L(n));
+    csg_unwound.consumeControlSignal(0, slideSpeed(n));
     y3(n) = csg_unwound.tick();
 end
 

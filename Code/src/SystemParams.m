@@ -5,6 +5,7 @@ classdef SystemParams
     properties(Constant)
         audioRate = 48000;
         controlRate = 1000; %Not used in actual system, only in explorations
+        R = SystemParams.audioRate / SystemParams.controlRate;
 
         %Although this code is syntactically atrocious it seems to be the
         %best approach given how Matlab implements constants

@@ -13,6 +13,8 @@ slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
 slideSynthParams.stringName = "G";
+Fs_audio = SystemParams.audioRate;
+Fs_ctrl = SystemParams.controlRate;
 
 %Slide motion parameters
 soundDuration_sec = 3;
@@ -22,88 +24,35 @@ wideVibratoWidth = .5;
 wideVibratoFreq = 2;
 narrowVibratoWidth = .125;
 narrowVibratoFreq = 5;
-
-%Spectrogram analysis parameters
-Fs = SystemParams.audioRate;
-windowLength = 12*10^-3*Fs; %12 ms window
-window = hamming(windowLength);
-overlap = .75*windowLength;
-N = 4096;
-y_upperLim_kHz = Fs/2000;
-
-numSamples = soundDuration_sec * Fs;
-
-%********Test a wide vibrato********
 %All the vibrato terms are in frets which are then mapped to the relative
 %string length
-t = (0:numSamples-1)/Fs;
+t = (0:Fs_ctrl*soundDuration_sec-1)/Fs_ctrl;
 fretTrajectory = wideVibratoWidth*sin(2*pi*wideVibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
-%Processing objects
-slideSynth = SlideSynth(slideSynthParams, L(1));
-slideSpeed = zeros(1, numSamples);
-y10 = zeros(1, numSamples);
+%Spectrogram analysis parameters
+windowLength = 12*10^-3*Fs_audio; %12 ms window
+window = hamming(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim_kHz = Fs_audio/2000;
 
-%Processing loop
-slideSynth.pluck(); %Set up the string to generate sound...
-for n = 1:numSamples
-    if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, numSamples);
-    end
-    slideSynth.consumeControlSignal(L(n));
-    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
-    y10(n) = slideSynth.tick();
-end
+%********Test a wide vibrato********
+y10 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
 
 figure;
-subplot(3, 1, 1)
-plot(y10);
-title("Slow Wide Vibrato");
-subplot(3, 1, 2);
-plot(L);
-subplot(3, 1, 3);
-plot(slideSpeed);
-title("Slide Speed");
-
-figure;
-spectrogram(y10, window, overlap, N, Fs, "yaxis");  
+spectrogram(y10, window, overlap, N, Fs_audio, "yaxis");  
 ylim([0 y_upperLim_kHz]);
-title("Slow Wide Vibrato")
+title("Slow Wide Vibrato");
 
 %********Test a narrow fast vibrato********
-%All the vibrato terms are in frets which are then mapped to the relative
-%string length
-t = (0:numSamples-1)/Fs;
 fretTrajectory = narrowVibratoWidth*sin(2*pi*narrowVibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
 %Processing objects
-slideSynth = SlideSynth(slideSynthParams, L(1));
-y11 = zeros(1, numSamples);
-
-%Processing loop
-slideSynth.pluck(); %Set up the string to generate sound...
-for n = 1:numSamples
-    if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, numSamples);
-    end
-    slideSynth.consumeControlSignal(L(n));
-    slideSpeed(n) = slideSynth.contactSoundGenerator.absoluteSlideSpeed;
-    y11(n) = slideSynth.tick();
-end
+y11 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
 
 figure;
-subplot(3, 1, 1)
-plot(y11);
-title("Narrow Fast Vibrato");
-subplot(3, 1, 2);
-plot(L);
-subplot(3, 1, 3);
-plot(slideSpeed);
-title("Slide Speed");
-
-figure;
-spectrogram(y11, window, overlap, N, Fs, "yaxis");  
+spectrogram(y11, window, overlap, N, Fs_audio, "yaxis");  
 ylim([0 y_upperLim_kHz]);
 title("Narrow Fast Vibrato");

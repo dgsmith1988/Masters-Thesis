@@ -33,7 +33,7 @@ classdef SlideSynth < Controllable & AudioGenerator
             obj.couplingFilter = CouplingFilter("None");
             obj.stringDWG = StringDWG(stringParams, L_0, params.stringNoiseSource, params.useNoiseFile);
             obj.antiAliasingFilter = AntiAliasing();
-            obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_0);
+            obj.controlSignalProcessor = ControlSignalProcessor(L_0);
         end
         
         function pluck(obj)
@@ -52,13 +52,11 @@ classdef SlideSynth < Controllable & AudioGenerator
         
         function [y_n, stringDWGOutput, CSGOutput] = tick(obj)
             %Generate the various control signals at audio rate
-            [L_n, f_c_n, slideSpeed_n] = obj.controlSignalProcessor.tick();
+            [L_n, slideSpeed_n] = obj.controlSignalProcessor.tick();
             
             %Update the different processing objects accordingly
-            %TODO: Simplify this so the n_w calucation is done in the contact
-            %sound generator?
             obj.stringDWG.consumeControlSignal(L_n);
-            obj.contactSoundGenerator.consumeControlSignal(f_c_n, slideSpeed_n);
+            obj.contactSoundGenerator.consumeControlSignal(slideSpeed_n);
             
             %Run through the various processing objects
             CSGOutput = obj.contactSoundGenerator.tick();

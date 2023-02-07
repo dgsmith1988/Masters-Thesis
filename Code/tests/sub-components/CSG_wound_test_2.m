@@ -8,7 +8,6 @@ dbstop if error;
 
 %System parameters
 Fs = SystemParams.audioRate;
-stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
 stringModeFilterSpec = SystemParams.D_string_modes.chrome;
 n_w = stringParams.n_w;
@@ -29,34 +28,27 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim = 7; %corresponds to 5kHz on the frequency axis
 
-%Generate the parabolic f_c/velocity trajectory
+%Generate the parabolic f_c trajectory
 a = 1/.09;
 increment = .6/numSamples;
 x = 0:increment:.6-increment;
 f_c = 1000*(-a*(x -.3).^2 + 1);
 
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c(n)/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to remove the
-%discontinuity at the beginning
-L_n_1 = L(1);
+%convert it to a slide speed
+slideSpeed = f_c/n_w;
 
 %*****Isolate Longitudinal Mode Branch Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
 csg_wound.g_bal = 0;
-pulseTrain_TV = zeros(1, length(L));
-y4 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound.g_user = 1;   %maximize the signal
+pulseTrain_TV = zeros(1, numSamples);
+y4 = zeros(1, numSamples);
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     [y4(n), pulseTrain_TV(n)] = csg_wound.tick();
 end
 
@@ -72,14 +64,15 @@ yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '
 
 %*****Isolate Resonator Branch Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
 csg_wound.g_bal = 1;
-y5 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound.g_user = 1;   %maximize the signal
+y5 = zeros(1, numSamples);
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     y5(n) = csg_wound.tick();
 end
 
@@ -102,14 +95,15 @@ hold off;
 
 %*****Combined Branches Test*****
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator, L_n_1);
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
 csg_wound.g_bal = .25; %Favor the modes to bring them out more
-y6 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound.g_user = 1;   %maximize the signal
+y6 = zeros(1, numSamples);
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed(n));
     y6(n) = csg_wound.tick();
 end
 

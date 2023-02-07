@@ -1,15 +1,17 @@
 classdef CSG_wound < ContactSoundGenerator
     properties
         %Processing/generation objects
-%         controlSignalProcessor
         noiseSource
         stringModeFilter
         harmonicAccentuator
         
+        %Constant string parameters
+        n_w
+        
         %Parameters which change during run-time
         g_slide
         f_c_n
-        slideSpeed
+        slideSpeed_n
         
         %User specified tuning parameters which shouldn't change during
         %operation, but made non-constant to facilitate testing
@@ -28,10 +30,8 @@ classdef CSG_wound < ContactSoundGenerator
             %Initializing these to zero is no issue as they are given
             %values at each call to the consumeControlSignal() function
             obj.f_c_n = 0;
-            obj.slideSpeed = 0;
-            
-%             obj.controlSignalProcessor = ControlSignalProcessor(stringParams.n_w, L_n_1);
-            
+            obj.slideSpeed_n = 0;
+                       
             if noiseSource == "Burst"
                 obj.noiseSource = NoiseBurst(0, stringParams.T60);
             elseif noiseSource == "PulseTrain"
@@ -51,6 +51,8 @@ classdef CSG_wound < ContactSoundGenerator
                 ME = MException("CSG_wound:invalid harmonic accentuator", "Specified haromnic accentuator does not exist");
                 throw(ME);
             end
+            
+            obj.n_w = stringParams.n_w;
         end
         
         function [y_n, noiseSample] = tick(obj)
@@ -67,14 +69,20 @@ classdef CSG_wound < ContactSoundGenerator
             v2 = obj.g_bal*v2;
             
             %Scale the signal by the slide speed and output it
-            obj.g_slide =.5*obj.slideSpeed;
+            obj.g_slide =.5*obj.slideSpeed_n;
             y_n = obj.g_user*(obj.g_slide*(v1 + v2));
         end
         
-        function consumeControlSignal(obj, L_n)
-            %calculate the control parameters and update the corresponding
-            %objects
-            [obj.f_c_n, obj.slideSpeed] = obj.controlSignalProcessor.tick(L_n);
+        function consumeControlSignal(obj, slideSpeed_n)
+            %Calculate the new control signal parameters
+            obj.slideSpeed_n = slideSpeed_n; 
+            % units here should by cycles/sec as each winding represents
+            % the start of a cycle as the slide impacts it and creates an
+            % triggers an IR
+            % cycles/sec = windings/meter * meters/sec
+            obj.f_c_n = obj.n_w*obj.slideSpeed_n;
+            
+            %Update the corresponding objects
             obj.noiseSource.consumeControlSignal(obj.f_c_n);
             obj.harmonicAccentuator.consumeControlSignal(obj.f_c_n);
         end

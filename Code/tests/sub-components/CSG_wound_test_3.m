@@ -1,33 +1,23 @@
 %Test the wound CSG object in the scenario where the slide doesn't move to
 %ensure it outputs zeros
 
-% close all;
-% clear;
+close all;
+clear all;
 
 dbstop if error;
 
 %System parameters
 Fs = SystemParams.audioRate;
-stringLength = SystemParams.stringLengthMeters;
 stringParams = SystemParams.D_string_params;
 stringModeFilterSpec = SystemParams.D_string_modes.chrome;
-n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);
 
-%A slide velocity of zero corresponds to an f_c of 0
-f_c = 0;
-
-%generate the control signal based on the derivations in your notebook
-L = zeros(1, numSamples);
-L(1) = 1;
-for n = 2:numSamples
-    L(n) = L(n-1) - f_c/(n_w*stringLength*Fs);
-end
-
-%Set the initial one to be slightly greater than 1 in order to remove the
-%discontinuity at the beginning
-L_n_1 = L(1);
+%Configure the noise source and harmonic accentuator
+% noiseSource = "Burst";
+noiseSource = "PulseTrain";
+% harmonicAccentuator = "HarmonicResonatorBank";
+harmonicAccentuator = "ResoTanh";
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -37,15 +27,20 @@ overlap = .75*windowLength;
 N = 4096;
 y_upperLim = 5; %corresponds to 5kHz on the frequency axis
 
+%A slide speed of zero corresponds to an f_c of 0
+slideSpeed = 0;
+
 %create/initialize the processing objects
-csg_wound = CSG_wound(stringParams, stringModeFilterSpec, @tanh, L_n_1);
-csg_wound.g_bal = .25;
-y7 = zeros(1, length(L));
-for n = 1:length(L)
+csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
+csg_wound.g_user = 1;   %maximize the signal
+y7 = zeros(1, numSamples);
+
+%Processing loop
+for n = 1:numSamples
     if(mod(n, 100) == 0)
-        fprintf("n = %i/%i\n", n, length(L));
+        fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_wound.consumeControlSignal(L(n));
+    csg_wound.consumeControlSignal(slideSpeed);
     y7(n) = csg_wound.tick();
 end
 
