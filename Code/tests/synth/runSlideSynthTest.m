@@ -1,4 +1,4 @@
-function y = runSlideSynthTest(synthesizerParams, L, duration_sec)
+function y = runSlideSynthTest(synthesizerParams, L)
 %Easier to copy these here rather than make arguments atm... Fix this
 %later...
 Fs_audio = SystemParams.audioRate;
@@ -6,8 +6,9 @@ Fs_ctrl = SystemParams.controlRate;
 R = Fs_audio / Fs_ctrl;
 
 %Derived parameters
-numSamples_audio = duration_sec * Fs_audio;
-numSamples_ctrl = duration_sec * Fs_ctrl;
+numSamples_ctrl = length(L);
+numSamples_audio = R*numSamples_ctrl;
+
 n_audio = 0:numSamples_audio - 1;
 n_ctrl = 0:numSamples_ctrl - 1;
 
@@ -23,7 +24,7 @@ n = 1;
 for m = 1:numSamples_ctrl
     slideSynth.consumeControlSignal(L(m))
     for k = 1:R
-        if(mod(n, 100) == 0)
+        if(mod(n, 1000) == 0)
             fprintf("n = %i/%i\n", n, numSamples_audio);
         end
         y(n) = slideSynth.tick();
@@ -38,27 +39,34 @@ end
 %Generate the various plots
 figure;
 subplot(4, 1, 1)
-plot(n_audio, y);
-title("y[n]");
-xlabel("n");
+% plot(n_audio, y);
+% xlabel("n");
+plot(n_audio/Fs_audio, y);
+xlabel("Sec");
 ylabel("Amplitude");
+title("y[n]");
 
 subplot(4, 1, 2);
-plot(n_ctrl, L);
+plot(n_ctrl/Fs_ctrl, L);
 title("L[m]");
-xlabel("n");
+% xlabel("n");
+xlabel("Sec");
 ylabel("Relative length");
 
 subplot(4, 1, 3);
-plot(n_audio, f_c);
-title("f_c[n]");
-xlabel("n");
+% plot(n_audio, f_c);
+% xlabel("n");
+plot(n_audio/Fs_audio, f_c);
+xlabel("Sec");
 ylabel("Hz");
+title("f_c[n]");
 
 subplot(4, 1, 4);
-plot(n_audio, slideSpeed);
-title("slideSpeed[n]");
-xlabel("n");
+% plot(n_audio, slideSpeed);
+% xlabel("n");
+plot(n_audio/Fs_audio, slideSpeed);
+xlabel("Sec");
 ylabel("m/s");
+title("slideSpeed[n]");
 end
 

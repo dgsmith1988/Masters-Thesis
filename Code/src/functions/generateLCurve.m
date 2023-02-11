@@ -13,8 +13,9 @@ arguments
     Fs              {mustBePositive, mustBeInteger}
 end
 
-numSamples = duration_sec * Fs;
-assert(mod(numSamples, 1) == 0, "At this point the we only support an integer number of samples")
+% numSamples = duration_sec * Fs;
+% assert(mod(numSamples, 1) == 0, "At this point the we only support an integer number of samples")
+numSamples = round(duration_sec * Fs);
 
 startingStringLength = fretNumberToRelativeLength(startingFret);
 endingStringLength = fretNumberToRelativeLength(endingFret);
