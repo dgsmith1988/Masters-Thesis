@@ -6,9 +6,9 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = false;
+slideSynthParams.enableCSG = true;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
-slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
+slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
@@ -44,29 +44,29 @@ y_upperLim_kHz = Fs_audio/2000;
 %Pre-allocate the output buffer for speed and eliminating memory allocation
 %during the processing loop
 numNotes = length(slideLick);
-% lickDuration_sec = 0;
-% for k = 1:numNotes
-%     lickDuration_sec = lickDuration_sec + slideLick{k}.duration_sec;
-% end
-% numSamples_audio = lickDuration_sec * Fs_audio;
-% y12 = zeros(1, numSamples_audio);
-y12 = [];
+lickDuration_sec = 0;
+for k = 1:numNotes
+    lickDuration_sec = lickDuration_sec + slideLick{k}.duration_sec;
+end
+
+%Allocate slightly more as rounding can occur depending on durations and
+%subdivisions
+y12 = zeros(1, ceil(1.01*(lickDuration_sec * Fs_audio)));
 
 %Synthesize the sounds and stitch them together in the output buffer
-% i1 = 1;
+i1 = 1
 for k  = 1:numNotes
     fprintf("Synthesizing note %i/%i\n", k, numNotes);
     L = slideLick{k}.generateLCurve(Fs_ctrl);
-%     i2 = i1 + slideLick{k}.duration_sec*Fs_audio - 1;
-%     y12(i1:i2) = synthesizeSinglePluck(slideSynthParams, L);
-%     y12 = [y12, runSlideSynthTest(slideSynthParams, L)];
-    y12 = [y12, synthesizeSinglePluck(slideSynthParams, L)];
-%     i1 = i2 + 1;
+    synthSound = synthesizeSinglePluck(slideSynthParams, L);
+%     synthSound = runSlideSynthTest(slideSynthParams, L);
+    i2 = i1 + length(synthSound) - 1
+    y12(i1:i2) = synthSound;
+    i1 = i2 + 1
 end
 
 %Plot the results as well as the spectrogram
 figure;
-% plot(0:numSamples_audio-1, y12);
 plot(0:length(y12)-1, y12);
 title("y[n]");
 xlabel("n");

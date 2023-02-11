@@ -13,7 +13,7 @@ classdef Note
     end
     
     properties (Constant)
-        BPM = 80
+        BPM = 90
         slideRhythmicDuration = 1/4
         slideDuration_sec = Note.calucalateDuration(Note.slideRhythmicDuration, Note.BPM)
     end
@@ -41,8 +41,8 @@ classdef Note
                 %All the vibrato terms are in frets which are then mapped to the relative
                 %string length
                 centerFret = obj.fret;
-                vibratoWidth = .25;
-                vibratoFreq = 2;
+                vibratoWidth = 1/8;
+                vibratoFreq = 1.75;
                 t = (0:Fs_ctrl*soundDuration_sec-1)/Fs_ctrl;
                 fretTrajectory = vibratoWidth*sin(2*pi*vibratoFreq*t) + centerFret;
                 L = [L, fretNumberToRelativeLength(fretTrajectory)];
