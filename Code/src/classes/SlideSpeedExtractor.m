@@ -1,4 +1,4 @@
-classdef SlideSpeedExtractor < handle
+classdef SlideSpeedExtractor < Tickable
     %Calculate the slide speed from the control signal L[m]
     %This should run at the control rate.
     

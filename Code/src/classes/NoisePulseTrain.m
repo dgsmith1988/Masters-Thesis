@@ -1,4 +1,4 @@
-classdef NoisePulseTrain < Controllable & AudioGenerator
+classdef NoisePulseTrain < NoiseSource
     properties
         exponentialDecay
         dcBlocker

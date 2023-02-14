@@ -33,20 +33,17 @@ classdef FilterObject < AudioProcessor
         end
         
         function plotPhaseDelay(obj)
-%             phasedelay(obj.b, obj.a, obj.N, SystemParams.audioRate);
             phasedelay(obj.b, obj.a, obj.N);
             grid on;
             grid minor;
         end
         
-        function [phi, w, avg] = computePhaseDelay(obj)
+        function [phi, w] = computePhaseDelay(obj)
             [phi, w] = phasedelay(obj.b, obj.a, obj.N);
-            avg = mean(phi, 'omitnan');
         end
         
         function plotGroupDelay(obj)
             grpdelay(obj.b, obj.a, obj.N, SystemParams.audioRate);
-%             grpdelay(obj.b, obj.a, obj.N);
             grid on;
             grid minor;
         end

@@ -1,9 +1,5 @@
 classdef CSG_unwound < ContactSoundGenerator
     properties
-        g_TV = 1;
-        g_user = .10; 
-        slideSpeed_n
-        f_c_n   %Keep this here to provide a uniform interface for the testing code
         lowPassFilter
     end
     
@@ -11,6 +7,7 @@ classdef CSG_unwound < ContactSoundGenerator
         function obj = CSG_unwound()           
             %Generate the LPF coefficients and initalize the object to
             %noise as we are going to be filtering noise.
+            obj.g_user = .10;
             [b, a] = butter(1, .5);
             z_init = Noise.tick();           
             obj.lowPassFilter = FilterObject(b, a, z_init);
@@ -21,8 +18,8 @@ classdef CSG_unwound < ContactSoundGenerator
             lowPassed = obj.lowPassFilter.tick(noiseSample);
 
             %Scale the signal by the slide speed and output it
-            obj.g_TV = .5*obj.slideSpeed_n;
-            outputSample = obj.g_user*(obj.g_TV*lowPassed);
+            obj.g_slide = .5*obj.slideSpeed_n;
+            outputSample = obj.g_user*(obj.g_slide*lowPassed);
         end
         
         function consumeControlSignal(obj, slideSpeed_n)

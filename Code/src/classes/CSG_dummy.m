@@ -1,9 +1,4 @@
-classdef CSG_dummy < ContactSoundGenerator
-    properties
-        f_c_n
-        slideSpeed_n
-    end
-    
+classdef CSG_dummy < ContactSoundGenerator   
     methods
         function obj = CSG_dummy()
             

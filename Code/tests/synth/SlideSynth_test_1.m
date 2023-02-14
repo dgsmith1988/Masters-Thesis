@@ -34,7 +34,7 @@ y_upperLim_kHz = Fs_audio/2000;
 numSamples_audio = duration_sec * Fs_audio;
 numSamples_ctrl = duration_sec * Fs_ctrl;
 
-y1 = runSlideSynthTest(slideSynthParams, L, duration_sec);
+y1 = runSlideSynthTest(slideSynthParams, L);
 
 figure;
 spectrogram(y1, window, overlap, N, Fs_audio, "yaxis");

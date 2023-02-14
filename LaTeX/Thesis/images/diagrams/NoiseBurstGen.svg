@@ -303,14 +303,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="362.67217"
+     inkscape:cx="274.17217"
      inkscape:cy="673.2641"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
+     inkscape:window-width="2400"
+     inkscape:window-height="1271"
+     inkscape:window-x="2391"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true" />
@@ -440,7 +440,7 @@
      id="layer2"
      inkscape:label="Top Layer">
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1496)"
+       style="fill:none;stroke:#000000;stroke-width:0.50000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.50000001,0.50000001;stroke-opacity:1;marker-end:url(#marker1496);stroke-dashoffset:0"
        d="M 18.653123,47.41354 30.956247,18.97083"
        id="path1486"
        inkscape:connector-curvature="0" />
@@ -544,7 +544,7 @@
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1291-7-8-5)"
        sodipodi:nodetypes="cc" />
     <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46799999;stroke-miterlimit:4;stroke-dasharray:0.468, 0.468;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46799999;stroke-miterlimit:4;stroke-dasharray:0.46799999,0.93599998;stroke-dashoffset:0;stroke-opacity:1"
        id="rect5078"
        width="109.0219"
        height="43.061325"

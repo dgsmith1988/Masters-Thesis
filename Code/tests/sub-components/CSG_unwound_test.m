@@ -33,7 +33,7 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(0, slideSpeed(n));
+    csg_unwound.consumeControlSignal(slideSpeed(n));
     y1(n) = csg_unwound.tick();
 end
 
@@ -45,8 +45,8 @@ figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");
 title('Unwound CSG Test Output - No Slide Velocity Spectrogram');
 
-%*********Constant Slide Spped Test********
-slideSpeed = 250*ones(1, numSamples);
+%*********Constant Slide Speed Test********
+slideSpeed = .5*ones(1, numSamples);
 
 %create/initialize the processing objects
 csg_unwound = CSG_unwound();
@@ -57,7 +57,7 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(0, slideSpeed(n));
+    csg_unwound.consumeControlSignal(slideSpeed(n));
     y2(n) = csg_unwound.tick();
 end
 
@@ -74,7 +74,7 @@ title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram');
 a = 1/.09;
 increment = .6/numSamples;
 x = 0:increment:.6-increment;
-slideSpeed = 1000*(-a*(x -.3).^2 + 1);
+slideSpeed = (-a*(x -.3).^2 + 1);
 
 %create/initialize the processing objects
 csg_unwound = CSG_unwound();
@@ -85,7 +85,7 @@ for n = 1:numSamples
     if(mod(n, 100) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    csg_unwound.consumeControlSignal(0, slideSpeed(n));
+    csg_unwound.consumeControlSignal(slideSpeed(n));
     y3(n) = csg_unwound.tick();
 end
 

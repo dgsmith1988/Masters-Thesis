@@ -1,4 +1,4 @@
-classdef NoiseBurst < Controllable & AudioGenerator   
+classdef NoiseBurst < NoiseSource  
     properties
         exponentialDecay
     end

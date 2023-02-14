@@ -6,13 +6,13 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = true;
+slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "A";
+slideSynthParams.stringName = "G";
 Fs_audio = SystemParams.audioRate;
 Fs_ctrl = SystemParams.controlRate;
 
@@ -54,15 +54,15 @@ end
 y12 = zeros(1, ceil(1.01*(lickDuration_sec * Fs_audio)));
 
 %Synthesize the sounds and stitch them together in the output buffer
-i1 = 1
+i1 = 1;
 for k  = 1:numNotes
     fprintf("Synthesizing note %i/%i\n", k, numNotes);
     L = slideLick{k}.generateLCurve(Fs_ctrl);
     synthSound = synthesizeSinglePluck(slideSynthParams, L);
 %     synthSound = runSlideSynthTest(slideSynthParams, L);
-    i2 = i1 + length(synthSound) - 1
+    i2 = i1 + length(synthSound) - 1;
     y12(i1:i2) = synthSound;
-    i1 = i2 + 1
+    i1 = i2 + 1;
 end
 
 %Plot the results as well as the spectrogram

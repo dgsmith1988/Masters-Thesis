@@ -41,12 +41,12 @@ classdef ControlSignalProcessor < Tickable & Controllable
             obj.interpolator_slideSpeed = Interpolator(SystemParams.R, 0);
         end
         
-        function [L_n, f_c_n] = tick(obj)
+        function [L_n, slideSpeed_n] = tick(obj)
             L_n = obj.interpolator_L.tick();
             L_n = obj.smoother_L.tick(L_n);
             
-            f_c_n = obj.interpolator_slideSpeed.tick();
-            f_c_n = obj.smoother_slideSpeed.tick(f_c_n);
+            slideSpeed_n = obj.interpolator_slideSpeed.tick();
+            slideSpeed_n = obj.smoother_slideSpeed.tick(slideSpeed_n);
         end
         
         function consumeControlSignal(obj, L_m)

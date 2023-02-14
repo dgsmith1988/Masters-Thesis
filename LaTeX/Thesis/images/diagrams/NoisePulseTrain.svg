@@ -319,14 +319,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="373.00562"
+     inkscape:cx="284.50562"
      inkscape:cy="583.22489"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
+     inkscape:window-width="2400"
+     inkscape:window-height="1271"
+     inkscape:window-x="2391"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true" />
@@ -463,7 +463,7 @@
          inkscape:connector-curvature="0"
          id="path1486"
          d="M 60.324997,203.99896 72.628121,175.55625"
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1496)"
+         style="fill:none;stroke:#000000;stroke-width:0.50000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.50000001,0.50000001;stroke-opacity:1;marker-end:url(#marker1496);stroke-dashoffset:0"
          transform="translate(0,-87.000001)" />
       <path
          inkscape:connector-curvature="0"
@@ -563,7 +563,7 @@
    id="tspan3392">60</tspan></tspan></text>
     </g>
     <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.468;stroke-miterlimit:4;stroke-dasharray:0.468,0.468;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46799999;stroke-miterlimit:4;stroke-dasharray:0.46799999,0.93599998;stroke-dashoffset:0;stroke-opacity:1"
        id="rect5078"
        width="78.713539"
        height="43.061325"

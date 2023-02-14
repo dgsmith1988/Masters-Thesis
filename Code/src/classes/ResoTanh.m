@@ -3,7 +3,7 @@ classdef ResoTanh < HarmonicAccentuator
     %series with a tanh function
     
     properties
-        preTanhGain
+        preTanhGain = 
         resonator
     end
     

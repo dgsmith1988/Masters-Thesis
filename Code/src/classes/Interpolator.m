@@ -1,11 +1,11 @@
-classdef Interpolator < Controllable & AudioProcessor
+classdef Interpolator < Controllable & Tickable
    
-    properties
-        x_m
-        x_m_1
-        R
-        increment
-        k
+    properties(GetAccess = public)
+        x_m         %Target value
+        x_m_1       %Departure value
+        R           %number of points to interpolate, R = audioRate/controlRate
+        increment   %increment to be added each audiorate time-step
+        k           %current calulcation step (out of R)
     end
     
     methods

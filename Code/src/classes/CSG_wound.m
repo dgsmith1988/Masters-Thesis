@@ -8,30 +8,22 @@ classdef CSG_wound < ContactSoundGenerator
         %Constant string parameters
         n_w
         
-        %Parameters which change during run-time
-        g_slide
-        f_c_n
-        slideSpeed_n
-        
         %User specified tuning parameters which shouldn't change during
         %operation, but made non-constant to facilitate testing
         g_bal = .75; %favor the string winding noise as compared to modal resonators
-        g_user = .5;
     end
     
     properties (Constant)
-        %Tuned values used to initialize objects
-        r = .99
+        %Tuned values used to initialize objects, put here so the have a
+        %name
+        r = .99 %r value for resonators
         preTanhGain = 7
     end
     
     methods
-        function obj = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator)
-            %Initializing these to zero is no issue as they are given
-            %values at each call to the consumeControlSignal() function
-            obj.f_c_n = 0;
-            obj.slideSpeed_n = 0;
-                       
+        function obj = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator)                      
+            obj.g_user = .5;
+            
             if noiseSource == "Burst"
                 obj.noiseSource = NoiseBurst(0, stringParams.T60);
             elseif noiseSource == "PulseTrain"

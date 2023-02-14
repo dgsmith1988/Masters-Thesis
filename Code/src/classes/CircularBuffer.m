@@ -1,5 +1,5 @@
 classdef CircularBuffer < handle & AudioProcessor
-    %Circular buffer to help facilitate the interpolated delay line class.
+    %Circular buffer to facilitate delay lines.
     
     properties(Constant)
         %TODO: Eventually figure out the best places to put these things
