@@ -4,12 +4,13 @@ clear;
 close all;
 
 %Length of audio to capture
-duration_sec = 5;
+duration_sec = 15;
 
 %Device Settings
 Fs = 48000;
 bitDepth = "32-bit float";
-device = "miniDSP ASIO Driver";
+% device = "miniDSP ASIO Driver";
+device = "ASIO FIreface USB";
 driver = "ASIO";
 numChannels = 1; %UMIK-2 output channels are identical so just grab 1
 numSamples = duration_sec*Fs;

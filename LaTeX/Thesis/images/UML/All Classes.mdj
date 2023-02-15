@@ -12100,7 +12100,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGFmUhB0KZ/HII="
 							},
-							"name": "InitializeNonInterpolatingPart",
+							"name": "initializeNonInterpolatingPart",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -13477,7 +13477,7 @@
 											"top": 838,
 											"width": 292.296875,
 											"height": 13,
-											"text": "+InitializeNonInterpolatingPart(newData: float[1..*])",
+											"text": "+initializeNonInterpolatingPart(newData: float[1..*])",
 											"horizontalAlignment": 0
 										}
 									],
