@@ -22,8 +22,8 @@ max_pitchf0 = maxString_f0 / min_L;
 %value of decrement in this test at the final output.
 
 %Generate the sweep signal to test the block with
-sweepStop = ceil(FeedbackLoop.calculateTotalDWGLength(max_pitchf0));
-sweepStart = floor(FeedbackLoop.calculateTotalDWGLength(min_pitchf0));
+sweepStop = ceil(calculateTotalDWGLength(max_pitchf0, SystemParams.audioRate));
+sweepStart = floor(calculateTotalDWGLength(min_pitchf0, SystemParams.audioRate));
 decrement = (sweepStop - sweepStart) / (numSamples - 1);
 DWGLengthSweep = sweepStart:decrement:sweepStop;
 
@@ -70,7 +70,7 @@ DWGLengthSweep = a*(nRange*Ts).^2 + c;
 %Reset the internal state of the energy sscaler. Use this value based on
 %the parametrization above to produce continuity and agreement between the
 %theory and measured.
-energyScaler.prevLengthSamples = a*(-1*Ts)^2 + c;
+energyScaler.prevDWGLength = a*(-1*Ts)^2 + c;
 
 %Processing loop
 for n = nRange + 1

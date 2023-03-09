@@ -16,7 +16,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="NoiseBurstGen.svg">
+   sodipodi:docname="NoiseBurstGen.svg"
+   inkscape:export-filename="C:\Users\Graham\Documents\McGill\M.A\Thesis\Masters-Thesis\LaTeX\Thesis\images\diagrams\NoiseBurstGen.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <marker
@@ -303,14 +306,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.0000001"
-     inkscape:cx="274.17217"
-     inkscape:cy="673.2641"
+     inkscape:cx="239.90745"
+     inkscape:cy="593.2641"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
-     inkscape:window-width="2400"
-     inkscape:window-height="1271"
-     inkscape:window-x="2391"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true" />
@@ -544,9 +547,9 @@
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1291-7-8-5)"
        sodipodi:nodetypes="cc" />
     <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46799999;stroke-miterlimit:4;stroke-dasharray:0.46799999,0.93599998;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.46799999;stroke-miterlimit:4;stroke-dasharray:0.46799999, 0.93599998;stroke-dashoffset:0;stroke-opacity:1"
        id="rect5078"
-       width="109.0219"
+       width="75.552101"
        height="43.061325"
        x="4.7624998"
        y="11.760559" />
@@ -560,7 +563,7 @@
          id="tspan5080"
          x="5.8208327"
          y="8.9166718"
-         style="stroke-width:0.26458332;font-size:4.58611111px">Amplitude Envelope</tspan></text>
+         style="font-size:4.58611107px;stroke-width:0.26458332">Exponential Decay</tspan></text>
     <text
        id="text2670-5-9"
        y="47.702557"

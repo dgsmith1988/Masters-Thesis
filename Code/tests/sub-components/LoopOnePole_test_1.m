@@ -30,8 +30,9 @@ for n = 1:numSamples
 end
 
 figure;
-plot(pitch_f0, a);
-title("Figure 19 Recreation");
+plot(pitch_f0, a, "--k");
+% title("Figure 19 Recreation");
+title("Recreation");
 xlim([300 1000]);
 ylim([-0.03 0]);
 grid on;
@@ -40,8 +41,9 @@ xlabel("Frequency (Hz)");
 ylabel("Loop Filter Coeffecient a");
 
 figure;
-plot(pitch_f0, g);
-title("Figure 18 Recreation");
+plot(pitch_f0, g, "--k");
+% title("Figure 18 Recreation");
+title("Recreation");
 ylim([.99 1]);
 xlim([300 1000]);
 grid on;

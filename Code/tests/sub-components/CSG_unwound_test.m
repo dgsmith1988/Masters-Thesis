@@ -30,7 +30,7 @@ y1 = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_unwound.consumeControlSignal(slideSpeed(n));
@@ -43,7 +43,7 @@ title("Unwound CSG Test Output - No Slide Velocity");
 
 figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");
-title('Unwound CSG Test Output - No Slide Velocity Spectrogram');
+% title('Unwound CSG Test Output - No Slide Velocity');
 
 %*********Constant Slide Speed Test********
 slideSpeed = .5*ones(1, numSamples);
@@ -54,7 +54,7 @@ y2 = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_unwound.consumeControlSignal(slideSpeed(n));
@@ -67,7 +67,7 @@ title("Unwound CSG Test Output - Constant Slide Velocity");
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");
-title('Unwound CSG Test Output - Constant Slide Velocity Spectrogram');
+% title('Unwound CSG Test Output - Constant Slide Velocity');
 
 %*********Time Varying Slide Velocity Test********
 %Generate the parabolic trajectory from before
@@ -82,7 +82,7 @@ y3 = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_unwound.consumeControlSignal(slideSpeed(n));
@@ -95,4 +95,4 @@ title("Unwound CSG Test Output - Time-Varying Slide Velocity");
 
 figure;
 spectrogram(y3, window, overlap, N, Fs, "yaxis");
-title('Unwound CSG Test Output - Time-Varying Slide Velocity Spectrogram');
+% title('Unwound CSG Test Output - Time-Varying Slide Velocity');

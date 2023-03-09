@@ -1,4 +1,4 @@
-classdef LoopOnePole < LoopFilter & FilterObject
+classdef LoopOnePole < LoopFilter
     %Class matching the parametrization of the loop filter specified in the
     %CMJ paper. One-pole low-pass parametrized by gain (g) and cut-off (a)
     %           g*(1 + a)
@@ -27,7 +27,7 @@ classdef LoopOnePole < LoopFilter & FilterObject
             %initialize everything in the parent to zero to keep matlab
             %happy. in the call to consumeControlSignal() the coefficients
             %will be generated.
-            obj@FilterObject(0, 0, 0);
+            obj@LoopFilter(0, 0, 0);
             obj.a_pol = a_pol;
             obj.g_pol = g_pol;
             obj.consumeControlSignal(L_n);

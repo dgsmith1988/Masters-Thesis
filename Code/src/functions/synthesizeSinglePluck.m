@@ -26,5 +26,6 @@ for m = 1:numSamples_ctrl
         n = n + 1;
     end
 end
+n; %for allowing a breakpoint to be put here
 end
 

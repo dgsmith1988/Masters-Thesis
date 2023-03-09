@@ -57,3 +57,15 @@ end
 figure;
 plot(y2);
 title("Noise Burst Test - Rate Changing");
+
+windowLength = 12*10^-3*Fs; %12 ms window
+% window = hamming(windowLength);
+window = rectwin(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim = Fs/2000;
+
+figure;
+spectrogram(y2, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+% title('Wound CSG Combined Branches Output Spectrogram')

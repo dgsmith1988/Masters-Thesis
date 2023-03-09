@@ -1,6 +1,4 @@
 function y = runSlideSynthTest(synthesizerParams, L)
-%Easier to copy these here rather than make arguments atm... Fix this
-%later...
 Fs_audio = SystemParams.audioRate;
 Fs_ctrl = SystemParams.controlRate;
 R = Fs_audio / Fs_ctrl;

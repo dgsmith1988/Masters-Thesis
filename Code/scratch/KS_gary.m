@@ -5,7 +5,7 @@
 % length using allpass interpolation. [10 pts]
 
 fs = 48000;  % sample rate
-f0 = 1300;    % fundamental frequency
+f0 = 375;    % fundamental frequency
 t = 3.0;     % time duration
 B = 1.0;     % blend factor (between 0 - 1)
 A = 1;     % amplitude of binary initialization

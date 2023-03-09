@@ -28,7 +28,7 @@ noisePulseTrain = NoisePulseTrain(period_samp, T60);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     noisePulseTrain.consumeControlSignal(f_c);
@@ -47,7 +47,7 @@ f_c = 1000*(-a*(x -.3).^2 + 1);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     noisePulseTrain.consumeControlSignal(f_c(n));
@@ -57,3 +57,16 @@ end
 figure;
 plot(y2);
 title("Noise Pulse Train Test - Rate Changing");
+
+%Spectrogram analysis parameters
+windowLength = 12*10^-3*Fs; %12 ms window
+% window = hamming(windowLength);
+window = rectwin(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim = Fs/2000;
+
+figure;
+spectrogram(y2, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+% title('Wound CSG Combined Branches Output Spectrogram')

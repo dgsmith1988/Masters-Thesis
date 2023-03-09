@@ -38,17 +38,18 @@ nb = zeros(1, numSamples);
 y1 = zeros(1, numSamples);
 
 %Processing objects
-noiseBurst = NoiseBurst(period_samp, T60);
+% noiseBurst = NoiseBurst(period_samp, T60);
 harmonicResonatorBank = HarmonicResonatorBank(f_c(1), r);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
-    noiseBurst.consumeControlSignal(f_c(n));
+%     noiseBurst.consumeControlSignal(f_c(n));
     harmonicResonatorBank.consumeControlSignal(f_c(n));
-    nb(n) = noiseBurst.tick();
+%     nb(n) = noiseBurst.tick();
+    nb(n) = Noise.tick();
     y1(n) = harmonicResonatorBank.tick(nb(n));
 end
 
@@ -56,11 +57,11 @@ figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 hold on; 
-plot((0:n-1)/Fs, f_c/1000, 'r');
-plot((0:n-1)/Fs, 2*f_c/1000, 'r');
-plot((0:n-1)/Fs, 3*f_c/1000, 'r');
-plot((0:n-1)/Fs, 4*f_c/1000, 'r');
-plot((0:n-1)/Fs, 5*f_c/1000, 'r');
-plot((0:n-1)/Fs, 6*f_c/1000, 'r');
+plot((0:n-1)/Fs, f_c/1000, ':r');
+plot((0:n-1)/Fs, 2*f_c/1000, ':r');
+plot((0:n-1)/Fs, 3*f_c/1000, ':r');
+plot((0:n-1)/Fs, 4*f_c/1000, ':r');
+plot((0:n-1)/Fs, 5*f_c/1000, ':r');
+plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("Harmonic Resonator Test");
+% title("Harmonic Resonator Test");

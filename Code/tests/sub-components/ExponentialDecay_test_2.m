@@ -34,7 +34,8 @@ for n = 1:numSamples
 end
 
 stem(0:numSamples-1, y2);
-title(sprintf("Exponential Decay Overlap Test - Signal should be 1.001 reached after %i samples", T60_samples));
+% title(sprintf("Exponential Decay Overlap Test - Signal should be 1.001 reached after %i samples", T60_samples));
+title(sprintf("Signal should be 1.001 after %i samples", T60_samples));
 ylim([.96, 1.005]);
 xlim([T60_samples-10, T60_samples+10]);
 grid on;

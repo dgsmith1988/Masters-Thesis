@@ -1,10 +1,10 @@
-%Script to make measurements using UMIK-2 Microphone. Make sure the
+%Script to make measurements using and audio interface. Make sure the
 %settings here match what appears in the device's configuration panel.
-clear;
-close all;
+% clear;
+% close all;
 
 %Length of audio to capture
-duration_sec = 15;
+duration_sec = 10;
 
 %Device Settings
 Fs = 48000;
@@ -12,7 +12,8 @@ bitDepth = "32-bit float";
 % device = "miniDSP ASIO Driver";
 device = "ASIO Fireface USB";
 driver = "ASIO";
-numChannels = 1; %UMIK-2 output channels are identical so just grab 1
+numChannels = 2;
+labels = {'AKG', 'DPA'};
 numSamples = duration_sec*Fs;
 samplesPerFrame = 1024;
 
@@ -23,6 +24,7 @@ window = hamming(windowLength);
 overlap = .75*windowLength;
 N = 4096;
 y_upperLim_kHz = Fs/2000; 
+% y_upperLim_kHz = 8; 
 
 %*******End of user configuration, program begins********
 %Frame related calculations
@@ -43,14 +45,14 @@ for n = 1:numFrames
     end
     iStart = samplesPerFrame*(n-1) + 1;
     iEnd = iStart + samplesPerFrame - 1;
-    [capturedAudio(iStart:iEnd), numOverrun(n)] = deviceReader();
+    [capturedAudio(iStart:iEnd, :), numOverrun(n)] = deviceReader();
     if numOverrun ~= 0
         fprintf("Frame #%i - %i samples of overrun" , n, numOverrun(n));
     end
 end
 
-%Transpose it into a row-vector as I prefer that
-capturedAudio = capturedAudio';
+% %Transpose it into a row-vector as I prefer that
+% capturedAudio = capturedAudio';
 
 fprintf("Audio capture finshed.\n");
 fprintf("Total number of samples overrun: %d.\n", sum(numOverrun));
@@ -58,14 +60,18 @@ release(deviceReader);
 
 %********Generate Plots********
 t = (0:numSamples - 1)/Fs;
-
 figure;
 plot(t, capturedAudio);
 title("Captured Audio Data");
 xlabel("Sec");
 ylabel("Amplitude");
+legend(labels);
 
-figure;
-spectrogram(capturedAudio, window, overlap, N, Fs, "yaxis");  
-ylim([0 y_upperLim_kHz]);
-title("Captured Audio Data");
+for channel = 1:numChannels
+    figure;
+    spectrogram(capturedAudio(:, channel), window, overlap, N, Fs, "yaxis");
+    ylim([0 y_upperLim_kHz]);
+    title("Captured Audio Data - " + labels(channel));
+end
+
+ylim([0 8]);

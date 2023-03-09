@@ -84,6 +84,7 @@ end
 subplot(5, 1, 5);
 stem(0:numSamples-1, y);
 title('Object starts at sample 15');
+xlabel("Time-step (n)");
 
 %TODO: Add a test for where the f_c signal sweeps through a range of
 %values?

@@ -40,7 +40,7 @@ y = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    y(n) = loopFilter.tick(delayLine(ptr));
+    y(n) = loopFilter.passThru(delayLine(ptr));
     delayLine(ptr) = y(n);
     ptr = ptr + 1;
     if ptr > delay

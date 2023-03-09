@@ -3,7 +3,6 @@ classdef Lagrange < CircularBuffer
         M               %Interger delay length
         N               %Lagrange interpolation order
         L               %Length of filter for Lagrange interp
-%         h               %Lagrange filter coefficients
         h               %Filter object to store the coefficients and exploit the plotting features of the filter object
         D               %Delay implemented by Lagrange component, D = floor(D) + d
         D_min           %Minimum D based on N
@@ -32,7 +31,6 @@ classdef Lagrange < CircularBuffer
             
             %Calculate the various derived values
             obj.L = N + 1;
-%             obj.h = hlagr2(obj.L, obj.d);
             b = hlagr2(obj.L, obj.d);
             obj.h = FilterObject(b, 1, zeros(1, obj.L-1));
             
@@ -60,7 +58,6 @@ classdef Lagrange < CircularBuffer
             end
             
             %perform the convolution sum with the Lagrange filter kernel
-%             outputSample = sum((obj.h .* obj.x));
             outputSample = sum((obj.h.b .* obj.x));
         end
         
@@ -86,7 +83,6 @@ classdef Lagrange < CircularBuffer
         function setFractionalDelay(obj, newValue)
             obj.d = newValue;
             obj.D = floor(obj.D) + obj.d;
-%             obj.h = hlagr2(obj.L, obj.d);
             obj.h.b = hlagr2(obj.L, obj.d);
         end
         

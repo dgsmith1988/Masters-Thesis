@@ -15,7 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="f_c_extractor.svg">
+   sodipodi:docname="f_c_extractor.svg"
+   inkscape:export-filename="C:\Users\Graham\Documents\McGill\M.A\Thesis\Masters-Thesis\LaTeX\Thesis\images\diagrams\f_c_extractor.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <marker
@@ -314,8 +317,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="445.00815"
-     inkscape:cy="647.88312"
+     inkscape:cx="405.81889"
+     inkscape:cy="676.16739"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -334,7 +337,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

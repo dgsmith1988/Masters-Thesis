@@ -41,6 +41,7 @@ plot(err, 'DisplayName', 'err');
 hold off;
 legend();
 title('f_c comparison');
+% ylim([-10 1010]);
 
 subplot(2, 1, 2);
 plot(L, 'DisplayName', 'L[n]');

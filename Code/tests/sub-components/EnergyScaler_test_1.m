@@ -22,8 +22,8 @@ max_pitchf0 = maxString_f0 / min_L;
 %value of increment in this test at the final output.
 
 %Generate the sweep signal to test the block with
-sweepStop = floor(FeedbackLoop.calculateTotalDWGLength(min_pitchf0));
-sweepStart = ceil(FeedbackLoop.calculateTotalDWGLength(max_pitchf0));
+sweepStop = floor(calculateTotalDWGLength(min_pitchf0, SystemParams.audioRate));
+sweepStart = ceil(calculateTotalDWGLength(max_pitchf0, SystemParams.audioRate));
 increment = (sweepStop - sweepStart) / (numSamples - 1);
 DWGLengthSweep = sweepStart:increment:sweepStop;
 
@@ -48,7 +48,7 @@ yyaxis right;
 plot(nRange, DWGLengthSweep);
 ylabel("DWG Length (Samples)");
 xlabel("n (Time-step)");
-title("g_c for Linearly Increasing DWG Length");
+title("g_c for Linear DWG Length");
 
 delta_x_theory = increment*ones(1, numSamples);
 g_c_theory = sqrt(abs(1-delta_x_theory));
@@ -56,22 +56,23 @@ g_c_err = g_c_theory - g_c;
 
 subplot(2, 1, 2);
 plot(nRange, g_c_err)
-title("g_c Error")
-ylabel("Theory - Measured");
+% title("g_c Error");
+% ylabel("Theory - Measured");
+ylabel("g_c Error");
 xlabel("n (Time-step)");
+ylim([-1 1]);
 
 %********Test 2 - Decreasing Parabolic DWG Length*********
-
 %Generate the sweep signal to test the block with by sampling the
 %continuous domain signal
 a = (sweepStop - sweepStart) / duration_sec^2;
 c = sweepStart;
 DWGLengthSweep = a*(nRange*Ts).^2 + c;
 
-%Reset the internal state of the energy sscaler. Use this value based on
+%Reset the internal state of the energy scaler. Use this value based on
 %the parametrization above to produce continuity and agreement between the
 %theory and measured.
-energyScaler.prevLengthSamples = a*(-1*Ts)^2 + c;
+energyScaler.prevDWGLength = a*(-1*Ts)^2 + c;
 
 %Processing loop
 for n = nRange + 1
@@ -88,7 +89,7 @@ yyaxis right;
 plot(nRange, DWGLengthSweep);
 ylabel("DWG Length (Samples)");
 xlabel("n (Time-step)");
-title("g_c for Increasing Parabolic DWG Length");
+title("g_c for Quadratic DWG Length");
 
 DWG_n_theory = a*(nRange*Ts).^2 + c;
 DWG_n_1_theory = a*((nRange-1)*Ts).^2 + c;

@@ -3,20 +3,20 @@
 
 close all;
 clear;
-addpath("..\src");
+% addpath("..\src");
 
 num_strings = 3;
 num_slides = 3;
 
-LongitudinalModeFilters.E_string.brass = LongitudinalModeFilter(SystemParams.E_string.brass);
-LongitudinalModeFilters.E_string.glass = LongitudinalModeFilter(SystemParams.E_string.glass);
-LongitudinalModeFilters.E_string.chrome = LongitudinalModeFilter(SystemParams.E_string.chrome);
-LongitudinalModeFilters.A_string.brass = LongitudinalModeFilter(SystemParams.A_string.brass);
-LongitudinalModeFilters.A_string.glass = LongitudinalModeFilter(SystemParams.A_string.glass);
-LongitudinalModeFilters.A_string.chrome = LongitudinalModeFilter(SystemParams.A_string.chrome);
-LongitudinalModeFilters.D_string.brass = LongitudinalModeFilter(SystemParams.D_string.brass);
-LongitudinalModeFilters.D_string.glass = LongitudinalModeFilter(SystemParams.D_string.glass);
-LongitudinalModeFilters.D_string.chrome = LongitudinalModeFilter(SystemParams.D_string.chrome);
+LongitudinalModeFilters.E_string.brass = LongitudinalMode(SystemParams.E_string_modes.brass);
+LongitudinalModeFilters.E_string.glass = LongitudinalMode(SystemParams.E_string_modes.glass);
+LongitudinalModeFilters.E_string.chrome = LongitudinalMode(SystemParams.E_string_modes.chrome);
+LongitudinalModeFilters.A_string.brass = LongitudinalMode(SystemParams.A_string_modes.brass);
+LongitudinalModeFilters.A_string.glass = LongitudinalMode(SystemParams.A_string_modes.glass);
+LongitudinalModeFilters.A_string.chrome = LongitudinalMode(SystemParams.A_string_modes.chrome);
+LongitudinalModeFilters.D_string.brass = LongitudinalMode(SystemParams.D_string_modes.brass);
+LongitudinalModeFilters.D_string.glass = LongitudinalMode(SystemParams.D_string_modes.glass);
+LongitudinalModeFilters.D_string.chrome = LongitudinalMode(SystemParams.D_string_modes.chrome);
 
 %Now lets generate the frequency responses to see how they compare to what
 %the paper displays.
@@ -52,11 +52,28 @@ for k = 1:numel(strings)
         semilogx(f, mag2db(abs(h)));
         ylabel('Magnitude (dB)');
         xlabel('Frequency (Hz)');
-        xlim([400 5000]);
-        ylim([-30 0]);
-        title_string = sprintf("%s - %s slide", strings{k}, slides{l});
-        title(strrep(title_string, '_', ' '));
+        xlim([300 5000]);
+        ylim([-35 5]);
+        text(500, -30, sprintf("String #%i", 6-(k-1)));
         grid on;
+        xticklabels({});
+        xlabel({});
+        
+        %Add the slide type only on the top row
+        if n == 1 || n == 2 || n == 3
+            title_string = sprintf("%s slide", slides{l});
+            title_string{1}(1) = upper(title_string{1}(1));
+            title(title_string);
+        end
+        
+        %Add the tick labels and xlabel only on the bottom row
+        if n == 7 || n == 8 || n == 9
+            xticks(1000*[.4 .5 .6 .7 .8 .9 1 2 3 4 5]);
+            xticklabels({'', '.5', '', '', '', '', '1', '2', '3', '4', '5'});
+            xtickangle(0);
+            xlabel("Frequency (kHz)");
+        end
+        
         n = n + 1;
     end
 end

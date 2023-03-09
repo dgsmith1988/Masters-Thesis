@@ -44,7 +44,7 @@ csg_wound.g_user = 1;   %maximize the signal
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_wound.consumeControlSignal(slideSpeed(n));
@@ -58,7 +58,7 @@ title("Wound CSG Longitudinal Branch Test Output");
 figure;
 spectrogram(y1, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Longitudinal Branch Output Spectrogram')
+% title('Wound CSG Longitudinal Branch Output Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
 
 %*****Resonator Branch Test*****
@@ -69,7 +69,7 @@ y2 = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_wound.consumeControlSignal(slideSpeed(n));
@@ -78,13 +78,13 @@ end
 
 figure;
 plot(y2);
-title("Wound CSG Resonator Branch Test Output");
+% title("Wound CSG Resonator Branch Test Output");
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Harmonics Branch Output Spectrogram')
-yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
+% title('Wound CSG Harmonics Branch Output Spectrogram')
+yline(f_c(1)/1000*[1 2 3 4 5 6], ':r');
 
 %*****Longitudinal + Harmonics Branch Test*****
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
@@ -94,7 +94,7 @@ y3 = zeros(1, numSamples);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     csg_wound.consumeControlSignal(slideSpeed(n));
@@ -103,12 +103,12 @@ end
 
 figure;
 plot(y3);
-title("Wound CSG Combined Branches Test Output");
+% title("Wound CSG Combined Branches Test Output");
 
 figure;
 spectrogram(y3, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
-title('Wound CSG Combined Branches Output Spectrogram')
+% title('Wound CSG Combined Branches Output Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
-yline(f_c(1)/1000*[1 2 3 4 5 6], '--r');
-yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--r');
+yline(f_c(1)/1000*[1 2 3 4 5 6], ':r');
+yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, ':r');

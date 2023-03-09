@@ -5,8 +5,8 @@
 %amplitude scaling from teh CSG_Wound in total explains the slight
 %differences in the output spectrograms from a noise standpoint
 
-% close all;
-% clear;
+close all;
+clear;
 
 dbstop if error;
 
@@ -27,7 +27,8 @@ window = hamming(windowLength);
 % window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-y_upperLim = 7; %corresponds to 5kHz on the frequency axis
+% y_upperLim = 8; %corresponds to 5kHz on the frequency axis
+y_upperLim = Fs/2000; %corresponds to 5kHz on the frequency axis
 
 %Generate f_c control signal
 a = 1/.09;
@@ -45,7 +46,7 @@ resoTanh = ResoTanh(f_c(1), r, preTanhGain);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     noisePulseTrain.consumeControlSignal(f_c(n));
@@ -65,4 +66,4 @@ plot((0:n-1)/Fs, 4*f_c/1000, ':r');
 plot((0:n-1)/Fs, 5*f_c/1000, ':r');
 plot((0:n-1)/Fs, 6*f_c/1000, ':r');
 hold off;
-title("ResoTanh Test");
+% title("ResoTanh Test");

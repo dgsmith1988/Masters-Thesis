@@ -1,4 +1,4 @@
-%********Test 2 - Frequency Resposne for range of L*********
+%********Test 2 - Frequency Response for range of L*********
 %Run L through a range of parameters to determine the frequency response
 %effects and ensure that the resulting systems would be stable in a
 %feedback loop. This is done for all strings.

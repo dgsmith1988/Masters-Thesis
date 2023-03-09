@@ -43,9 +43,11 @@ plot(R*(1+n_ctrl), L, "DisplayName", "L");
 hold on;
 stem(n_audio, L_interp, "DisplayName", "L interp");
 hold off;
-legend();
+legend("AutoUpdate", "off", "Location", "NorthWest");
 title("Interpolator Test");
 xline(R*(1:j-1), "--k", "Displayname", "Frame");
+% xline(R*(1:j-1), "--k");
+xlabel("Time-index (n)");
 
 % figure;
 % t = tiledlayout(1, 1);

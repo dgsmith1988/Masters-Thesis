@@ -20,7 +20,7 @@ delay = M + D;
 %******Test the basic constructor first******
 figure;
 for k = 1:length(M)
-    interpolatedDelayLine = Lagrange_v2(N, delay(k));
+    interpolatedDelayLine = Lagrange(N, delay(k));
     
     %Run the test signal through the delay to see what comes out
     for n = 1:length(x)
@@ -39,7 +39,8 @@ for k = 1:length(M)
     grid on;
     grid minor;
     legend();
-    title(sprintf("Interp Lagrange Delay Test - M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
+%     title(sprintf("Interp Lagrange Delay Test - M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
+    title(sprintf("M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
 end
 
 %******Test the increment/decrement delay feature******
@@ -48,7 +49,7 @@ x = repmat(x, [1, 3]);
 y = zeros(size(x));
 M = 8;
 delay = M + D;
-interpolatedDelayLine = Lagrange_v2(N, delay);
+interpolatedDelayLine = Lagrange(N, delay);
 n = 1;
 for k = 1:3
     if k == 2
@@ -74,7 +75,8 @@ stem(n, x, 'DisplayName', 'x');
 hold on;
 stem(n, y, 'DisplayName', 'y');
 hold off;
-title(sprintf("Interp Lagrange Delay Test - Changing Delay During Operation"));
+title(sprintf("Changing Delay During Operation"));
+% title(sprintf("Interp Lagrange Delay Test - Changing Delay During Operation"));
 grid on;
 grid minor;
 legend();
@@ -85,7 +87,7 @@ M = [8, 9, 8];
 d = [.25, .5, .75];
 D = d + (N-1)/2;
 delay = M + D;
-interpolatedDelayLine = Lagrange_v2(N, delay(1));
+interpolatedDelayLine = Lagrange(N, delay(1));
 n = 1;
 for k = 1:3
     interpolatedDelayLine.setDelay(delay(k))
@@ -104,7 +106,8 @@ stem(n, x, 'DisplayName', 'x');
 hold on;
 stem(n, y, 'DisplayName', 'y');
 hold off;
-title(sprintf("Interp Lagrange Delay Test - Changing Delay Component"));
+% title(sprintf("Interp Lagrange Delay Test - Changing Delay Component"));
+title(sprintf("Changing Fractional Delay Component"));
 grid on;
 grid minor;
 legend();

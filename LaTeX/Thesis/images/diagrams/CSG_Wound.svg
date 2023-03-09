@@ -15,7 +15,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="CSG_Wound.svg">
+   sodipodi:docname="CSG_Wound.svg"
+   inkscape:export-filename="C:\Users\Graham\Documents\McGill\M.A\Thesis\Masters-Thesis\LaTeX\Thesis\images\diagrams\CSG_wound.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <marker
@@ -254,15 +257,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="593.71544"
-     inkscape:cy="654.43729"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="620.0138"
+     inkscape:cy="658.05048"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2400"
-     inkscape:window-height="1271"
-     inkscape:window-x="2391"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1" />
   <metadata
@@ -284,7 +287,9 @@
      transform="translate(0,-87)">
     <g
        transform="translate(120.97204,81.984931)"
-       id="g824-7">
+       id="g824-7"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <g
          id="g862">
         <rect
@@ -314,7 +319,9 @@
     </g>
     <g
        id="g964"
-       transform="translate(56.666288,79.913593)">
+       transform="translate(56.666288,79.913593)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <path
          sodipodi:type="star"
          style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -347,7 +354,9 @@
     </g>
     <g
        transform="translate(56.666288,122.29192)"
-       id="g964-6">
+       id="g964-6"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <path
          sodipodi:type="star"
          style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -380,7 +389,9 @@
     </g>
     <g
        id="g1010"
-       transform="translate(51.065729,85.729384)">
+       transform="translate(51.065729,85.729384)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <text
          id="text1001"
          y="52.481255"
@@ -404,66 +415,88 @@
        d="M 97.820647,114.58855 H 129.65913"
        id="path885"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1179)"
        d="m 174.6433,114.58855 h 9.35443"
        id="path1169"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1179-7)"
        d="m 170.16543,156.96688 h 13.77202"
        id="path1169-9"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1928)"
        d="m 107.08067,114.532 v 42.61681 h 27.17173"
        id="path1918"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2156)"
        d="m 271.12691,135.77771 h 22.81717"
        id="path2020"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2092)"
        d="m 247.43595,135.77771 h 6.37645"
        id="path2022"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2034)"
        d="m 221.4337,135.77771 h 8.5517"
        id="path2024"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2492)"
        d="m 201.43873,114.58855 c 0,0 15.12852,-0.0945 16.59318,0 v 14.59002"
        id="path2404"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2416)"
        d="m 201.43873,156.96688 h 16.54593 v -14.65364"
        id="path2406"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        inkscape:connector-curvature="0"
        id="path1486-9-4"
        d="m 257.15749,151.25314 12.30312,-28.44272"
-       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1496-67-6)" />
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1496-67-6)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="278.21027"
        y="133.18694"
-       id="text887-56"><tspan
+       id="text887-56"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan885-0"
          x="278.21027"
@@ -474,7 +507,9 @@
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="205.44986"
        y="112.58723"
-       id="text887-56-4"><tspan
+       id="text887-56-4"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan885-0-1"
          x="205.44986"
@@ -487,7 +522,9 @@
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="205.56177"
        y="162.12189"
-       id="text887-56-4-2"><tspan
+       id="text887-56-4-2"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan885-0-1-0"
          x="205.56177"
@@ -497,7 +534,9 @@
    id="tspan1088">2</tspan>[n]</tspan></text>
     <g
        transform="translate(-84.535443,137.27288)"
-       id="g964-6-0-4-4">
+       id="g964-6-0-4-4"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <g
          id="g1220">
         <path
@@ -536,13 +575,17 @@
        id="path2654"
        d="m 60.237006,171.94784 h 86.523614 l 12.30312,-28.44272"
        style="fill:none;stroke:#000000;stroke-width:0.50000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.50000001,0.50000001;stroke-opacity:1;marker-end:url(#marker2074);stroke-dashoffset:0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        id="text2670"
        y="169.4962"
        x="81.966316"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       xml:space="preserve"><tspan
+       xml:space="preserve"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          style="font-size:4.93888903px;stroke-width:0.26458332"
          y="169.4962"
          x="81.966316"
@@ -555,13 +598,17 @@
        d="M -0.0076856,171.94784 H 42.931467"
        id="path1341-6"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="4.78828"
        y="168.92877"
-       id="text2670-5-1-9"><tspan
+       id="text2670-5-1-9"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan2668-6-0-7"
          x="4.78828"
@@ -572,13 +619,17 @@
        d="m 31.243263,171.7054 v 16.69166 l 200.381897,0.13584 v -37.41598 l 12.30312,-28.44272"
        id="path1918-1"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.50000001, 0.50000001;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1291-4-5)"
        d="M 69.96173,171.70112 69.861504,131.01524 82.164628,101.95265"
        id="path1341-6-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
   <g
      inkscape:groupmode="layer"

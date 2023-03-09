@@ -1,4 +1,4 @@
-%********Test 2 - Frequency Resposne for range of L*********
+%********Test 3 - Phase Delay for range of L*********
 %Run L through a range of parameters to determine the phase delay at each
 %setting. This is done for all strings.
 

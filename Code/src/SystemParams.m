@@ -61,7 +61,7 @@ classdef SystemParams
         A_string_params = StringParams(5, 110, 2600, 13*10^-3, ...
             [-0.05928143968051, 0.00171045642780],...  
             [0.98347976839019 , 0.00040239847018]);     
-        D_string_params = StringParams(4, 146.83, 3800, 11*10^-3, ...
+        D_string_params = StringParams(4, 146.83, 3800, 5*10^-3, ...
             [-0.06091679973956, 0.00298025530804],...  
             [0.98780640700360 , 0.00037712305083]);
         G_string_params = StringParams(3, 196, 0, 0, ...
@@ -75,9 +75,9 @@ classdef SystemParams
             [0.99402123928178 , 0.00008928138142]);     
         
         stringLengthMeters = .65;
-%         minRelativeStringLength = fretNumberToRelativeLength(24);  %Limit things to two octaves per string (or the 24th fret)
+        minRelativeStringLength = fretNumberToRelativeLength(24);  %Limit things to two octaves per string (or the 24th fret)
 %         minRelativeStringLength = fretNumberToRelativeLength(21);
-        minRelativeStringLength = fretNumberToRelativeLength(15);
+%         minRelativeStringLength = fretNumberToRelativeLength(15);
         maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
         
         minFretNumber = relativeLengthToFretNumber(SystemParams.maxRelativeStringLength);

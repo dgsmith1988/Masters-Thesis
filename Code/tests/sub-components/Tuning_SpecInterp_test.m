@@ -36,7 +36,7 @@ y = zeros(1, numSamples);
 %Processing loop
 stringDWG.pluck();
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     y(n) = stringDWG.tick(0);

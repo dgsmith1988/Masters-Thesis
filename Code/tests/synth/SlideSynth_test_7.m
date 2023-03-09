@@ -1,12 +1,12 @@
 %Attempet to emulate the single string slide lick which was recorded
 
-clear;
-close all;
+% clear;
+% close all;
 dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = false;
+slideSynthParams.enableCSG = true;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "HarmonicResonatorBank";
 slideSynthParams.stringNoiseSource = "Pink";

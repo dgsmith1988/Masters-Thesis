@@ -28,7 +28,7 @@ classdef ControlSignalProcessor < Tickable & Controllable
             %initially starts generating sound. This helps avoid massive
             %changes in the L[n] which aren't supported by the interpolated
             %delay line. It only moves one sample at a time max. z_init is
-            %specified in this manner as filter() iplements things via
+            %specified in this manner as filter() implements things via
             %DFII Transposed.
             z_init = L_m_1 * 1/obj.M * (obj.M-1:-1:1);
             obj.smoother_L = FilterObject(b, 1, z_init);

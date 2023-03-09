@@ -35,7 +35,8 @@ for k = 1:length(T60_samples)
     end
     
     stem(0:numSamples-1, y1(k, :));
-    title(sprintf("Exponential Decay T60 Test - .001 reached after %i samples", T60_samples(k)));
+%     title(sprintf("Exponential Decay T60 Test - .001 reached after %i samples", T60_samples(k)));
+    title(sprintf(".001 reached after %i samples", T60_samples(k)));
     ylim([0 .002]);
     xlim([T60_samples(k)-10, T60_samples(k)+10]);
     grid on;

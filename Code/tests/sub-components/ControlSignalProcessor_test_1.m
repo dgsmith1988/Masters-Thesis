@@ -37,12 +37,21 @@ for m = 1:numSamples_ctrl
     end
 end
 
+figure;
 subplot(3, 1, 1);
 plot(nCtrl, L_m, 'DisplayName', 'L[m]');
-title("L[m]");
+ylabel("L[m]");
+xlabel("m (time-index)");
+grid on; grid minor;
+
 subplot(3, 1, 2);
 plot(nAudio, L_n, 'DisplayName', 'L[n]');
-title("L[n]");
+ylabel("L[n]");
+xlabel("n (time-index)");
+grid on; grid minor;
+
 subplot(3, 1, 3);
 plot(nAudio, slideSpeed_n, 'DisplayName', 'slideSpeed[n]');
-title("slideSpeed[n]");
+ylabel("slideSpeed[n]");
+xlabel("n (time-index)");
+grid on; grid minor;
