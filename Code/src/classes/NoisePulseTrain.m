@@ -14,12 +14,12 @@ classdef NoisePulseTrain < NoiseSource
             obj.dcBlocker = DCBlocker(obj.R);
         end
         
-        function outputSample = tick(obj)
+        function [outputSample, scaledNoise] = tick(obj)
             %Feed the impulse train into the IIR to generate the
             %exponentially decaying signal
             amplitude = obj.exponentialDecay.tick();
-            scaledNoise = amplitude*abs(Noise.tick());
-            outputSample = obj.dcBlocker.tick(scaledNoise);
+            scaledNoise = amplitude*Noise.tick();
+            outputSample = obj.dcBlocker.tick(abs(scaledNoise));
         end
         
         function consumeControlSignal(obj, f_c_n)

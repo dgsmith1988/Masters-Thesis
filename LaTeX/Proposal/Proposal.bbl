@@ -1,0 +1,82 @@
+\begin{thebibliography}{10}
+
+\bibitem{evangelista_physical_2012}
+G.~Evangelista, ``Physical {Model} of the {Slide} {Guitar}: {An} {Approach}
+  {Based} on {Contact} {Forces},'' in {\em Audio {Engineering} {Society}
+  {Convention} 132}, Apr. 2012.
+
+\bibitem{pakarinen_virtual_2008}
+J.~Pakarinen, T.~Puputti, and V.~Välimäki, ``Virtual {Slide} {Guitar},'' {\em
+  Computer Music Journal}, vol.~32, no.~3, pp.~42--54, 2008.
+
+\bibitem{pakarinen_analysis_2007}
+J.~Pakarinen, H.~Penttinen, and B.~Bank, ``Analysis of {Handling} {Noises} on
+  {Wound} {Strings},'' {\em The Journal of the Acoustical Society of America},
+  vol.~122, no.~6, 2007.
+
+\bibitem{bhanuprakash_finite_2020}
+A.~Bhanuprakash, P.~Stapleton, and M.~van Walstijn, ``A {Finite} {Difference}
+  {Model} for {Articulated} {Slide}-{String} {Simulation},'' (Vienna), DAFx,
+  Sept. 2020.
+
+\bibitem{hiller_synthesizing_1971}
+L.~Hiller and P.~Ruiz, ``Synthesizing {Musical} {Sounds} by {Solving} the
+  {Wave} {Equation} for {Vibrating} {Objects}: {Part} 2,'' {\em Journal of the
+  Audio Engineering Society}, vol.~19, no.~7, pp.~542--551, 1971.
+
+\bibitem{karplus_digital_1983}
+K.~Karplus and A.~Strong, ``Digital synthesis of plucked-string and drum
+  timbres,'' {\em Computer Music Journal}, vol.~7, no.~2, pp.~43--55, 1983.
+
+\bibitem{jaffe_extensions_1983}
+D.~A. Jaffe and J.~O. Smith, ``Extensions of the {Karplus}-{Strong}
+  plucked-string algorithm,'' {\em Computer Music Journal}, vol.~7, no.~2,
+  pp.~56--69, 1983.
+
+\bibitem{karjalainen_plucked-string_1998}
+M.~Karjalainen, V.~Välimäki, and T.~Tolonen, ``Plucked-{String} {Models}:
+  {From} the {Karplus}-{Strong} {Algorithm} to {Digital} {Waveguides} and
+  beyond,'' {\em Computer Music Journal}, vol.~22, no.~3, pp.~17--32, 1998.
+\newblock Publisher: The MIT Press.
+
+\bibitem{woodhouse_synthesis_2004}
+J.~Woodhouse, ``On the {Synthesis} of {Guitar} {Plucks},'' {\em Acta Acustica
+  United with Acustica}, vol.~90, no.~5, pp.~928--944, 2004.
+\newblock 928.
+
+\bibitem{puputti_real-time_2012}
+T.~Puputti, ``Real-{Time} {Implementation} of the {Virtual} {Air} {Slide}
+  {Guitar},'' Master's thesis, Aalto University, May 2010.
+
+\bibitem{valimaki_development_1998}
+V.~Välimäki and T.~Tolonen, ``Development and {Calibration} of a {Guitar}
+  {Synthesizer},'' {\em Journal of the Audio Engineering Society}, vol.~46,
+  no.~9, pp.~766--778, 1998.
+
+\bibitem{penttinen_model-based_2006}
+H.~Penttinen, J.~Pakarinen, V.~Välimäki, M.~Laurson, H.~Li, and M.~Leman,
+  ``Model-{Based} {Sound} {Synthesis} of the {Guqin},'' {\em The Journal of the
+  Acoustical Society of America}, vol.~120, no.~6, pp.~4052--4063, 2006.
+
+\bibitem{evangelista_physical_2011}
+G.~Evangelista, ``Physical {Model} of the {String}-{Fret} {Interaction},'' in
+  {\em http://dafx11.ircam.fr/}, (Paris), DAFx, Sept. 2011.
+
+\bibitem{evangelista_playerinstrument_2010}
+G.~Evangelista and F.~Eckerholm, ``Player–{Instrument} {Interaction} {Models}
+  for {Digital} {Waveguide} {Synthesis} of {Guitar}: {Touch} and
+  {Collisions},'' {\em IEEE Transactions on Audio, Speech, and Language
+  Processing}, vol.~18, no.~4, pp.~822--832, 2010.
+
+\bibitem{valimaki_discrete-time_1995}
+V.~Välimäki, {\em Discrete-{Time} {Modeling} of {Acoustic} {Tubes} {Using}
+  {Fractional} {Delay} {Filters}}.
+\newblock {PhD} {Thesis}, Helsinki University of Technology, Espoo, Finland,
+  Dec. 1995.
+
+\bibitem{duyne_lossless_1997}
+S.~A.~V. Duyne, D.~A. Jaffe, G.~P. Scandalis, and T.~S. Stilson, ``A
+  {Lossless}, {Click}-free, {Pitchbend}-able {Delay} {Line} {Loop}
+  {Interpolation} {Scheme},'' in {\em {ICMC}}, 1997.
+
+\end{thebibliography}

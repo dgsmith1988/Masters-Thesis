@@ -19,7 +19,7 @@ N = 4096;
 y_upperLim_kHz = Fs/2000;
 
 %Sound parameters
-f0_bin = 32;
+f0_bin = 100;
 duration_sec = 3;
 
 %Derived parameters
@@ -72,18 +72,30 @@ err_hz = bin_err * Fs / N
 
 figure;
 plot(0:N-1, Y_dB, "DisplayName", "Y dB");
-title("Y dB");
-xlabel("BIN");
-xline(f0_bin, "r", "DisplayName", "Theoretical Value");
-xline(bin_estimate, "g", "DisplayName", "Estimated Value");
+% title("Y dB");
+ylabel("Magnitude (dB)");
+xlabel("Bin #");
+% xline(f0_bin, "r", "DisplayName", "Theoretical Value");
+% xline(bin_estimate, "g", "DisplayName", "Estimated Value");
 xline(upper, "--k", "DisplayName", "Upper");
-legend();
+% legend();
 grid on; grid minor;
 xlim([0 N/2-1]);
 
 figure;
+plot(0:N-1, Y_dB, "DisplayName", "Y dB");
+ylabel("Magnitude (dB)");
+xlabel("Bin #");
+% xline(f0_bin, "--r", "DisplayName", "Theoretical Value");
+xline(bin_estimate, "--g", "DisplayName", "Estimated Value");
+% xline(upper, "--k", "DisplayName", "Upper");
+legend();
+grid on; grid minor;
+xlim(f0_bin + [-4 4]);
+
+figure;
 spectrogram(y, window, overlap, N, Fs, "yaxis");
 ylim([0 y_upperLim_kHz]);
-title('KS Scratch Spectrogram');
+% title('KS Scratch Spectrogram');
 yline(pitch_f0/1000, "--r");
 yline(bin_estimate*Fs/N/1000, "--k");

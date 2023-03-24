@@ -35,7 +35,7 @@ y_upperLim_kHz = Fs_audio/2000;
 
 %********Test 3 frets up over three seconds********
 %Run the test
-y4 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
+y4 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y4, window, overlap, N, Fs_audio, "yaxis");  
@@ -47,7 +47,7 @@ title('Medium Upward Bend Spectrogram')
 L = generateLCurve(higherFret, lowerFret, slideDuration_sec, Fs_ctrl);
 L = [L, L(end)*ones(1, staticDuration_sec*Fs_ctrl)];
 
-y5 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
+y5 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y5, window, overlap, N, Fs_audio, "yaxis");  

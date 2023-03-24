@@ -1,4 +1,97 @@
-\contentsline {chapter}{\numberline {1}First}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Second Things}{1}{section.1.2}%
-\contentsline {chapter}{\numberline {2}Introductiasdfon}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Background}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}What is the slide guitar?}{2}{section.2.1}%
+\contentsline {section}{\numberline {2.2}What is physical modeling and digital wave guides?}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Fundamental Components}{5}{subsection.2.2.1}%
+\contentsline {subsubsection}{Digital Filters}{5}{subsubsection*.4}%
+\contentsline {subsubsection}{Digital Delay Lines}{5}{subsubsection*.5}%
+\contentsline {subsubsection}{Fractional Delay Components}{6}{subsubsection*.6}%
+\contentsline {subsection}{\numberline {2.2.2}Applied to String Modeling}{7}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Development of a basic slide guitar digital wave guide model}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Energy Compensation}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Loop Filter}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}CSG Development}{8}{subsection.2.3.3}%
+\contentsline {subsubsection}{Finger Noise Analysis}{9}{subsubsection*.7}%
+\contentsline {subsubsection}{CSG Model Development/Analysis}{12}{subsubsection*.8}%
+\contentsline {section}{\numberline {2.4}Other Developments and Approaches}{15}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Description of Slide Guitar Synthesis Model}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction of Architecture}{16}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Diagram Conventions}{16}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Single String Slide Synthesizer}{17}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Control Signal Processor}{18}{subsection.3.1.3}%
+\contentsline {subsubsection}{Slide Speed Extractor}{19}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {3.1.4}String DWG}{19}{subsection.3.1.4}%
+\contentsline {subsubsection}{Energy Scaler}{20}{subsubsection*.10}%
+\contentsline {subsubsection}{Loop Filter}{20}{subsubsection*.11}%
+\contentsline {subsection}{\numberline {3.1.5}Contact Sound Generator}{21}{subsection.3.1.5}%
+\contentsline {subsubsection}{Unwound Strings}{21}{subsubsection*.12}%
+\contentsline {subsubsection}{Wound Strings}{21}{subsubsection*.13}%
+\contentsline {paragraph}{Noise Source}{22}{paragraph*.14}%
+\contentsline {subparagraph}{Noise Pulse Train}{22}{subparagraph*.15}%
+\contentsline {subparagraph}{Noise Burst Generator}{23}{subparagraph*.16}%
+\contentsline {paragraph}{Harmonic Accentuation}{23}{paragraph*.17}%
+\contentsline {subparagraph}{Resonator + Tanh}{24}{subparagraph*.18}%
+\contentsline {subparagraph}{Harmonic Resonator Bank}{24}{subparagraph*.19}%
+\contentsline {subsection}{\numberline {3.1.6}Generating Control Signals}{26}{subsection.3.1.6}%
+\contentsline {section}{\numberline {3.2}Limitations of Model}{26}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Loop Filter Magnitude Response}{26}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Non-constant Phase Delay of Filters}{30}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Bandwidth Limitations}{31}{subsection.3.2.3}%
+\contentsline {chapter}{\numberline {4}Verification Of Slide Model and Constituent Components}{36}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Filters}{36}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Resonator}{37}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Longitudinal Modes}{37}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}DC Blocker}{40}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Smoothing Filter}{40}{subsection.4.1.4}%
+\contentsline {section}{\numberline {4.2}CSP and Components}{41}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Components}{41}{subsection.4.2.1}%
+\contentsline {subsubsection}{Interpolator}{41}{subsubsection*.20}%
+\contentsline {subsubsection}{Slide Speed Extractor}{42}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {4.2.2}Control Signal Processor}{43}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Loop Filter}{43}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Noise Generation Objects}{47}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Impulse Train}{47}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Exponential Decay}{47}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Noise Pulse Train}{50}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Noise Burst Generator}{52}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Harmonic Accentuators}{54}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Harmonic Resonator Bank}{54}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Reso + Tanh}{54}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Contact Sound Generator}{55}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Wound Variant}{56}{subsection.4.5.1}%
+\contentsline {subsubsection}{Static $f_c[n]$}{56}{subsubsection*.22}%
+\contentsline {subsubsection}{Time-Varying $f_c[n]$}{59}{subsubsection*.23}%
+\contentsline {subsection}{\numberline {4.5.2}Unwound Variant}{61}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}String DWG and Components}{61}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Interpolated Delay Line}{61}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Energy Scaler}{65}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}String Digital Waveguide}{69}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Slide Synthesizer}{72}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Physical Measurements of Slide Sounds}{74}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experimental Setup}{74}{section.5.1}%
+\contentsline {section}{\numberline {5.2}String Winding Density}{75}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Transverse to Longitudinal Coupling}{76}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Setup and Method}{77}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Results}{77}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Contact Noise Spectrum}{78}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Method}{78}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Results}{79}{subsection.5.4.2}%
+\contentsline {section}{\numberline {5.5}Decay Rate of Single Winding Impact}{81}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Methods}{81}{subsection.5.5.1}%
+\contentsline {subsubsection}{Hold and Release}{82}{subsubsection*.24}%
+\contentsline {subsubsection}{Strike Multiple Windings}{82}{subsubsection*.25}%
+\contentsline {subsection}{\numberline {5.5.2}Results}{83}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Playing Examples}{84}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Sound Design and Controlling Parameters}{85}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Alternate Architecture Considerations}{85}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Tuning Parameters}{85}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}$T_{60}$}{85}{subsection.6.2.1}%
+\contentsline {subsubsection}{Tuning}{87}{subsubsection*.26}%
+\contentsline {section}{\numberline {6.3}Waveform Initialization}{87}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Removing DC Component from String DWG}{88}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}Control Signal Parametrization}{89}{section.6.4}%
+\contentsline {chapter}{\numberline {7}Conclusion}{92}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Future Work}{92}{section.7.1}%
+\contentsline {chapter}{\numberline {A}String Winding Measurement Photos}{93}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Class Hierarchy}{94}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Code}{95}{appendix.C}%

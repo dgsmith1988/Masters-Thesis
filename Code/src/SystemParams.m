@@ -55,7 +55,7 @@ classdef SystemParams
         C_string_params = StringParams(7, 65.41, 1400, 17*10^-3, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol
-        E_string_params = StringParams(6, 82.41, 2000, 15*10^-3, ...
+        E_string_params = StringParams(6, 82.41, 2000, 2*10^-3, ...
             [-0.08135045114297, -0.00085796015850],...
             [0.97816203269973 , 0.00061375406757]);
         A_string_params = StringParams(5, 110, 2600, 13*10^-3, ...
@@ -77,6 +77,7 @@ classdef SystemParams
         stringLengthMeters = .65;
         minRelativeStringLength = fretNumberToRelativeLength(24);  %Limit things to two octaves per string (or the 24th fret)
 %         minRelativeStringLength = fretNumberToRelativeLength(21);
+%         minRelativeStringLength = fretNumberToRelativeLength(19);
 %         minRelativeStringLength = fretNumberToRelativeLength(15);
         maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
         

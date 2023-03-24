@@ -32,7 +32,7 @@ higherFret = 1;
 L = generateLCurve(lowerFret, higherFret, duration_sec, Fs_ctrl);
 
 %Run the test
-y2 = runSlideSynthTest(slideSynthParams, L, duration_sec);
+y2 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y2, window, overlap, N, Fs_audio, "yaxis");  
@@ -44,7 +44,7 @@ title('Slow Upward Bend Spectrogram');
 L = generateLCurve(higherFret, lowerFret, duration_sec, Fs_ctrl);
 
 %Run the test
-y3 = runSlideSynthTest(slideSynthParams, L, duration_sec);
+y3 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y3, window, overlap, N, Fs_audio, "yaxis");  

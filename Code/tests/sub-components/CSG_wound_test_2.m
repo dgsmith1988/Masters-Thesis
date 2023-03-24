@@ -1,15 +1,15 @@
 %Test the wound CSG object in using the combined output from both branches
 %and a time-varying slide velocity
 
-close all;
-clear;
+% close all;
+% clear;
 
 dbstop if error;
 
 %System parameters
 Fs = SystemParams.audioRate;
-stringParams = SystemParams.D_string_params;
-stringModeFilterSpec = SystemParams.D_string_modes.chrome;
+stringParams = SystemParams.E_string_params;
+stringModeFilterSpec = SystemParams.E_string_modes.chrome;
 n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);

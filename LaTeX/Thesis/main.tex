@@ -22,6 +22,7 @@
 
 % Custom commands
 \newcommand{\tinytodo}[2][] {\todo[caption={#2}, #1]{\begin{spacing}{0.5} #2 \end{spacing}}}
+\newcommand{\citetwo}[1]{(\cite{#1})}
 
 \newenvironment{tinytest}%
 {\begin{tiny}\it}%
@@ -51,20 +52,21 @@
 
 %===== Title page
 
-\title{Measurement and Design of a Digital Waveguide\\ Slide Guitar Model}
+\title{Measurement and Design of a Digital Waveguide\\ Slide Guitar Synthesizer}
 \author{David G. Smith}
 \date{\Month\ \number\year}
 \organization{%
   \\[0.2in]
   \McGillCrest {!}{1in}\\	% McGill University crest
   \\[0.1in]
-  Department of Music Technology \\ Computational Acoustic Modeling Labratory\\
+  Music Technology Area, Department of Music Research\\
+  Schulich School of Music\\
   McGill University\\
   Montr\'eal, Canada}
 \note{%
   {\color{red} \hrule height 0.4ex}
   \vskip 3ex
-  An exam submitted to McGill University in partial fulfillment of the
+  A thesis submitted to McGill University in partial fulfillment of the
   requirements for the degree of Master of Arts.
   \vskip 3ex
   \copyright\ \the\year\ David Smith
@@ -87,7 +89,11 @@
 \chapter*{List of Acronyms}
 
 \begin{longtable}{ll}
+    CSG & Contact Sound Generator\\
 	DMI & Digital Music Instrument\\
+    DWG & Digital Waveguide\\
+    FIR & Finite Impulse Response\\
+    IIR & Infinite Impulse Response\\
 \end{longtable}
 
 \cleardoublepage
@@ -102,6 +108,21 @@
 \typeout{}
 \subfile{sections/chapter2}
 
+\typeout{}
+\subfile{sections/chapter3}
+
+\typeout{}
+\subfile{sections/chapter4}
+
+\typeout{}
+\subfile{sections/chapter5}
+
+\typeout{}
+\subfile{sections/chapter6}
+
+\typeout{}
+\subfile{sections/chapter7}
+
 %========== Bibliography ==========
 \typeout{}
 \begin{singlespace}
@@ -109,5 +130,10 @@
 \printbibliography
 
 \end{singlespace}
+
+%========== Appendix ==========
+
+\typeout{}
+\subfile{sections/appendix}
 
 \end{document}

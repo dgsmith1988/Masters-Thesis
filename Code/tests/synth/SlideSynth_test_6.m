@@ -6,10 +6,10 @@ dbstop if error
 
 %Synthsizer and sound parameters
 slideSynthParams = SlideSynthParams();
-slideSynthParams.enableCSG = true;
+slideSynthParams.enableCSG = false;
 slideSynthParams.CSG_noiseSource = "NoisePulseTrain";
 slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
-slideSynthParams.stringNoiseSource = "Pink";
+slideSynthParams.stringNoiseSource = "White";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
 slideSynthParams.stringName = "G";
@@ -38,7 +38,7 @@ N = 4096;
 y_upperLim_kHz = Fs_audio/2000;
 
 %********Test a wide vibrato********
-y10 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
+y10 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y10, window, overlap, N, Fs_audio, "yaxis");  
@@ -50,7 +50,7 @@ fretTrajectory = narrowVibratoWidth*sin(2*pi*narrowVibratoFreq*t) + centerFret;
 L = fretNumberToRelativeLength(fretTrajectory);
 
 %Processing objects
-y11 = runSlideSynthTest(slideSynthParams, L, soundDuration_sec);
+y11 = synthesizeSinglePluck(slideSynthParams, L);
 
 figure;
 spectrogram(y11, window, overlap, N, Fs_audio, "yaxis");  

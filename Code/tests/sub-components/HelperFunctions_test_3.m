@@ -3,7 +3,7 @@
 %functions are:
 % 1. generateLcurve()
 
-clear;
+% clear;
 % close all;
 dbstop if error
 

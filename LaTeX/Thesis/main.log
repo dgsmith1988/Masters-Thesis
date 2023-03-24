@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7.30) (preloaded format=pdflatex 2022.11.12)  25 FEB 2023 14:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7.30) (preloaded format=pdflatex 2022.11.12)  24 MAR 2023 12:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -985,32 +985,35 @@ Package: McGillLogo 2004/08/31
 \@nomenclaturefile=\write5
 \openout5 = `main.nlo'.
 
-Package nomencl Info: Writing nomenclature file main.nlo on input line 35.
+Package nomencl Info: Writing nomenclature file main.nlo on input line 36.
 \@quotelevel=\count456
 \@quotereset=\count457
- (main.aux)
+ (main.aux
+
+LaTeX Warning: Label `fig:noise_pulses' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-
-(C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+ (C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count458
 \scratchdimen=\dimen289
@@ -1031,7 +1034,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 (C:\Program Files\MiKTeX 2.9\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 50.
+Package hyperref Info: Link coloring OFF on input line 51.
  (main.out)
 (main.out)
 \@outlinefile=\write6
@@ -1049,55 +1052,57 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `main.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main.bbl' found.
+Package biblatex Info: ... file 'main.bbl' not found.
 
-(main.bbl)
-Package biblatex Info: Reference section=0 on input line 50.
-Package biblatex Info: Reference segment=0 on input line 50.
+No file main.bbl.
+Package biblatex Info: Reference section=0 on input line 51.
+Package biblatex Info: Reference segment=0 on input line 51.
 Package epstopdf Info: Source file: <McGillcrest.eps>
-(epstopdf)                    date: 2022-08-04 14:32:48
+(epstopdf)                    date: 2023-03-24 16:07:30
 (epstopdf)                    size: 6236 bytes
 (epstopdf)             Output file: <McGillcrest-eps-converted-to.pdf>
-(epstopdf)                    date: 2023-02-25 14:39:04
+(epstopdf)                    date: 2023-03-24 12:09:28
 (epstopdf)                    size: 7087 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=McGillcrest-eps-conv
 erted-to.pdf McGillcrest.eps>
-(epstopdf)             \includegraphics on input line 73.
-Package epstopdf Info: Output file is already uptodate.
+(epstopdf)             \includegraphics on input line 75.
+runsystem(miktex-epstopdf --outfile=McGillcrest-eps-converted-to.pdf McGillcres
+t.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <McGillcrest-eps-converted-to.pdf>
+(epstopdf)                    date: 2023-03-24 12:10:00
+(epstopdf)                    size: 7087 bytes.
 
 
 pdfTeX warning: pdflatex.exe (file ./McGillcrest-eps-converted-to.pdf): PDF inc
 lusion: found PDF version <1.7>, but at most version <1.5> allowed
-<McGillcrest-eps-converted-to.pdf, id=22, 43.16125pt x 54.2025pt>
+<McGillcrest-eps-converted-to.pdf, id=302, 43.16125pt x 54.2025pt>
 File: McGillcrest-eps-converted-to.pdf Graphic file (type pdf)
 <use McGillcrest-eps-converted-to.pdf>
 Package pdftex.def Info: McGillcrest-eps-converted-to.pdf  used on input line 7
-3.
+5.
 (pdftex.def)             Requested size: 43.16113pt x 54.20236pt.
 [1
 
 {C:/Users/Graham/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map} <./McGil
-lcrest-eps-converted-to.pdf>] (main.toc)
+lcrest-eps-converted-to.pdf>] (main.toc [1
+
+] [2])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
- [1
-
-] (main.lot)
+ [3] (main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [2
+ [4
 
-] [3
+] [5
 
 ]
 
 (sections/chapter1.tex
 Chapter 1.
-
-LaTeX Warning: Citation 'mrx05' on page 1 undefined on input line 10.
-
 )
 
 (sections/chapter2.tex
@@ -1106,30 +1111,1175 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.7 \chapter
-            {Introductiasdfon} [1
+            {Background} [1
 
 
 ]
 Chapter 2.
+
+LaTeX Warning: Citation 'evangelista_physical_2012' on page 2 undefined on inpu
+t line 14.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 2 undefined on input l
+ine 14.
+
+[2
+
+]
+<./images/pictures/Slide-guitar-1024x683.jpg, id=431, 1027.84pt x 685.56125pt>
+File: ./images/pictures/Slide-guitar-1024x683.jpg Graphic file (type jpg)
+<use ./images/pictures/Slide-guitar-1024x683.jpg>
+Package pdftex.def Info: ./images/pictures/Slide-guitar-1024x683.jpg  used on i
+nput line 18.
+(pdftex.def)             Requested size: 308.35437pt x 205.66995pt.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 3 undefined on input 
+line 23.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 3 undefined on input 
+line 23.
+
+<./images/pictures/slide_wound_string_zoom.PNG, id=433, 352.31625pt x 134.904pt
+>
+File: ./images/pictures/slide_wound_string_zoom.PNG Graphic file (type png)
+<use ./images/pictures/slide_wound_string_zoom.PNG>
+Package pdftex.def Info: ./images/pictures/slide_wound_string_zoom.PNG  used on
+ input line 27.
+(pdftex.def)             Requested size: 352.31538pt x 134.90367pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'bhanuprakash_finite_2020' on page 3 undefined on input
+ line 32.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 3 undefined on input l
+ine 32.
+
+[3 <./images/pictures/Slide-guitar-1024x683.jpg>]
+<./images/pictures/Slide-guitar-different-slides-768x427.jpg, id=443, 770.88pt 
+x 428.60126pt>
+File: ./images/pictures/Slide-guitar-different-slides-768x427.jpg Graphic file 
+(type jpg)
+<use ./images/pictures/Slide-guitar-different-slides-768x427.jpg>
+Package pdftex.def Info: ./images/pictures/Slide-guitar-different-slides-768x42
+7.jpg  used on input line 36.
+(pdftex.def)             Requested size: 269.81204pt x 150.01268pt.
+ [4 <./images/pictures/slide_wound_string_zoom.PNG> <./images/pictures/Slide-gu
+itar-different-slides-768x427.jpg>] [5] [6]
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 7 undefined on input l
+ine 89.
+
+<./images/pictures/SDL_slide_model.PNG, id=464, 507.0945pt x 141.52875pt>
+File: ./images/pictures/SDL_slide_model.PNG Graphic file (type png)
+<use ./images/pictures/SDL_slide_model.PNG>
+Package pdftex.def Info: ./images/pictures/SDL_slide_model.PNG  used on input l
+ine 93.
+(pdftex.def)             Requested size: 380.31993pt x 106.14629pt.
+
+LaTeX Warning: Citation 'pakarinen_slide_2008' on page 7 undefined on input lin
+e 94.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7]
+<./images/pictures/finger-noise-spectrogram.png, id=471, 297.11pt x 223.234pt>
+File: ./images/pictures/finger-noise-spectrogram.png Graphic file (type png)
+<use ./images/pictures/finger-noise-spectrogram.png>
+Package pdftex.def Info: ./images/pictures/finger-noise-spectrogram.png  used o
+n input line 111.
+(pdftex.def)             Requested size: 297.10927pt x 223.23343pt.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 8 undefined on input 
+line 112.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 8 undefined on input 
+line 112.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 8 undefined on input 
+line 117.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 8 undefined on inp
+ut line 117.
+
+[8 <./images/pictures/SDL_slide_model.PNG>]
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 9 undefined on input 
+line 121.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 9 undefined on inp
+ut line 121.
+
+[9 <./images/pictures/finger-noise-spectrogram.png (PNG copy)>] [10]
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 11 undefined on input
+ line 142.
+
+
+LaTeX Warning: Citation 'bank_physics-based_2006' on page 11 undefined on input
+ line 144.
+
+[11]
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 12 undefined on input
+ line 161.
+
+
+LaTeX Warning: Citation 'morse_vibration_1981' on page 12 undefined on input li
+ne 161.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 12 undefined on input
+ line 167.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 12 undefined on input 
+line 173.
+
+<./images/pictures/CSG_original.PNG, id=503, 728.12025pt x 288.47775pt>
+File: ./images/pictures/CSG_original.PNG Graphic file (type png)
+<use ./images/pictures/CSG_original.PNG>
+Package pdftex.def Info: ./images/pictures/CSG_original.PNG  used on input line
+ 177.
+(pdftex.def)             Requested size: 364.05923pt x 144.23851pt.
+
+LaTeX Warning: Citation 'pakarinen_slide_2008' on page 12 undefined on input li
+ne 178.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[12]
+<./images/pictures/noise_pulses.PNG, id=517, 328.22626pt x 87.32625pt>
+File: ./images/pictures/noise_pulses.PNG Graphic file (type png)
+<use ./images/pictures/noise_pulses.PNG>
+Package pdftex.def Info: ./images/pictures/noise_pulses.PNG  used on input line
+ 186.
+(pdftex.def)             Requested size: 328.22545pt x 87.32603pt.
+
+
+LaTeX Warning: Citation 'pakarinen_slide_2008' on page 13 undefined on input li
+ne 187.
+
+[13 <./images/pictures/CSG_original.PNG> <./images/pictures/noise_pulses.PNG>]
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 14 undefined on input 
+line 197.
+
+)
+
+(sections/chapter3.tex [14] [15]
+Chapter 3.
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 16 undefined on input 
+line 11.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 16 undefined on input 
+line 11.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 16 undefined on input 
+line 14.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 16 undefined on input 
+line 14.
+
+[16
+
+]
+<./images/diagrams/slideSynth.png, id=541, 660.21657pt x 215.30438pt>
+File: ./images/diagrams/slideSynth.png Graphic file (type png)
+<use ./images/diagrams/slideSynth.png>
+Package pdftex.def Info: ./images/diagrams/slideSynth.png  used on input line 2
+2.
+(pdftex.def)             Requested size: 429.13568pt x 139.94618pt.
+ [17 <./images/diagrams/slideSynth.png>]
+<./images/diagrams/controlSignalProcessor.png, id=549, 576.65437pt x 139.27031p
+t>
+File: ./images/diagrams/controlSignalProcessor.png Graphic file (type png)
+<use ./images/diagrams/controlSignalProcessor.png>
+Package pdftex.def Info: ./images/diagrams/controlSignalProcessor.png  used on 
+input line 37.
+(pdftex.def)             Requested size: 374.82089pt x 90.52461pt.
+ [18 <./images/diagrams/controlSignalProcessor.png>]
+<./images/diagrams/slideSpeedExtractor.png, id=557, 553.31718pt x 140.02313pt>
+File: ./images/diagrams/slideSpeedExtractor.png Graphic file (type png)
+<use ./images/diagrams/slideSpeedExtractor.png>
+Package pdftex.def Info: ./images/diagrams/slideSpeedExtractor.png  used on inp
+ut line 52.
+(pdftex.def)             Requested size: 276.65791pt x 70.01138pt.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 19 undefined on input 
+line 57.
+
+<./images/diagrams/stringDWG.png, id=559, 654.19406pt x 238.64156pt>
+File: ./images/diagrams/stringDWG.png Graphic file (type png)
+<use ./images/diagrams/stringDWG.png>
+Package pdftex.def Info: ./images/diagrams/stringDWG.png  used on input line 63
+.
+(pdftex.def)             Requested size: 327.09622pt x 119.32048pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 19 undefined on input 
+line 68.
+
+[19 <./images/diagrams/slideSpeedExtractor.png>]
+<./images/diagrams/energyScaler.png, id=571, 526.21594pt x 177.66376pt>
+File: ./images/diagrams/energyScaler.png Graphic file (type png)
+<use ./images/diagrams/energyScaler.png>
+Package pdftex.def Info: ./images/diagrams/energyScaler.png  used on input line
+ 75.
+(pdftex.def)             Requested size: 263.10733pt x 88.83165pt.
+
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 20 undefined on inp
+ut line 87.
+
+[20 <./images/diagrams/stringDWG.png> <./images/diagrams/energyScaler.png>]
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 21 undefined on input 
+line 93.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 21 undefined on input 
+line 93.
+
+<./images/diagrams/CSG_unwound.png, id=584, 442.65375pt x 101.62968pt>
+File: ./images/diagrams/CSG_unwound.png Graphic file (type png)
+<use ./images/diagrams/CSG_unwound.png>
+Package pdftex.def Info: ./images/diagrams/CSG_unwound.png  used on input line 
+97.
+(pdftex.def)             Requested size: 221.32632pt x 50.81471pt.
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 21 undefined on input 
+line 103.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 21 undefined on input 
+line 103.
+
+
+Overfull \hbox (11.77434pt too wide) in paragraph at lines 103--104
+\OT1/cmr/m/n/10.95 core func-tion-al-ity does not dif-fer from the mod-ule whic
+h was sug-gested in ([])
+ []
+
+[21 <./images/diagrams/CSG_unwound.png>]
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 22 undefined on input 
+line 105.
+
+<./images/diagrams/CSG_wound.png, id=595, 844.65562pt x 254.45062pt>
+File: ./images/diagrams/CSG_wound.png Graphic file (type png)
+<use ./images/diagrams/CSG_wound.png>
+Package pdftex.def Info: ./images/diagrams/CSG_wound.png  used on input line 11
+1.
+(pdftex.def)             Requested size: 422.32678pt x 127.22499pt.
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 22 undefined on input 
+line 117.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 22 undefined on input 
+line 117.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 22 undefined on in
+put line 117.
+
+
+Overfull \hbox (29.40207pt too wide) in paragraph at lines 117--118
+\OT1/cmr/m/n/10.95 The sec-ond is more akin to what was in-tro-duced in the guq
+in model in ([]). 
+ []
+
+[22 <./images/diagrams/CSG_wound.png>]
+<./images/diagrams/NoisePulseTrain.png, id=605, 410.2828pt x 200.24812pt>
+File: ./images/diagrams/NoisePulseTrain.png Graphic file (type png)
+<use ./images/diagrams/NoisePulseTrain.png>
+Package pdftex.def Info: ./images/diagrams/NoisePulseTrain.png  used on input l
+ine 124.
+(pdftex.def)             Requested size: 205.1409pt x 100.12381pt.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 23 undefined on in
+put line 130.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 23 undefined on input 
+line 130.
+
+<./images/diagrams/NoiseBurstGen.png, id=607, 412.54124pt x 207.02344pt>
+File: ./images/diagrams/NoiseBurstGen.png Graphic file (type png)
+<use ./images/diagrams/NoiseBurstGen.png>
+Package pdftex.def Info: ./images/diagrams/NoiseBurstGen.png  used on input lin
+e 134.
+(pdftex.def)             Requested size: 206.27011pt x 103.51146pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 23 undefined on input 
+line 140.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 23 undefined on in
+put line 140.
+
+[23 <./images/diagrams/NoisePulseTrain.png>]
+<./images/diagrams/ResoTanh.png, id=617, 359.84438pt x 104.64093pt>
+File: ./images/diagrams/ResoTanh.png Graphic file (type png)
+<use ./images/diagrams/ResoTanh.png>
+Package pdftex.def Info: ./images/diagrams/ResoTanh.png  used on input line 147
+.
+(pdftex.def)             Requested size: 179.92174pt x 52.32033pt.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 24 undefined on input 
+line 153.
+
+[24 <./images/diagrams/NoiseBurstGen.png> <./images/diagrams/ResoTanh.png>]
+<./images/diagrams/HarmonicResonatorBank.png, id=629, 554.82281pt x 582.67688pt
+>
+File: ./images/diagrams/HarmonicResonatorBank.png Graphic file (type png)
+<use ./images/diagrams/HarmonicResonatorBank.png>
+Package pdftex.def Info: ./images/diagrams/HarmonicResonatorBank.png  used on i
+nput line 157.
+(pdftex.def)             Requested size: 277.41072pt x 291.33772pt.
+
+[25 <./images/diagrams/HarmonicResonatorBank.png>]
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 26 undefined on inp
+ut line 169.
+
+<./images/plots/String 1 - Loop Filter Magnitude Response.png, id=638, 526.9687
+5pt x 395.22656pt>
+File: ./images/plots/String 1 - Loop Filter Magnitude Response.png Graphic file
+ (type png)
+<use ./images/plots/String 1 - Loop Filter Magnitude Response.png>
+Package pdftex.def Info: ./images/plots/String 1 - Loop Filter Magnitude Respon
+se.png  used on input line 175.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/String 4 - Loop Filter Magnitude Response.png, id=639, 526.9687
+5pt x 395.22656pt>
+File: ./images/plots/String 4 - Loop Filter Magnitude Response.png Graphic file
+ (type png)
+<use ./images/plots/String 4 - Loop Filter Magnitude Response.png>
+Package pdftex.def Info: ./images/plots/String 4 - Loop Filter Magnitude Respon
+se.png  used on input line 182.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[26
+
+]
+<./images/plots/String 4 - Loop Filter Magnitude Response - stable.png, id=648,
+ 526.96875pt x 395.22656pt>
+File: ./images/plots/String 4 - Loop Filter Magnitude Response - stable.png Gra
+phic file (type png)
+<use ./images/plots/String 4 - Loop Filter Magnitude Response - stable.png>
+Package pdftex.def Info: ./images/plots/String 4 - Loop Filter Magnitude Respon
+se - stable.png  used on input line 191.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27 <./images/plots/String 1 - Loop Filter Magnitude Response.png (PNG copy)>]
+[28 <./images/plots/String 4 - Loop Filter Magnitude Response.png (PNG copy)>]
+<./images/plots/UnstableLoopFilter.png, id=659, 526.96875pt x 395.22656pt>
+File: ./images/plots/UnstableLoopFilter.png Graphic file (type png)
+<use ./images/plots/UnstableLoopFilter.png>
+Package pdftex.def Info: ./images/plots/UnstableLoopFilter.png  used on input l
+ine 214.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'oppenheim_discrete-time_2010' on page 29 undefined on 
+input line 220.
+
+
+LaTeX Warning: Citation 'laakso_splitting_1996' on page 29 undefined on input l
+ine 220.
+
+[29 <./images/plots/String 4 - Loop Filter Magnitude Response - stable.png (PNG
+ copy)>]
+<./images/plots/Lagrange Phase Delays.png, id=669, 526.96875pt x 395.22656pt>
+File: ./images/plots/Lagrange Phase Delays.png Graphic file (type png)
+<use ./images/plots/Lagrange Phase Delays.png>
+Package pdftex.def Info: ./images/plots/Lagrange Phase Delays.png  used on inpu
+t line 224.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/String 5 - Phase Delays.png, id=670, 526.96875pt x 395.22656pt>
+
+File: ./images/plots/String 5 - Phase Delays.png Graphic file (type png)
+<use ./images/plots/String 5 - Phase Delays.png>
+Package pdftex.def Info: ./images/plots/String 5 - Phase Delays.png  used on in
+put line 231.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[30 <./images/plots/UnstableLoopFilter.png (PNG copy)>]
+<./images/plots/ExtremeDownwardSlide_NoLoopFilter.png, id=679, 526.96875pt x 39
+5.22656pt>
+File: ./images/plots/ExtremeDownwardSlide_NoLoopFilter.png Graphic file (type p
+ng)
+<use ./images/plots/ExtremeDownwardSlide_NoLoopFilter.png>
+Package pdftex.def Info: ./images/plots/ExtremeDownwardSlide_NoLoopFilter.png  
+used on input line 241.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/ExtremeUpwardSlide_NoLoopFilter.png, id=680, 526.96875pt x 395.
+22656pt>
+File: ./images/plots/ExtremeUpwardSlide_NoLoopFilter.png Graphic file (type png
+)
+<use ./images/plots/ExtremeUpwardSlide_NoLoopFilter.png>
+Package pdftex.def Info: ./images/plots/ExtremeUpwardSlide_NoLoopFilter.png  us
+ed on input line 248.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[31 <./images/plots/Lagrange Phase Delays.png (PNG copy)>]
+<./images/plots/StringDWGIntAsc.png, id=690, 526.96875pt x 395.22656pt>
+File: ./images/plots/StringDWGIntAsc.png Graphic file (type png)
+<use ./images/plots/StringDWGIntAsc.png>
+Package pdftex.def Info: ./images/plots/StringDWGIntAsc.png  used on input line
+ 257.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/StringDWGIntDesc.png, id=691, 526.96875pt x 395.22656pt>
+File: ./images/plots/StringDWGIntDesc.png Graphic file (type png)
+<use ./images/plots/StringDWGIntDesc.png>
+Package pdftex.def Info: ./images/plots/StringDWGIntDesc.png  used on input lin
+e 264.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 32 undefined on input 
+line 269.
+
+[32 <./images/plots/String 5 - Phase Delays.png (PNG copy)>])
+
+(sections/chapter4.tex [33 <./images/plots/ExtremeDownwardSlide_NoLoopFilter.pn
+g (PNG copy)>] [34 <./images/plots/ExtremeUpwardSlide_NoLoopFilter.png (PNG cop
+y)> <./images/plots/StringDWGIntAsc.png (PNG copy)>] [35 <./images/plots/String
+DWGIntDesc.png (PNG copy)>]
+Chapter 4.
+[36
+
+]
+<./images/plots/ResonatorTest.png, id=715, 526.96875pt x 395.22656pt>
+File: ./images/plots/ResonatorTest.png Graphic file (type png)
+<use ./images/plots/ResonatorTest.png>
+Package pdftex.def Info: ./images/plots/ResonatorTest.png  used on input line 1
+9.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 37 undefined on input 
+line 25.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 37 undefined on input 
+line 25.
+
+[37 <./images/plots/ResonatorTest.png (PNG copy)>]
+<./images/plots/LongitudinalModeFiltersOriginal.png, id=724, 434.22224pt x 349.
+90726pt>
+File: ./images/plots/LongitudinalModeFiltersOriginal.png Graphic file (type png
+)
+<use ./images/plots/LongitudinalModeFiltersOriginal.png>
+Package pdftex.def Info: ./images/plots/LongitudinalModeFiltersOriginal.png  us
+ed on input line 29.
+(pdftex.def)             Requested size: 282.2411pt x 227.43701pt.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 38 undefined on input 
+line 30.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 38 undefined on input 
+line 30.
+
+<./images/plots/LongitudinalModeFiltersRecreation.png, id=725, 526.96875pt x 39
+5.22656pt>
+File: ./images/plots/LongitudinalModeFiltersRecreation.png Graphic file (type p
+ng)
+<use ./images/plots/LongitudinalModeFiltersRecreation.png>
+Package pdftex.def Info: ./images/plots/LongitudinalModeFiltersRecreation.png  
+used on input line 36.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[38 <./images/plots/LongitudinalModeFiltersOriginal.png>] [39 <./images/plots/L
+ongitudinalModeFiltersRecreation.png (PNG copy)>]
+<./images/plots/DCBlockerResponse.png, id=738, 526.96875pt x 395.22656pt>
+File: ./images/plots/DCBlockerResponse.png Graphic file (type png)
+<use ./images/plots/DCBlockerResponse.png>
+Package pdftex.def Info: ./images/plots/DCBlockerResponse.png  used on input li
+ne 48.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/SmoothingIR.png, id=740, 526.96875pt x 395.22656pt>
+File: ./images/plots/SmoothingIR.png Graphic file (type png)
+<use ./images/plots/SmoothingIR.png>
+Package pdftex.def Info: ./images/plots/SmoothingIR.png  used on input line 58.
+
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[40
+
+ <./images/plots/DCBlockerResponse.png (PNG copy)>]
+<./images/plots/InterpolatorTest.png, id=748, 526.96875pt x 395.22656pt>
+File: ./images/plots/InterpolatorTest.png Graphic file (type png)
+<use ./images/plots/InterpolatorTest.png>
+Package pdftex.def Info: ./images/plots/InterpolatorTest.png  used on input lin
+e 70.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[41 <./images/plots/SmoothingIR.png (PNG copy)>]
+<./images/plots/SlideSpeedExtractorTest.png, id=756, 526.96875pt x 395.22656pt>
+
+File: ./images/plots/SlideSpeedExtractorTest.png Graphic file (type png)
+<use ./images/plots/SlideSpeedExtractorTest.png>
+Package pdftex.def Info: ./images/plots/SlideSpeedExtractorTest.png  used on in
+put line 86.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[42 <./images/plots/InterpolatorTest.png (PNG copy)>]
+<./images/plots/CSPTest.png, id=765, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSPTest.png Graphic file (type png)
+<use ./images/plots/CSPTest.png>
+Package pdftex.def Info: ./images/plots/CSPTest.png  used on input line 96.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[43 <./images/plots/SlideSpeedExtractorTest.png (PNG copy)>]
+<./images/plots/Figure18Orig.png, id=776, 362.5545pt x 263.7855pt>
+File: ./images/plots/Figure18Orig.png Graphic file (type png)
+<use ./images/plots/Figure18Orig.png>
+Package pdftex.def Info: ./images/plots/Figure18Orig.png  used on input line 10
+6.
+(pdftex.def)             Requested size: 271.9152pt x 197.83864pt.
+
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 44 undefined on inp
+ut line 107.
+
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 44 undefined on inp
+ut line 107.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/Figure18Recon.png, id=777, 526.96875pt x 395.22656pt>
+File: ./images/plots/Figure18Recon.png Graphic file (type png)
+<use ./images/plots/Figure18Recon.png>
+Package pdftex.def Info: ./images/plots/Figure18Recon.png  used on input line 1
+13.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/Figure19Orig.png, id=778, 383.031pt x 272.217pt>
+File: ./images/plots/Figure19Orig.png Graphic file (type png)
+<use ./images/plots/Figure19Orig.png>
+Package pdftex.def Info: ./images/plots/Figure19Orig.png  used on input line 12
+0.
+(pdftex.def)             Requested size: 287.27254pt x 204.16223pt.
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 44 undefined on inp
+ut line 121.
+
+
+LaTeX Warning: Citation 'valimaki_development_1998' on page 44 undefined on inp
+ut line 121.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/Figure19Recon.png, id=779, 526.96875pt x 395.22656pt>
+File: ./images/plots/Figure19Recon.png Graphic file (type png)
+<use ./images/plots/Figure19Recon.png>
+Package pdftex.def Info: ./images/plots/Figure19Recon.png  used on input line 1
+27.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[44 <./images/plots/CSPTest.png (PNG copy)>] [45 <./images/plots/Figure18Orig.p
+ng> <./images/plots/Figure18Recon.png (PNG copy)>] [46 <./images/plots/Figure19
+Orig.png> <./images/plots/Figure19Recon.png (PNG copy)>]
+<./images/plots/ImpulseTrainTest.png, id=799, 526.96875pt x 395.22656pt>
+File: ./images/plots/ImpulseTrainTest.png Graphic file (type png)
+<use ./images/plots/ImpulseTrainTest.png>
+Package pdftex.def Info: ./images/plots/ImpulseTrainTest.png  used on input lin
+e 140.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+ [47
+
+ <./images/plots/ImpulseTrainTest.png (PNG copy)>]
+<./images/plots/ExpDecayTest1.png, id=809, 526.96875pt x 395.22656pt>
+File: ./images/plots/ExpDecayTest1.png Graphic file (type png)
+<use ./images/plots/ExpDecayTest1.png>
+Package pdftex.def Info: ./images/plots/ExpDecayTest1.png  used on input line 1
+50.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/ExpDecayTest2.png, id=810, 526.96875pt x 395.22656pt>
+File: ./images/plots/ExpDecayTest2.png Graphic file (type png)
+<use ./images/plots/ExpDecayTest2.png>
+Package pdftex.def Info: ./images/plots/ExpDecayTest2.png  used on input line 1
+57.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[48 <./images/plots/ExpDecayTest1.png (PNG copy)>] [49 <./images/plots/ExpDecay
+Test2.png (PNG copy)>]
+<./images/plots/NPTTest1.png, id=823, 526.96875pt x 395.22656pt>
+File: ./images/plots/NPTTest1.png Graphic file (type png)
+<use ./images/plots/NPTTest1.png>
+Package pdftex.def Info: ./images/plots/NPTTest1.png  used on input line 169.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/NPTTest2.png, id=824, 526.96875pt x 395.22656pt>
+File: ./images/plots/NPTTest2.png Graphic file (type png)
+<use ./images/plots/NPTTest2.png>
+Package pdftex.def Info: ./images/plots/NPTTest2.png  used on input line 176.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/NPTTest2Spectrum.png, id=825, 526.96875pt x 395.22656pt>
+File: ./images/plots/NPTTest2Spectrum.png Graphic file (type png)
+<use ./images/plots/NPTTest2Spectrum.png>
+Package pdftex.def Info: ./images/plots/NPTTest2Spectrum.png  used on input lin
+e 183.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[50
+
+ <./images/plots/NPTTest1.png (PNG copy)>] [51 <./images/plots/NPTTest2.png (PN
+G copy)> <./images/plots/NPTTest2Spectrum.png (PNG copy)>]
+<./images/plots/NBGTest1.png, id=843, 526.96875pt x 395.22656pt>
+File: ./images/plots/NBGTest1.png Graphic file (type png)
+<use ./images/plots/NBGTest1.png>
+Package pdftex.def Info: ./images/plots/NBGTest1.png  used on input line 195.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/NBGTest2.png, id=844, 526.96875pt x 395.22656pt>
+File: ./images/plots/NBGTest2.png Graphic file (type png)
+<use ./images/plots/NBGTest2.png>
+Package pdftex.def Info: ./images/plots/NBGTest2.png  used on input line 202.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/NBGTest2Spectrum.png, id=845, 526.96875pt x 395.22656pt>
+File: ./images/plots/NBGTest2Spectrum.png Graphic file (type png)
+<use ./images/plots/NBGTest2Spectrum.png>
+Package pdftex.def Info: ./images/plots/NBGTest2Spectrum.png  used on input lin
+e 209.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[52
+
+ <./images/plots/NBGTest1.png (PNG copy)>] [53 <./images/plots/NBGTest2.png (PN
+G copy)> <./images/plots/NBGTest2Spectrum.png (PNG copy)>]
+<./images/plots/HRBTest.png, id=859, 526.96875pt x 395.22656pt>
+File: ./images/plots/HRBTest.png Graphic file (type png)
+<use ./images/plots/HRBTest.png>
+Package pdftex.def Info: ./images/plots/HRBTest.png  used on input line 222.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+ [54
+
+ <./images/plots/HRBTest.png (PNG copy)>]
+<./images/plots/ResoTanhTest.png, id=866, 526.96875pt x 395.22656pt>
+File: ./images/plots/ResoTanhTest.png Graphic file (type png)
+<use ./images/plots/ResoTanhTest.png>
+Package pdftex.def Info: ./images/plots/ResoTanhTest.png  used on input line 23
+2.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+ [55 <./images/plots/ResoTanhTest.png (PNG copy)>]
+[56]
+<./images/plots/CSG_Wound_Static_Long.png, id=892, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_Static_Long.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_Static_Long.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_Static_Long.png  used on inpu
+t line 264.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/CSG_Wound_Static_Harm.png, id=893, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_Static_Harm.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_Static_Harm.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_Static_Harm.png  used on inpu
+t line 271.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/CSG_Wound_Static_Both.png, id=894, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_Static_Both.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_Static_Both.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_Static_Both.png  used on inpu
+t line 278.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[57 <./images/plots/CSG_Wound_Static_Long.png (PNG copy)>] [58 <./images/plots/
+CSG_Wound_Static_Harm.png (PNG copy)> <./images/plots/CSG_Wound_Static_Both.png
+ (PNG copy)>]
+<./images/plots/CSG_Wound_TV_Long.png, id=907, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_TV_Long.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_TV_Long.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_TV_Long.png  used on input li
+ne 290.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/CSG_Wound_TV_Harm.png, id=908, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_TV_Harm.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_TV_Harm.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_TV_Harm.png  used on input li
+ne 297.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/CSG_Wound_TV_Both.png, id=909, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Wound_TV_Both.png Graphic file (type png)
+<use ./images/plots/CSG_Wound_TV_Both.png>
+Package pdftex.def Info: ./images/plots/CSG_Wound_TV_Both.png  used on input li
+ne 304.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[59
+
+ <./images/plots/CSG_Wound_TV_Long.png (PNG copy)>] [60 <./images/plots/CSG_Wou
+nd_TV_Harm.png (PNG copy)> <./images/plots/CSG_Wound_TV_Both.png (PNG copy)>]
+<./images/plots/CSG_Unwound_TV.png, id=922, 526.96875pt x 395.22656pt>
+File: ./images/plots/CSG_Unwound_TV.png Graphic file (type png)
+<use ./images/plots/CSG_Unwound_TV.png>
+Package pdftex.def Info: ./images/plots/CSG_Unwound_TV.png  used on input line 
+316.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+ [61
+
+ <./images/plots/CSG_Unwound_TV.png (PNG copy)>]
+<./images/plots/LagrangeTest1.png, id=930, 526.96875pt x 395.22656pt>
+File: ./images/plots/LagrangeTest1.png Graphic file (type png)
+<use ./images/plots/LagrangeTest1.png>
+Package pdftex.def Info: ./images/plots/LagrangeTest1.png  used on input line 3
+30.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/LagrangeTest2.png, id=932, 526.96875pt x 395.22656pt>
+File: ./images/plots/LagrangeTest2.png Graphic file (type png)
+<use ./images/plots/LagrangeTest2.png>
+Package pdftex.def Info: ./images/plots/LagrangeTest2.png  used on input line 3
+39.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+ [62 <./images/plots/LagrangeTest1.png (PNG copy)>]
+<./images/plots/LagrangeTest3.png, id=941, 526.96875pt x 395.22656pt>
+File: ./images/plots/LagrangeTest3.png Graphic file (type png)
+<use ./images/plots/LagrangeTest3.png>
+Package pdftex.def Info: ./images/plots/LagrangeTest3.png  used on input line 3
+65.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[63 <./images/plots/LagrangeTest2.png (PNG copy)>] [64 <./images/plots/Lagrange
+Test3.png (PNG copy)>] [65
+
+]
+<./images/plots/EnergyScalerLinearIncreasing.png, id=965, 526.96875pt x 395.226
+56pt>
+File: ./images/plots/EnergyScalerLinearIncreasing.png Graphic file (type png)
+<use ./images/plots/EnergyScalerLinearIncreasing.png>
+Package pdftex.def Info: ./images/plots/EnergyScalerLinearIncreasing.png  used 
+on input line 404.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/EnergyScalerQuadraticIncreasing.png, id=966, 526.96875pt x 395.
+22656pt>
+File: ./images/plots/EnergyScalerQuadraticIncreasing.png Graphic file (type png
+)
+<use ./images/plots/EnergyScalerQuadraticIncreasing.png>
+Package pdftex.def Info: ./images/plots/EnergyScalerQuadraticIncreasing.png  us
+ed on input line 411.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/EnergyScalerLinearDecreasing.png, id=967, 526.96875pt x 395.226
+56pt>
+File: ./images/plots/EnergyScalerLinearDecreasing.png Graphic file (type png)
+<use ./images/plots/EnergyScalerLinearDecreasing.png>
+Package pdftex.def Info: ./images/plots/EnergyScalerLinearDecreasing.png  used 
+on input line 418.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/EnergyScalerQuadraticDecreasing.png, id=968, 526.96875pt x 395.
+22656pt>
+File: ./images/plots/EnergyScalerQuadraticDecreasing.png Graphic file (type png
+)
+<use ./images/plots/EnergyScalerQuadraticDecreasing.png>
+Package pdftex.def Info: ./images/plots/EnergyScalerQuadraticDecreasing.png  us
+ed on input line 425.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[66] [67 <./images/plots/EnergyScalerLinearIncreasing.png (PNG copy)> <./images
+/plots/EnergyScalerQuadraticIncreasing.png (PNG copy)>] [68 <./images/plots/Ene
+rgyScalerLinearDecreasing.png (PNG copy)> <./images/plots/EnergyScalerQuadratic
+Decreasing.png (PNG copy)>]
+
+LaTeX Warning: Citation 'smith_spectral_nodate' on page 69 undefined on input l
+ine 433.
+
+! Double subscript.
+l.437 ...nge of the algorithm is limited $1.5*F_0_
+                                                  {bin}$, where $F_0_{bin}$ ...
+I treat `x_1_2' essentially like `x_1{}_2'.
+
+! Double subscript.
+l.437 ...m is limited $1.5*F_0_{bin}$, where $F_0_
+                                                  {bin}$ is the DFT bin asso...
+I treat `x_1_2' essentially like `x_1{}_2'.
+
+[69
+
+]
+! Double subscript.
+l.448 ...mental frequency corresponding with $F_0_
+                                                  {bin} = 100$, or 1,171.9 H...
+I treat `x_1_2' essentially like `x_1{}_2'.
+
+
+LaTeX Warning: Citation 'smith_spectral_nodate' on page 70 undefined on input l
+ine 448.
+
+<./images/plots/StringDWGInterpBins.png, id=993, 526.96875pt x 395.22656pt>
+File: ./images/plots/StringDWGInterpBins.png Graphic file (type png)
+<use ./images/plots/StringDWGInterpBins.png>
+Package pdftex.def Info: ./images/plots/StringDWGInterpBins.png  used on input 
+line 452.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/plots/StringDWGInterpBinsZoom.png, id=994, 526.96875pt x 395.22656pt>
+
+File: ./images/plots/StringDWGInterpBinsZoom.png Graphic file (type png)
+<use ./images/plots/StringDWGInterpBinsZoom.png>
+Package pdftex.def Info: ./images/plots/StringDWGInterpBinsZoom.png  used on in
+put line 459.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/StringDWGInterpSpec.png, id=995, 526.96875pt x 395.22656pt>
+File: ./images/plots/StringDWGInterpSpec.png Graphic file (type png)
+<use ./images/plots/StringDWGInterpSpec.png>
+Package pdftex.def Info: ./images/plots/StringDWGInterpSpec.png  used on input 
+line 466.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[70 <./images/plots/StringDWGInterpBins.png (PNG copy)>] [71 <./images/plots/St
+ringDWGInterpBinsZoom.png (PNG copy)> <./images/plots/StringDWGInterpSpec.png (
+PNG copy)>]
+<./images/plots/VibratoWideSpec.png, id=1009, 526.96875pt x 395.22656pt>
+File: ./images/plots/VibratoWideSpec.png Graphic file (type png)
+<use ./images/plots/VibratoWideSpec.png>
+Package pdftex.def Info: ./images/plots/VibratoWideSpec.png  used on input line
+ 491.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<./images/plots/VibratoNarrowSpec.png, id=1010, 526.96875pt x 395.22656pt>
+File: ./images/plots/VibratoNarrowSpec.png Graphic file (type png)
+<use ./images/plots/VibratoNarrowSpec.png>
+Package pdftex.def Info: ./images/plots/VibratoNarrowSpec.png  used on input li
+ne 498.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
+
+(sections/chapter5.tex [72
+
+] [73 <./images/plots/VibratoWideSpec.png (PNG copy)> <./images/plots/VibratoNa
+rrowSpec.png (PNG copy)>]
+Chapter 5.
+<./images/pictures/MySlides.png, id=1030, 1715.81026pt x 1125.60526pt>
+File: ./images/pictures/MySlides.png Graphic file (type png)
+<use ./images/pictures/MySlides.png>
+Package pdftex.def Info: ./images/pictures/MySlides.png  used on input line 15.
+
+(pdftex.def)             Requested size: 257.36043pt x 168.8335pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[74
+
+] [75 <./images/pictures/MySlides.png>]
+<./images/pictures/WindingsEZoom.png, id=1042, 469.15276pt x 187.902pt>
+File: ./images/pictures/WindingsEZoom.png Graphic file (type png)
+<use ./images/pictures/WindingsEZoom.png>
+Package pdftex.def Info: ./images/pictures/WindingsEZoom.png  used on input lin
+e 62.
+(pdftex.def)             Requested size: 351.8637pt x 140.92615pt.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 76 undefined on input 
+line 67.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 76 undefined on input 
+line 70.
+
+[76 <./images/pictures/WindingsEZoom.png>]
+<./images/pictures/CouplingSetup.png, id=1049, 2183.15625pt x 655.85025pt>
+File: ./images/pictures/CouplingSetup.png Graphic file (type png)
+<use ./images/pictures/CouplingSetup.png>
+Package pdftex.def Info: ./images/pictures/CouplingSetup.png  used on input lin
+e 77.
+(pdftex.def)             Requested size: 436.62352pt x 131.16772pt.
+ [77 <./images/pictures/CouplingSetup.png>] [78]
+<./images/pictures/FoamDamping.png, id=1060, 2773.9635pt x 1217.14725pt>
+File: ./images/pictures/FoamDamping.png Graphic file (type png)
+<use ./images/pictures/FoamDamping.png>
+Package pdftex.def Info: ./images/pictures/FoamDamping.png  used on input line 
+95.
+(pdftex.def)             Requested size: 416.07657pt x 182.56421pt.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 79 undefined on input 
+line 103.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 79 undefined on input
+ line 103.
+
+
+Overfull \hbox (19.00798pt too wide) in paragraph at lines 103--104
+\OT1/cmr/m/n/10.95 anal-y-sis per-formed in ([]) for the slide gui-tar and ([])
+
+ []
+
+[79 <./images/pictures/FoamDamping.png>]
+<./images/plots/ContactNoiseEBrass.png, id=1069, 526.96875pt x 395.22656pt>
+File: ./images/plots/ContactNoiseEBrass.png Graphic file (type png)
+<use ./images/plots/ContactNoiseEBrass.png>
+Package pdftex.def Info: ./images/plots/ContactNoiseEBrass.png  used on input l
+ine 107.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+<./images/pictures/CutFoam.png, id=1070, 2769.74776pt x 354.72525pt>
+File: ./images/pictures/CutFoam.png Graphic file (type png)
+<use ./images/pictures/CutFoam.png>
+Package pdftex.def Info: ./images/pictures/CutFoam.png  used on input line 116.
+
+(pdftex.def)             Requested size: 415.44424pt x 53.20648pt.
+ [80 <./images/plots/ContactNoiseEBrass.png (PNG copy)>]
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 81 undefined on input 
+line 122.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 81 undefined on input 
+line 122.
+
+[81 <./images/pictures/CutFoam.png>]
+<./images/pictures/KnifeEdgeWedge.png, id=1081, 1214.73825pt x 956.97525pt>
+File: ./images/pictures/KnifeEdgeWedge.png Graphic file (type png)
+<use ./images/pictures/KnifeEdgeWedge.png>
+Package pdftex.def Info: ./images/pictures/KnifeEdgeWedge.png  used on input li
+ne 132.
+(pdftex.def)             Requested size: 242.94334pt x 191.39166pt.
+ [82 <./images/pictures/KnifeEdgeWedge.png>]
+<./images/pictures/KnifeStrikingSetup.png, id=1091, 2080.77374pt x 1135.24126pt
+>
+File: ./images/pictures/KnifeStrikingSetup.png Graphic file (type png)
+<use ./images/pictures/KnifeStrikingSetup.png>
+Package pdftex.def Info: ./images/pictures/KnifeStrikingSetup.png  used on inpu
+t line 142.
+(pdftex.def)             Requested size: 416.14738pt x 227.04422pt.
+ [83 <./images/pictures/KnifeStrikingSetup.png>])
+
+(sections/chapter6.tex [84]
+Chapter 6.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 13.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 13.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 13.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 85 undefined on input 
+line 14.
+
+[85
+
+]
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 86 undefined on input 
+line 16.
+
+
+LaTeX Warning: Citation 'penttinen_model-based_2006' on page 86 undefined on in
+put line 16.
+
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 86 undefined on input 
+line 18.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 86 undefined on input 
+line 18.
+
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 86 undefined on input 
+line 18.
+
+File: ./images/pictures/noise_pulses.PNG Graphic file (type png)
+<use ./images/pictures/noise_pulses.PNG>
+Package pdftex.def Info: ./images/pictures/noise_pulses.PNG  used on input line
+ 22.
+(pdftex.def)             Requested size: 246.16908pt x 65.49452pt.
+
+LaTeX Warning: Citation 'pakarinen_virtual_2008' on page 86 undefined on input 
+line 23.
+
+
+LaTeX Warning: Citation 'pakarinen_analysis_2007' on page 86 undefined on input
+ line 27.
+
+[86]
+
+LaTeX Warning: Citation 'puputti_real-time_2010' on page 87 undefined on input 
+line 33.
+
+
+LaTeX Warning: Citation 'karplus_digital_1983' on page 87 undefined on input li
+ne 33.
+
+[87] [88]
+<./images/plots/F0Compare.png, id=1120, 526.96875pt x 395.22656pt>
+File: ./images/plots/F0Compare.png Graphic file (type png)
+<use ./images/plots/F0Compare.png>
+Package pdftex.def Info: ./images/plots/F0Compare.png  used on input line 55.
+(pdftex.def)             Requested size: 342.52562pt x 256.89421pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[89] [90 <./images/plots/F0Compare.png (PNG copy)>])
+
+(sections/chapter7.tex [91]
+Chapter 7.
 )
 
 
-LaTeX Warning: Empty bibliography on input line 109.
+LaTeX Warning: Empty bibliography on input line 130.
 
-[2
+
+(sections/appendix.tex [92
+
+]
+Appendix A.
+[93
+
+]
+Appendix B.
+[94
+
+]
+Appendix C.
+) [95
 
 ] (main.aux)
 
 LaTeX Warning: There were undefined references.
 
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: C71402E5DF147538BA66C151C003604E;407
-(rerunfilecheck)             After:  E8D4E1D79B9781906F0806CC3514B152;427.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: B15EAE42D30184FD57F786C98EC6E46F;12468.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -1140,22 +2290,31 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31190 strings out of 478303
- 589393 string characters out of 2843287
- 1316065 words of memory out of 3000000
- 49126 multiletter control sequences out of 15000+600000
- 477541 words of font info for 56 fonts, out of 8000000 for 9000
+ 32255 strings out of 478303
+ 618806 string characters out of 2843287
+ 1335630 words of memory out of 3000000
+ 49792 multiletter control sequences out of 15000+600000
+ 478995 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 110i,11n,106p,787b,849s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 110i,13n,106p,1328b,1103s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\Graham\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600
 \tcrm1095.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (6 pages, 90511 bytes).
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (101 pages, 54368140 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 14 named destinations out of 1000 (max. 500000)
- 50 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1287 PDF objects out of 1440 (max. 8388607)
+ 312 named destinations out of 1000 (max. 500000)
+ 1005 words of extra memory for PDF output out of 10000 (max. 10000000)
 

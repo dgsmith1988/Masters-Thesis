@@ -1,8 +1,9 @@
-% clear all;
-% close all;
+clear all;
+close all;
 
+% path = "./sounds/Measurements/T60-v2 - Single Winding/";
 path = "./sounds/Measurements/Noise Characterization/";
-dataName =  "E-glass";
+dataName =  "E-brass-trimmed";
 [y, Fs] = audioread(path+dataName + ".wav");
 labels = {'AKG', 'DPA'};
 
@@ -24,6 +25,25 @@ title(dataName);
 xlabel("Sec");
 ylabel("Amplitude");
 legend(labels);
+
+y_norm = [y(:, 1)/max(abs(y(:, 1))), y(:, 2)/max(abs(y(:, 2)))];
+figure;
+subplot(2, 1, 1);
+% plot(t, abs(y_norm(:, 1)));
+plot(t, y_norm(:, 2));
+title(dataName + " " + labels{1});
+xlabel("Sec");
+ylabel("Amplitude");
+xlim([0 t(end)]);
+% ylim(.75*[-1 1])
+subplot(2, 1, 2);
+% plot(t, abs(y_norm(:, 2)));
+plot(t, y_norm(:, 2));
+title(dataName + " " + labels{2});
+xlabel("Sec");
+ylabel("Amplitude");
+xlim([0 t(end)]);
+% ylim(.75*[-1 1])
 
 for channel = 1:size(y, 2)
     figure;

@@ -1,11 +1,12 @@
 clear all;
 close all;
 
-path = "Slide Licks\";
-dataName =  "High e-string";
+path = "C:\Users\Graham\Documents\McGill\M.A\Thesis\Masters-Thesis\LaTeX\Thesis\sound examples\";
+dataName =  "SlideLick-High-e";
 [x, Fs] = audioread(path+dataName + ".wav");
 
 f_c = SystemParams.e_string_params.f0 - 20;
+
 y = highpass(x, f_c, Fs);
 
 %Spectrogram analysis parameters
@@ -31,6 +32,8 @@ spectrogram(y, window, overlap, N, Fs, "yaxis");
 ylim([0 y_upperLim_kHz]);
 title(dataName);
 
-yinOut = yin(y, Fs);
 figure;
-plot(yinOut.f0);
+yin(y, Fs);
+% yinOut = yin(y, Fs);
+% figure;
+% plot(yinOut.f0);

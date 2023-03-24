@@ -48,7 +48,7 @@ yyaxis right;
 plot(nRange, DWGLengthSweep);
 ylabel("DWG Length (Samples)");
 xlabel("n (Time-step)");
-title("g_c for Linearly Decreasing DWG Length");
+title("g_c for Linear DWG Length");
 
 delta_x_theory = decrement*ones(1, numSamples);
 g_c_theory = sqrt(abs(1-delta_x_theory));
@@ -58,8 +58,9 @@ subplot(2, 1, 2);
 plot(nRange, g_c_err)
 ylabel("g_c Error");
 xlabel("n (Time-step)");
+ylim([-1 1]);
 
-%********Test 2 - Increasing Decreasing Parabolic DWG Length*********
+%********Test 2 - Decreasing Quadratic DWG Length*********
 
 %Generate the sweep signal to test the block with by sampling the
 %continuous domain signal
@@ -87,7 +88,7 @@ yyaxis right;
 plot(nRange, DWGLengthSweep);
 ylabel("DWG Length (Samples)");
 xlabel("n (Time-step)");
-title("g_c for Decreasing Parabolic DWG Length");
+title("g_c for Decreasing DWG Length");
 
 DWG_n_theory = a*(nRange*Ts).^2 + c;
 DWG_n_1_theory = a*((nRange-1)*Ts).^2 + c;
@@ -99,3 +100,4 @@ subplot(2, 1, 2);
 plot(nRange, g_c_err)
 ylabel("g_c Error");
 xlabel("n (Time-step)");
+ylim([-1 1]);

@@ -4,16 +4,16 @@
 %   2. Resonator branch
 %   3. Combined output
 
-close all;
-clear all;
+% close all;
+% clear all;
 
 dbstop if error;
 
 %System parameters
 Fs = SystemParams.audioRate;
 stringLength = SystemParams.stringLengthMeters;
-stringParams = SystemParams.D_string_params;
-stringModeFilterSpec = SystemParams.D_string_modes.chrome;
+stringParams = SystemParams.E_string_params;
+stringModeFilterSpec = SystemParams.E_string_modes.brass;
 n_w = stringParams.n_w;
 duration_sec = 2;
 numSamples = round(Fs*duration_sec);

@@ -6,7 +6,6 @@ classdef SlideSynth < Controllable & AudioGenerator
         stringDWG               %object which generates the string sound
         contactSoundGenerator   %unit adding slide/string contact noise
         couplingFilter          %TODO: Determine this later
-        antiAliasingFilter      %what's in a name?
     end
     
     methods
@@ -32,7 +31,6 @@ classdef SlideSynth < Controllable & AudioGenerator
             %TODO: Coupling filter is currently a place holder
             obj.couplingFilter = CouplingFilter("Full");
             obj.stringDWG = StringDWG(stringParams, L_0, params.stringNoiseSource, params.useNoiseFile);
-            obj.antiAliasingFilter = AntiAliasing();
             obj.controlSignalProcessor = ControlSignalProcessor(L_0);
         end
         
@@ -50,7 +48,7 @@ classdef SlideSynth < Controllable & AudioGenerator
             obj.controlSignalProcessor.consumeControlSignal(L_m);
         end
         
-        function [y_n, stringDWGOutput, CSGOutput] = tick(obj)
+        function [y_n, L_n, stringDWGOutput, CSGOutput] = tick(obj)
             %Generate the various control signals at audio rate
             [L_n, slideSpeed_n] = obj.controlSignalProcessor.tick();
             
@@ -65,9 +63,7 @@ classdef SlideSynth < Controllable & AudioGenerator
             couplingFilterOutput = obj.couplingFilter.passThru(0.0);
             stringDWGOutput = obj.stringDWG.tick(couplingFilterOutput);
             
-            %Filter the output before sending it out incase aliasing
-            %occured when the delay-line length changed
-            y_n = obj.antiAliasingFilter.tick(stringDWGOutput + CSGOutput);
+            y_n = stringDWGOutput + CSGOutput;
         end
     end
 end

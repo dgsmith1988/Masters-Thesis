@@ -110,4 +110,4 @@ hold off;
 title(sprintf("Changing Fractional Delay Component"));
 grid on;
 grid minor;
-legend();
+legend("Location", "west");

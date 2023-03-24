@@ -22,6 +22,7 @@ f_c = Fs/period_samp;
 %buffers to be filled during processing loop
 y1 = zeros(1, numSamples);
 y2 = zeros(1, numSamples);
+y3 = zeros(1, numSamples);
 
 %Processing objects
 noisePulseTrain = NoisePulseTrain(period_samp, T60);
@@ -38,6 +39,10 @@ end
 figure;
 plot(y1);
 title("Noise Pulse Train Test - Constant Rate");
+
+figure;
+spectrogram(y1, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
 
 %Rate changing test
 a = 1/.09;
@@ -68,5 +73,34 @@ y_upperLim = Fs/2000;
 
 figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
+ylim([0 y_upperLim]);
+% title('Wound CSG Combined Branches Output Spectrogram')
+
+%250 Hz test
+f_c = 250*ones(numSamples, 1);
+
+%Processing loop
+for n = 1:numSamples
+    if(mod(n, 1000) == 0)
+        fprintf("n = %i/%i\n", n, numSamples);
+    end
+    noisePulseTrain.consumeControlSignal(f_c(n));
+    y3(n) = noisePulseTrain.tick();
+end
+
+figure;
+plot(y3);
+title("Noise Pulse Train Test - 250 Hz Test");
+
+%Spectrogram analysis parameters
+windowLength = 12*10^-3*Fs; %12 ms window
+% window = hamming(windowLength);
+window = rectwin(windowLength);
+overlap = .75*windowLength;
+N = 4096;
+y_upperLim = Fs/2000;
+
+figure;
+spectrogram(y3, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 % title('Wound CSG Combined Branches Output Spectrogram')

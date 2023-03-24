@@ -18,8 +18,8 @@ Fs_ctrl = SystemParams.controlRate;
 
 %Slide motion parameters
 duration_sec = 3;
-higherFret = 24;
-lowerFret = 24;
+higherFret = 0;
+lowerFret = 0;
 L = generateLCurve(higherFret, lowerFret, duration_sec, Fs_ctrl);
 
 %Spectrogram analysis parameters
