@@ -2,6 +2,8 @@
 
 %\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{nomencl}
 \usepackage{enumitem}
 \usepackage{amsmath}		% Extra math definitions
@@ -22,7 +24,7 @@
 
 % Custom commands
 \newcommand{\tinytodo}[2][] {\todo[caption={#2}, #1]{\begin{spacing}{0.5} #2 \end{spacing}}}
-\newcommand{\citetwo}[1]{(\cite{#1})}
+\newcommand{\citetwo}[1]{[\cite{#1}]}
 
 \newenvironment{tinytest}%
 {\begin{tiny}\it}%
@@ -69,7 +71,7 @@
   A thesis submitted to McGill University in partial fulfillment of the
   requirements for the degree of Master of Arts.
   \vskip 3ex
-  \copyright\ \the\year\ David Smith
+  \copyright\ \the\year\ David G. Smith
 }
 
 \maketitle
@@ -82,25 +84,30 @@
 %========== Tables of contents, figures, tables
 \tableofcontents
 % \listoffigures
-\listoftables
+% \listoftables
 
 \newpage{}
 
 \chapter*{List of Acronyms}
 
 \begin{longtable}{ll}
+    AES & Audio Engineering Society\\
+    CMJ & Computer Music Journal\\
     CSG & Contact Sound Generator\\
-	DMI & Digital Music Instrument\\
+    DFT & Discrete Fourier Transform\\
     DWG & Digital Waveguide\\
     FIR & Finite Impulse Response\\
     IIR & Infinite Impulse Response\\
+    IR & Impulse Response\\
+    LPC & Linear Predictive Coding\\
 \end{longtable}
 
 \cleardoublepage
 
 %========== Chapters ==========
 \pagenumbering{arabic}
-\doublespacing
+% \doublespacing
+\singlespacing
 
 \typeout{}
 \subfile{sections/chapter1}

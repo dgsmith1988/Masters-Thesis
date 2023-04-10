@@ -4,13 +4,15 @@
 
 \begin{document}
 
-\chapter{Sound Design and Controlling Parameters}
+\chapter{Sound Design and Control Signals}
 Fill me in later
 
 \section{Alternate Architecture Considerations}
 \section{Tuning Parameters}
 Explain how DC blocker is different than not using absolute value function in noise source
-\subsection{$T_{60}$}
+\subsection{Decay Rate}
+THE MORE NOSIE LIKE THIS LETS THE NPT OUTPUT BECOME THEN THE MORE THE $f_C$ quantization is mitigated as the filter's don't have that issue.
+
 $T_{60}$ is not full described in the original \citetwo{pakarinen_virtual_2008} paper. This paper describes the type of string as determining both the decay time as well as duration and an individual noise pulse. Given that the noise pulses have an exponential amplitude envelope, ultimately only one of these are needed as the decay time and duration can be derived from each other. There is no specification as to how the decay rate is specified either, so the $T_{60}$ value was chosen as this is a widely known and standardized parameter for reverberation time. It has been adapted here to represent the amplitude envelope's time until it decays 60 dB from its original value (and does not correspond to any sort of reverberation).
 
 The implementation of the algorithm as described in \citetwo{puputti_real-time_2010} does not clearly define how the decay rate and pulse length are specified as well. Their implementation is more akin to the guqin model (\citetwo{penttinen_model-based_2006}) or noise burst approach where the stacking of the impulses is not allowed to occur in an unrestrained fashion. This makes the signal less harmonic and more noise like as the fundamental repetition of the slide/winding collision impulse response is not allowed to occur in a more sonically meaningful way.
@@ -29,6 +31,10 @@ The physical interpretation of a noise burst is meant to represent the impulse r
 \subsubsection{Tuning}
 Attempts were made to empirically measure the $T_{60}$ value, however the measurement equipment was not sufficiently low noise to allow for a meaningful result to be calculated. Instead, an attempt will be made to determine the correct value based on trying to match the spectrograms where were measured. The crucial component to understanding this observing the relationship between the decay rate and the firing rate. The longer the decay rate is, then the lower the firing rate needs to be in-order to have the impulse responses overlap. The more the noise pulses overlap, the more "noise like" the signal becomes due to the build up of energy. If this build up is too much then the harmonic component of the signal is obscured. Signal-to-noise ratio could be an apt term to describe this, however the standard definition of this implies that the "noise" component is unwanted. Given that the "noise" component is useful as a stimuli for the longitudinal-mode filters which follow it in the CSG', the desirability of "noise" is ultimately subjective as it is a creative decision by the person playing the synthesizer. The $T_{60}$ parameter ultimately controls the haromonicity to noise transition frequency for $f_c[n]$.
 
+\section{CSG Configurations}
+\subsection{Computaional Complexity}
+The more harmonics which are added to the HRB. The longer it takes to compute the results.
+
 \section{Waveform Initialization}
 Two different types of noise were experimented with for specifying different initial conditions for the DWG's buffer: white and pink noise. Each noise type has a different properties regarding its frequency content. White noise contains equal frequency content across the spectrum, whereas pink noise has a spectrum where there is equal energy per octave. Accordingly, pink noise is skewed more towards the lower end of the spectrum while white noise contains more energy at the upper end for a specified sampling rate. Experiments were done with both types of noise. There is an audible difference between the two, where the white noise generated signal contains more definition/clarity in the attack. Intuitively this makes sense as the higher frequencies are necessary to create sharper transitions associated with a faster transient. The pink noise generated sounds have more of a ``warmer" sound due to their stronger low-frequency content and are more natural sounding. Pink noise was used in the \citetwo{puputti_real-time_2010} implementation while historically white noise has been used as illustrated by \citetwo{karplus_digital_1983}. 
 
@@ -42,9 +48,33 @@ In terms of the actual initialization, it is necessary to only initialize as man
 TODO: ADD SOME PICTURES FOR THIS
 
 \section{Control Signal Parametrization}
+
+\subsection{Generating L[n]}
+A rudimentary algorithm for generating control signals was created based on the idea of specifying linear perceived pitch trajectories as the ear perceives. This was done using Algorithm~\ref{alg:generateLn}, shown below, which calculates $L[n]$ from a specified sampling frequency, duration in seconds as well as starting and ending string lengths.
+\begin{algorithm}
+\caption{Generate $L[n]$ from specified end points}
+\label{alg:generateLn}
+\begin{algorithmic}
+\Require $L_{init}$, $L_{end}$, $F_s$, $duration$
+\State $frequencyRatio = \frac{L_{init}}{L_{end}}$
+\State $numSamples = F_s \times duration$ \Comment{$duration$ is in seconds}
+\State $sampleRatio = frequencyRatio^{\frac{1}{numSamples-1}}$  \Comment{Ratio change in $L[n]$ per each sample}
+\State $n \gets 0$
+\For{$n < numSamples-1$}
+    \State $L[n] \gets L_{init} \times sampleRatio^{-n}$
+\End
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Analysis of Signals from Playing Examples}
 An attempt was made to synthesize the following musical segment.
 
-TODO: INSERT FIGURE OF THE SLIDE LICK HERE
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.75]{./images/pictures/slideLick.png}
+    \caption{Slide playing example for the high E string.}
+    \label{fig:slideLick}
+\end{figure}
 
 This example was also played and recorded to be able to compare the difference between the synthesized figures and the real playing examples. This occurred across multiple different parameters, but the primary one of interest was the accuracy in terms of the specified control signal. The goal of a musical synthesizer is to be able make make musical sounds (something which is fundamentally subjective), however one way of determining the ``musicality" of a synthesized sound would be to compare it to a recorded example.
 
@@ -65,5 +95,56 @@ The second plot in the figure illustrates the fundamental frequency which should
 
 The slide transitions are linear in the computed approach for some reason, even though the underlying algorithm has been specified to operate logarthmically. Although for small enough segments it is approximately linear and we are considering only a 1-fret slide in
 from below over the course of a 16th note at 75 BPM. This note duration is approximately 47 milliseconds.
+
+\subsection{Purposeful Instability}
+As detailed in \citetwo{valimaki_development_1998}, the $a$ and $g$ coefficients for this filter were derived from recordings of a professional guitar player playing several notes on all the frets of a guitar for each string. Unfortunately there is no mention of numerically how many frets were on the the guitar used in the recordings. Furthermore, there is no standardization of fret-numbers agreed upon by guitar manufacturers. Common values range are 19, 21, 22 and 24 depending on the make and manufacturer. Without a clear number of frets from which the measurements were made, it is hard to establish what range of values the relative length signal could take. This creates there situation, where physically valid fretting options create an unstable system in terms of the loop filter in certain situations. This is further complicated by the fact that slides are often used to play notes above the range of the end of the fingerboard.
+
+Figures \ref{fig:Str1LoopMag} and \ref{fig:Str4LoopMag} illustrate this scenario more clearly. In both these figures, the magnitude response for the relative length setting of .25 (which corresponds to the 24th fret) goes above 0 dB at certain frequencies. This creates a positive feedback loop where the total amount of energy in the system increases with each iteration making the system unstable. If the relative length is maintained here for too long the output will grow unbounded and explode.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.65]{./images/plots/String 1 - Loop Filter Magnitude Response.png}
+    \caption{Unstable Loop Filter magnitude response for high E string}
+    \label{fig:Str1LoopMag}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.65]{./images/plots/String 4 - Loop Filter Magnitude Response.png}
+    \caption{Unstable Loop Filter magnitude response for D string}
+    \label{fig:Str4LoopMag}
+\end{figure}
+
+Through experimentation it was determined that in order to guarantee that $|H_{loop}(\omega)| < 1$, the maximum fret value needs to be set to 21. This corresponds to $L \approx .30$. However, as shown in figure \ref{fig:Str4LoopMagStable} this results in in a frequency response where the lower frequencies are attenuated more rapidly than the higher frequencies. While stable, this is in contradiction to how the modes of a vibrating string are expected to decay. Even taking into account the various other losses (air damping, internal frictional forces, etc.) which the loop filter is approximating this is still not physically consistent and in opposition to the behavior illustrated at the various other relative string lengths.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.65]{./images/plots/String 4 - Loop Filter Magnitude Response - stable.png}
+    \caption{Stable Loop Filter magnitude response for D string}
+    \label{fig:Str4LoopMagStable}
+\end{figure}
+
+Given that the filter coefficients are generated through a polynomial approximation derived from approximating the frequency response characteristics at various relative string lengths, I believe that this is an error in the process in general. It could be that the anomalous relative string lengths are not something which was captured in the original measurements. However given that the other strings do not illustrate this behavior I believe that it is more likely a limitation of the polynomial approximation used to generate the different filter coefficients. Given that the purpose of the slide is to expand the pitch palette beyond the fretboard this is a limitation when compared to the physical realities of the slide-guitar. It is often common for players to go far beyond the 24-fret and experiment with extended ranges.
+
+In practice, to achieve this unstable state another condition needs to be imposed on the Lagrange interpolator. The total magnitude response of the loop is determined by the effects of the Lagrange interpolation filter as well as the loop filter as they are in series and the integer delay line has a unity gain. When approximating a fractional delay, the Lagrange interpolator tends to act as a low-pass filter whose attenuation at the higher-frequencies is greater than then amplification of the loop filter in an unstable state. However, if not required, then the Lagrange filter will act as a pure integer delay and have a flat magnitude response and the overall system would be unstable due to the aforementioned positive feedback. This condition occurs when the fractional component of the total digital waveguide length can be achieved via the via phase delay of the loop filter. The relative string length can be expressed as:
+
+\begin{equation}
+    L = \frac{OpenString_{F_0}}{F_s} \times DWGLength    
+\end{equation}
+
+For a given open-string fundamental frequency and sampling rate, the appropriate digital waveguide length needs to be selected. For the D-string running at 48kHz and using an approximation of .25 for the loop filter's phase delay, the following calculation produces an unstable system without going beyond the 24th fret:
+
+\begin{equation}
+    L = \frac{146.83}{48,000} \times 82.25 \approx .2516
+\end{equation}
+
+The results of this system can be heard in the example \emph{UnstableLoopFilter-scaled.wav} and are illustrated in figure \ref{fig:UnstableLoop}. This clearly shows how the upper frequencies are amplified over time as the system maintains an unstable state. The system grows quite rapidly near the end of the signal so in order to save it as a wave, it had to be scaled to prevent clipping. It is rather difficult to hear given the high contrast in the different signal levels. In a real-time system this would likely manifest as clipping so correspondingly a clipped signal was output and can be heard in the file \emph{UnstableLoopFilter-clipped.wav}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=.65]{./images/plots/UnstableLoopFilter.png}
+    \caption{Corresponds to \emph{UnstableLoopFilter-scaled.wav}}
+    \label{fig:UnstableLoop}
+\end{figure}
 
 \end{document}

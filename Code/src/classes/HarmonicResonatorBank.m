@@ -3,58 +3,44 @@ classdef HarmonicResonatorBank < HarmonicAccentuator
     %harmonically linked resonators controlled by f_c[n]
     
     properties
-        %each number corresponds to the haromnic the resonator emphasizes
-        %6 resonators were chosen based on the number of haromnics which
-        %appear in the spectrograms of figure 2 in the CMJ article
-        resonator_1
-        resonator_2
-        resonator_3
-        resonator_4
-        resonator_5
-        resonator_6
-
-        %TODO: Determine the best values to tune these to through
-        %measurement for each string/slide type
-        h = db2mag([0 -2.5 -5 -7.5 -10 -12.5]); %this holds the different relative strengths of each harmonic
-    end
-    
-    properties(Constant)
-        numResonators = 6;
+        resonatorBank = []; %Array of Resonator filters
+        h                   %Holds the relative linear strength of each harmonic
+        y                   %Buffer to hold the filter outputs
     end
     
     methods
-        function obj = HarmonicResonatorBank(f_c, r)
-            obj.resonator_1 = Resonator(f_c, r);
-            obj.resonator_2 = Resonator(f_c, r);
-            obj.resonator_3 = Resonator(f_c, r);
-            obj.resonator_4 = Resonator(f_c, r);
-            obj.resonator_5 = Resonator(f_c, r);
-            obj.resonator_6 = Resonator(f_c, r);
+        function obj = HarmonicResonatorBank(h_dB, f_c, r)
+            %Convert the dB values to linear for easier implmentation
+            obj.h = db2mag(h_dB);
+            
+            %Fill the resonator bank array with the number of resonators
+            %specified
+            for k = 1:length(obj.h)
+                obj.resonatorBank = [obj.resonatorBank, Resonator(f_c, r)];
+            end
+            
+            %Initialize the output buffer
+            obj.y = zeros(1, length(obj.h));
         end
         
         function outputSample = tick(obj, inputSample)
-            %Buffer to store the outputs
-            y = zeros(1, obj.numResonators);
-            
-            y(1) = obj.resonator_1.tick(inputSample);
-            y(2) = obj.resonator_2.tick(inputSample);
-            y(3) = obj.resonator_3.tick(inputSample);
-            y(4) = obj.resonator_4.tick(inputSample);
-            y(5) = obj.resonator_5.tick(inputSample);
-            y(6) = obj.resonator_6.tick(inputSample);
+            %Loop through the resonator bank array and compute each
+            %filter's output
+            for k = 1:length(obj.resonatorBank)
+                obj.y(k) = obj.resonatorBank(k).tick(inputSample);
+            end
             
             %Apply the relative amplitdues and sum the filter outputs to
             %generate the total output
-            outputSample = sum(obj.h .* y);
+            outputSample = sum(obj.h .* obj.y);
         end
         
         function consumeControlSignal(obj, f_c_n)
-            obj.resonator_1.update_f_c(1*f_c_n);
-            obj.resonator_2.update_f_c(2*f_c_n);
-            obj.resonator_3.update_f_c(3*f_c_n);
-            obj.resonator_4.update_f_c(4*f_c_n);
-            obj.resonator_5.update_f_c(5*f_c_n);
-            obj.resonator_6.update_f_c(6*f_c_n);
+            %Loop through the resonator bank array and compute each
+            %filter's centre frequency
+            for k = 1:length(obj.resonatorBank)
+                obj.resonatorBank(k).update_f_c(k*f_c_n);
+            end
         end
     end
 end

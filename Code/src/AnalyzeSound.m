@@ -2,10 +2,9 @@
 % close all;
 
 % path = "Single Winding Stimulation\";
-path = "Slide Licks\";
-dataName =  "High e-string";
-% dataName =  "High e-string brass";
-[y, Fs] = audioread(path+dataName + ".wav");
+directory = "..\Data\Recordings\Longitudinal to Transverse Coupling\";
+dataName =  "E-string brass-trimmed";
+[y, Fs] = audioread(directory+dataName + ".wav");
 
 %Spectrogram analysis parameters
 windowLength = 12*10^-3*Fs; %12 ms window
@@ -30,7 +29,7 @@ figure;
 spectrogram(y, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim_kHz]);
 % title(dataName + " L2T Coupling Spectrogram");
-title(dataName);
+% title(dataName);
 
-figure;
-yin(y, Fs);
+% figure;
+% yin(y, Fs);

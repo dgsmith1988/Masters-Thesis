@@ -6,7 +6,5 @@ addpath(genpath(".\src"))
 addpath(genpath(".\external"))
 %Add code where i figure things out it isolation
 addpath(genpath(".\scratch"))
-%Add sound examples from elsewhere
-addpath(genpath(".\sounds"))
-%Add directory where comparisons are generated
-addpath(".\comparisons")
+%Add measurement data
+addpath(genpath("..\Data"))

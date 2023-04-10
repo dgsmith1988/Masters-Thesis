@@ -1,4 +1,4 @@
-%This tests the functionality associated with the functions used to help
+ using the%This tests the functionality associated with the functions used to help
 %compute quntities/values used within other classes/functions. These
 %functions are:
 % 1. generateLcurve()

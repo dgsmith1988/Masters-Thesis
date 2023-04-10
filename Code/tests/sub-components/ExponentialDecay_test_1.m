@@ -19,7 +19,7 @@ T60 = [duration_sec/2, duration_sec/4, duration_sec/8];
 T60_samples = [duration_sec/2, duration_sec/4, duration_sec/8]*Fs;
 
 %buffers to be filled during processing loop
-y1 = zeros(length(T60_samples), numSamples);
+y = zeros(length(T60_samples), numSamples);
 
 figure;
 for k = 1:length(T60_samples)
@@ -31,10 +31,10 @@ for k = 1:length(T60_samples)
     %Processing loop
     for n = 1:numSamples
         exponentialDecay.consumeControlSignal(f_c);
-        y1(k, n) = exponentialDecay.tick();
+        y(k, n) = exponentialDecay.tick();
     end
     
-    stem(0:numSamples-1, y1(k, :));
+    stem(0:numSamples-1, y(k, :));
 %     title(sprintf("Exponential Decay T60 Test - .001 reached after %i samples", T60_samples(k)));
     title(sprintf(".001 reached after %i samples", T60_samples(k)));
     ylim([0 .002]);
@@ -45,6 +45,18 @@ for k = 1:length(T60_samples)
     %add one as we need to have the specified number of samples pass before
     %the value reaches .001 (think about how the sampling of the continuous
     %expontential decay works)
-    stem(T60_samples(k), y1(k, T60_samples(k)+1));
+    stem(T60_samples(k), y(k, T60_samples(k)+1));
     hold off;
 end
+
+%generate the better looking plot on the dB scale...
+figure;
+y_dB = mag2db(y);
+plot(y_dB');
+xlim([0 12000]);
+ylim([-60 0]);
+xlabel("Time Sample Index");
+ylabel("Amplitude (dB)");
+grid on;
+grid minor;
+legend("T_{60} = 12000", "T_{60} = 6000", "T_{60} = 3000");

@@ -36,7 +36,7 @@ classdef CSG_wound < ContactSoundGenerator
             obj.stringModeFilter = LongitudinalMode(stringModeFilterSpec);
             
             if harmonicAccentuator == "HarmonicResonatorBank"
-                obj.harmonicAccentuator = HarmonicResonatorBank(obj.f_c_n, CSG_wound.r);
+                obj.harmonicAccentuator = HarmonicResonatorBank(SystemParams.h_dB, obj.f_c_n, CSG_wound.r);
             elseif harmonicAccentuator == "ResoTanh"
                 obj.harmonicAccentuator = ResoTanh(obj.f_c_n, CSG_wound.r, CSG_wound.preTanhGain);
             else

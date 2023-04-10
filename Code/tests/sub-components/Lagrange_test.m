@@ -41,7 +41,10 @@ for k = 1:length(M)
     legend();
 %     title(sprintf("Interp Lagrange Delay Test - M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
     title(sprintf("M = %i, D = %1.2f, M + D = %1.2f", M(k), D, M(k) + D));
+    ylabel("Amplitude");
 end
+xlabel("Time-index (n)");
+
 
 %******Test the increment/decrement delay feature******
 %Expand the test stimuli to contain the number of delay settings we want to test
@@ -79,7 +82,9 @@ title(sprintf("Changing Delay During Operation"));
 % title(sprintf("Interp Lagrange Delay Test - Changing Delay During Operation"));
 grid on;
 grid minor;
-legend();
+legend("Location", "west");
+xlabel("Time-index (n)");
+ylabel("Amplitude");
 
 %******Test the setFractionalDelay() function******
 %Expand the test stimuli to contain the number of delay settings we want to test
@@ -99,7 +104,7 @@ end
 
 %Plot the results. We should see the impulse responses for the
 %interploation spaced the at different distances from the impulse each time
-%but %change according to the interpolation amount.
+%but %change according to the interpolation amount.l
 figure;
 n = 0:length(x)-1;
 stem(n, x, 'DisplayName', 'x');
@@ -111,3 +116,5 @@ title(sprintf("Changing Fractional Delay Component"));
 grid on;
 grid minor;
 legend("Location", "west");
+xlabel("Time-index (n)");
+ylabel("Amplitude");

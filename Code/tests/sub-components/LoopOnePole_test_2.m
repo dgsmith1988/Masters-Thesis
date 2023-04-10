@@ -13,11 +13,14 @@
 clear;
 close all;
 
-L_min = SystemParams.minRelativeStringLength;
-L_max = SystemParams.maxRelativeStringLength;
-numSamples = 8;
-decrement = (L_min - L_max) / (numSamples - 1);
-L = L_max:decrement:L_min;
+% L_min = SystemParams.minRelativeStringLength;
+% L_max = SystemParams.maxRelativeStringLength;
+% numSamples = 8;
+% decrement = (L_min - L_max) / (numSamples - 1);
+% L = L_max:decrement:L_min;
+
+fretNumbers = [18 19 20 21 22 23 24];
+L = fretNumberToRelativeLength(fretNumbers);
 
 stringParams = [SystemParams.e_string_params, SystemParams.B_string_params,...
     SystemParams.G_string_params, SystemParams.D_string_params....
@@ -30,18 +33,18 @@ for string = stringParams
     
     %Output buffers to store values
     f = zeros(1, FilterObject.N);
-    h = zeros(numSamples, FilterObject.N);
+    h = zeros(length(L), FilterObject.N);
     
     figure;
-    for n = 1:numSamples
+    for n = 1:length(L)
         loopFilter.consumeControlSignal(L(n));
         [h(n,:), f] = loopFilter.computeFrequencyResponse();
 %         subplot(2, 1, 1);
         hold on;
-        plot(f, mag2db(abs(h(n, :))), 'DisplayName', sprintf("L = %.2f", L(n)));
+        plot(f, mag2db(abs(h(n, :))));
         hold off;
-%         text(f(end-350), mag2db(abs(h(n, end-350))), sprintf("L = %.2f", L(n)));
-        text(f(end), mag2db(abs(h(n, end))), sprintf("L = %.2f", L(n)));
+%         text(f(end), mag2db(abs(h(n, end))), sprintf("L = %.2f", L(n)));
+        text(f(end), mag2db(abs(h(n, end))), sprintf("Fret: %i", fretNumbers(n)));
 %         subplot(2, 1, 2);
 %         hold on;
 %         plot(f, angle(h(n, :)), 'DisplayName', sprintf("L = %.2f", L(n)));
@@ -50,7 +53,8 @@ for string = stringParams
 %     subplot(2, 1, 1);
     xlabel("Frequency (Hz)");
     ylabel("Magnitude (dB)");
-    title(sprintf("String #%i - Magnitude Response for Various L Values", string.number));
+%     title(sprintf("String #%i - Magnitude Response for Various L Values", string.number));
+    title(sprintf("String #%i - Magnitude Response for Various Frets", string.number));
     grid on;
     grid minor;
 %     subplot(2, 1, 2);

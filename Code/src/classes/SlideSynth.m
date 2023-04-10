@@ -5,7 +5,7 @@ classdef SlideSynth < Controllable & AudioGenerator
         controlSignalProcessor  %this handles pre-processing the incoming control signal
         stringDWG               %object which generates the string sound
         contactSoundGenerator   %unit adding slide/string contact noise
-        couplingFilter          %TODO: Determine this later
+        g_c                     %longitudinal to transverse coupling coefficient
     end
     
     methods
@@ -28,8 +28,7 @@ classdef SlideSynth < Controllable & AudioGenerator
                 obj.contactSoundGenerator = CSG_dummy();
             end
             
-            %TODO: Coupling filter is currently a place holder
-            obj.couplingFilter = CouplingFilter("Full");
+            obj.g_c = stringParams.g_c;
             obj.stringDWG = StringDWG(stringParams, L_0, params.stringNoiseSource, params.useNoiseFile);
             obj.controlSignalProcessor = ControlSignalProcessor(L_0);
         end
@@ -58,11 +57,7 @@ classdef SlideSynth < Controllable & AudioGenerator
             
             %Run through the various processing objects
             CSGOutput = obj.contactSoundGenerator.tick();
-            
-            %TODO: Come back and experiment with different coupling methods
-            couplingFilterOutput = obj.couplingFilter.passThru(0.0);
-            stringDWGOutput = obj.stringDWG.tick(couplingFilterOutput);
-            
+            stringDWGOutput = obj.stringDWG.tick(obj.g_c*CSGOutput);            
             y_n = stringDWGOutput + CSGOutput;
         end
     end

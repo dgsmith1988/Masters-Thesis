@@ -16,17 +16,28 @@ ticks = f_cToTicks(f_c, Fs);
 
 f_c_quantized = Fs ./ ticks;
 
+%Plot things...
+t =( 0:numSamples-1)/Fs;
 figure;
-subplot(3, 1, 1);
-plot(f_c);
-title("f_c");
-subplot(3, 1, 2);
-plot(f_c_quantized);
-title("f_c quantized");
-subplot(3, 1, 3);
-plot(ticks(100:end-100));
-title("ticks");
+subplot(2, 1, 1);
+hold on;
+plot(t, f_c, "DisplayName", "Ideal");
+plot(t, f_c_quantized, "DisplayName", "Quantized");
+hold off;
+title("f_c sweep");
+ylim([0 1050]);
+grid on;
+grid minor;
+ylabel("Frequency (Hz)");
+xlabel("Time (sec)");
+legend("Location", "south");
 
-figure;
-harmonicPaths = (1:20)'*f_c_quantized;
-plot(harmonicPaths');
+subplot(2, 1, 2);
+harmonicPaths = (1:6)'*f_c_quantized;
+plot(t, harmonicPaths');
+ylim([0 6100]);
+title("Harmonics");
+grid on;
+grid minor;
+ylabel("Frequency (Hz)");
+xlabel("Time (sec)");

@@ -12,7 +12,7 @@ L_init = .5;
 
 %Derived parameters
 numSamples_ctrl = length(L);
-numSamples_audio = numSamples_ctrl*R;
+numSamples_audio = numSamples_ctrl*R+1;
 
 %Processing objects/buffers
 interpolator = Interpolator(R, L_init);
@@ -27,16 +27,10 @@ for j = 1:length(L)
     end
 end
 
+L_interp(end) = L(end);
+
 n_ctrl = 0:numSamples_ctrl - 1;
 n_audio = 0:numSamples_audio - 1;
-
-% figure;
-% subplot(2, 1, 1);
-% stem(n_ctrl, L);
-% title("L[n]");
-% subplot(2, 1, 2);
-% stem(n_audio, L_interp);
-% title("L[n] interp");
 
 figure;
 plot(R*(1+n_ctrl), L, "DisplayName", "L");
@@ -49,18 +43,30 @@ xline(R*(1:j-1), "--k", "Displayname", "Frame");
 % xline(R*(1:j-1), "--k");
 xlabel("Time-index (n)");
 
-% figure;
-% t = tiledlayout(1, 1);
-% 
-% ax1 = axes(t);
-% plot(ax1, n_ctrl, L, "-r");
-% ax1.XColor = "r";
-% ax1.YColor = "r";
-% 
-% ax2 = axes(t);
-% stem(ax2, n_audio, L_interp);
-% ax2.XAxisLocation = "top";
-% ax2.YAxisLocation = "right";
-% ax2.Color = "none";
-% ax1.Box = "off";
-% ax2.Box = "off";
+figure;
+t = tiledlayout(1, 1);
+ax1 = axes(t);
+plot(ax1, n_ctrl, L, "*k",  "DisplayName", "L");
+ax1.XColor = "k";
+ax1.YColor = "k";
+ax1.XAxisLocation = "top";
+ax1.YAxisLocation = "right";
+xlim([-1 n_ctrl(end)]);
+% ylim([-.1 1.1]);
+xlabel("Control Rate Index (m)");
+ylabel("L[m]");
+grid on;
+grid minor;
+
+ax2 = axes(t);
+plot(ax2, n_audio, L_interp, "-or", "DisplayName", "L interp");
+ax2.XColor = "r";
+ax2.YColor = "r";
+ax2.XAxisLocation = "bottom";
+ax2.YAxisLocation = "left";
+ax2.Color = 'none';
+xlabel("Audio Rate Index (n)");
+ylabel("L[n]");
+ax1.Box = 'off';
+ax2.Box = 'off';
+xticks([0 R 2*R 3*R 4*R 5*R]);

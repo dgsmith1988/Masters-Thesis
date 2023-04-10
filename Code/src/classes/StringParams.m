@@ -8,15 +8,17 @@ classdef StringParams
         n_w             %windings per meter on string
         T60             %noise pulse parameter specifying T60 in seconds
         a_pol           %table 2 from 1996 - Developmentand Calibration of a Guitar Synthesizer          
-        g_pol           %table 1 from 1996 - Developmentand Calibration of a Guitar Synthesizer          
+        g_pol           %table 1 from 1996 - Developmentand Calibration of a Guitar Synthesizer
+        g_c             %longitudinal to transverse coupling coefficient
     end
     
     methods
-        function obj = StringParams(number, f0, n_w, T60, a_pol, g_pol)
+        function obj = StringParams(number, f0, n_w, T60, g_c, a_pol, g_pol)
             obj.number = number;
             obj.f0 = f0;
             obj.n_w = n_w;
             obj.T60 = T60;           
+            obj.g_c = g_c;
             obj.a_pol = a_pol;
             obj.g_pol = g_pol;
         end
