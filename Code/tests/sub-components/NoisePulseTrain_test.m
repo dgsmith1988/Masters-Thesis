@@ -1,6 +1,6 @@
 %Script to test the NoisePulseTrain class and ensure correct operation
 
-% clear;
+% clear all;
 % close all;
 
 %System parameters
@@ -14,8 +14,8 @@ windowLength = 12*10^-3*Fs; %12 ms window
 window = rectwin(windowLength);
 overlap = .75*windowLength;
 N = 4096;
-% y_upperLim = Fs/2000;
-y_upperLim = 6.5;
+y_upperLim = Fs/2000;
+% y_upperLim = 6.5;
 
 
 %Noise pulse characteristics
@@ -25,7 +25,7 @@ period_samp = Fs/4;
 %characteristics
 % T60_samp = period_samp/8;
 % T60 = T60_samp/Fs;
-T60 = SystemParams.E_string_params.T60;
+T60 = 20*10^-3;
 
 %Constant Rate Test
 f_c = Fs/period_samp;

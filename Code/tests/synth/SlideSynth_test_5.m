@@ -1,7 +1,7 @@
 %Test the slide synth patch for extreme string length settings
 
-clear;
-close all;
+% clear;
+% close all;
 dbstop if error
 
 %Synthsizer and sound parameters
@@ -14,7 +14,7 @@ slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
 %This test requires a special string, otherwise delay line values get
 %messed up
-slideSynthParams.stringName = "D";
+slideSynthParams.stringName = "C";
 Fs_audio = SystemParams.audioRate;
 Fs_ctrl = SystemParams.controlRate;
 
@@ -22,10 +22,6 @@ Fs_ctrl = SystemParams.controlRate;
 soundDuration_sec = 3;
 slideDuration_sec = soundDuration_sec;
 lowerFret = SystemParams.minFretNumber;
-% L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, SystemParams.E_string_params.f0); 
-% L_max_pitch = calculateLFromPitchF0(SystemParams.maxPitch_f0, SystemParams.minString_f0); 
-% higherFret = relativeLengthToFretNumber(L_max_pitch);
-% lowerFret = 24;
 higherFret = SystemParams.maxFretNumber;
 staticDuration_sec = soundDuration_sec - slideDuration_sec;
 L = generateLCurve(lowerFret, higherFret, slideDuration_sec, Fs_ctrl);

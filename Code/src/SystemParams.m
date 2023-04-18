@@ -52,13 +52,13 @@ classdef SystemParams
         %The C string was created for testing purposes and its loop filter
         %polynomials match that of the E string. The number of windings
         %were measured on a guitar. The decay time was tuned by ear.
-        C_string_params = StringParams(7, 65.41, 1400, 17*10^-3, 1, ...
+        C_string_params = StringParams(7, 65.41, 1400, 19*10^-3, 1, ...
             [-0.08135045114297, -0.00085796015850],...  %a_pol
             [0.97816203269973 , 0.00061375406757]);     %g_pol
-        E_string_params = StringParams(6, 82.41, 2000, 2*10^-3, 1, ...
+        E_string_params = StringParams(6, 82.41, 2000, 15*10^-3, 1, ...
             [-0.08135045114297, -0.00085796015850],...
             [0.97816203269973 , 0.00061375406757]);
-        A_string_params = StringParams(5, 110, 2600, 13*10^-3, 1, ...
+        A_string_params = StringParams(5, 110, 2600, 10*10^-3, 1, ...
             [-0.05928143968051, 0.00171045642780],...  
             [0.98347976839019 , 0.00040239847018]);     
         D_string_params = StringParams(4, 146.83, 3800, 5*10^-3, 1, ...
@@ -74,15 +74,14 @@ classdef SystemParams
             [-0.02955827361150, 0.00134421335136],...  
             [0.99402123928178 , 0.00008928138142]);     
         
-        stringLengthMeters = .65;
-        minRelativeStringLength = fretNumberToRelativeLength(24);  %Limit things to two octaves per string (or the 24th fret)
-%         minRelativeStringLength = fretNumberToRelativeLength(21);
-%         minRelativeStringLength = fretNumberToRelativeLength(19);
-%         minRelativeStringLength = fretNumberToRelativeLength(15);
-        maxRelativeStringLength = 1;    %Can't physically go lower than the nut here
+        minFretNumber = 0;
+%         maxFretNumber = 15;
+%         maxFretNumber = 19;
+        maxFretNumber = 24;
         
-        minFretNumber = relativeLengthToFretNumber(SystemParams.maxRelativeStringLength);
-        maxFretNumber = relativeLengthToFretNumber(SystemParams.minRelativeStringLength);
+        stringLengthMeters = .65;
+        minRelativeStringLength = fretNumberToRelativeLength(SystemParams.maxFretNumber);
+        maxRelativeStringLength = fretNumberToRelativeLength(SystemParams.minFretNumber);
         
         minString_f0 = SystemParams.C_string_params.f0;
 %         minString_f0 = SystemParams.E_string_params.f0;

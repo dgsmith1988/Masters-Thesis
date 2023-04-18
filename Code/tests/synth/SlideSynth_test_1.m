@@ -12,14 +12,14 @@ slideSynthParams.CSG_harmonicAccentuator = "ResoTanh";
 slideSynthParams.stringNoiseSource = "Pink";
 slideSynthParams.useNoiseFile = false;
 slideSynthParams.slideType = "Brass";
-slideSynthParams.stringName = "D";
+slideSynthParams.stringName = "e";
 Fs_audio = SystemParams.audioRate;
 Fs_ctrl = SystemParams.controlRate;
 
 %Slide motion parameters
 duration_sec = 3;
-higherFret = 0;
-lowerFret = 0;
+higherFret = 12;
+lowerFret = 12;
 L = generateLCurve(higherFret, lowerFret, duration_sec, Fs_ctrl);
 
 %Spectrogram analysis parameters

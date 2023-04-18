@@ -13,7 +13,7 @@ classdef Note
     end
     
     properties (Constant)
-        BPM = 75
+        BPM = 80
         slideRhythmicDuration = 1/4
         slideDuration_sec = Note.calucalateDuration(Note.slideRhythmicDuration, Note.BPM)
     end

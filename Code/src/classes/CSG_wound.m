@@ -10,14 +10,14 @@ classdef CSG_wound < ContactSoundGenerator
         
         %User specified tuning parameters which shouldn't change during
         %operation, but made non-constant to facilitate testing
-        g_bal = .75; %favor the string winding noise as compared to modal resonators
+        g_bal = .15; %favor the the modal resonators as they aren't stimulated as much
     end
     
     properties (Constant)
         %Tuned values used to initialize objects, put here so the have a
         %name
         r = .99 %r value for resonators
-        preTanhGain = 7
+        preTanhGain = 30
     end
     
     methods
