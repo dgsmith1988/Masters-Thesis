@@ -12,7 +12,7 @@ In the following chapter the testing methods used to verify the correctness of t
 All the filters implemented using a class built around MATLAB's \emph{filter()} function. The general strategy for verifying correct operation of the filters is ensuring their frequency response or impulse response is correct. An exception to this rule is the Loop Filter, which will be explained in more detail in its corresponding section.
 
 \subsection{Resonator}
-As a test, the second-order resonator class was configured with the following parameters: $F_s = 48,000 \text{ Hz}$, $f_c = 5,000 \text{ Hz}$ and $r = .99$. This is illustrated below in figure \ref{fig:ResoTest}.
+As a test, the second-order resonator class was configured with the following parameters: $F_s = 48,000 \text{ Hz}$, $f_c = 5,000 \text{ Hz}$ and $r = .99$. This is illustrated below in Fig.~\ref{fig:ResoTest}.
 
 \begin{figure}[h]
     \centering
@@ -21,27 +21,8 @@ As a test, the second-order resonator class was configured with the following pa
     \label{fig:ResoTest}
 \end{figure}
 
-\subsection{Longitudinal Modes}
-The precise method by which the longitudinal mode filters were derived and designed is not completely specified in either \citetwo{puputti_real-time_2010} or \citetwo{pakarinen_virtual_2008}. What is explained is that a linear-prediction filter of order 100 was used to estimate the spectrum of the different modes of each slide/wound string interaction. From this a 4th-order IIR filter was derived based on the most prominent resonances. The pole/zero locations for these 4th-order filters are what is provided for an implementation. Magnitude responses for the different filters as well as the linear-prediction estimates are provided as shown in figure \ref{fig:LongModeOrig}. These plots for the 4th-order approximations were recreated for the implemented longitudinal mode filters as shown in figure \ref{fig:LongModeRecr}. Verification was done through visual comparison of the plots as it was the best option available.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=.65]{./images/plots/LongitudinalModeFiltersOriginal.png}
-    \caption{Original figure from \citetwo{pakarinen_virtual_2008} for comparison purposes. Solid lines represent spectral estimates using linear-prediction filter of order 100. Dashed lines indicate modal filter magnitude responses.}
-    \label{fig:LongModeOrig}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=.65]{./images/plots/LongitudinalModeFiltersRecreation.png}
-    \caption{Plot of the different contact sound filter responses for modal filters.}
-    \label{fig:LongModeRecr}
-\end{figure}
-
-\clearpage
-
 \subsection{DC Blocker}
-Figure \ref{fig:DCBlockerResponse} illustrates the DC blocker's frequency response for a value of $R = .995$.
+Figure~\ref{fig:DCBlockerResponse} illustrates the DC blocker's frequency response for a value of $R = .995$.
 
 \begin{figure}[h]
     \centering
@@ -50,8 +31,13 @@ Figure \ref{fig:DCBlockerResponse} illustrates the DC blocker's frequency respon
     \label{fig:DCBlockerResponse}
 \end{figure}
 
+\clearpage
+
+\subsection{Longitudinal Modes}
+The precise method by which the longitudinal mode filters were derived and designed is not completely specified in either \citetwo{puputti_real-time_2010} or \citetwo{pakarinen_virtual_2008}. What is explained is that a linear-prediction filter of order 100 was used to estimate the spectrum of the different modes of each slide/wound string interaction. From this a 4th-order IIR filter was derived based on the most prominent resonances. The pole/zero locations for these 4th-order filters are what is provided for an implementation. Magnitude responses for the different filters as well as the linear-prediction estimates are provided as shown in Fig.~\ref{fig:LongModeOrig}. These plots for the 4th-order approximations were recreated for the implemented longitudinal mode filters as shown in Fig.~\ref{fig:LongModeRecr}. Verification was done through visual comparison of the plots as it was the best option available.
+
 \subsection{Smoothing Filter}
-The smoothing filters is implemented via a 10-point moving average where every sample is weighted evenly. Accordingly, it is expected that the impulse response will be 10 impulses all scaled by $\frac{1}{10}$ as the impulse response of an FIR is the same as its coefficients. This is verified by the output shown in figure \ref{fig:SmoothingIR}. Extra elements are shown to indicate the filter outputs zeros after the 10th iteration (corresponding to $n = 9$). Given that it is easier to understand this filter from its impulse response, and this is is paired to the frequency response via the Fourier Transform, verification for this was done in the time-domain.
+The smoothing filters is implemented via a 10-point moving average where every sample is weighted evenly. Accordingly, it is expected that the impulse response will be 10 impulses all scaled by $\frac{1}{10}$ as the impulse response of an FIR is the same as its coefficients. This is verified by the output shown in Fig.~\ref{fig:SmoothingIR}. Extra elements are shown to indicate the filter outputs zeros after the 10th iteration (corresponding to $n = 9$). Given that it is easier to understand this filter from its impulse response, and this is is paired to the frequency response via the Fourier Transform, verification for this was done in the time-domain.
 
 \begin{figure}[h]
     \centering
@@ -60,10 +46,26 @@ The smoothing filters is implemented via a 10-point moving average where every s
     \label{fig:SmoothingIR}
 \end{figure}
 
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=.65]{./images/plots/LongitudinalModeFiltersOriginal.png}
+        \caption{Original figure from \citetwo{pakarinen_virtual_2008} for comparison purposes. Solid lines represent spectral estimates using linear-prediction filter of order 100. Dashed lines indicate modal filter magnitude responses.}
+        \label{fig:LongModeOrig}
+\end{figure}
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=.65]{./images/plots/LongitudinalModeFiltersRecreation.png}
+        \caption{Plot of the different contact sound filter responses for modal filters.}
+        \label{fig:LongModeRecr}
+\end{figure}
+
+\clearpage
+
 \section{CSP and Components}
 \subsection{Components}
 \subsubsection{Interpolator}
-The interpolator block operates via linear interpolation. It was tested by specifying a control signal $L[m]$ and running it through the interpolator. The original $L[m]$ was plotted with linear line segments connecting between the points. The interpolated $L[n]$ output was plotted as individual samples overlaid onto the original to ensure that the linear trajectories were maintained. Figure \ref{fig:InterpTest} illustrates this. For this figure, the audio rate was specified as 48,000 Hz while the control rate was specified as 12,000 Hz. This would give a ratio of $R = \frac{48000}{12000} = 4$, meaning 3 interpolated audio samples would need to be calculated for every 1 control sample. The black dashed lines in the figure correspond to the boundaries between the interpolation frames. It is also necessary to specify an initial value for the interpolation to start from. In this figure $.5$ was used.
+The interpolator block operates via linear interpolation. It was tested by specifying a control signal $L[m]$ and running it through the interpolator. The original $L[m]$ was plotted with linear line segments connecting between the points. The interpolated $L[n]$ output was plotted as individual samples overlaid onto the original to ensure that the linear trajectories were maintained. Figure~\ref{fig:InterpTest} illustrates this. For this figure, the audio rate was specified as 48,000 Hz while the control rate was specified as 12,000 Hz. This would give a ratio of $R = \frac{48000}{12000} = 4$, meaning 3 interpolated audio samples would need to be calculated for every 1 control sample. The black dashed lines in the figure correspond to the boundaries between the interpolation frames. It is also necessary to specify an initial value for the interpolation to start from. In this figure $.5$ was used.
 
 \begin{figure}[h]
     \centering
@@ -88,6 +90,8 @@ This curve was then fed into the Slide Speed Extractor object to generate the co
 
 \subsection{Control Signal Processor}
 With the constituent components verified as working, the test here confirms that everything is linked together correctly inside the Control Signal Processor. Figure~\ref{fig:CSPTest} illustrates the output of the Control Signal Processor to a specified $L[m]$ control signal. This was chosen to be linear to make the interpolation and smoothing easier to verify. The $slideSpeed[n]$ signal can be seen as indicating the slide starts from rest and then gradually ramps up to constant speed. This is consistent with what would be expected as we have specified that the starting $L[m]$ value in the CSP corresponds to when $m = 0$.
+
+\clearpage
 
 \begin{figure}[h]
     \centering
@@ -131,7 +135,7 @@ As described before, the loop filter was designed to approximate the various los
 
 \section{Noise Generation Objects}
 \subsection{Impulse Train}
-The Impulse Train object responds to the $f_c[n]$ signal which controls its firing rate. Accordingly, various artificial $f_c[n]$ signals were generated to ensure the different run-time use cases would execute correctly during synthesis. Figure \ref{fig:ImpulseTrainTest} provides a summary of the tests and output. The full details can be found in the Appendix. 
+The Impulse Train object responds to the $f_c[n]$ signal which controls its firing rate. Accordingly, various artificial $f_c[n]$ signals were generated to ensure the different run-time use cases would execute correctly during synthesis. Figure~\ref{fig:ImpulseTrainTest} provides a summary of the tests and output. The full details can be found in the Appendix. 
 
 \begin{figure}[h]
     \centering
@@ -143,62 +147,63 @@ The Impulse Train object responds to the $f_c[n]$ signal which controls its firi
 \subsection{Exponential Decay}
 The Exponential Decay object is composed of a Impulse Train fed into a one-pole IIR filter whose feedback coefficient is tuned to match the specified $T_{60}$ parameter. As the Impulse Train was tested separately, it was necessary to ensure that the $T_{60}$ parameter was implemented correctly. Figure~\ref{fig:ExpDecayTest1} illustrates correct functioning of the object for three different $T_{60}$ values where they have been converted from seconds to samples. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
-    \includegraphics[scale=.65]{./images/plots/ExpDecayTest1.png}
+    \includegraphics[scale=.55]{./images/plots/ExpDecayTest1.png}
     \caption{Test results for different $T60$ decay parameters specified in samples}
     \label{fig:ExpDecayTest1}
 \end{figure}
-
-\clearpage
  
 \subsection{Noise Pulse Train}
-The Noise Pulse Train object was tested with two different scenarios: a constant firing rate producing 12 distinct pulses with no overlap and an swept firing rate corresponding to the same parabolic trajectory used in previous tests. The results are illustrated in figures \ref{fig:NPTT1}, \ref{fig:NPTT2} and \ref{fig:NPTT2Spec}. Note the overlap of the individual pulses in the second test due to the firing rate being faster than the decay rate. The spectrum also illustrates how the signal has a harmonic component in the lower end. The output of each test can be heard in the files \emph{NoisePulseTrain-test1.wav} and \emph{NoisePulseTrain-test2.wav}. The ``noisiness" of a signal at higher values of $f_c$ can be controlled by the $T_{60}$ parameter as will be discussed in the Sound Design chapter.
+The Noise Pulse Train object was tested with two different scenarios: a constant firing rate producing 12 distinct pulses with no overlap and an swept firing rate corresponding to the same parabolic trajectory used in previous tests. The results are illustrated in Fig.~\ref{fig:NPTT1}, Fig.~\ref{fig:NPTT2} and Fig.~\ref{fig:NPTT2Spec}. Note the overlap of the individual pulses in the second test due to the firing rate being faster than the decay rate. The spectrum also illustrates how the signal has a harmonic component in the lower end. The output of each test can be heard in the files \emph{NoisePulseTrain-test1.wav} and \emph{NoisePulseTrain-test2.wav}. The ``noisiness" of a signal at higher values of $f_c$ can be controlled by the $T_{60}$ parameter as will be discussed in the Sound Design chapter.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/NPTTest1.png}
+    \includegraphics[scale=.55]{./images/plots/NPTTest1.png}
     \caption{Noise Pulse Train output for a constant rate. Note the negative values introduced by the DC Blocker.}
     \label{fig:NPTT1}
 \end{figure}
 
-\begin{figure}[h]
+\clearpage
+
+\begin{figure}[t]
     \centering
     \includegraphics[scale=.65]{./images/plots/NPTTest2.png}
     \caption{Noise Pulse Train output in response to an $f_c[n]$ sweep. Note the overlapping build-up of the individual impulses. Individual pulses can be seen at the ends.}
     \label{fig:NPTT2}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
     \includegraphics[scale=.65]{./images/plots/NPTTest2Spectrum.png}
-    \caption{Spectrum corresponding to figure \ref{fig:NPTT2}. Note the emergence of harmonics at the lower end.}
+    \caption{Spectrum corresponding to Fig.~\ref{fig:NPTT2}. Note the emergence of harmonics at the lower end.}
     \label{fig:NPTT2Spec}
 \end{figure}
 
 \clearpage
 
 \subsection{Noise Burst Generator}
-The Noise Burst generator was tested with the same two scenarios as the Noise Pulse Train. The outputs are shown in figures \ref{fig:NBGT1}, \ref{fig:NBGT2} and \ref{fig:NBGT2Spec}. The sounds can be heard in the files \emph{NoiseBurstGen-test1.wav} and \emph{NoiseBurstGen-test2.wav}. The noisiness in the second example was by design as explained in Chapter 3. Each of the different noise sources were originally designed to work with a different Harmonic Accentuation technique. The Noise Burst Generator pairs best with the Harmonic Resonator Bank.
+\label{sec:NBGVerify}
+The Noise Burst generator was tested with the same two scenarios as the Noise Pulse Train. The outputs are shown in Fig.~\ref{fig:NBGT1}, Fig.~\ref{fig:NBGT2} and Fig.~\ref{fig:NBGT2Spec}. The sounds can be heard in the files \emph{NoiseBurstGen-test1.wav} and \emph{NoiseBurstGen-test2.wav}. The noisiness in the second example was by design as explained in Chapter 3. Each of the different noise sources were originally designed to work with a different Harmonic Accentuation technique. The Noise Burst Generator pairs best with the Harmonic Resonator Bank.
 
-\begin{figure}[h]
+\begin{figure}[hb]
     \centering
     \includegraphics[scale=.65]{./images/plots/NBGTest1.png}
     \caption{Noise Burst Generator output for a constant rate. Note the approximate symmetry about the x-axis.}
     \label{fig:NBGT1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=.65]{./images/plots/NBGTest2.png}
     \caption{Noise Burst Generator output in response to an $f_c[n]$ sweep. Note the effects of the hard-clipping.}
     \label{fig:NBGT2}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[hb]
     \centering
     \includegraphics[scale=.65]{./images/plots/NBGTest2Spectrum.png}
-    \caption{Spectrum corresponding to figure \ref{fig:NBGT2}. Note the lack of harmonics.}
+    \caption{Spectrum corresponding to Fig.~\ref{fig:NBGT2}. Note the lack of harmonics.}
     \label{fig:NBGT2Spec}
 \end{figure}
 
@@ -248,59 +253,59 @@ The audio producing tests were further sub-divided into three other tests by con
 In the spectrograms showing the results, the dashed black lines represent the specified longitudinal mode frequencies and the dotted red lines indicate the theoretical harmonic trajectories.
 
 \subsubsection{Static $f_c[n]$}
-The results for the constant slide velocity scenario are shown in figures \ref{fig:CSGWoundStaticLong}, \ref{fig:CSGWoundStaticHarm} and \ref{fig:CSGWoundStaticBoth}. Figure \ref{fig:CSGWoundTVLong} illustrates how the original source stimuli produced by the Noise Pulse Generator does not contain strong frequency components at the 1st longitudinal mode frequency. Also illustrated is that the harmonic branch extracts and emphasizes the fundamental while retaining many of the upper harmonics in decreasing strength. The corresponding audio can be heard in \emph{CSG-Wound-Static-Long.wav}, \emph{CSG-Wound-Static-Harm.wav} and \emph{CSG-Wound-Static-Both.wav}.
+The results for the constant slide velocity scenario are shown in Fig.~\ref{fig:CSGWoundStaticLong}, Fig.~\ref{fig:CSGWoundStaticHarm} and Fig.~\ref{fig:CSGWoundStaticBoth}. Figure~\ref{fig:CSGWoundTVLong} illustrates how the original source stimuli produced by the Noise Pulse Generator does not contain strong frequency components at the 1st longitudinal mode frequency. Also illustrated is that the harmonic branch extracts and emphasizes the fundamental while retaining many of the upper harmonics in decreasing strength. The corresponding audio can be heard in \emph{CSG-Wound-Static-Long.wav}, \emph{CSG-Wound-Static-Harm.wav} and \emph{CSG-Wound-Static-Both.wav}.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/CSG_Wound_Static_Long.png}
-    \caption{Wound CSG and Static Slide Velocity - Longitudinal Branch}
+    \includegraphics[scale=.58]{./images/plots/CSG_Wound_Static_Long.png}
+    \caption{Output from the Wound CSG test using a static slide velocity for the longitudinal branch. The dashed black lines indicate longitudinal mode frequencies. As the stimuli doesn't contain frequencies near the first mode, there is less energy there.}
     \label{fig:CSGWoundStaticLong}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
-    \includegraphics[scale=.65]{./images/plots/CSG_Wound_Static_Harm.png}
-    \caption{Wound CSG and Static Slide Velocity - Harmonic Branch}
+    \includegraphics[scale=.60]{./images/plots/CSG_Wound_Static_Harm.png}
+    \caption{Output from the Wound CSG test using a static slide velocity for the harmonic branch. The dotted red lines indicate the frequencies for the first six harmonics.}
     \label{fig:CSGWoundStaticHarm}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
-    \includegraphics[scale=.65]{./images/plots/CSG_Wound_Static_Both.png}
-    \caption{Wound CSG and Static Slide Velocity - Both Branches}
+    \includegraphics[scale=.60]{./images/plots/CSG_Wound_Static_Both.png}
+    \caption{Output from the Wound CSG test using a static slide velocity for both combined branches. Notice how this is a combination of Fig.~\ref{fig:CSGWoundStaticLong} and Fig.~\ref{fig:CSGWoundStaticHarm}.}
     \label{fig:CSGWoundStaticBoth}
 \end{figure}
 
 \clearpage
 
 \subsubsection{Time-Varying $f_c[n]$}
-The results for the time-varying scenario are shown in figures \ref{fig:CSGWoundTVLong}, \ref{fig:CSGWoundTVHarm} and \ref{fig:CSGWoundTVBoth}. Dashed red lines indicate the theoretical harmonic trajectories. Dashed blacked lines correspond to the static longitudinal modes. As is clearly shown in Figure \ref{fig:CSGWoundTVLong}, the longitudinal modes are only stimulated when the frequencies the filters are tuned to are present in the incoming signal. It also illustrates how some of the harmonic components leak through due to imperfections in the filter. Only $\frac{1}{3}$ of the spectrum is plotted to emphasize these points. The corresponding audio can be heard in \emph{CSG-Wound-TV-Long.wav}, \emph{CSG-Wound-TV-Harm.wav} and \emph{CSG-Wound-TV-Both.wav}.
+The results for the time-varying scenario are shown in Fig.~\ref{fig:CSGWoundTVLong}, Fig.~\ref{fig:CSGWoundTVHarm} and Fig.~\ref{fig:CSGWoundTVBoth}. Dashed red lines indicate the theoretical harmonic trajectories. Dashed blacked lines correspond to the static longitudinal modes. As is clearly shown in Fig.~\ref{fig:CSGWoundTVLong}, the longitudinal modes are only stimulated when the frequencies the filters are tuned to are present in the incoming signal. It also illustrates how some of the harmonic components leak through due to imperfections in the filter. Only $\frac{1}{3}$ of the spectrum is plotted to emphasize these points. The corresponding audio can be heard in \emph{CSG-Wound-TV-Long.wav}, \emph{CSG-Wound-TV-Harm.wav} and \emph{CSG-Wound-TV-Both.wav}.
 
-\begin{figure}[h]
+\begin{figure}[hb]
     \centering
     \includegraphics[scale=.65]{./images/plots/CSG_Wound_TV_Long.png}
-    \caption{Dashed black lines = Longitudinal modes}
+    \caption{Output from the Wound CSG test using a time-varying slide velocity for the longitudinal branch. The dashed black lines indicate longitudinal mode frequencies. When the fundamental of the sweep matches a modal frequency it is reinforced more.}
     \label{fig:CSGWoundTVLong}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
-    \includegraphics[scale=.65]{./images/plots/CSG_Wound_TV_Harm.png}
-    \caption{Dotted red lines = harmonic trajectories}
+    \includegraphics[scale=.60]{./images/plots/CSG_Wound_TV_Harm.png}
+    \caption{Output from the Wound CSG test using a time-varying slide velocity for the harmonic branch. The dotted red lines indicate the frequencies for the first six harmonics.}
     \label{fig:CSGWoundTVHarm}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[b]
     \centering
-    \includegraphics[scale=.65]{./images/plots/CSG_Wound_TV_Both.png}
-    \caption{Dashed black lines = Longitudinal modes, Dotted red lines = harmonic trajectories}
+    \includegraphics[scale=.60]{./images/plots/CSG_Wound_TV_Both.png}
+    \caption{Output from the Wound CSG test using a static slide velocity for both combined branches. Notice how this is a combination of Fig.~\ref{fig:CSGWoundTVLong} and Fig.~\ref{fig:CSGWoundTVHarm}.}
     \label{fig:CSGWoundTVBoth}
 \end{figure}
 
 \clearpage
 
 \subsection{Unwound Variant}
-Figure \ref{fig:CSGUnwoundTVSpec} illustrates the output of the unwound Contact Sound Generator for the same time-varying slide speed signal. It is substantially less interesting but still necessary for the purposes of verification. As can be seen the low-pass filter applied creates a roll-off at the top of the spectrum while the ramp-in and ramp-down create the variations in spectral energy near the beginning and end of the sound. This can be heard in the file \emph{CSG-Unwound-TV.wav}. The rest of the scenarios were also run on this module (as can be seen in the Appendix) but aren't shown here.
+Figure~\ref{fig:CSGUnwoundTVSpec} illustrates the output of the unwound Contact Sound Generator for the same time-varying slide speed signal. It is substantially less interesting but still necessary for the purposes of verification. As can be seen the low-pass filter applied creates a roll-off at the top of the spectrum while the ramp-in and ramp-down create the variations in spectral energy near the beginning and end of the sound. This can be heard in the file \emph{CSG-Unwound-TV.wav}. The rest of the scenarios were also run on this module (as can be seen in the Appendix) but aren't shown here.
 
 \begin{figure}[h]
     \centering
@@ -332,9 +337,9 @@ The second test which was performed ensures that the delay line value can be upd
     \label{fig:LagrangeTest2}
 \end{figure}
 
-The third test which was done is similar to the second, however now the fractional component was changed to ensure the coefficients of the Lagrange FIR are calculated correctly. Table \ref{tab:LagrangeTest3} illustrates the parameter changes which occur every 15 samples. Under these conditions, the length of the interpolation filter is 6 samples, while $M$ is 8 samples. The output of this test is shown in figure \ref{fig:LagrangeTest3}. As is clearly shown, the impulse response of the Lagrange interpolator, corresponding to the different fractional delays, appears in the six samples after the eight zeros (which correspond to the integer delay component of the structure).
+The third test which was done is similar to the second, however now the fractional component was changed to ensure the coefficients of the Lagrange FIR are calculated correctly. Table~\ref{tab:LagrangeTest3} illustrates the parameter changes which occur every 15 samples. Under these conditions, the length of the interpolation filter is 6 samples, while $M$ is 8 samples. The output of this test is shown in Fig.~\ref{fig:LagrangeTest3}. As is clearly shown, the impulse response of the Lagrange interpolator, corresponding to the different fractional delays, appears in the six samples after the eight zeros (which correspond to the integer delay component of the structure).
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=.65]{./images/plots/LagrangeTest3.png}
     \caption{$x[n]$ is an impulse train with a period of 15 samples used as input. $y[n]$ is the corresponding output. The parameter changes are specified in Table~\ref{tab:LagrangeTest3}. The output clearly illustrates the appropriate number of integer delay values followed by the impulse response of a filter approximating the Lagrange interpolation.}
@@ -357,8 +362,6 @@ The third test which was done is similar to the second, however now the fraction
     \caption{Parameter changes for the test shown in Fig.\ref{fig:LagrangeTest3}}
     \label{tab:LagrangeTest3}
 \end{table}
-
-\clearpage
 
 \subsection{Energy Scaler}
 The energy scaling coefficient is governed by the following equation:
@@ -386,34 +389,36 @@ Given that $\Delta x = DWGLength[n] - DWGLength[n-1]$, we can express $g_c[n]$ a
 \end{equation}
 and use the expressions for $a$ and $b$ to develop a parameterized theoretical curve for the ideal output to a quadratic input. A similar procedure can be followed for the simpler linear case.
 
-Figures \ref{fig:EnergyScalerLinInc} and \ref{fig:EnergyScalerQuadInc} show the results for the linear and quadratic DWG Length functions respectively. The output to a linearly increasing function is a constant gain factor less than one. Intuitively this is what we would expect as the change in the DWG Length on a per sample basis is a constant value and the length of the DWG is increasing. It is necessary to attenuate the energy slightly as it spreads out across the new DWG Length. The output to a quadratically increasing function is a linearly decreasing function. Intuitively this makes sense as the change in length at each time step is gradually getting larger. It is necessary to attenuate the signal more and more to maintain the same perceptual loudness as the energy spreads out more across the length of the digital waveguide. 
+Figure~\ref{fig:EnergyScalerLinInc} and Fig.~\ref{fig:EnergyScalerQuadInc} show the results for the linear and quadratic DWG Length functions respectively. The output to a linearly increasing function is a constant gain factor less than one. Intuitively this is what we would expect as the change in the DWG Length on a per sample basis is a constant value and the length of the DWG is increasing. It is necessary to attenuate the energy slightly as it spreads out across the new DWG Length. The output to a quadratically increasing function is a linearly decreasing function. Intuitively this makes sense as the change in length at each time step is gradually getting larger. It is necessary to attenuate the signal more and more to maintain the same perceptual loudness as the energy spreads out more across the length of the digital waveguide. 
 
-Figures \ref{fig:EnergyScalerLinDec} and \ref{fig:EnergyScalerQuadDec} illustrate the output to the same functions which are now decreasing. As is illustrated, the error remains zero and the gain operates in the same pattern but applying amplification. Amplification is required in order to maintain the same perceptual loudness as samples are being discarded by the shortening length.
+Figure~\ref{fig:EnergyScalerLinDec} and Fig.~\ref{fig:EnergyScalerQuadDec} illustrate the output to the same functions which are now decreasing. As is illustrated, the error remains zero and the gain operates in the same pattern but applying amplification. Amplification is required in order to maintain the same perceptual loudness as samples are being discarded by the shortening length.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/EnergyScalerLinearIncreasing.png}
+    \includegraphics[scale=.50]{./images/plots/EnergyScalerLinearIncreasing.png}
     \caption{Energy scaler output for linearly increasing input}
     \label{fig:EnergyScalerLinInc}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/EnergyScalerQuadraticIncreasing.png}
+    \includegraphics[scale=.50]{./images/plots/EnergyScalerQuadraticIncreasing.png}
     \caption{Energy scaler output for quadraticly increasing output}
     \label{fig:EnergyScalerQuadInc}
 \end{figure}
 
-\begin{figure}[h]
+\clearpage
+
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/EnergyScalerLinearDecreasing.png}
+    \includegraphics[scale=.63]{./images/plots/EnergyScalerLinearDecreasing.png}
     \caption{Energy scaler output for linearly decreasing input}
     \label{fig:EnergyScalerLinDec}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/EnergyScalerQuadraticDecreasing.png}
+    \includegraphics[scale=.63]{./images/plots/EnergyScalerQuadraticDecreasing.png}
     \caption{Energy scaler output for quadraticly decreasing output}
     \label{fig:EnergyScalerQuadDec}
 \end{figure}
@@ -436,7 +441,7 @@ To analyze the test the signal, the following STFT analysis parameters were used
     \item Window length = 12 ms
 \end{itemize}
 
-The DWG was configured to generate a signal with a fundamental frequency corresponding with $F_{0_{bin}} = 100$, or 1,171.9 Hz. Following the method described in \citetwo{smith_spectral_nodate}, the calculated bin error was $8.3499 \times 10^{-5}$. In hertz this is $9.7850 \times 10^{-4}$. As this is extremely small, the tuning was considered to be accurate and verified. Figures \ref{fig:DWGInterpBins}, \ref{fig:DWGInterpBinsZoom} and \ref{fig:DWGInterpSpec} illustrate this process.
+The DWG was configured to generate a signal with a fundamental frequency corresponding with $F_{0_{bin}} = 100$, or 1,171.9 Hz. Following the method described in \citetwo{smith_spectral_nodate}, the calculated bin error was $8.3499 \times 10^{-5}$. In hertz this is $9.7850 \times 10^{-4}$. As this is extremely small, the tuning was considered to be accurate and verified. Figure~\ref{fig:DWGInterpBins}, Fig.~\ref{fig:DWGInterpBinsZoom} and Fig.~\ref{fig:DWGInterpSpec} illustrate this process.
 
 \begin{figure}[h]
     \centering
@@ -445,21 +450,21 @@ The DWG was configured to generate a signal with a fundamental frequency corresp
     \label{fig:DWGInterpBins}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/StringDWGInterpBinsZoom.png}
+    \includegraphics[scale=.58]{./images/plots/StringDWGInterpBinsZoom.png}
     \caption{Zoom of FFT for tuning verification.}
     \label{fig:DWGInterpBinsZoom}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
-    \includegraphics[scale=.65]{./images/plots/StringDWGInterpSpec.png}
+    \includegraphics[scale=.58]{./images/plots/StringDWGInterpSpec.png}
     \caption{Tuning verification spectrum. Black-dashed line is estimation of fundamental.}
     \label{fig:DWGInterpSpec}
 \end{figure}
 
-\clearpage
+% \clearpage
 
 \section{Slide Synthesizer}
 After all the individual components had been verified, a series of tests were run to check the overall functioning of the slide synthesizer. These tests were not meant to necessarily by physically accurate or musically useful, but purely as an approach to benchmark its basic behavior and determine the relationships between the CSG and DWG sound components. These were run with the different combinations of noise sources and harmonic accentuators as well as on the different string types. 
@@ -475,16 +480,16 @@ The testing scenarios are:
 \end{enumerate}
 The output files and spectrograms were generated using the Noise Pulse Train and Harmonic Resonator Bank configuration using a mixture of the different strings. The filenames are \emph{SlideSynth-Test-\#-direction.wav}, where \emph{\#} is replaced with the corresponding test number and \emph{direction} is either up or down.
 
-Figures \ref{fig:VibratoWideSpec} and \ref{fig:VibratoNarrowSpec} show the spectra from the different vibrato tests. As can clearly be seen, the harmonics follow a sinusoidal trajectory corresponding to the parameters of the specified vibrato. The variations in the contact sound intensity can be seen as well. As is also shown, the contact sound dominates the spectrum as the string dies out, which is similar to what happens in the physical world.
+Figure~\ref{fig:VibratoWideSpec} and Fig.~\ref{fig:VibratoNarrowSpec} show the spectra from the different vibrato tests. As can clearly be seen, the harmonics follow a sinusoidal trajectory corresponding to the parameters of the specified vibrato. The variations in the contact sound intensity can be seen as well. As is also shown, the contact sound dominates the spectrum as the string dies out, which is similar to what happens in the physical world.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=.65]{./images/plots/VibratoWideSpec.png}
     \caption{}
     \label{fig:VibratoWideSpec}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[scale=.65]{./images/plots/VibratoNarrowSpec.png}
     \caption{}

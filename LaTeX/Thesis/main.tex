@@ -21,6 +21,7 @@
 \usepackage{subfiles} %inline documents (allows for usage of packages in subfiles)
 \usepackage{todonotes} %side margin todo notes
 \usepackage{soul} %highlighting
+% \usepackage[showframe]{geometry}
 
 % Custom commands
 \newcommand{\tinytodo}[2][] {\todo[caption={#2}, #1]{\begin{spacing}{0.5} #2 \end{spacing}}}
@@ -81,28 +82,33 @@
 \onehalfspacing
 \pagenumbering{roman}
 
+\typeout{}
+\subfile{sections/abstract}
+\typeout{}
+\subfile{sections/acknowledgements}
+
 %========== Tables of contents, figures, tables
 \tableofcontents
 % \listoffigures
 % \listoftables
 
-\newpage{}
+% \newpage{}
 
-\chapter*{List of Acronyms}
+% \chapter*{List of Acronyms}
 
-\begin{longtable}{ll}
-    AES & Audio Engineering Society\\
-    CMJ & Computer Music Journal\\
-    CSG & Contact Sound Generator\\
-    DFT & Discrete Fourier Transform\\
-    DWG & Digital Waveguide\\
-    FIR & Finite Impulse Response\\
-    IIR & Infinite Impulse Response\\
-    IR & Impulse Response\\
-    LPC & Linear Predictive Coding\\
-\end{longtable}
+% \begin{longtable}{ll}
+%     AES & Audio Engineering Society\\
+%     CMJ & Computer Music Journal\\
+%     CSG & Contact Sound Generator\\
+%     DFT & Discrete Fourier Transform\\
+%     DWG & Digital Waveguide\\
+%     FIR & Finite Impulse Response\\
+%     IIR & Infinite Impulse Response\\
+%     IR & Impulse Response\\
+%     LPC & Linear Predictive Coding\\
+% \end{longtable}
 
-\cleardoublepage
+% \cleardoublepage
 
 %========== Chapters ==========
 \pagenumbering{arabic}
