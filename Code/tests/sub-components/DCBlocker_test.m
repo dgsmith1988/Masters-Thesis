@@ -14,3 +14,13 @@ title(sprintf("R = %.3f", R));
 % title("Resonator Frequency Response - update_f_c() test", 'interpreter', 'none');
 % grid on;
 % grid minor;
+
+subplot(2, 1, 1);
+xlim([-500 24000]);
+ylim([-15 2]);
+grid on; grid minor;
+
+subplot(2, 1, 2);
+xlim([-500 24000]);
+ylim([-2 90]);
+grid on; grid minor;

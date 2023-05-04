@@ -56,6 +56,7 @@ end
 subplot(5, 1, 3);
 stem(0:numSamples-1, y);
 title('Rate increases at sample 15');
+ylabel("Linear Amplitude");
 
 %********Test for a transition to stop********
 tickLimit = 5;

@@ -28,7 +28,7 @@ noiseBurst = NoiseBurst(period_samp, T60);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     noiseBurst.consumeControlSignal(f_c);
@@ -38,6 +38,11 @@ end
 figure;
 plot(y1);
 title("Noise Burst Test - Constant Rate");
+ylabel("Amplitude");
+xlabel("Time-index (n)");
+grid on;
+grid minor;
+xlim([-500 27000])
 
 %Rate changing test
 a = 1/.09;
@@ -47,7 +52,7 @@ f_c = 1000*(-a*(x -.3).^2 + 1);
 
 %Processing loop
 for n = 1:numSamples
-    if(mod(n, 100) == 0)
+    if(mod(n, 1000) == 0)
         fprintf("n = %i/%i\n", n, numSamples);
     end
     noiseBurst.consumeControlSignal(f_c(n));
@@ -57,6 +62,8 @@ end
 figure;
 plot(y2);
 title("Noise Burst Test - Rate Changing");
+ylabel("Amplitude");
+xlabel("Time-index (n)");
 
 windowLength = 12*10^-3*Fs; %12 ms window
 % window = hamming(windowLength);

@@ -84,7 +84,7 @@ figure;
 spectrogram(y2, window, overlap, N, Fs, "yaxis");  
 ylim([0 y_upperLim]);
 % title('Wound CSG Harmonics Branch Output Spectrogram')
-yline(f_c(1)/1000*[1 2 3 4 5 6], ':r');
+yline(f_c(1)/1000*[1 2 3 4 5 6], '-.r');
 
 %*****Longitudinal + Harmonics Branch Test*****
 csg_wound = CSG_wound(stringParams, stringModeFilterSpec, noiseSource, harmonicAccentuator);
@@ -110,5 +110,5 @@ spectrogram(y3, window, overlap, N, Fs, "yaxis");
 ylim([0 y_upperLim]);
 % title('Wound CSG Combined Branches Output Spectrogram')
 yline([stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '--k');
-yline(f_c(1)/1000*[1 2 3 4 5 6], ':r');
-yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, ':r');
+yline(f_c(1)/1000*[1 2 3 4 5 6], '-.r');
+yline([f_c(1), stringModeFilterSpec.poles.F(1), stringModeFilterSpec.poles.F(3)]/1000, '-.r');

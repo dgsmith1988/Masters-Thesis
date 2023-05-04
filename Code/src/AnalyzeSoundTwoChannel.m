@@ -28,7 +28,7 @@ legend(labels);
 
 y_norm = [y(:, 1)/max(abs(y(:, 1))), y(:, 2)/max(abs(y(:, 2)))];
 figure;
-subplot(2, 1, 1);
+% subplot(2, 1, 1);
 plot(t, abs(y_norm(:, 1)));
 % plot(t, y_norm(:, 2));
 title(dataName + " " + labels{1});
@@ -38,7 +38,7 @@ xlim([0 t(end)]);
 % ylim(.75*[-1 1])
 % subplot(2, 1, 2);
 % plot(t, abs(y_norm(:, 2)));
-plot(t, -y_norm(:, 2));
+plot(t, mag2db(-y_norm(:, 2)));
 title(dataName + " " + labels{2});
 xlabel("Sec");
 ylabel("Amplitude");

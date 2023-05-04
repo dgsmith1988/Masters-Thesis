@@ -19,7 +19,8 @@ close all;
 % decrement = (L_min - L_max) / (numSamples - 1);
 % L = L_max:decrement:L_min;
 
-fretNumbers = [18 19 20 21 22 23 24];
+% fretNumbers = [18 19 20 21 22 23 24];
+fretNumbers = [0:3:15 19];
 L = fretNumberToRelativeLength(fretNumbers);
 
 stringParams = [SystemParams.e_string_params, SystemParams.B_string_params,...

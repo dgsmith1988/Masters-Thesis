@@ -5,7 +5,7 @@
 %amplitude scaling from teh CSG_Wound in total explains the slight
 %differences in the output spectrograms from a noise standpoint
 
-close all;
+% close all;
 clear;
 
 dbstop if error;

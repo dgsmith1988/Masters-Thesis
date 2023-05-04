@@ -1,5 +1,5 @@
 clear;
-close all;
+%close all;
 %addpath("..\src");
 
 Fs = 48000;
