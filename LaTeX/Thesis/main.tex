@@ -15,7 +15,7 @@
 \usepackage{titlesec}
 \usepackage[hidelinks]{hyperref}       % to simplify the use of \href
 \usepackage{array} % column width in tables
-\usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage[backend=biber,style=authoryear, maxbibnames=99]{biblatex}
 \addbibresource{bibliography.bib}
 
 \usepackage{subfiles} %inline documents (allows for usage of packages in subfiles)
@@ -137,9 +137,11 @@
 \subfile{sections/chapter7}
 
 %========== Bibliography ==========
+\clearpage
+
 \typeout{}
 \begin{singlespace}
-
+\phantomsection\addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 
 \end{singlespace}

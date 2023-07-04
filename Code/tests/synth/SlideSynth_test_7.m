@@ -70,7 +70,7 @@ title("y[n]");
 xlabel("n");
 ylabel("Amplitude");
 subplot(2, 1, 2);
-plot((0:length(L_n)-1)/Fs, openString_f0./ L_n);
+plot((0:length(L_n)-1)/Fs_audio, openString_f0./ L_n);
 title("F_0[n]");
 xlabel("Time (sec)");
 ylabel("Hz");

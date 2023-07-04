@@ -8,3 +8,5 @@ addpath(genpath(".\external"))
 addpath(genpath(".\scratch"))
 %Add measurement data
 addpath(genpath("..\Data"))
+%Add Sound Examples
+addpath(genpath("..\Sound Examples"))

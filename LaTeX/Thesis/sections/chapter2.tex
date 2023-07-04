@@ -15,11 +15,12 @@ Physical modeling is a discipline which attempts to recreate physical phenomena 
 Two of the fundamental components of digital waveguide models are digital filters and digital delay lines \citetwo{smith_physical_nodate}. The second component can be broken down into integer and fractional length delay lines. A variety of wave propagation phenomena can be modeled by interconnections of these different components. Through the incorporation of different noise sources and initialization waveforms, a large number of different sound synthesis algorithms can be created.
 
 \subsubsection{Digital Filters}
-Conceptually digital filters are extremely simple computational structures. They merely add scaled time-delayed versions of their inputs and outputs. Through various combinations of delay and scaling, a range of different frequency domain effects can be achieved. Filters are linear systems which means that the tools developed in the theory of linear-time invariant (LTI) systems is available to the algorithm designer. 
+\label{subsec:Ch2DigitalFilters}
+Conceptually digital filters are extremely simple computational structures. They merely add scaled time-delayed versions of their inputs and outputs. Through various combinations of delay and scaling, a range of different frequency domain effects can be achieved. Filters are linear systems which means that the tools developed in the theory of linear time-invariant (LTI) systems is available to the algorithm designer. 
 
 The behaviour of digital filters can be analyzed in the frequency domain in terms of their frequency response. This can further be divided into two components: the magnitude response and the phase response. The magnitude response describes the change in amplitude each frequency component of a signal experiences when the filter is applied to it. The phase response describes the amount of delay experienced by a signal's frequency components, given in radians. The phase delay is a function of frequency indicating the time-delay, in samples, each frequency component experiences. The phase delay can be derived from the phase response.
 
-Digital filters come in two varieties: finite impulse response (FIR) and infinite impulse response (IIR). FIR filters consist of only delayed and scaled copies of the input signal while IIR filters incorporate the output of the filter via feedback connections. This is what gives rise to the ``infinite" aspect of their name. Theoretically the feedback causes the filter's output in response to an impulse signal to never completely decay (ignoring the effects of digital arithmetic).
+Digital filters come in two varieties: finite impulse response (FIR) and infinite impulse response (IIR). FIR filters consist of only delayed and scaled copies of the input signal while IIR filters incorporate the output of the filter via feedback connections. This is what gives rise to the ``infinite" aspect of their name. Theoretically the feedback causes the filter's output in response to an impulse signal to never completely decay (ignoring the finite precision effects of digital arithmetic).
 
 All filters exhibit a transient response \citetwo{oppenheim_signals_1997}. These occur whenever there is a change in the coefficients associated with a filter's structure as well as when there is a change in the frequency content or phase of the input signal. FIR filters have a transient whose length corresponds to the order of the filter. IIR filters pose more of a problem with regards to transients as their feedback cause the transients to propagate for a much longer time (depending on the attenuation provided by the filter's coefficients). Figure~\ref{fig:generic_IIR} illustrates a generic IIR filter structure.
 
@@ -47,11 +48,11 @@ Unfortunately, there is an inherent limitation to digital delay lines. They are 
 \end{figure}
 
 \subsubsection{One-Pole Impulse Response}
-Beyond being used to modify the frequency content of signals, filters can also be used as extremely efficient structures to generate signals. This is achieved by tuning their impulse responses to the desired signal characteristics. A one pole-filter\footnote{See \url{https://ccrma.stanford.edu/~jos/filters/Pole_Zero_Analysis_I.html} for information on filter poles.} can be designed to have the following impulse response:
+Beyond being used to modify the frequency content of signals, filters can also be used as extremely efficient structures to generate signals. This is achieved by tuning their impulse responses to the desired signal characteristics. For example, a one pole-filter\footnote{See \url{https://ccrma.stanford.edu/~jos/filters/Pole_Zero_Analysis_I.html} for information on filter poles.} can be designed to have the following impulse response:
 \begin{equation}
     h[n] = \alpha^n
 \end{equation}
-where $\alpha$ is the filter's pole location. This means that a one-pole filter can be used to generate an exponential sequence in response to an impulse signal. The shape of the sequence can depends on the value of $\alpha$. It is possible to calculate $\alpha$ to generate a decreasing exponential sequence which decays to a certain value after a particular amount of time.
+where $\alpha$ is the filter's pole location. This means that a one-pole filter can be used to generate an exponential sequence in response to an impulse signal. The shape of the sequence can depends on the value of $\alpha$. It is possible to calculate $\alpha$ to generate a decreasing exponential sequence which decays to a certain value after a particular amount of time. The computational implementation is quite simple as a single-pole filter only requires a single sample delay, single coefficient and single addition.
 
 \subsubsection{Delay Line Interpolation}
 Various approaches have been developed in an attempt to approximate the signal values in between samples of a digital delay line \citetwo{laakso_splitting_1996}. As a value is being determined which lies in between two known values, the task is fundamentally interpolation. The different interpolation approaches are implemented using filters whose coefficients are calculated in a particular way to achieve the desired degree of fractional/sub-sample approximation. When combined in series at the output of an integer delay line, the overall structure is referred to as a fractional delay line. Given the techniques are realized using filters, the different approaches have various frequency/time domain implications and transients can become an issue (in the case of a time-varying delay line length).
@@ -89,7 +90,7 @@ where $y(x,t)$ represents the transverse displacement, $A$ is the complex amplit
 \end{equation}
 where $c$ is the wave speed and $y^+$ and $y^-$ represent waves traveling in the positive and negative $x$ directions respectively, with the same speed. In the physical world, strings need to have a finite length and often have a termination at each end which is referred to as a load impedance. These impedances have their own effects and can be considered as filters. When a traveling wave encounters one of the termination impedances, it is reflected back along the string to travel in the opposite direction with the effects of the corresponding load impedance applied to it. 
 
-If this was to be implemented via a DWG model, an initial approach would consist of a digital delay line representing each direction of propagation as well as a filter at each end of the string's terminations. Figure~\ref{fig:BiDirectionDWG} illustrates a signal flow diagram for this bi-directional computational model. The traveling wave variables could be any physical quantity related to the string movement (i.e. displacement, acceleration, velocity...) depending on what is desired for the synthesis model, however transverse displacement is commonly used for string models. This is because transverse vibrations are primarily how string instruments are played. In combination with the laws of physics, it is easy to calculate the other physical quantities which might be needed using the transverse displacement. In the case of a guitar the terminations are the nut and the bridge.
+If this was to be implemented via a DWG model, an initial approach would consist of a digital delay line representing each direction of propagation as well as a filter at each end of the string's terminations. Figure~\ref{fig:BiDirectionDWG} illustrates a signal-flow diagram for this bi-directional computational model. The traveling wave variables could be any physical quantity related to the string movement (i.e., displacement, acceleration, velocity, etc.) depending on what is desired for the synthesis model, however transverse displacement is commonly used for string models. This is because transverse vibrations are primarily how string instruments generate their characteristic sounds as they are played. In combination with the laws of physics, it is easy to calculate the other physical quantities which might be needed using the transverse displacement. In the case of a guitar the terminations are the nut and the bridge.
 
 Plucking a string corresponds to imparting an initial displacement along its length \citetwo{smith_physical_nodate}. For a DWG model, this corresponds to the waveform which is used to initialize the values of the delay lines when modeling the transverse displacement. The output, $y[n]$ can be determined at any spatial location by summing the appropriate spatial samples from each of the different traveling wave simulations (applying interpolation where is necessary). Determining where the output will be taken is part of the synthesis model. For the most physically accurate model, this corresponds to where the sound is probed in the system. The bridge is commonly used as the output location for string models as this is where the vibrations of the string are transferred to the body of the instrument. The body's effects often create the distinguishing characteristics of a string instrument.
 
@@ -100,7 +101,7 @@ Plucking a string corresponds to imparting an initial displacement along its len
     \label{fig:BiDirectionDWG}
 \end{figure}
 
-By exploiting the linearity of the systems involved, as well as the fact that it is generally only necessary to know the output at one specific spatial location, it is possible to commute the different components of the bi-directional system into a substantially more efficient model. Figure~\ref{fig:SDLModel} illustrates this new computational structure, which is referred to as the single-delay loop (SDL) structure \citetwo{karjalainen_plucked-string_1998}. The various traveling losses and other effects from phenomena like reflection and dispersion have been combined into the loop filter $H_l(z)$. Both traveling wave are still simulated, however they are not implemented separately. A single delay line is used to model their propagation.
+By exploiting the linearity of the systems involved, as well as the fact that it is generally only necessary to know the output at one specific spatial location, it is possible to commute the different components of the bi-directional system into a substantially more efficient model. Figure~\ref{fig:SDLModel} illustrates this new computational structure, which is referred to as the single-delay loop (SDL) structure \citetwo{karjalainen_plucked-string_1998}. The various traveling losses and other effects from phenomena like reflection and dispersion have been combined into the loop filter $H_l(z)$. Both traveling waves are still simulated, however they are not implemented separately. A single delay line is used to model their propagation.
 
 \begin{figure}[h]
     \centering
@@ -110,10 +111,10 @@ By exploiting the linearity of the systems involved, as well as the fact that it
 \end{figure}
 
 The waveform used to initialize the DWG can have a physical correlate to
-the variable being modeled (i.e. represent the displacement associated with the plucking position of the string) \citetwo{valimaki_development_1998}. Noise has also been historically used \citetwo{karplus_digital_1983}. The initialization waveform has a drastic impact on the timbre of the sound synthesized (as will be shown in Sec.~\ref{sec:Ch6WaveformInit}).
+the variable being modeled (i.e., representing the displacement associated with the plucking position of the string) \citetwo{valimaki_development_1998}. Noise has also been historically used \citetwo{karplus_digital_1983}. The initialization waveform has a drastic impact on the timbre of the sound synthesized (as will be shown in Sec.~\ref{sec:Ch6WaveformInit}).
 
 \subsubsection{Controlling Pitch}
-Suppose you have a string of a given length which is vibrating. It will produce a pitch with a corresponding fundamental frequency $F_0$. This is referred to as the open string fundamental. If the length of the string is shortened, then the fundamental of the pitch will be scaled inversely proportional to the relative string length \citetwo{valimaki_development_1998}. If $L$ represents the relative string length, which exists on the interval $(0, 1]$, the fundamental at a specified relative string length can be expressed as:
+Suppose you have a string of a given length which is vibrating. It will produce a pitch with a corresponding fundamental frequency $F_0$. This is referred to as the open string fundamental. If the length of the string is shortened, then the fundamental frequency will be scaled inversely proportional to the relative string length \citetwo{valimaki_development_1998}. If $L$ represents the relative string length, which exists on the interval $(0, 1]$, the fundamental at a specified relative string length can be expressed as:
 
 \begin{equation}
     F_L = \frac{F_0}{L}
@@ -126,7 +127,7 @@ In terms of the DWG structure, controlling the physical length of the string equ
     \text{DWG Length} = \frac{F_s}{F_L}
 \end{equation}
 
-From this we can clearly see why it is necessary to use an interpolation method as described before. If the length of the digital wave guide is limited to purely integer values, then the fundamentals of the synthesized tones will be quantized to integer divisions of the sampling frequency. In order to have the synthesis model be more flexible, expressive, and usable, it is necessary to allow the digital waveguide length to take on non-integer values. This issue is well known in the literature as shown in \citetwo{jaffe_extensions_1983}.
+From this we can clearly see why it is necessary to use an interpolation method as described before. If the length of the digital wave guide is limited to purely integer values, then the fundamentals of the synthesized tones will be quantized to integer divisions of the sampling frequency. In order to have the synthesis model be more flexible, expressive and usable, it is necessary to allow the digital waveguide length to take on non-integer values. This issue is well-known in the literature as shown in \citetwo{jaffe_extensions_1983}.
 
 \subsubsection{Determining DWG Length}
 In order to express the length of the SDL structure, it is necessary to break down the delay line into its constituent components as shown in Fig.~\ref{fig:SDLBreakdown}. The total delay which a waveform propagating through the system will encounter, can be expressed as the sum of the phase delays of the components in the loop: 
@@ -143,7 +144,7 @@ where $\tau_{H_L}$ represents the phase delay of the loop filter, $L_f$ represen
 \end{figure}
 
 \section{Development of Slide Guitar Model}
-The slide guitar model which serves as the basis for this thesis was first reported by Pakarien et al. (2008). The basis for this model is the SDL structure with an additional component to model the slide/string surface interactions and another to scale energy quantities based on changes in the string length. The model is shown in Fig.~\ref{fig:original_DWG}. The loop filter serves the purpose of approximating the losses a vibrating string experiences over time. This model's loop filter was designed by analyzing recordings of a professional guitar player playing notes at the different fret locations along the neck to approximate the losses associated with different string lengths. The loop filter's coefficients have been expressed as a polynomial which is a function of relative string length to allow for the synthesis of notes in between the frets.
+The slide guitar model which serves as the basis for this thesis was first reported by Pakarien et al. (2008). The basis for this model is the SDL structure with an additional component to model the slide/string surface interactions and another to scale energy quantities as a function of changes in the string length. The model is shown in Fig.~\ref{fig:original_DWG}. The loop filter serves the purpose of approximating the losses a vibrating string experiences over time. This model's loop filter was designed by analyzing recordings of a professional guitar player playing notes at the different fret locations along the neck to approximate the losses associated with different string lengths. These measurements at discrete fret-locations were approximated by continuous polynomials which which are a function of relative string length. These polynomials are used to generate the loop filter coefficients so allow for the synthesis of notes in between the frets.
 
 \begin{figure}[h]
     \centering
@@ -155,14 +156,14 @@ The slide guitar model which serves as the basis for this thesis was first repor
 The fundamental control signal for the system is the time-varying relative length of the string. Although not depicted in Fig.~\ref{fig:original_DWG}, this is notated as $L[n]$. As shown before, this is what controls the pitch of the synthesized tone. It also controls the sounds generated by the slide/string surface interactions (as will be elaborated upon in Sec.~\ref{sec:CSG_dev}) as the placement of the slide is ultimately what determines the value $L[n]$ takes.
 
 \subsection{Energy Compensation}
-Synthesis of slide guitar sounds differs from that of traditional plucked models in that the pitch is a time-varying quantity that can occur over the course of a single \emph{pluck}. In terms of the DWG model, this translates into a time-varying number of samples for the total DWG length. In order to not have perceptually unnatural shifts in the perceived loudness of the synthesized tone, it is necessary to compensate the energy of the signal based on how the string length changes \citetwo{pakarinen_energy_2005}. For instance, if you suddenly move the slide so the relative string length is half of its current value, then half of the samples of the DWG will be removed and an unnatural drop in the volume of the sound occurs.
+Synthesis of slide guitar sounds differs from that of traditional plucked models in that the pitch is a time-varying quantity that can occur over the course of a single \emph{pluck}. In terms of the DWG model, this translates into a time-varying number of samples for the total DWG length. In order to not have perceptually unnatural shifts in the perceived loudness of the synthesized tone as well as help mitigate aliasing, it is necessary to compensate the energy of the signal based on how the string length changes \citetwo{pakarinen_energy_2005}. For instance, if you suddenly move the slide so the relative string length is half of its current value, then half of the samples of the DWG will be removed and an unnatural drop in the volume of the sound occurs.
 
-The energy compensation block is what compensates for the string length changes. It is governed by the following equation:
+The energy compensation block compensates for the string length changes. It is governed by the following equation:
 \begin{equation}
     p_c[n] = \sqrt{1-\Delta x}p[n] = g_c p[n]
     \label{eq:energyScaler}
 \end{equation}
-where $\Delta x$ is the delay-line variation in samples per one time step, $p[n]$ is the output of the time-varying delay-line, $g_c$ is the scaling coefficient and $p_c[n]$ is the energy compensated signal. This is referred to as zero-order energy-preserving interpolation as is explained in \citetwo{pakarinen_energy_2005}.
+where $\Delta x$ is the delay-line variation in samples per one time step, $p[n]$ is the output of the time-varying delay-line, $g_c$ is the scaling coefficient and $p_c[n]$ is the energy compensated signal. This is referred to as zero-order energy-preserving interpolation as is explained in \citetwo{pakarinen_energy_2005}. As the true energetic behavior of a string with a sliding termination is subject to debate, this is a digital approximation which also helps synthesize a more perceptually accurate sound \citetwo{pakarinen_virtual_2008}.
 
 \subsection{Loop Filter}
 \label{sec:Ch2LoopFilter}
@@ -173,7 +174,7 @@ The loop filter is implemented via a single-pole design with the following trans
 \end{equation}
 where $a$ controls the cut-off frequency and $g$ controls the gain. $a$ and $g$ determine the characteristics of the tone decay and are meant to model the physical losses associated with string vibration. The parameters were derived from recordings of a professional guitar player playing several notes of every fret for each string in an anechoic chamber. \citetwo{valimaki_development_1998} describes this in more detail.
 
-The $a$ and $g$ parameters are governed by the following first order polynomials:
+The $a$ and $g$ parameters are governed by the following first-order polynomials:
 \begin{align}
     g &= g_{pol}(0) + g_{pol}(1)m_{\text{fret}}\\
     a &= a_{pol}(0) + a_{pol}(1)m_{\text{fret}}\\
@@ -220,7 +221,7 @@ where $g_{pol}(n)$ and $a_{pol}(n)$ represent the different polynomial coefficie
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[scale=.75]{./images/plots/Figure18Orig.png}
+    \includegraphics[scale=.70]{./images/plots/Figure18Orig.png}
     \caption{The loop gain $g$ for modeling the high E string (solid line) and the first-order polynomial fit (dashed line) as a function of frequency \citetwo{valimaki_development_1998}.}
     \label{fig:originalLoopGain}
 \end{figure}
@@ -228,10 +229,10 @@ where $g_{pol}(n)$ and $a_{pol}(n)$ represent the different polynomial coefficie
 \clearpage
 
 \section{CSG Development} \label{sec:CSG_dev}
-The handling noises based on wound string and finger interactions have previous been investigated in \citetwo{pakarinen_analysis_2007} and \citetwo{penttinen_model-based_2006}. The slide and string interactions are slightly different, however the underlying framework developed by the finger-noise analysis is valid and the slide synthesis algorithm was adapted from it. In this subsection, the finger-noise analysis will be introduced first followed by the adaptations necessary for the slide scenario.
+The handling noises based on wound string and finger interactions have previous been investigated in \citetwo{pakarinen_analysis_2007} and \citetwo{penttinen_model-based_2006}. The slide and string interactions are slightly different, however the underlying framework developed by the finger-noise analysis is valid as the slide synthesis algorithm was adapted from it. In this subsection, the finger-noise analysis will be introduced first followed by the adaptations necessary for the slide scenario.
 
 \subsection{Contact Sound Analysis}
-Figure~\ref{fig:finger_noise_spectrogram} shows the spectrogram of the noise generated by dragging a finger tip across the surface of a wound guitar string \citetwo{pakarinen_analysis_2007}. As can clearly be seen, there are two spectral components to the sound. The first is a time-varying harmonic component which corresponds to the interactions of the finger tip with the spatially periodic windings on the string's surface. The second is a static component which is due to the longitudinal modes being stimulated by the finger tip's impacts with the windings. Similar results have been shown in \citetwo{penttinen_model-based_2006} where the guqin, a fretless Chinese stringed instrument using wound strings, was examined.
+Figure~\ref{fig:finger_noise_spectrogram} shows the spectrogram of the noise generated by dragging a finger tip along the surface of a wound guitar string \citetwo{pakarinen_analysis_2007}. As can clearly be seen, there are two spectral components to the sound. The first is a time-varying harmonic component which corresponds to the interactions of the finger tip with the spatially periodic windings on the string's surface. The second is a static component which is due to the longitudinal modes being stimulated by the finger tip's impacts with the windings. Similar results have been shown in \citetwo{penttinen_model-based_2006} where the guqin, a fretless Chinese stringed instrument using wound strings, was examined.
 
 \begin{figure}[h]
     \centering
@@ -241,20 +242,20 @@ Figure~\ref{fig:finger_noise_spectrogram} shows the spectrogram of the noise gen
 \end{figure}
 
 \subsubsection{Harmonic Component}
-An object moving along a wound string creates a repeated force excitation to the string based on its velocity as well as the texture of the string's surface \citetwo{pakarinen_analysis_2007}. In terms of a finger moving along a wound string, this can mathematically be expressed as:
+An object moving along a wound string creates a repeated force excitation to the string based on its velocity as well as the texture of the string's surface \citetwo{pakarinen_analysis_2007}. A finger moving along a wound string might therefore be approximated by:
 
 \begin{equation}
     F_{harm}(t) = \left[\sum_k \delta(t-t_k)\right] \ast f(t)
     \label{eqn:harmonic_force}
 \end{equation}
-where $f(t)$ is the impulse response from a single finger-winding collision, $t_k$ is the time instant where the $k$th impulse response is generated and $\delta$ is Dirac's delta function. This equation can also be interpreted as a repeated sequence of impulses which is filtered by the transfer function of a single finger-to-winding collision.
+where $f(t)$ is the impulse response from a single finger-to-winding collision, $t_k$ is the time instant where the $k$th impulse response is generated and $\delta$ is Dirac's delta function. A finger-to-winding collision is defined as when a finger tip slides from one winding and impacts the next. This equation can also be interpreted as a repeated sequence of impulses which is filtered by the transfer function of a single finger-to-winding collision.
 
-To understand how the $t_k$ values are established, lets assume the finger motion is described by a constant velocity. The rate at which winding collisions will occur is a function of the finger velocity as well as linear string winding density. Given that this rate is inversely proportional to $t_k$, the following mathematical expression holds:
+To understand how the $t_k$ values are established, let's assume the finger motion is described by a constant velocity. The rate at which winding collisions will occur is a function of the finger velocity as well as linear string winding density. Given that this rate is inversely proportional to $t_k$, the following mathematical expression holds:
 \begin{equation}
     t_k = \frac{k}{n_w |v_f|}
     \label{eqn:t_k}
 \end{equation}
-where $n_w$ represents the linear winding density of the string (winds per meter) and $v_f$ represents the finger tip velocity (meters per second), and $k$ is an indexing variable to distinguish the order of the impulses. This means the quantity $n_w |v_f|$ has units of windings per second and represents the rate of collisions (as alluded to before). By either increasing the linear winding density or finger speed, the frequency at which the impulse responses are generated can be controlled. As the $n_w$ parameter is constant for a string, the instantaneous fundamental frequency of the generated harmonic component is controlled by the speed at which the finger moves. The faster the finger moves, the shorter the time between impacts is and the higher the fundamental of the resulting waveform. A time-varying finger velocity generates a time-varying harmonic signal where the periodic waveform corresponds to the impulse response of a single finger-to-winding impact for that particular string.
+where $n_w$ represents the linear winding density of the string (winds per meter) and $v_f$ represents the finger tip velocity (meters per second), and $k$ is an indexing variable to distinguish the order of the impulses. This means the quantity $n_w |v_f|$ has units of windings per second and represents the rate of collisions (as alluded to before). By either increasing the linear winding density or finger speed, the frequency at which the impulse responses are generated can be controlled. As the $n_w$ parameter is constant for a string, the instantaneous fundamental frequency of the generated harmonic component is controlled by the speed at which the finger moves.
 
 This theory can be verified empirically by observing the spectrum in Fig.~\ref{fig:finger_noise_spectrogram}. In the figure, the finger starts at rest and accelerates to reach its maximum velocity halfway through the slide. At this point it begins to decelerate eventually returning to rest once the movement comes to an end. The minimum and maximum values of harmonic frequency trajectories illustrate the same behavior. The harmonics follow a differentiable trajectory. It can be concluded that the finger velocity must also be differentiable, which is useful information when generating control signals for the synthesizer. 
 
@@ -269,27 +270,27 @@ The other component from the contact sound, which has been explicitly labeled in
 where:
 \begin{itemize}
     \item $\xi(x,t)$ is the longitudinal displacement
-    \item $E$ is Young's modulus
+    \item $E$ is Young's modulus, which is related to the string's stiffness
     \item $S$ is the string's cross sectional area
     \item $\mu$ is the linear mass density
     \item $R(f)$ is a frequency dependent frictional resistance
     \item $d(x,t)$ is the excitation force density
 \end{itemize}
 
-For a longitudinal string wave, the propagation speed is $c_L = \sqrt{\frac{ES}{\mu}} = \sqrt{E \rho}$, where $\rho$ is the density of the material. Contrary to transverse modes, the longitudinal propagation speed does not depend on the tension in the string. Due to this constant longitudinal wave speed and the fact that the slide doesn't change the length of the string from a longitudinal perspective, the longitudinal modes are constant in frequency.
+For a longitudinal string wave, the propagation speed is $c_L = \sqrt{\frac{ES}{\mu}} = \sqrt{E \rho}$, where $\rho$ is the density of the material. Contrary to transverse modes, the longitudinal propagation speed does not depend on the tension in the string. Due to this constant longitudinal wave speed and the fact that the slide does not change the length of the string from a longitudinal perspective, the longitudinal modes are constant in frequency.
 
 As shown in \citetwo{pakarinen_analysis_2007} and \citetwo{morse_vibration_1981}, for a given $F(t)$ applied at $x_{exc}$, the bridge force can be expressed as:
 \begin{equation}
     F_b(t) = \frac{ES}{\mu L^2} \sum_{k = 1}^{\infty} \left[\frac{k}{f_k} e^{-t R(f_k)} \sin(2\pi f_k t)\right] \ast \left[ \sin\left(\frac{k \pi x_{exc}}{L}\right) F_{exc}(t)\right]
     \label{eqn:bridge_force}
 \end{equation}
-where the longitudinal modal frequencies are $f_k = k \frac{c_L}{2L}$, $x_{exc}$ is the point of excitation and $F_{exc}(t)$ is the excitation force applied. Equation~\ref{eqn:bridge_force} shows that the force signal excites a set of parallel resonances where the excitation amplitude depends on $x_{exc}$. In general, $x_{exc}$ has a strong shape over the spectrum and in the cases where a mode has a node at that point, the harmonic will be eliminated. This theory was experimentally verified in \citetwo{pakarinen_analysis_2007}. This equation also gives rise to the exciter-resonator perspective as the longitudinal modes can be interpreted as a set of parallel resonances stimulated by an excitation, $F_{exc}(t)$, whose amplitude depends on $x_{exc}$.
+where the longitudinal modal frequencies are $f_k = k \frac{c_L}{2L}$, $x_{exc}$ is the point of excitation and $F_{exc}(t)$ is the excitation force applied. Equation~\ref{eqn:bridge_force} shows that the force signal excites a set of parallel resonances where the excitation amplitude depends on $x_{exc}$. In general, $x_{exc}$ has a strong shape over the spectrum and in the cases where a mode has a node at that point, the harmonic will be eliminated. This theory was experimentally verified in \citetwo{pakarinen_analysis_2007}. This equation also gives rise to the exciter-resonator perspective as the longitudinal modes can be interpreted as a set of parallel resonances stimulated by an excitation, $F_{exc}(t)$, whose amplitude depends on $x_{exc}$ \citetwo{pakarinen_analysis_2007}.
 
 \subsection{Adapting From Finger to Slide}
-Extrapolating this to the more rigid slide object is rather intuitive. The physical properties of the string do not change, only the surface of the object interacting with the string. In terms of impact on the analysis, the only part of the equations which would change is the impulse response function $f(t)$ in Eq.~\ref{eqn:harmonic_force}. This would now represent the impulse response of a single slide-to-winding impact. All the other analysis applies to a more general model and does not need to change drastically. Additionally, the finger tip velocity should be replaced by the slide velocity.
+Extrapolation from a finger tip to a rigid slide object is straightforward. The physical properties of the string do not change, only the surface of the object interacting with the string. The only part of the equations which would change is the impulse response function $f(t)$ in Eq.~\ref{eqn:harmonic_force}. This would now represent the impulse response of a single slide-to-winding collision. Additionally, the finger tip velocity should be replaced by the slide velocity.
 
 \subsection{Model Description}
-The CSG of the slide synthesis model can be seen as a discretization of the exciter-resonator model developed in the previous section. Figure~\ref{fig:original_CSG} shows a high-level signal flow diagram of the original CSG presented in \citetwo{pakarinen_virtual_2008}. 
+The CSG of the slide synthesis model can be seen as a discretization of the exciter-resonator model developed in the previous section. Figure~\ref{fig:original_CSG} shows a high-level signal-flow diagram of the original CSG presented in \citetwo{pakarinen_virtual_2008}. 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.50]{./images/pictures/CSG_original.PNG}
@@ -320,7 +321,7 @@ Not depicted in Fig.~\ref{fig:original_CSG} is the model which generates the sou
 \citetwo{pakarinen_virtual_2008} is one of the first articles published regarding slide guitar synthesis. There have been refinements and advancements since it was released in 2008. These approaches tend to take a more theoretical approach as compared to the empirical one described in \citetwo{pakarinen_virtual_2008}. The theoretical refinements add computational complexity at the potential cost of a real-time implementation.
 
 \subsection{Evangelista's DWG Approach}
-In 2012, Gianpaolo Evangelista published a paper as part of an AES convention which proposes a physically inspired DWG based model \citetwo{evangelista_physical_2012}. His model is a theoretical advancement in many ways, one of which is an expansion in the number of dimensions used to model the vibrations as indicated in Fig.~\ref{fig:EvangelistaCoordinateSystem}. Two DWG structures model the transverse vibrations, one for each of the orthogonal polarizations. Additionally, a DWG is also used to model the longitudinal vibrations as opposed to an IIR filter. This would more accurately model the system and makes the slide's direction important in addition to its speed. The transverse and longitudinal DWGs are weakly coupled in a non-linear fashion at the point where the slide has been placed.
+In 2012, Gianpaolo Evangelista published a paper as part of an AES convention which proposes a physically inspired DWG-based model \citetwo{evangelista_physical_2012}. His model is a theoretical advancement in many ways, one of which is an expansion in the number of dimensions used to model the vibrations as indicated in Fig.~\ref{fig:EvangelistaCoordinateSystem}. Two DWG structures model the transverse vibrations, one for each of the orthogonal polarizations. Additionally, a DWG is also used to model the longitudinal vibrations as opposed to an IIR filter. This would more accurately model the system and makes the slide's direction important in addition to its speed. The transverse and longitudinal DWGs are weakly coupled in a non-linear fashion at the point where the slide has been placed.
 
 \begin{figure}[h]
     \centering
@@ -329,9 +330,9 @@ In 2012, Gianpaolo Evangelista published a paper as part of an AES convention wh
     \label{fig:EvangelistaCoordinateSystem}
 \end{figure}
 
-As a basis for the friction sounds, Evangelista uses the Lu-Gre model. The Lu-Gre model only considers flat surfaces interacting and the wound string surface is a violation of this assumption. A new noise term has been added to the model to compensate and this addition is supported by experimental evidence. A non-linear state space model is used to describe the string and Lu-Gre bristle interactions. This produces a single equation which is solved via the Newton-Raphson method. Additionally, the transverse vibrations are taken into account when generating the friction sounds as there is minor interaction between the string and slide at the point of contact. 
+As a basis for the friction sounds, Evangelista uses the Lu-Gre model. The Lu-Gre model only considers flat surfaces interacting and the wound string surface is a violation of this assumption. A new noise term has been added to the model to compensate and this addition is supported by experimental evidence. A non-linear state-space model is used to describe the string and Lu-Gre bristle interactions. This produces a single equation which is solved via the Newton-Raphson method. Additionally, the transverse vibrations are taken into account when generating the friction sounds as there is minor interaction between the string and slide at the point of contact.
 
-A movable slide junction has also been introduced to refine the model further. This is placed at integer string samples and uses fractional delay methods when required. The slide junction models the interactions between the slide and string based on the respective materials of each component. A single parameter is used to control elasticity of the string-winding coefficients on the range from being completely inelastic to elastic. The equations governing the slide/string interactions at each node are non-linear. Figure~\ref{fig:EvangelistaSlideJunction} depicts the slide junction.
+A position-dependent slide junction has also been introduced to refine the model further. This is placed at integer string samples and uses fractional delay methods when required. The slide junction models the interactions between the slide and string based on the respective materials of each component. A single parameter is used to control elasticity of the string-winding coefficients on the range from being completely inelastic to elastic. The equations governing the slide/string interactions at each node are non-linear. Figure~\ref{fig:EvangelistaSlideJunction} depicts the slide junction.
 
 \begin{figure}[h]
     \centering
@@ -352,7 +353,7 @@ The most recent approach to slide guitar synthesis is a finite-difference approa
     \label{fig:FDModel}
 \end{figure}
 
-In terms of the physical model, advancements have been made to factor in the left and right hand actions. The damping provided by the part of the left-hand behind the slide is explicitly modeled as this is an integral part of the technique involved on a real instrument. The slide attachment/de-attachment sounds are taken into account as these are included within the hand motions. Comparatively speaking the vibration modeling is simpler than Evangelista's or the Finnish approaches. Only one polarization for transverse vibrations is included and the longitudinal vibrations are neglected entirely. Figure~ \ref{fig:FDModel} illustrates the spatial layout of the model.
+In terms of the physical model, advancements have been made to factor in the left and right hand actions. The damping provided by the part of the left-hand behind the slide is explicitly modeled as this is an integral part of the technique involved on a real instrument. The slide attachment/de-attachment sounds are taken into account as these are included within the hand motions. Comparatively speaking the vibration modeling is simpler than Evangelista's or the Finnish approach described in \citetwo{pakarinen_virtual_2008}. Only one polarization for transverse vibrations is included and the longitudinal vibrations are neglected entirely. Figure~ \ref{fig:FDModel} illustrates the spatial layout of the model.
 
 From a friction standpoint the model used is also lacking as friction is not explicitly modeled (in contrast to the other approaches). However, in the synthesized sounds a noise component can be heard. This is especially true during vibrato sections of phrases. This implies that the sliding noise is not purely based on friction and is likely a mix of friction as well as restoring force-based phenomena which would represent an advancement in the overall knowledge of physics of slide guitar in general.
 

@@ -306,8 +306,8 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1001"
+     inkscape:window-width="2400"
+     inkscape:window-height="1421"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
@@ -639,6 +639,6 @@
          id="tspan2590"
          x="37.173958"
          y="149.36249"
-         style="font-size:4.58611107px;stroke-width:0.26458332">First Order Derivative</tspan></text>
+         style="font-size:4.58611107px;stroke-width:0.26458332">First-Order Derivative</tspan></text>
   </g>
 </svg>
