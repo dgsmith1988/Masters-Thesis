@@ -97,7 +97,7 @@ The Control Signal Processor (see Sec.~\ref{subsec:Ch3ControlSignalProcessor}) c
     \item \textbf{Interpolator} - This block performs linear interpolation to upsample control rate signals to the audio rate.
     \item \textbf{Smoothing Filter} - This block smooths the interpolated signals to mitigate any discontinuities introduced during processing.
 \end{enumerate}
-The Smoothing Filter was verified earlier in Sec.~\ref{subsec:Ch4SmoothingFilter}. What remains to be shown is that the Interpolator and Slide Speed Extractor operate correctly as well as the Control Signal Processor as whole, given that it is created by the interconnection of these components.
+The Smoothing Filter was verified earlier in Sec.~\ref{subsec:Ch4SmoothingFilter}. What remains to be shown is that the Interpolator and Slide Speed Extractor operate correctly as well as the Control Signal Processor as a whole, given that it is created by the interconnection of these components.
 
 \subsection{Components of Control Signal Processor}
 \subsubsection{Interpolator}
@@ -223,7 +223,7 @@ The Noise Burst generator was tested with the same two input signals as the Nois
 
 \section{Harmonic Accentuators}
 \subsection{Harmonic Resonator Bank}
-Given that the resonators were in Sec.~\ref{subsec:resoTest}, the Harmonic Resonator Bank was verified by running white noise through the system while performing a sweep on the $f_c$ control parameter. The sweep follows the same parabolic trajectory from Sec.~\ref{sec:SSE_test}. The functionality of this block predicts that we would observe six harmonically linked bands in the output spectrum. This is shown in Fig.~\ref{fig:HRBTest} where the different harmonics' trajectories are overlaid in red. The output can be heard in \emph{HRB-test.wav}. Both the recording and spectrogram provide objective and subjective evidence that the Harmonic Resonator Bank works as is expected and is free from unwanted artifacts.
+Given that the resonators were verified in Sec.~\ref{subsec:resoTest}, the Harmonic Resonator Bank was verified by running white noise through the system while performing a sweep on the $f_c$ control parameter. The sweep follows the same parabolic trajectory from Sec.~\ref{sec:SSE_test}. The functionality of this block predicts that we would observe six harmonically linked bands in the output spectrum. This is shown in Fig.~\ref{fig:HRBTest} where the different harmonics' trajectories are overlaid in red. The output can be heard in \emph{HRB-test.wav}. Both the recording and spectrogram provide objective and subjective evidence that the Harmonic Resonator Bank works as is expected and is free from unwanted artifacts.
 
 \begin{figure}[h]
     \centering
