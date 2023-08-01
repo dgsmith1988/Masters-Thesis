@@ -3,7 +3,7 @@ This is a repo for the software and data which I developed during the course of 
 
  - All the code, data and measurements used to develop the model and verify the results
  - The thesis itself in PDF format
- - The LaTeX version of the document to help serve as a template for other Music Tech students
+ - The LaTeX version of the thesis and proposal to help serve as a template for other McGill Music Tech students
  - Documentation in the form of class diagrams and signal-flow charts to help understand the algorithms
  - The generated and recorded sound examples (referred to throughout the thesis)
  - The various papers referred to in the thesis
