@@ -2,7 +2,7 @@
 This is a repo for the software and data which I developed during the course of my Master's Thesis. If you are a fan of audio DSP and slide guitar, then *boy howdy* did you come to the right place! (That last sentence should be read using a Southern drawl). The contents of the repo includes:
 
  - All the code, data and measurements used to develop the model and verify the results
- - The thesis itself in PDF format
+ - The thesis and proposal themselves in PDF format
  - The LaTeX version of the thesis and proposal to help serve as a template for other McGill Music Tech students
  - Documentation in the form of class diagrams and signal-flow charts to help understand the algorithms
  - The generated and recorded sound examples (referred to throughout the thesis)
